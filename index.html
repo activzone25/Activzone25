@@ -6,14 +6,12 @@
     <title>Activzone25 - Catálogo de Camisetas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- ESTILOS GLOBALES Y VARIABLES --- */
         :root {
             --primary-color: #0d1b2a;
             --accent-color: #00b4d8;
             --bg-color: #f8f9fa;
             --card-bg: #ffffff;
             --text-color: #1b263b;
-            --text-muted: #6c757d;
             --transition: all 0.3s ease;
             --whatsapp-color: #25d366;
         }
@@ -37,7 +35,6 @@
             padding: 0 20px;
         }
 
-        /* --- ENCABEZADO (NAVBAR) --- */
         header {
             background-color: var(--primary-color);
             color: white;
@@ -65,32 +62,10 @@
             color: var(--accent-color);
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-
-        nav a {
-            color: #e0e1dd;
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        nav a:hover, nav a.active {
-            color: var(--accent-color);
-        }
-
         .cart-icon {
             position: relative;
             font-size: 20px;
             cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .cart-icon:hover {
-            color: var(--accent-color);
         }
 
         .cart-count {
@@ -105,7 +80,6 @@
             border-radius: 50%;
         }
 
-        /* --- SECCIÓN HERO --- */
         .hero {
             background: linear-gradient(rgba(13, 27, 42, 0.8), rgba(13, 27, 42, 0.8)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             height: 40vh;
@@ -121,7 +95,6 @@
             font-size: 42px;
             margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
         .hero-content p {
@@ -138,17 +111,10 @@
             border-radius: 4px;
             font-weight: 700;
             text-transform: uppercase;
-            cursor: pointer;
             text-decoration: none;
-            transition: var(--transition);
+            cursor: pointer;
         }
 
-        .btn-main:hover {
-            background-color: #0096c7;
-            transform: translateY(-2px);
-        }
-
-        /* --- SECCIÓN DEL CATÁLOGO --- */
         .catalog-section {
             padding-bottom: 60px;
         }
@@ -157,20 +123,9 @@
             font-size: 28px;
             margin-bottom: 40px;
             text-align: center;
-            position: relative;
             text-transform: uppercase;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background-color: var(--accent-color);
-            margin: 8px auto 0;
-        }
-
-        /* --- CUADRÍCULA DE PRODUCTOS --- */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -182,23 +137,16 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: var(--transition);
             display: flex;
             flex-direction: column;
             position: relative;
             border: 1px solid #e9ecef;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-
         .product-image {
             width: 100%;
             height: 280px;
             object-fit: cover;
-            background-color: #eee;
         }
 
         .product-badge {
@@ -211,8 +159,6 @@
             font-weight: bold;
             padding: 4px 10px;
             border-radius: 4px;
-            text-transform: uppercase;
-            border: 1px solid var(--accent-color);
         }
 
         .product-info {
@@ -222,7 +168,6 @@
             flex-grow: 1;
         }
 
-        /* Contenedor optimizado para los Escudos Oficiales de las Ligas */
         .league-container {
             display: flex;
             align-items: center;
@@ -235,10 +180,9 @@
         }
 
         .league-logo-img {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             object-fit: contain;
-            display: inline-block;
         }
 
         .product-league {
@@ -246,22 +190,19 @@
             color: var(--primary-color);
             text-transform: uppercase;
             font-weight: 700;
-            letter-spacing: 0.5px;
         }
 
         .product-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
             margin-bottom: 10px;
-            color: var(--primary-color);
         }
 
         .product-price {
             font-size: 22px;
             font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 15px;
             margin-top: auto;
+            margin-bottom: 15px;
         }
 
         .btn-add-cart {
@@ -272,11 +213,11 @@
             border-radius: 4px;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
+            transition: var(--transition);
         }
 
         .btn-add-cart:hover {
@@ -284,7 +225,6 @@
             color: white;
         }
 
-        /* --- BOTÓN FLOTANTE DE WHATSAPP --- */
         .whatsapp-btn {
             position: fixed;
             bottom: 30px;
@@ -300,38 +240,14 @@
             align-items: center;
             gap: 10px;
             z-index: 1000;
-            transition: var(--transition);
         }
 
-        .whatsapp-btn:hover {
-            transform: scale(1.05);
-            background-color: #20ba5a;
-        }
-
-        .whatsapp-btn i {
-            font-size: 22px;
-        }
-
-        /* --- PIE DE PÁGINA --- */
         footer {
             background-color: var(--primary-color);
-            color: #a3b18a;
+            color: #e0e1dd;
             text-align: center;
             padding: 30px 20px;
-            margin-top: auto;
             font-size: 14px;
-        }
-
-        /* --- DISEÑO RESPONSIVO --- */
-        @media (max-width: 768px) {
-            nav { display: none; }
-            .hero-content h1 { font-size: 32px; }
-            .whatsapp-btn {
-                bottom: 20px;
-                right: 20px;
-                padding: 12px 20px;
-                font-size: 14px;
-            }
         }
     </style>
 </head>
@@ -340,12 +256,6 @@
     <header>
         <div class="container">
             <div class="logo">Activzone<span>25</span></div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active">Inicio</a></li>
-                    <li><a href="#catalogo">Camisetas</a></li>
-                </ul>
-            </nav>
             <div class="cart-icon">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="cart-count" id="cart-count">0</span>
@@ -363,9 +273,7 @@
 
     <main class="container catalog-section" id="catalogo">
         <h2 class="section-title">Equipaciones Oficiales</h2>
-
-        <div class="products-grid" id="products-container">
-            </div>
+        <div class="products-grid" id="products-container"></div>
     </main>
 
     <a href="#" class="whatsapp-btn" id="whatsapp-link" target="_blank">
@@ -374,88 +282,8 @@
     </a>
 
     <footer>
-        <p>&copy; 2026 Activzone25 - Todos los derechos reservados. Diseñado con ❤️ para fanáticos del fútbol</p>
+        <p>&copy; 2026 Activzone25 - Todos los derechos reservados.</p>
     </footer>
 
     <script>
-        const TU_TELEFONO = "34647602998"; 
-
-        // Enlaces CDN estables e inmunes a bloqueos de carga (Hotlinking seguro)
-        const escudosLigas = {
-            "La Liga": "https://media.api-football.com/leagues/140.png",
-            "Premier League": "https://media.api-football.com/leagues/39.png",
-            "Bundesliga": "https://media.api-football.com/leagues/78.png",
-            "Ligue 1": "https://media.api-football.com/leagues/61.png",
-            "Serie A": "https://media.api-football.com/leagues/135.png"
-        };
-
-        // Catálogo de camisetas
-        const productos = [
-            { id: 1, titulo: "Camiseta FC Barcelona (Local)", liga: "La Liga", precio: 89.99, imagen: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "España" }
-            { id: 2, titulo: "Camiseta Manchester City (Local)", liga: "Premier League", precio: 85.00, imagen: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Inglaterra" },
-            { id: 3, titulo: "Camiseta Bayern Múnich (Visitante)", liga: "Bundesliga", precio: 84.95, imagen: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Alemania" },
-            { id: 4, titulo: "Camiseta Paris Saint-Germain (Local)", liga: "Ligue 1", precio: 89.99, imagen: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Francia" },
-            { id: 5, titulo: "Camiseta Juventus FC (Local)", liga: "Serie A", precio: 85.00, imagen: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Italia" },
-            
-        ];
-
-        let carritoContador = 0;
-        const container = document.getElementById('products-container');
-        const cartCountEl = document.getElementById('cart-count');
-        const whatsappLinkEl = document.getElementById('whatsapp-link');
-
-        // Renderizar los productos
-        function renderProductos() {
-            container.innerHTML = '';
-            productos.forEach(prod => {
-                const urlEscudo = escudosLigas[prod.liga] || '';
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <span class="product-badge">${prod.tag}</span>
-                    <img src="${prod.imagen}" alt="${prod.titulo}" class="product-image">
-                    <div class="product-info">
-                        <div class="league-container">
-                            <img src="${urlEscudo}" alt="${prod.liga}" class="league-logo-img">
-                            <span class="product-league">${prod.liga}</span>
-                        </div>
-                        <h3 class="product-title">${prod.titulo}</h3>
-                        <div class="product-price">€${prod.precio.toFixed(2)}</div>
-                        <button class="btn-add-cart" onclick="agregarAlCarrito()">
-                            <i class="fas fa-shopping-cart"></i> Añadir al Carrito
-                        </button>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-            actualizarEnlaceWhatsApp();
-        }
-
-        function agregarAlCarrito() {
-            carritoContador++;
-            cartCountEl.textContent = carritoContador;
-            
-            cartCountEl.style.transform = "scale(1.3)";
-            setTimeout(() => {
-                cartCountEl.style.transform = "scale(1)";
-            }, 200);
-
-            actualizarEnlaceWhatsApp();
-        }
-
-        function actualizarEnlaceWhatsApp() {
-            let mensaje = "";
-            if (carritoContador === 0) {
-                mensaje = "¡Hola! Estoy interesado en ver el catálogo de ropa deportiva en Activzone25.";
-            } else {
-                mensaje = `¡Hola! He estado mirando el catálogo de Activzone25 y me interesa encargar un total de ${carritoContador} camiseta(s). ¿Me indicas los pasos para realizar el pedido?`;
-            }
-            
-            const mensajeEncriptado = encodeURIComponent(mensaje);
-            whatsappLinkEl.href = `https://wa.me/${TU_TELEFONO}?text=${mensajeEncriptado}`;
-        }
-
-        renderProductos();
-    </script>
-</body>
-</html>
+        const TU
