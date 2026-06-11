@@ -222,27 +222,27 @@
             flex-grow: 1;
         }
 
-        /* Contenedor de la liga y su escudo en imagen */
+        /* Contenedor optimizado para los Escudos Oficiales de las Ligas */
         .league-container {
             display: flex;
             align-items: center;
             gap: 8px;
             margin-bottom: 12px;
             background-color: #f1f5f9;
-            padding: 4px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             width: fit-content;
         }
 
         .league-logo-img {
-            width: 18px;
-            height: 18px;
+            width: 22px;
+            height: 22px;
             object-fit: contain;
             display: inline-block;
         }
 
         .product-league {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--primary-color);
             text-transform: uppercase;
             font-weight: 700;
@@ -380,13 +380,13 @@
     <script>
         const TU_TELEFONO = "34647602998"; 
 
-        // URLs fijas y garantizadas con los logotipos oficiales de cada competición
+        // Enlaces CDN estables e inmunes a bloqueos de carga (Hotlinking seguro)
         const escudosLigas = {
-            "La Liga": "https://upload.wikimedia.org/wikipedia/commons/0/0f/La_Liga_logo_2023.svg",
-            "Premier League": "https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg",
-            "Bundesliga": "https://upload.wikimedia.org/wikipedia/en/d/df/Bundesliga_logo_%282017%29.svg",
-            "Ligue 1": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ligue_1_McDonald%27s_logo.svg",
-            "Serie A": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Serie_A_logo_2022.svg"
+            "La Liga": "https://media.api-football.com/leagues/140.png",
+            "Premier League": "https://media.api-football.com/leagues/39.png",
+            "Bundesliga": "https://media.api-football.com/leagues/78.png",
+            "Ligue 1": "https://media.api-football.com/leagues/61.png",
+            "Serie A": "https://media.api-football.com/leagues/135.png"
         };
 
         // Catálogo de camisetas
@@ -396,7 +396,7 @@
             { id: 3, titulo: "Camiseta Bayern Múnich (Visitante)", liga: "Bundesliga", precio: 84.95, imagen: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Alemania" },
             { id: 4, titulo: "Camiseta Paris Saint-Germain (Local)", liga: "Ligue 1", precio: 89.99, imagen: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Francia" },
             { id: 5, titulo: "Camiseta Juventus FC (Local)", liga: "Serie A", precio: 85.00, imagen: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Italia" },
-           
+            
         ];
 
         let carritoContador = 0;
