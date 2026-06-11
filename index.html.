@@ -286,4 +286,70 @@
     </footer>
 
     <script>
-        const TU
+        const TU_TELEFONO = "34647602998"; 
+
+        const escudosLigas = {
+            "La Liga": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/La_Liga_logo_2023.svg/512px-La_Liga_logo_2023.svg.png",
+            "Premier League": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Premier_League_Logo.svg/512px-Premier_League_Logo.svg.png",
+            "Bundesliga": "https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Bundesliga_logo_%282017%29.svg/512px-Bundesliga_logo_%282017%29.svg.png",
+            "Ligue 1": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Ligue_1_logo_2024.svg/512px-Ligue_1_logo_2024.svg.png",
+            "Serie A": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Serie_A_logo_2022.svg/512px-Serie_A_logo_2022.svg.png"
+        };
+
+        const productos = [
+            { id: 1, titulo: "Camiseta FC Barcelona (Local)", liga: "La Liga", precio: 89.99, imagen: "https://images.unsplash.com/photo-1518002171953-a080ee817e1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "España" },
+            { id: 2, titulo: "Camiseta Manchester City (Local)", liga: "Premier League", precio: 85.00, imagen: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Inglaterra" },
+            { id: 3, titulo: "Camiseta Bayern Múnich (Visitante)", liga: "Bundesliga", precio: 84.95, imagen: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Alemania" },
+            { id: 4, titulo: "Camiseta Paris Saint-Germain (Local)", liga: "Ligue 1", precio: 89.99, imagen: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Francia" },
+            { id: 5, titulo: "Camiseta Juventus FC (Local)", liga: "Serie A", precio: 85.00, imagen: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Italia" }
+        ];
+
+        let carritoContador = 0;
+        const container = document.getElementById('products-container');
+        const cartCountEl = document.getElementById('cart-count');
+        const whatsappLinkEl = document.getElementById('whatsapp-link');
+
+        function renderProductos() {
+            container.innerHTML = '';
+            productos.forEach(prod => {
+                const urlEscudo = escudosLigas[prod.liga] || '';
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <span class="product-badge">${prod.tag}</span>
+                    <img src="${prod.imagen}" alt="${prod.titulo}" class="product-image">
+                    <div class="product-info">
+                        <div class="league-container">
+                            <img src="${urlEscudo}" alt="${prod.liga}" class="league-logo-img">
+                            <span class="product-league">${prod.liga}</span>
+                        </div>
+                        <h3 class="product-title">${prod.titulo}</h3>
+                        <div class="product-price">€${prod.precio.toFixed(2)}</div>
+                        <button class="btn-add-cart" onclick="agregarAlCarrito()">
+                            <i class="fas fa-shopping-cart"></i> Añadir al Carrito
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            actualizarEnlaceWhatsApp();
+        }
+
+        function agregarAlCarrito() {
+            carritoContador++;
+            cartCountEl.textContent = carritoContador;
+            actualizarEnlaceWhatsApp();
+        }
+
+        function actualizarEnlaceWhatsApp() {
+            let mensaje = carritoContador === 0 
+                ? "¡Hola! Estoy interesado en ver el catálogo de ropa deportiva en Activzone25."
+                : `¡Hola! He estado mirando el catálogo de Activzone25 y me interesa encargar un total de ${carritoContador} camiseta(s). ¿Me indicas los pasos para realizar el pedido?`;
+            
+            whatsappLinkEl.href = `https://wa.me/${TU_TELEFONO}?text=${encodeURIComponent(mensaje)}`;
+        }
+
+        renderProductos();
+    </script>
+</body>
+</html>
