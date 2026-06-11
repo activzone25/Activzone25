@@ -288,12 +288,13 @@
     <script>
         const TU_TELEFONO = "34647602998"; 
 
+        // URLs corregidas mediante CDN público estable que no bloquea imágenes
         const escudosLigas = {
-            "La Liga": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/La_Liga_logo_2023.svg/512px-La_Liga_logo_2023.svg.png",
-            "Premier League": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Premier_League_Logo.svg/512px-Premier_League_Logo.svg.png",
-            "Bundesliga": "https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Bundesliga_logo_%282017%29.svg/512px-Bundesliga_logo_%282017%29.svg.png",
-            "Ligue 1": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Ligue_1_logo_2024.svg/512px-Ligue_1_logo_2024.svg.png",
-            "Serie A": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Serie_A_logo_2022.svg/512px-Serie_A_logo_2022.svg.png"
+            "La Liga": "https://cdn.jsdelivr.net/gh/bndbch/football選手assets@main/leagues/laliga.png",
+            "Premier League": "https://img.icons8.com/color/48/premier-league.png",
+            "Bundesliga": "https://img.icons8.com/color/48/bundesliga.png",
+            "Ligue 1": "https://cdn.jsdelivr.net/gh/bndbch/football選手assets@main/leagues/ligue1.png",
+            "Serie A": "https://img.icons8.com/color/48/serie-a.png"
         };
 
         const productos = [
@@ -320,7 +321,7 @@
                     <img src="${prod.imagen}" alt="${prod.titulo}" class="product-image">
                     <div class="product-info">
                         <div class="league-container">
-                            <img src="${urlEscudo}" alt="${prod.liga}" class="league-logo-img">
+                            <img src="${urlEscudo}" alt="${prod.liga}" class="league-logo-img" onerror="this.style.display='none'">
                             <span class="product-league">${prod.liga}</span>
                         </div>
                         <h3 class="product-title">${prod.titulo}</h3>
