@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutbolStore - Catálogo de Camisetas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- ESTILOS GLOBALES Y VARIABLES --- */
+        :root {
+            --primary-color: #0d1b2a;
+            --accent-color: #00b4d8;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #1b263b;
+            --text-muted: #6c757d;
+            --transition: all 0.3s ease;
+            --whatsapp-color: #25d366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- ENCABEZADO (NAVBAR) --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #e0e1dd;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cart-icon:hover {
+            color: var(--accent-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        /* --- SECCIÓN HERO --- */
+        .hero {
+            background: linear-gradient(rgba(13, 27, 42, 0.8), rgba(13, 27, 42, 0.8)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #e0e1dd;
+        }
+
+        .btn-main {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 10px 25px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-main:hover {
+            background-color: #0096c7;
+            transform: translateY(-2px);
+        }
+
+        /* --- SECCIÓN DEL CATÁLOGO --- */
+        .catalog-section {
+            padding-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 8px auto 0;
+        }
+
+        /* --- CUADRÍCULA DE PRODUCTOS --- */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid #e9ecef;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            border: 1px solid var(--accent-color);
+        }
+
+        .product-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        /* Contenedor de la liga y su escudo */
+        .league-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            background-color: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 20px;
+            width: fit-content;
+        }
+
+        .league-badge-icon {
+            font-size: 14px;
+            display: inline-block;
+            line-height: 1;
+        }
+
+        .product-league {
+            font-size: 11px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .product-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            margin-top: auto;
+        }
+
+        .btn-add-cart {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-add-cart:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* --- BOTÓN FLOTANTE DE WHATSAPP --- */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp-color);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            background-color: #20ba5a;
+        }
+
+        .whatsapp-btn i {
+            font-size: 22px;
+        }
+
+        /* --- PIE DE PÁGINA --- */
+        footer {
+            background-color: var(--primary-color);
+            color: #a3b18a;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: auto;
+            font-size: 14px;
+        }
+
+        /* --- DISEÑO RESPONSIVO --- */
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .hero-content h1 { font-size: 32px; }
+            .whatsapp-btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">Futbol<span>Store</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Inicio</a></li>
+                    <li><a href="#catalogo">Camisetas</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Las 5 Grandes Ligas de Europa</h1>
+            <p>Camisetas oficiales y de entrenamiento de los mejores clubes del mundo.</p>
+            <a href="#catalogo" class="btn-main">Explorar Catálogo</a>
+        </div>
+    </section>
+
+    <main class="container catalog-section" id="catalogo">
+        <h2 class="section-title">Equipaciones Oficiales</h2>
+
+        <div class="products-grid" id="products-container">
+            </div>
+    </main>
+
+    <a href="#" class="whatsapp-btn" id="whatsapp-link" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span>Pedir por WhatsApp</span>
+    </a>
+
+    <footer>
+        <p>&copy; 2026 FutbolStore - Todos los derechos reservados. Diseñado con ❤️ para fanáticos del fútbol</p>
+    </footer>
+
+    <script>
+        const TU_TELEFONO = "34600000000"; 
+
+        // Escudos representativos de cada liga usando insignias del sistema (Emojis oficiales de insignias/marcas de ligas)
+        const escudosLigas = {
+            "La Liga": "🇪🇸",
+            "Premier League": "🦁",
+            "Bundesliga": "🦅",
+            "Ligue 1": "🇫🇷",
+            "Serie A": "👑"
+        };
+
+        // Catálogo de camisetas
+        const productos = [
+            { id: 1, titulo: "Camiseta Real Madrid (Local)", liga: "La Liga", precio: 89.99, imagen: "https://images.unsplash.com/photo-1621572267360-ee0c2909d518?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "España" },
+            { id: 2, titulo: "Camiseta Manchester City (Local)", liga: "Premier League", precio: 85.00, imagen: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Inglaterra" },
+            { id: 3, titulo: "Camiseta Bayern Múnich (Visitante)", liga: "Bundesliga", precio: 84.95, imagen: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Alemania" },
+            { id: 4, titulo: "Camiseta Paris Saint-Germain (Local)", liga: "Ligue 1", precio: 89.99, imagen: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Francia" },
+            { id: 5, titulo: "Camiseta Juventus FC (Local)", liga: "Serie A", precio: 85.00, imagen: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "Italia" },
+            { id: 6, titulo: "Camiseta FC Barcelona (Local)", liga: "La Liga", precio: 89.99, imagen: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", tag: "España" }
+        ];
+
+        let carritoContador = 0;
+        const container = document.getElementById('products-container');
+        const cartCountEl = document.getElementById('cart-count');
+        const whatsappLinkEl = document.getElementById('whatsapp-link');
+
+        // Renderizar los productos
+        function renderProductos() {
+            container.innerHTML = '';
+            productos.forEach(prod => {
+                const iconoLiga = escudosLigas[prod.liga] || '⚽';
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <span class="product-badge">${prod.tag}</span>
+                    <img src="${prod.imagen}" alt="${prod.titulo}" class="product-image">
+                    <div class="product-info">
+                        <div class="league-container">
+                            <span class="league-badge-icon">${iconoLiga}</span>
+                            <span class="product-league">${prod.liga}</span>
+                        </div>
+                        <h3 class="product-title">${prod.titulo}</h3>
+                        <div class="product-price">€${prod.precio.toFixed(2)}</div>
+                        <button class="btn-add-cart" onclick="agregarAlCarrito()">
+                            <i class="fas fa-shopping-cart"></i> Añadir al Carrito
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            actualizarEnlaceWhatsApp();
+        }
+
+        function agregarAlCarrito() {
+            carritoContador++;
+            cartCountEl.textContent = carritoContador;
+            
+            cartCountEl.style.transform = "scale(1.3)";
+            setTimeout(() => {
+                cartCountEl.style.transform = "scale(1)";
+            }, 200);
+
+            actualizarEnlaceWhatsApp();
+        }
+
+        function actualizarEnlaceWhatsApp() {
+            let mensaje = "";
+            if (carritoContador === 0) {
+                mensaje = "¡Hola! Estoy interesado en ver el catálogo de camisetas.";
+            } else {
+                mensaje = `¡Hola! He estado mirando tu catálogo y me interesa encargar un total de ${carritoContador} camiseta(s). ¿Me indicas los pasos para el pago?`;
+            }
+            
+            const mensajeEncriptado = encodeURIComponent(mensaje);
+            whatsappLinkEl.href = `https://wa.me/${TU_TELEFONO}?text=${mensajeEncriptado}`;
+        }
+
+        renderProductos();
+    </script>
+</body>
+</html>
