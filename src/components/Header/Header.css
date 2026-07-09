@@ -1,0 +1,111 @@
+.top-banner {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.header {
+    height: 72px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 40px;
+
+    background: white;
+
+    border-bottom: 1px solid #ececec;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 999;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.logo-blue {
+    color: #00b8ff;
+}
+
+.menu {
+    display: flex;
+    gap: 30px;
+}
+
+.menu a {
+
+    text-decoration: none;
+
+    color: #222;
+
+    font-weight: 600;
+
+    transition: .25s;
+}
+
+.menu a:hover{
+
+    color:#00b8ff;
+
+}
+
+.header-actions{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.icon-btn{
+
+    position:relative;
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+}
+
+.badge{
+
+    position:absolute;
+
+    top:-8px;
+
+    right:-8px;
+
+    background:red;
+
+    color:white;
+
+    border-radius:50%;
+
+    width:18px;
+
+    height:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+}
