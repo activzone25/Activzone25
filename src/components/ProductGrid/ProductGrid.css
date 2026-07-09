@@ -1,0 +1,39 @@
+.product-grid-section{
+
+    max-width:1400px;
+
+    margin:70px auto;
+
+    padding:0 25px;
+
+}
+
+.section-header{
+
+    margin-bottom:35px;
+
+}
+
+.section-header h2{
+
+    font-size:34px;
+
+    margin-bottom:10px;
+
+}
+
+.section-header p{
+
+    color:#777;
+
+}
+
+.product-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:30px;
+
+}

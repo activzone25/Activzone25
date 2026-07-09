@@ -1,23 +1,28 @@
+import "./ProductGrid.css";
+
 import products from "../../data/products";
 import ProductCard from "../ProductCard/ProductCard";
 
 function ProductGrid() {
+  return (
+    <section className="product-grid-section">
 
-    return (
+      <div className="section-header">
+        <h2>🔥 Novedades</h2>
+        <p>Descubre las últimas equipaciones disponibles.</p>
+      </div>
 
-        <section>
+      <div className="product-grid">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+          />
+        ))}
+      </div>
 
-            {products.map(product=>(
-                <ProductCard
-                    key={product.id}
-                    product={product}
-                />
-            ))}
-
-        </section>
-
-    );
-
+    </section>
+  );
 }
 
 export default ProductGrid;
