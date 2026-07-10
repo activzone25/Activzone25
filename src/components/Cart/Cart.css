@@ -246,3 +246,20 @@
     transform:scale(1.03);
 
 }
+
+.discount {
+    color:#00d26a;
+    font-weight:bold;
+}
+
+
+.cart-info {
+    flex:1;
+}
+
+
+.quantity span {
+    min-width:25px;
+    text-align:center;
+    font-weight:bold;
+}

@@ -1,20 +1,60 @@
 import "./Cart.css";
 
-import { FiX, FiTrash2 } from "react-icons/fi";
+import { FiX, FiTrash2, FiPlus, FiMinus } from "react-icons/fi";
 
-import { useCart } from "../context/CartContext.jsx";
+import { useCart } from "../../context/CartContext";
 
 
 function Cart({ open, setOpen }) {
 
-  const { cart, removeFromCart } = useCart();
+  const {
+    cart,
+    removeFromCart,
+    updateQuantity
+  } = useCart();
 
 
-  const total = cart.reduce(
+  const subtotal = cart.reduce(
     (sum, item) =>
-      sum + (item.precio * (item.cantidad || 1)),
+      sum + item.precio * item.cantidad,
     0
   );
+
+
+  const descuento = cart.length >= 2
+    ? subtotal * 0.10
+    : 0;
+
+
+  const total = subtotal - descuento;
+
+
+
+  const enviarWhatsApp = () => {
+
+    let mensaje =
+      "🛒 Pedido Activzone25%0A%0A";
+
+
+    cart.forEach(item => {
+
+      mensaje +=
+        `👕 ${item.nombre} x${item.cantidad} - ${item.precio}€%0A`;
+
+    });
+
+
+    mensaje +=
+      `%0A💰 Total: ${total.toFixed(2)}€`;
+
+
+    window.open(
+      `https://wa.me/34647602998?text=${mensaje}`,
+      "_blank"
+    );
+
+  };
+
 
 
   return (
@@ -25,13 +65,11 @@ function Cart({ open, setOpen }) {
       <div className="cart-header">
 
         <h2>
-          🛒 Carrito
+          🛒 Tu carrito
         </h2>
 
 
-        <button
-          onClick={() => setOpen(false)}
-        >
+        <button onClick={() => setOpen(false)}>
           <FiX />
         </button>
 
@@ -51,12 +89,14 @@ function Cart({ open, setOpen }) {
 
         ) : (
 
-          cart.map((item)=>(
+
+          cart.map(item => (
 
             <div
               className="cart-item"
               key={item.id}
             >
+
 
               <img
                 src={item.imagen}
@@ -64,21 +104,60 @@ function Cart({ open, setOpen }) {
               />
 
 
-              <div>
+              <div className="cart-info">
+
 
                 <h3>
                   {item.nombre}
                 </h3>
 
 
-                <p className="cart-price">
+                <p>
                   {item.precio} €
                 </p>
 
 
+                <div className="quantity">
+
+
+                  <button
+                    onClick={() =>
+                      updateQuantity(
+                        item.id,
+                        Math.max(1,item.cantidad-1)
+                      )
+                    }
+                  >
+                    <FiMinus />
+                  </button>
+
+
+                  <span>
+                    {item.cantidad}
+                  </span>
+
+
+                  <button
+                    onClick={() =>
+                      updateQuantity(
+                        item.id,
+                        item.cantidad+1
+                      )
+                    }
+                  >
+                    <FiPlus />
+                  </button>
+
+
+                </div>
+
+
+
                 <button
                   className="remove-btn"
-                  onClick={() => removeFromCart(item.id)}
+                  onClick={() =>
+                    removeFromCart(item.id)
+                  }
                 >
 
                   <FiTrash2 />
@@ -105,17 +184,33 @@ function Cart({ open, setOpen }) {
       <div className="cart-footer">
 
 
+        <p>
+          Subtotal: {subtotal.toFixed(2)} €
+        </p>
+
+
+        {descuento > 0 && (
+
+          <p className="discount">
+            🎉 Descuento 10%: -{descuento.toFixed(2)} €
+          </p>
+
+        )}
+
+
+
         <h3>
-          Total: {total} €
+          Total: {total.toFixed(2)} €
         </h3>
 
 
-        <a
+
+        <button
           className="checkout"
-          href="#"
+          onClick={enviarWhatsApp}
         >
-          Finalizar pedido
-        </a>
+          Pedir por WhatsApp
+        </button>
 
 
       </div>

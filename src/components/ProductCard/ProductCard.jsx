@@ -1,5 +1,5 @@
 import { FiHeart, FiShoppingCart } from "react-icons/fi";
-import { useCart } from "../context/CartContext.jsx";
+import { useCart } from "../../context/CartContext";
 import "./ProductCard.css";
 
 function ProductCard({ product }) {
