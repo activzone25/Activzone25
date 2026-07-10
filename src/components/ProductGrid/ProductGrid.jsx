@@ -1,18 +1,17 @@
-import "./ProductGrid.css";
+function ProductGrid({ search, category = "Todas" }) {
+  const text = search.toLowerCase();
 
-import products from "../../data/products";
-import ProductCard from "../ProductCard/ProductCard";
-
-function ProductGrid({ search }) {
   const filteredProducts = products.filter((product) => {
-    const text = search.toLowerCase();
-
-    return (
+    const matchSearch =
       product.nombre.toLowerCase().includes(text) ||
       product.equipo.toLowerCase().includes(text) ||
       product.liga.toLowerCase().includes(text) ||
-      product.temporada.toLowerCase().includes(text)
-    );
+      product.temporada.toLowerCase().includes(text);
+
+    const matchCategory =
+      category === "Todas" || product.liga === category;
+
+    return matchSearch && matchCategory;
   });
 
   return (
@@ -20,6 +19,10 @@ function ProductGrid({ search }) {
       <div className="section-header">
         <h2>🔥 Novedades</h2>
         <p>Descubre las últimas equipaciones disponibles.</p>
+
+        <span className="product-count">
+          {filteredProducts.length} productos
+        </span>
       </div>
 
       <div className="product-grid">
@@ -37,5 +40,3 @@ function ProductGrid({ search }) {
     </section>
   );
 }
-
-export default ProductGrid;

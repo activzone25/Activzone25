@@ -1,7 +1,10 @@
 import { FiHeart, FiShoppingCart } from "react-icons/fi";
+import { useCart } from "../../context/CartContext";
 import "./ProductCard.css";
 
 function ProductCard({ product }) {
+  const { addToCart } = useCart();
+
   return (
     <article className="product-card">
 
@@ -41,11 +44,27 @@ function ProductCard({ product }) {
           ⭐⭐⭐⭐⭐
         </div>
 
+        <div className="extras">
+          <span>🏆 Parches GRATIS</span>
+
+          {product.personalizable && (
+            <span>✍️ Personalizable (+5 €)</span>
+          )}
+        </div>
+
         <div className="price">
           {product.precio} €
         </div>
 
-        <button className="add-btn">
+        <p className={`stock ${product.disponible ? "ok" : "no"}`}>
+          {product.disponible ? "🟢 Disponible" : "🔴 Agotado"}
+        </p>
+
+        <button
+          className="add-btn"
+          disabled={!product.disponible}
+          onClick={() => addToCart(product)}
+        >
           <FiShoppingCart />
           Añadir al carrito
         </button>

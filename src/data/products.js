@@ -1,16 +1,24 @@
-const products = [
+export const products = [
   {
     id: 1,
-    nombre: "FC Barcelona Local",
-    equipo: "Barcelona",
-    liga: "LaLiga",
+    nombre: "FC Barcelona",
     temporada: "2026/27",
-    categoria: "Adulto",
-    precio: 23,
-    imagen: "/assets/images/barcelona/local.webp",
-    nuevo: true,
-    oferta: false
+    precio: 25,
+    disponible: true,
+    imagen: "/img/camisetas/barcelona-local.jpg",
+    categoria: "LaLiga",
+    personalizable: true,
+    parcheGratis: true
+  },
+  {
+    id: 2,
+    nombre: "Real Madrid",
+    temporada: "2026/27",
+    precio: 25,
+    disponible: true,
+    imagen: "/img/camisetas/real-madrid-local.jpg",
+    categoria: "LaLiga",
+    personalizable: true,
+    parcheGratis: true
   }
 ];
-
-export default products;
