@@ -3,22 +3,21 @@ import "./Hero.css";
 function Hero() {
   return (
     <section className="hero">
-
-      <div className="hero-content">
+      <div className="hero-overlay">
 
         <span className="hero-badge">
-          ⚽ Temporada 2026/27
+          ⚽ Equipaciones Oficiales 2026/27
         </span>
 
         <h1>
-          Las mejores camisetas
+          Tu pasión.
           <br />
-          de fútbol
+          Tu camiseta.
         </h1>
 
         <p>
-          Equipaciones oficiales, retro y personalizadas.
-          Parches GRATIS y pedido directo por WhatsApp.
+          Camisetas de clubes y selecciones con personalización,
+          parches y la mejor calidad.
         </p>
 
         <div className="hero-buttons">
@@ -32,16 +31,6 @@ function Hero() {
         </div>
 
       </div>
-
-      <div className="hero-image">
-
-        <img
-          src="/assets/images/hero-shirt.png"
-          alt="Camiseta destacada"
-        />
-
-      </div>
-
     </section>
   );
 }

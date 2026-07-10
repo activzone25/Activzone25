@@ -1,17 +1,7 @@
-import Header from "./components/Header/Header";
-import Hero from "./components/Hero/Hero";
-import Categories from "./components/Categories/Categories";
-import ProductGrid from "./components/ProductGrid/ProductGrid";
+import AppRouter from "./router/AppRouter";
 
 function App() {
-  return (
-    <>
-      <Header />
-      <Hero />
-      <Categories />
-      <ProductGrid />
-    </>
-  );
+  return <AppRouter />;
 }
 
 export default App;
