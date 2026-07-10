@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import "./Header.css";
+import { useState } from "react";
+
+import Cart from "../Cart/Cart";
 
 import {
   FiSearch,
@@ -7,45 +10,96 @@ import {
   FiShoppingCart
 } from "react-icons/fi";
 
+import { useCart } from "../context/CartContext.jsx";
+
+
 function Header() {
+
+  const [openCart, setOpenCart] = useState(false);
+
+  const { cart } = useCart();
+
+
   return (
     <>
-      {/* Banner superior */}
+
       <div className="top-banner">
-        🚚 Envío gratis | ⭐ Parches GRATIS | 👕 Personalización incluida
+        🚚 Envío gratis | ⭐ Parches GRATIS | 👕 Personalización +5€
       </div>
 
-      {/* Header principal */}
+
       <header className="header">
 
-        {/* Logo */}
+
         <Link to="/" className="logo">
-          <span className="logo-blue">ACTIV</span>ZONE25
+          <span className="logo-blue">
+            ACTIV
+          </span>
+          ZONE25
         </Link>
 
-        {/* Menú */}
+
+
         <nav className="menu">
-          <Link to="/">Inicio</Link>
-          <Link to="/adulto">Adulto</Link>
-          <Link to="/nino">Niño</Link>
+
+          <Link to="/">
+            Inicio
+          </Link>
+
+          <Link to="/adulto">
+            Adulto
+          </Link>
+
+          <Link to="/nino">
+            Niño
+          </Link>
+
         </nav>
 
-        {/* Acciones */}
+
+
         <div className="header-actions">
 
-          <button className="icon-btn" aria-label="Buscar">
+
+          <button 
+            className="icon-btn"
+            aria-label="Buscar"
+          >
             <FiSearch />
           </button>
 
-          <button className="icon-btn" aria-label="Favoritos">
+
+
+          <button 
+            className="icon-btn"
+            aria-label="Favoritos"
+          >
             <FiHeart />
-            <span className="badge">0</span>
+
+            <span className="badge">
+              0
+            </span>
+
           </button>
 
-          <button className="icon-btn" aria-label="Carrito">
+
+
+
+          <button
+            className="icon-btn"
+            aria-label="Carrito"
+            onClick={() => setOpenCart(true)}
+          >
+
             <FiShoppingCart />
-            <span className="badge">0</span>
+
+            <span className="badge">
+              {cart.length}
+            </span>
+
           </button>
+
+
 
           <a
             href="https://wa.me/34647602998"
@@ -56,11 +110,22 @@ function Header() {
             WhatsApp
           </a>
 
+
         </div>
 
+
       </header>
+
+
+      <Cart
+        open={openCart}
+        setOpen={setOpenCart}
+      />
+
+
     </>
   );
 }
+
 
 export default Header;

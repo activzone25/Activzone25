@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 
 import App from "./App";
 
-import { CartProvider } from "./context/CartContext";
+import { CartProvider } from "./components/context/CartContext.jsx";
 
 import "./styles/global.css";
 import "./styles/responsive.css";

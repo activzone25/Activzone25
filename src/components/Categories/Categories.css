@@ -1,0 +1,114 @@
+.categories {
+    max-width: 1400px;
+    margin: 70px auto;
+    padding: 0 25px;
+}
+
+/* Título */
+
+.categories-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.categories-header h2 {
+    font-size: 36px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.categories-header p {
+    color: #aaa;
+}
+
+
+/* Grid */
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 25px;
+}
+
+
+/* Tarjetas */
+
+.category-card {
+
+    background: #151515;
+
+    border: 2px solid transparent;
+
+    border-radius: 20px;
+
+    padding: 25px 15px;
+
+    cursor: pointer;
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    transition: .35s;
+
+}
+
+
+/* Hover */
+
+.category-card:hover {
+
+    transform: translateY(-8px);
+
+    border-color: #00d26a;
+
+    box-shadow: 0 12px 30px rgba(0,210,106,.2);
+
+}
+
+
+/* Seleccionada */
+
+.category-card.active {
+
+    background: #00d26a;
+
+    color: #000;
+
+    border-color: #00d26a;
+
+    box-shadow: 0 0 20px rgba(0,210,106,.35);
+
+}
+
+
+/* Escudos */
+
+.category-logo {
+
+    width: 90px;
+
+    height: 90px;
+
+    object-fit: contain;
+
+}
+
+
+/* Texto */
+
+.category-card span {
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+}
