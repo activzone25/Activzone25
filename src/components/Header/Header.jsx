@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 import "./Header.css";
 
+import {
+  FiSearch,
+  FiHeart,
+  FiShoppingCart
+} from "react-icons/fi";
+
 function Header() {
   return (
     <>
@@ -11,10 +17,11 @@ function Header() {
 
       {/* Header principal */}
       <header className="header">
+
         {/* Logo */}
-        <div className="logo">
+        <Link to="/" className="logo">
           <span className="logo-blue">ACTIV</span>ZONE25
-        </div>
+        </Link>
 
         {/* Menú */}
         <nav className="menu">
@@ -25,20 +32,32 @@ function Header() {
 
         {/* Acciones */}
         <div className="header-actions">
+
           <button className="icon-btn" aria-label="Buscar">
-            🔍
+            <FiSearch />
           </button>
 
           <button className="icon-btn" aria-label="Favoritos">
-            ❤️
+            <FiHeart />
             <span className="badge">0</span>
           </button>
 
           <button className="icon-btn" aria-label="Carrito">
-            🛒
+            <FiShoppingCart />
             <span className="badge">0</span>
           </button>
+
+          <a
+            href="https://wa.me/34647602998"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="whatsapp-btn"
+          >
+            WhatsApp
+          </a>
+
         </div>
+
       </header>
     </>
   );
