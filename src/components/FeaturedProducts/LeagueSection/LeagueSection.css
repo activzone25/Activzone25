@@ -1,0 +1,78 @@
+.league-section{
+
+    padding:80px 8%;
+
+    background:#111;
+
+}
+
+.league-section h2{
+
+    color:#fff;
+
+    text-align:center;
+
+    font-size:42px;
+
+    margin-bottom:50px;
+
+}
+
+.league-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:30px;
+
+}
+
+.league-card{
+
+    background:#181818;
+
+    border:1px solid #2a2a2a;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    transition:.35s;
+
+}
+
+.league-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#00d26a;
+
+    box-shadow:0 15px 35px rgba(0,210,106,.25);
+
+}
+
+.league-card img{
+
+    width:90px;
+
+    height:90px;
+
+    object-fit:contain;
+
+    margin-bottom:20px;
+
+}
+
+.league-card h3{
+
+    color:#fff;
+
+    font-size:22px;
+
+}

@@ -1,6 +1,9 @@
 import { useState } from "react";
 
 import Hero from "../components/Hero/Hero";
+import PromoBar from "../components/PromoBar/PromoBar";
+import FeaturedProducts from "../components/FeaturedProducts/FeaturedProducts";
+import LeagueSection from "../components/LeagueSection/LeagueSection";
 import Categories from "../components/Categories/Categories";
 import SearchBar from "../components/SearchBar/SearchBar";
 import ProductGrid from "../components/ProductGrid/ProductGrid";
@@ -14,10 +17,11 @@ function Home() {
     <>
       <Hero />
 
-      <Categories
-        category={category}
-        setCategory={setCategory}
-      />
+      <PromoBar />
+
+      <FeaturedProducts />
+
+      <LeagueSection />
 
       <SearchBar
         search={search}

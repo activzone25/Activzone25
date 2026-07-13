@@ -1,0 +1,231 @@
+.league-section{
+
+    padding:110px 20px;
+
+    background:
+    radial-gradient(circle at top,#171717,#090909);
+
+}
+
+.league-header{
+
+    text-align:center;
+
+    margin-bottom:70px;
+
+}
+
+.league-header span{
+
+    color:#00d26a;
+
+    font-weight:700;
+
+    letter-spacing:4px;
+
+    font-size:14px;
+
+}
+
+.league-header h2{
+
+    color:white;
+
+    font-size:48px;
+
+    margin:18px 0;
+
+    font-weight:900;
+
+}
+
+.league-header p{
+
+    color:#a5a5a5;
+
+    font-size:18px;
+
+}
+
+.league-grid{
+
+    max-width:1450px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+
+    gap:35px;
+
+}
+
+.league-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(180deg,
+    rgba(255,255,255,.06),
+    rgba(255,255,255,.02));
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:24px;
+
+    padding:40px 20px;
+
+    text-decoration:none;
+
+    text-align:center;
+
+    transition:.45s;
+
+}
+
+.league-card:hover{
+
+    transform:
+    translateY(-12px)
+    scale(1.03);
+
+    border-color:#00d26a;
+
+    box-shadow:
+
+    0 0 35px rgba(0,210,106,.20),
+
+    0 20px 60px rgba(0,0,0,.45);
+
+}
+
+.league-card img{
+
+    width:100px;
+
+    height:100px;
+
+    object-fit:contain;
+
+    margin-bottom:30px;
+
+    transition:.45s;
+
+}
+
+.league-card:hover img{
+
+    transform:
+    scale(1.15)
+    rotate(-5deg);
+
+}
+
+.league-card h3{
+
+    color:white;
+
+    font-size:22px;
+
+    margin-bottom:28px;
+
+}
+
+.league-btn{
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:100%;
+
+    height:50px;
+
+    border-radius:14px;
+
+    background:#00d26a;
+
+    color:black;
+
+    font-weight:800;
+
+    transition:.35s;
+
+}
+
+.league-card:hover .league-btn{
+
+    background:white;
+
+}
+
+.shine{
+
+    position:absolute;
+
+    top:-120%;
+
+    left:-50%;
+
+    width:60%;
+
+    height:260%;
+
+    transform:rotate(25deg);
+
+    background:
+
+    linear-gradient(
+
+    transparent,
+
+    rgba(255,255,255,.35),
+
+    transparent);
+
+}
+
+.league-card:hover .shine{
+
+    animation:shine .9s linear;
+
+}
+
+@keyframes shine{
+
+    from{
+
+        left:-70%;
+
+    }
+
+    to{
+
+        left:170%;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+.league-header h2{
+
+    font-size:34px;
+
+}
+
+.league-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+}
