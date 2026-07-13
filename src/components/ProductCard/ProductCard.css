@@ -207,3 +207,163 @@
     cursor: not-allowed;
     opacity: .7;
 }
+
+/* ==========================================
+   PARCHES
+========================================== */
+
+.patch-container{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin:15px 0;
+}
+
+.patch-container img{
+    width:36px;
+    height:36px;
+    object-fit:contain;
+    transition:.3s;
+}
+
+.patch-container img:hover{
+    transform:scale(1.15);
+}
+
+
+/* ==========================================
+   BOTONES
+========================================== */
+
+.product-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.view-btn,
+.add-btn{
+
+    flex:1;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    transition:.3s;
+
+    cursor:pointer;
+}
+
+.view-btn{
+
+    background:#242424;
+    color:#fff;
+    border:1px solid #333;
+}
+
+.view-btn:hover{
+
+    background:#333;
+    border-color:#00d26a;
+}
+
+.add-btn{
+
+    background:#00d26a;
+    color:#000;
+}
+
+.add-btn:hover{
+
+    background:#00bf62;
+}
+
+
+/* ==========================================
+   HOVER
+========================================== */
+
+.product-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+        transparent,
+        rgba(0,210,106,.06)
+    );
+
+    opacity:0;
+
+    transition:.35s;
+
+    pointer-events:none;
+
+}
+
+.product-card:hover::after{
+
+    opacity:1;
+
+}
+
+.secondary{
+    margin-top:12px;
+    background:#222;
+    color:#fff;
+    text-decoration:none;
+}
+
+.secondary:hover{
+    background:#2d2d2d;
+    color:#00d26a;
+}
+
+.rating{
+    display:flex;
+    gap:2px;
+    font-size:18px;
+}
+
+.price{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.price::after{
+    content:"IVA incl.";
+    font-size:12px;
+    color:#999;
+    font-weight:500;
+}
+
+.product-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.35));
+    pointer-events:none;
+}
+
+.product-card:hover .badge{
+    transform:scale(1.05);
+}
+
+.badge{
+    transition:.3s;
+}
+
+.favorite-btn{
+    backdrop-filter:blur(10px);
+}

@@ -1,3 +1,6 @@
+import barcelona from "../assets/camisetas/barcelona-local.png";
+import realMadrid from "../assets/camisetas/real-madrid-local.png";
+
 const products = [
   {
     id: 1,
@@ -13,7 +16,7 @@ const products = [
 
     precio: 25,
 
-    imagen: "/img/camisetas/barcelona-local.jpg",
+    imagen: barcelona,
 
     disponible: true,
     personalizable: true,
@@ -37,7 +40,7 @@ const products = [
 
     precio: 25,
 
-    imagen: "/img/camisetas/real-madrid-local.jpg",
+    imagen: realMadrid,
 
     disponible: true,
     personalizable: true,

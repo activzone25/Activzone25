@@ -1,40 +1,44 @@
 .cart {
 
-    position: fixed;
+    position:fixed;
 
-    top: 0;
-    right: -420px;
+    top:0;
 
-    width: 380px;
-    height: 100vh;
+    right:-450px;
 
-    background: #111;
+    width:400px;
 
-    color: white;
+    height:100vh;
 
-    z-index: 999;
+    background:#0b0b0b;
 
-    padding: 25px;
+    color:white;
 
-    transition: .4s;
+    z-index:999;
 
-    box-shadow: -10px 0 30px rgba(0,0,0,.5);
+    padding:25px;
 
-    display: flex;
-    flex-direction: column;
+    transition:.4s ease;
+
+    box-shadow:-15px 0 40px rgba(0,0,0,.6);
+
+    display:flex;
+
+    flex-direction:column;
 
 }
+
 
 
 .cart.active {
 
-    right: 0;
+    right:0;
 
 }
 
 
 
-/* Cabecera */
+/* CABECERA */
 
 .cart-header {
 
@@ -44,43 +48,55 @@
 
     align-items:center;
 
-    border-bottom:1px solid #333;
-
     padding-bottom:20px;
 
+    border-bottom:1px solid #262626;
+
 }
+
 
 
 .cart-header h2 {
 
     margin:0;
 
+    font-size:24px;
+
 }
+
 
 
 .cart-header button {
 
-    background:none;
+    background:#171717;
 
     border:none;
 
     color:white;
 
-    font-size:25px;
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
 
     cursor:pointer;
+
+    font-size:20px;
 
 }
 
 
 
-/* Productos */
+/* PRODUCTOS */
 
 .cart-items {
 
     flex:1;
 
     overflow-y:auto;
+
+    padding-top:15px;
 
 }
 
@@ -92,11 +108,13 @@
 
     gap:15px;
 
-    margin:20px 0;
+    padding:15px;
 
-    padding-bottom:15px;
+    margin-bottom:15px;
 
-    border-bottom:1px solid #333;
+    background:#151515;
+
+    border-radius:18px;
 
 }
 
@@ -116,9 +134,9 @@
 
 
 
-.cart-item h3 {
+.cart-info h3 {
 
-    margin:0;
+    margin:0 0 5px;
 
     font-size:16px;
 
@@ -126,17 +144,31 @@
 
 
 
-.cart-price {
+.cart-info p {
+
+    color:#00d26a;
 
     font-weight:bold;
 
-    color:#00d26a;
+    margin:5px 0;
 
 }
 
 
 
-/* Cantidad */
+.cart-info small {
+
+    display:block;
+
+    color:#aaa;
+
+    margin-top:4px;
+
+}
+
+
+
+/* CANTIDAD */
 
 .quantity {
 
@@ -144,9 +176,9 @@
 
     align-items:center;
 
-    gap:10px;
+    gap:12px;
 
-    margin:10px 0;
+    margin:12px 0;
 
 }
 
@@ -154,35 +186,17 @@
 
 .quantity button {
 
-    width:28px;
+    width:30px;
 
-    height:28px;
-
-    border:none;
+    height:30px;
 
     border-radius:50%;
 
-    cursor:pointer;
+    border:none;
 
     background:#00d26a;
 
-    color:#000;
-
-    font-weight:bold;
-
-}
-
-
-
-/* Eliminar */
-
-.remove-btn {
-
-    background:none;
-
-    border:none;
-
-    color:#ff4d4d;
+    color:black;
 
     cursor:pointer;
 
@@ -190,17 +204,47 @@
 
     align-items:center;
 
-    gap:5px;
+    justify-content:center;
 
 }
 
 
 
-/* Footer */
+.quantity span {
+
+    font-weight:bold;
+
+}
+
+
+
+/* ELIMINAR */
+
+.remove-btn {
+
+    background:none;
+
+    border:none;
+
+    color:#ff5555;
+
+    cursor:pointer;
+
+    display:flex;
+
+    gap:5px;
+
+    align-items:center;
+
+}
+
+
+
+/* FOOTER */
 
 .cart-footer {
 
-    border-top:1px solid #333;
+    border-top:1px solid #262626;
 
     padding-top:20px;
 
@@ -208,37 +252,50 @@
 
 
 
-.cart-footer h3 {
+.cart-footer p {
 
-    margin-bottom:20px;
+    color:#aaa;
 
 }
 
 
 
-/* Botón pedido */
+.cart-footer h3 {
+
+    font-size:26px;
+
+    margin:15px 0;
+
+}
+
+
+
+/* BOTONES */
 
 .checkout {
 
-    display:block;
+    width:100%;
 
-    text-align:center;
+    padding:16px;
+
+    border:none;
+
+    border-radius:15px;
 
     background:#00d26a;
 
     color:#000;
 
-    padding:15px;
+    font-weight:800;
 
-    border-radius:12px;
+    font-size:16px;
 
-    text-decoration:none;
-
-    font-weight:bold;
+    cursor:pointer;
 
     transition:.3s;
 
 }
+
 
 
 .checkout:hover {
@@ -247,19 +304,50 @@
 
 }
 
-.discount {
-    color:#00d26a;
-    font-weight:bold;
+
+
+.clear-cart {
+
+    width:100%;
+
+    margin-top:12px;
+
+    padding:12px;
+
+    border-radius:15px;
+
+    border:1px solid #333;
+
+    background:#171717;
+
+    color:white;
+
+    cursor:pointer;
+
 }
 
 
-.cart-info {
-    flex:1;
+
+.clear-cart:hover {
+
+    border-color:#ff5555;
+
+    color:#ff5555;
+
 }
 
 
-.quantity span {
-    min-width:25px;
-    text-align:center;
-    font-weight:bold;
+
+/* MOVIL */
+
+@media(max-width:500px){
+
+
+    .cart {
+
+        width:100%;
+
+    }
+
+
 }
