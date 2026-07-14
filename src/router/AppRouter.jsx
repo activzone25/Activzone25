@@ -15,45 +15,36 @@ function AppRouter() {
 
     <BrowserRouter>
 
-      {/* <Header /> */}
+      <Header />
 
+      <Routes>
 
-      <Route 
- path="/" 
- element={
-   <h1 style={{color:"white"}}>
-     HOME FUNCIONA
-   </h1>
- }
-/>
-
-
-        <Route 
-          path="/adulto" 
-          element={<Adult />} 
+        <Route
+          path="/"
+          element={<Home />}
         />
 
-
-        <Route 
-          path="/nino" 
-          element={<Kids />} 
+        <Route
+          path="/adulto"
+          element={<Adult />}
         />
 
-
-        <Route 
-          path="/producto/:slug" 
-          element={<Product />} 
+        <Route
+          path="/nino"
+          element={<Kids />}
         />
 
-
-        <Route 
-          path="*" 
-          element={<NotFound />} 
+        <Route
+          path="/producto/:slug"
+          element={<Product />}
         />
 
+        <Route
+          path="*"
+          element={<NotFound />}
+        />
 
       </Routes>
-
 
     </BrowserRouter>
 
