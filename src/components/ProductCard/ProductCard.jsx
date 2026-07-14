@@ -41,9 +41,9 @@ function ProductCard({ product }) {
         </div>
 
         <div className="extras">
-          <span>✅ Personalización disponible</span>
-          <span>🚚 Envío 24/48h</span>
-        </div>
+  <span>✅ Personalización disponible</span>
+  <span>🏆 Parches GRATIS</span>
+</div>
 
         <div className="price">
           {product.precio} €

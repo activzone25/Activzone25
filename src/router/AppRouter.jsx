@@ -15,16 +15,17 @@ function AppRouter() {
 
     <BrowserRouter>
 
-      <Header />
+      {/* <Header /> */}
 
 
-      <Routes>
-
-
-        <Route 
-          path="/" 
-          element={<Home />} 
-        />
+      <Route 
+ path="/" 
+ element={
+   <h1 style={{color:"white"}}>
+     HOME FUNCIONA
+   </h1>
+ }
+/>
 
 
         <Route 
