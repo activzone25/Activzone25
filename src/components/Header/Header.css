@@ -1,63 +1,290 @@
-import { Link } from "react-router-dom";
+/* =====================================================
+   ACTIVZONE25 - HEADER
+===================================================== */
 
-import "./Hero.css";
+.header{
 
-function Hero() {
-  return (
-    <section className="hero">
+    position:sticky;
 
-      <div className="hero-content">
+    top:0;
 
-        <span className="hero-badge">
-          ⚽ TEMPORADA 2026/27
-        </span>
+    z-index:1000;
 
-        <h1>
-          Camisetas de fútbol 2026/27
-        </h1>
+    width:100%;
 
-        <p>
-          Personaliza tu camiseta con nombre, número y parches oficiales.
-        </p>
+    backdrop-filter:blur(18px);
 
-        <div className="hero-buttons">
+    background:rgba(11,11,11,.90);
 
-          <a
-            href="#productos"
-            className="hero-btn primary"
-          >
-            Comprar ahora
-          </a>
+    border-bottom:1px solid #222;
 
-          <Link
-            to="/"
-            className="hero-btn secondary"
-          >
-            Ver catálogo
-          </Link>
-
-        </div>
-
-        <div className="hero-features">
-
-          <span>
-            🏆 Parches GRATIS
-          </span>
-
-          <span>
-            👕 2 camisetas por 46 €
-          </span>
-
-          <span>
-            ✍️ Personalización +5 €
-          </span>
-
-        </div>
-
-      </div>
-
-    </section>
-  );
 }
 
-export default Hero;
+
+.header-container{
+
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:18px 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:30px;
+
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo{
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:32px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    transition:.25s;
+
+}
+
+.logo:hover{
+
+    color:#00d26a;
+
+}
+
+
+/* =====================================================
+   BUSCADOR
+===================================================== */
+
+.search-box{
+
+    flex:1;
+
+    max-width:500px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 18px;
+
+    background:#171717;
+
+    border:2px solid #262626;
+
+    border-radius:50px;
+
+    transition:.25s;
+
+}
+
+.search-box:focus-within{
+
+    border-color:#00d26a;
+
+    box-shadow:0 0 18px rgba(0,210,106,.25);
+
+}
+
+.search-box svg{
+
+    color:#8a8a8a;
+
+    font-size:18px;
+
+}
+
+.search-box input{
+
+    flex:1;
+
+    background:transparent;
+
+    border:none;
+
+    outline:none;
+
+    color:#fff;
+
+    font-size:15px;
+
+}
+
+.search-box input::placeholder{
+
+    color:#777;
+
+}
+
+
+/* =====================================================
+   BOTONES
+===================================================== */
+
+.header-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.menu-btn,
+.cart-btn{
+
+    position:relative;
+
+    width:48px;
+
+    height:48px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#171717;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.menu-btn:hover,
+.cart-btn:hover{
+
+    background:#00d26a;
+
+    color:#000;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* =====================================================
+   CONTADOR
+===================================================== */
+
+.cart-count{
+
+    position:absolute;
+
+    top:-4px;
+
+    right:-4px;
+
+    min-width:22px;
+
+    height:22px;
+
+    padding:0 6px;
+
+    border-radius:50px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#ff2b2b;
+
+    color:#fff;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    border:2px solid #0b0b0b;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:900px){
+
+    .header-container{
+
+        flex-wrap:wrap;
+
+        gap:18px;
+
+    }
+
+    .logo{
+
+        width:100%;
+
+        text-align:center;
+
+        font-size:28px;
+
+    }
+
+    .search-box{
+
+        order:3;
+
+        width:100%;
+
+        max-width:none;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .header-container{
+
+        padding:15px;
+
+    }
+
+    .menu-btn,
+    .cart-btn{
+
+        width:44px;
+
+        height:44px;
+
+    }
+
+    .logo{
+
+        font-size:24px;
+
+    }
+
+}

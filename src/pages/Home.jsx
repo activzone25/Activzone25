@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import Header from "../../components/Header/Header";
-import Hero from "../../components/Hero/Hero";
-import Categories from "../../components/Categories/Categories";
-import ProductGrid from "../../components/ProductGrid/ProductGrid";
-import Cart from "../../components/Cart/Cart";
+import Header from "../components/Header/Header";
+import Hero from "../components/Hero/Hero";
+import Categories from "../components/Categories/Categories";
+import ProductGrid from "../components/ProductGrid/ProductGrid";
+import Cart from "../components/Cart/Cart";
 
 function Home() {
   const [search, setSearch] = useState("");
