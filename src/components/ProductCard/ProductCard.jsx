@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
-import { FiHeart, FiShoppingCart, FiEye } from "react-icons/fi";
+import {
+  FiHeart,
+  FiShoppingCart,
+  FiEye
+} from "react-icons/fi";
 
 import { useCart } from "../../context/CartContext";
+import { useFavorites } from "../../context/FavoritesContext";
 
 import laliga from "../../assets/parches/laliga.png";
 import champions from "../../assets/parches/champions.png";
@@ -9,36 +14,56 @@ import champions from "../../assets/parches/champions.png";
 import "./ProductCard.css";
 
 function ProductCard({ product }) {
+
   const { addToCart } = useCart();
+
+  const {
+    toggleFavorite,
+    isFavorite
+  } = useFavorites();
 
   const patches = {
     laliga,
     champions
   };
 
-  const addProduct = () => {
+  function addProduct() {
+
     addToCart({
+
       ...product,
+
       imagen: product.front,
+
       cantidad: 1
+
     });
-  };
+
+  }
 
   return (
+
     <article className="product-card">
 
-      {/* BADGE */}
-
       {product.nuevo && (
+
         <span className="badge new">
           ⭐ NUEVO 26/27
         </span>
+
       )}
 
-      {/* FAVORITO */}
+      {/* FAVORITOS */}
 
-      <button className="favorite-btn">
+      <button
+        className={`favorite-btn ${
+          isFavorite(product.id) ? "active" : ""
+        }`}
+        onClick={() => toggleFavorite(product)}
+      >
+
         <FiHeart />
+
       </button>
 
       {/* IMAGEN */}
@@ -75,8 +100,6 @@ function ProductCard({ product }) {
 
         </div>
 
-        {/* PARCHES */}
-
         <div className="patch-container">
 
           {product.parches?.map((patch) => (
@@ -91,19 +114,17 @@ function ProductCard({ product }) {
 
         </div>
 
-        {/* PRECIO */}
-
         <div className="price">
-          {product.precio} €
-        </div>
 
-        {/* STOCK */}
+          {product.precio} €
+
+        </div>
 
         <div className="stock ok">
-          ● En stock
-        </div>
 
-        {/* BOTONES */}
+          ● En stock
+
+        </div>
 
         <div className="product-buttons">
 
@@ -111,16 +132,22 @@ function ProductCard({ product }) {
             className="add-btn"
             onClick={addProduct}
           >
+
             <FiShoppingCart />
+
             Añadir
+
           </button>
 
           <Link
             to={`/producto/${product.slug}`}
             className="view-btn"
           >
+
             <FiEye />
+
             Ver
+
           </Link>
 
         </div>
@@ -128,7 +155,9 @@ function ProductCard({ product }) {
       </div>
 
     </article>
+
   );
+
 }
 
 export default ProductCard;

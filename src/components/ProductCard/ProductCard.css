@@ -524,3 +524,37 @@
 
 
 }
+.favorite-btn svg{
+    font-size:20px;
+    transition:.3s;
+}
+
+.favorite-btn .fa-heart{
+    color:#ff2b55;
+}
+
+.favorite-btn:hover svg{
+    transform:scale(1.2);
+}
+
+.favorite-btn.active{
+
+    background:#ff2d55;
+
+    color:#fff;
+
+    transform:scale(1.1);
+
+}
+
+.favorite-btn.active svg{
+
+    fill:currentColor;
+
+}
+
+.favorite-btn:hover{
+
+    transform:scale(1.08);
+
+}

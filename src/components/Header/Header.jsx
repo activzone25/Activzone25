@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import {
   FiSearch,
   FiShoppingCart,
@@ -11,11 +10,10 @@ import { useCart } from "../../context/CartContext";
 import "./Header.css";
 
 function Header({
-
   search,
   setSearch,
-  setCartOpen
-
+  setCartOpen,
+  setMenuOpen
 }) {
 
   const { cart } = useCart();
@@ -26,13 +24,11 @@ function Header({
   );
 
   return (
-
     <header className="header">
 
       <div className="header-container">
 
         {/* LOGO */}
-
         <Link
           to="/"
           className="logo"
@@ -41,7 +37,6 @@ function Header({
         </Link>
 
         {/* BUSCADOR */}
-
         <div className="search-box">
 
           <FiSearch />
@@ -56,13 +51,13 @@ function Header({
         </div>
 
         {/* ACCIONES */}
-
         <div className="header-actions">
 
-          <button className="menu-btn">
-
+          <button
+            className="menu-btn"
+            onClick={() => setMenuOpen(true)}
+          >
             <FiMenu />
-
           </button>
 
           <button
@@ -73,13 +68,9 @@ function Header({
             <FiShoppingCart />
 
             {totalProductos > 0 && (
-
               <span className="cart-count">
-
                 {totalProductos}
-
               </span>
-
             )}
 
           </button>
@@ -89,9 +80,7 @@ function Header({
       </div>
 
     </header>
-
   );
-
 }
 
 export default Header;
