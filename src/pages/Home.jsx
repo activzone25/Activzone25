@@ -1,53 +1,44 @@
 import { useState } from "react";
 
-import Hero from "../components/Hero/Hero";
-import PromoBar from "../components/PromoBar/PromoBar";
-import FeaturedProducts from "../components/FeaturedProducts/FeaturedProducts";
-import LeagueSection from "../components/LeagueSection/LeagueSection";
-import SearchBar from "../components/SearchBar/SearchBar";
-import ProductGrid from "../components/ProductGrid/ProductGrid";
-import Footer from "../components/Footer/Footer";
-
+import Header from "../../components/Header/Header";
+import Hero from "../../components/Hero/Hero";
+import Categories from "../../components/Categories/Categories";
+import ProductGrid from "../../components/ProductGrid/ProductGrid";
+import Cart from "../../components/Cart/Cart";
 
 function Home() {
-
   const [search, setSearch] = useState("");
-
   const [category, setCategory] = useState("Todas");
-
+  const [cartOpen, setCartOpen] = useState(false);
 
   return (
-
     <>
+      <Header
+        search={search}
+        setSearch={setSearch}
+        setCartOpen={setCartOpen}
+      />
 
       <Hero />
 
-      <PromoBar />
-
-      <FeaturedProducts />
-
-      <LeagueSection />
-
-
-      <SearchBar
-        search={search}
-        setSearch={setSearch}
-      />
-
-
-      <ProductGrid
-        search={search}
+      <Categories
         category={category}
+        setCategory={setCategory}
       />
 
+      <div id="productos">
+        <ProductGrid
+          search={search}
+          category={category}
+        />
+      </div>
 
-      <Footer />
-
+      <Cart
+        open={cartOpen}
+        setOpen={setCartOpen}
+      />
     </>
-
   );
-
 }
-
 
 export default Home;

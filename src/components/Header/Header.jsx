@@ -1,131 +1,97 @@
 import { Link } from "react-router-dom";
-import "./Header.css";
-import { useState } from "react";
-
-import Cart from "../Cart/Cart";
 
 import {
   FiSearch,
-  FiHeart,
-  FiShoppingCart
+  FiShoppingCart,
+  FiMenu
 } from "react-icons/fi";
 
 import { useCart } from "../../context/CartContext";
 
+import "./Header.css";
 
-function Header() {
+function Header({
 
-  const [openCart, setOpenCart] = useState(false);
+  search,
+  setSearch,
+  setCartOpen
+
+}) {
 
   const { cart } = useCart();
 
+  const totalProductos = cart.reduce(
+    (sum, item) => sum + (item.cantidad || 1),
+    0
+  );
 
   return (
-    <>
 
-      <div className="top-banner">
-        🚚 Envío gratis | ⭐ Parches GRATIS | 👕 Personalización +5€
-      </div>
+    <header className="header">
 
+      <div className="header-container">
 
-      <header className="header">
+        {/* LOGO */}
 
-
-        <Link to="/" className="logo">
-          <span className="logo-blue">
-            ACTIV
-          </span>
-          ZONE25
+        <Link
+          to="/"
+          className="logo"
+        >
+          ACTIVZONE25
         </Link>
 
+        {/* BUSCADOR */}
 
+        <div className="search-box">
 
-        <nav className="menu">
+          <FiSearch />
 
-          <Link to="/">
-            Inicio
-          </Link>
+          <input
+            type="text"
+            placeholder="Buscar camiseta..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
 
-          <Link to="/adulto">
-            Adulto
-          </Link>
+        </div>
 
-          <Link to="/nino">
-            Niño
-          </Link>
-
-        </nav>
-
-
+        {/* ACCIONES */}
 
         <div className="header-actions">
 
+          <button className="menu-btn">
 
-          <button 
-            className="icon-btn"
-            aria-label="Buscar"
-          >
-            <FiSearch />
-          </button>
-
-
-
-          <button 
-            className="icon-btn"
-            aria-label="Favoritos"
-          >
-            <FiHeart />
-
-            <span className="badge">
-              0
-            </span>
+            <FiMenu />
 
           </button>
-
-
-
 
           <button
-            className="icon-btn"
-            aria-label="Carrito"
-            onClick={() => setOpenCart(true)}
+            className="cart-btn"
+            onClick={() => setCartOpen(true)}
           >
 
             <FiShoppingCart />
 
-            <span className="badge">
-              {cart.length}
-            </span>
+            {totalProductos > 0 && (
+
+              <span className="cart-count">
+
+                {totalProductos}
+
+              </span>
+
+            )}
 
           </button>
 
-
-
-          <a
-            href="https://wa.me/34647602998"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="whatsapp-btn"
-          >
-            WhatsApp
-          </a>
-
-
         </div>
 
+      </div>
 
-      </header>
+    </header>
 
-
-      <Cart
-        open={openCart}
-        setOpen={setOpenCart}
-      />
-
-
-    </>
   );
-}
 
+}
 
 export default Header;

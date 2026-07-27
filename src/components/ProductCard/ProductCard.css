@@ -1,9 +1,9 @@
 /* =====================================================
-   ACTIVZONE25 - PRODUCT CARD PREMIUM V5
+   ACTIVZONE25 - PRODUCT CARD PREMIUM
 ===================================================== */
 
 
-.product-card {
+.product-card{
 
     position:relative;
 
@@ -14,78 +14,16 @@
         #090909
     );
 
-    border:1px solid #242424;
+    border:1px solid #262626;
 
-    border-radius:26px;
+    border-radius:24px;
 
     overflow:hidden;
-
-    opacity:0;
-
-    animation:cardShow .6s ease forwards;
 
     transition:.45s ease;
 
     box-shadow:
-    0 20px 45px rgba(0,0,0,.5);
-
-}
-
-
-/* ANIMACION ENTRADA */
-
-@keyframes cardShow {
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(35px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-
-
-/* BRILLO PREMIUM */
-
-.product-card::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-    linear-gradient(
-        120deg,
-        transparent 35%,
-        rgba(255,255,255,.15),
-        transparent 65%
-    );
-
-    transform:translateX(-120%);
-
-    transition:.8s;
-
-    pointer-events:none;
-
-}
-
-
-.product-card:hover::before{
-
-    transform:translateX(120%);
+    0 15px 40px rgba(0,0,0,.45);
 
 }
 
@@ -93,19 +31,21 @@
 
 .product-card:hover{
 
-    transform:translateY(-12px);
+    transform:translateY(-10px);
 
     border-color:#00d26a;
 
     box-shadow:
-    0 30px 70px rgba(0,210,106,.25);
+    0 25px 60px rgba(0,210,106,.25);
 
 }
 
 
 
+
+
 /* =====================================================
-   IMAGEN
+   IMAGEN CAMISETA PNG
 ===================================================== */
 
 
@@ -113,14 +53,22 @@
 
     position:relative;
 
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:25px;
+
     background:
     radial-gradient(
         circle,
-        #333,
+        #222,
         #111
     );
 
-    overflow:hidden;
+    min-height:330px;
 
 }
 
@@ -130,20 +78,32 @@
 
     width:100%;
 
-    aspect-ratio:1/1;
+    max-width:260px;
 
-    object-fit:cover;
+    height:300px;
 
-    transition:.6s;
+    object-fit:contain;
+
+    filter:
+    drop-shadow(
+        0 20px 25px rgba(0,0,0,.55)
+    );
+
+    transition:.4s;
 
 }
+
 
 
 .product-card:hover .product-image{
 
-    transform:scale(1.10);
+    transform:scale(1.08);
 
 }
+
+
+
+
 
 
 
@@ -160,13 +120,13 @@
 
     right:18px;
 
-    width:44px;
+    width:42px;
 
-    height:44px;
-
-    border-radius:50%;
+    height:42px;
 
     border:none;
+
+    border-radius:50%;
 
     display:flex;
 
@@ -183,11 +143,12 @@
 
     cursor:pointer;
 
-    z-index:5;
+    z-index:10;
 
     transition:.3s;
 
 }
+
 
 
 .favorite-btn:hover{
@@ -196,14 +157,18 @@
 
     color:#000;
 
-    transform:scale(1.15);
+    transform:scale(1.1);
 
 }
 
 
 
+
+
+
+
 /* =====================================================
-   BADGES
+   NUEVO
 ===================================================== */
 
 
@@ -221,11 +186,12 @@
 
     font-size:12px;
 
-    font-weight:900;
+    font-weight:800;
 
-    z-index:5;
+    z-index:10;
 
 }
+
 
 
 .badge.new{
@@ -238,6 +204,10 @@
 
 
 
+
+
+
+
 /* =====================================================
    INFORMACION
 ===================================================== */
@@ -245,18 +215,19 @@
 
 .product-info{
 
-    padding:25px;
+    padding:24px;
 
 }
 
 
+
 .product-info h3{
 
-    color:#fff;
+    color:white;
 
     font-size:21px;
 
-    font-weight:900;
+    font-weight:800;
 
     margin-bottom:8px;
 
@@ -278,9 +249,9 @@
 
     color:#ffc107;
 
-    font-size:18px;
-
     margin:15px 0;
+
+    font-size:18px;
 
 }
 
@@ -302,49 +273,7 @@
 
 
 
-/* PRECIO */
 
-.price{
-
-    color:#00d26a;
-
-    font-size:32px;
-
-    font-weight:900;
-
-    margin:18px 0;
-
-}
-
-
-.price::after{
-
-    content:" IVA incl.";
-
-    color:#777;
-
-    font-size:12px;
-
-}
-
-
-
-/* STOCK */
-
-.stock{
-
-    margin-bottom:15px;
-
-    font-weight:700;
-
-}
-
-
-.stock.ok{
-
-    color:#00d26a;
-
-}
 
 
 
@@ -359,29 +288,31 @@
 
     justify-content:center;
 
-    align-items:center;
+    gap:10px;
 
-    gap:8px;
-
-    margin:12px 0;
+    margin:15px 0;
 
 }
+
 
 
 .patch-container img{
 
-    width:24px;
+    width:30px;
 
-    height:24px;
+    height:30px;
 
     object-fit:contain;
 
     filter:
-    drop-shadow(0 3px 6px rgba(0,0,0,.45));
+    drop-shadow(
+        0 3px 5px rgba(0,0,0,.5)
+    );
 
-    transition:.3s ease;
+    transition:.3s;
 
 }
+
 
 
 .patch-container img:hover{
@@ -389,6 +320,71 @@
     transform:scale(1.25);
 
 }
+
+
+
+
+
+
+
+/* =====================================================
+   PRECIO
+===================================================== */
+
+
+.price{
+
+    color:#00d26a;
+
+    font-size:32px;
+
+    font-weight:900;
+
+    margin:18px 0;
+
+}
+
+
+
+.price::after{
+
+    content:" IVA incl.";
+
+    color:#777;
+
+    font-size:12px;
+
+}
+
+
+
+
+
+
+
+/* =====================================================
+   STOCK
+===================================================== */
+
+
+.stock{
+
+    margin-bottom:18px;
+
+    font-weight:700;
+
+}
+
+
+.stock.ok{
+
+    color:#00d26a;
+
+}
+
+
+
+
 
 
 
@@ -447,9 +443,10 @@
 }
 
 
+
 .add-btn:hover{
 
-    background:#fff;
+    background:white;
 
     transform:translateY(-3px);
 
@@ -461,7 +458,7 @@
 
     background:#222;
 
-    color:#fff;
+    color:white;
 
     border:1px solid #333;
 
@@ -479,12 +476,30 @@
 
 
 
+
+
+
+
 /* =====================================================
    MOVIL
 ===================================================== */
 
 
 @media(max-width:768px){
+
+
+.product-image-container{
+
+    min-height:280px;
+
+}
+
+
+.product-image{
+
+    height:250px;
+
+}
 
 
 .product-info{

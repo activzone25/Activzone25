@@ -1,0 +1,49 @@
+.fade{
+
+    animation:fade .35s ease;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.zoom{
+
+    transition:.3s;
+
+}
+
+.zoom:hover{
+
+    transform:scale(1.04);
+
+}
+
+.float{
+
+    transition:.3s;
+
+}
+
+.float:hover{
+
+    transform:translateY(-5px);
+
+}

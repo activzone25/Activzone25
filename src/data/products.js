@@ -1,87 +1,137 @@
-import barcelona from "../assets/camisetas/barcelona-local.png";
-import realMadrid from "../assets/camisetas/real-madrid-local.png";
+import barcaFront from "../assets/camisetas/barcelona/front.png";
+import barcaBack from "../assets/camisetas/barcelona/back.png";
 
+import madridFront from "../assets/camisetas/realmadrid/front.png";
+import madridBack from "../assets/camisetas/realmadrid/back.png";
+
+const defaultPositions = {
+
+    namePosition:{
+        top:"23%",
+        left:"50%"
+    },
+
+    numberPosition:{
+        top:"34%",
+        left:"50%"
+    }
+
+};
 
 const products = [
 
-  {
-    id: 1,
+{
+    id:1,
 
-    slug: "fc-barcelona-local-26-27",
+    slug:"fc-barcelona-local-26-27",
 
-    nombre: "FC Barcelona",
+    nombre:"FC Barcelona",
 
-    equipo: "Barcelona",
+    equipo:"Barcelona",
 
-    liga: "LaLiga",
+    liga:"LaLiga",
 
-    categoria: "Adulto",
+    categoria:"Adulto",
 
-    temporada: "2026/27",
+    temporada:"2026/27",
 
-    precio: 25,
+    precio:25,
 
-    imagen: barcelona,
+    front:barcaFront,
 
+    back:barcaBack,
 
-    disponible: true,
+    disponible:true,
 
-    personalizable: true,
+    personalizable:true,
 
-    parcheGratis: true,
+    parcheGratis:true,
 
+    nuevo:true,
 
-    parches: [
-      "laliga",
-      "champions"
+    oferta:false,
+
+    parches:[
+        "laliga",
+        "champions"
     ],
 
+    patchesPosition:{
 
-    nuevo: true,
+        laliga:{
+            top:"35%",
+            left:"22%",
+            width:"30px"
+        },
 
-    oferta: false
-  },
+        champions:{
+            top:"33%",
+            left:"22%",
+            width:"34px"
+        }
 
+    },
 
-  {
-    id: 2,
+    ...defaultPositions
 
-    slug: "real-madrid-local-26-27",
+},
 
-    nombre: "Real Madrid",
+{
+    id:2,
 
-    equipo: "Real Madrid",
+    slug:"real-madrid-local-26-27",
 
-    liga: "LaLiga",
+    nombre:"Real Madrid",
 
-    categoria: "Adulto",
+    equipo:"Real Madrid",
 
-    temporada: "2026/27",
+    liga:"LaLiga",
 
-    precio: 25,
+    categoria:"Adulto",
 
-    imagen: realMadrid,
+    temporada:"2026/27",
 
+    precio:25,
 
-    disponible: true,
+    front:madridFront,
 
-    personalizable: true,
+    back:madridBack,
 
-    parcheGratis: true,
+    disponible:true,
 
+    personalizable:true,
 
-    parches: [
-      "laliga",
-      "champions"
+    parcheGratis:true,
+
+    nuevo:true,
+
+    oferta:false,
+
+    parches:[
+        "laliga",
+        "champions"
     ],
 
+    patchesPosition:{
 
-    nuevo: true,
+        laliga:{
+            top:"38%",
+            left:"34%",
+            width:"28px"
+        },
 
-    oferta: false
-  }
+        champions:{
+            top:"34%",
+            left:"22%",
+            width:"32px"
+        }
+
+    },
+
+    ...defaultPositions
+
+}
 
 ];
-
 
 export default products;

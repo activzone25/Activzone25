@@ -7,7 +7,6 @@ import products from "../../data/products";
 
 function ProductPage() {
 
-
   const { slug } = useParams();
 
 
@@ -16,8 +15,7 @@ function ProductPage() {
   );
 
 
-
-  if(!product){
+  if (!product) {
 
     return (
       <h2>
@@ -28,7 +26,6 @@ function ProductPage() {
   }
 
 
-
   return (
 
     <ProductDetail
@@ -36,7 +33,6 @@ function ProductPage() {
     />
 
   );
-
 
 }
 

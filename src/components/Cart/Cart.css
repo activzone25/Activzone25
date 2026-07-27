@@ -1,4 +1,9 @@
-.cart {
+/* =====================================================
+   ACTIVZONE25 - CART PREMIUM
+===================================================== */
+
+
+.cart{
 
     position:fixed;
 
@@ -18,19 +23,19 @@
 
     padding:25px;
 
-    transition:.4s ease;
-
-    box-shadow:-15px 0 40px rgba(0,0,0,.6);
-
     display:flex;
 
     flex-direction:column;
 
+    transition:.4s ease;
+
+    box-shadow:
+    -15px 0 40px rgba(0,0,0,.6);
+
 }
 
 
-
-.cart.active {
+.cart.active{
 
     right:0;
 
@@ -38,9 +43,16 @@
 
 
 
-/* CABECERA */
 
-.cart-header {
+
+
+
+/* =========================
+   CABECERA
+========================= */
+
+
+.cart-header{
 
     display:flex;
 
@@ -56,7 +68,7 @@
 
 
 
-.cart-header h2 {
+.cart-header h2{
 
     margin:0;
 
@@ -66,19 +78,19 @@
 
 
 
-.cart-header button {
-
-    background:#171717;
-
-    border:none;
-
-    color:white;
+.cart-header button{
 
     width:40px;
 
     height:40px;
 
+    border:none;
+
     border-radius:50%;
+
+    background:#171717;
+
+    color:white;
 
     cursor:pointer;
 
@@ -88,9 +100,16 @@
 
 
 
-/* PRODUCTOS */
 
-.cart-items {
+
+
+
+/* =========================
+   PRODUCTOS
+========================= */
+
+
+.cart-items{
 
     flex:1;
 
@@ -102,7 +121,10 @@
 
 
 
-.cart-item {
+
+
+
+.cart-item{
 
     display:flex;
 
@@ -112,7 +134,14 @@
 
     margin-bottom:15px;
 
-    background:#151515;
+    background:
+    linear-gradient(
+        145deg,
+        #181818,
+        #101010
+    );
+
+    border:1px solid #222;
 
     border-radius:18px;
 
@@ -120,21 +149,43 @@
 
 
 
-.cart-item img {
 
-    width:80px;
 
-    height:80px;
 
-    object-fit:cover;
+
+/* CAMISETA */
+
+.cart-item > img{
+
+    width:90px;
+
+    height:90px;
+
+    object-fit:contain;
+
+    background:#111;
 
     border-radius:12px;
+
+    padding:5px;
+
+    filter:
+    drop-shadow(
+        0 8px 12px rgba(0,0,0,.5)
+    );
 
 }
 
 
 
-.cart-info h3 {
+
+
+
+
+/* INFORMACION */
+
+
+.cart-info h3{
 
     margin:0 0 5px;
 
@@ -144,7 +195,7 @@
 
 
 
-.cart-info p {
+.cart-info p{
 
     color:#00d26a;
 
@@ -156,7 +207,7 @@
 
 
 
-.cart-info small {
+.cart-info small{
 
     display:block;
 
@@ -168,9 +219,42 @@
 
 
 
-/* CANTIDAD */
 
-.quantity {
+
+
+
+/* PARCHE */
+
+
+.patch-cart{
+
+    width:35px !important;
+
+    height:35px !important;
+
+    object-fit:contain !important;
+
+    background:transparent !important;
+
+    padding:0 !important;
+
+    margin-top:8px;
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   CANTIDAD
+========================= */
+
+
+.quantity{
 
     display:flex;
 
@@ -184,7 +268,7 @@
 
 
 
-.quantity button {
+.quantity button{
 
     width:30px;
 
@@ -202,15 +286,15 @@
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
+
+    align-items:center;
 
 }
 
 
 
-.quantity span {
+.quantity span{
 
     font-weight:bold;
 
@@ -218,9 +302,23 @@
 
 
 
-/* ELIMINAR */
 
-.remove-btn {
+
+
+
+
+/* =========================
+   ELIMINAR
+========================= */
+
+
+.remove-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
 
     background:none;
 
@@ -230,19 +328,20 @@
 
     cursor:pointer;
 
-    display:flex;
-
-    gap:5px;
-
-    align-items:center;
-
 }
 
 
 
-/* FOOTER */
 
-.cart-footer {
+
+
+
+/* =========================
+   FOOTER
+========================= */
+
+
+.cart-footer{
 
     border-top:1px solid #262626;
 
@@ -252,7 +351,7 @@
 
 
 
-.cart-footer p {
+.cart-footer p{
 
     color:#aaa;
 
@@ -260,7 +359,15 @@
 
 
 
-.cart-footer h3 {
+.discount{
+
+    color:#00d26a !important;
+
+}
+
+
+
+.cart-footer h3{
 
     font-size:26px;
 
@@ -270,9 +377,16 @@
 
 
 
-/* BOTONES */
 
-.checkout {
+
+
+
+/* =========================
+   BOTONES
+========================= */
+
+
+.checkout{
 
     width:100%;
 
@@ -286,9 +400,9 @@
 
     color:#000;
 
-    font-weight:800;
-
     font-size:16px;
+
+    font-weight:800;
 
     cursor:pointer;
 
@@ -298,7 +412,7 @@
 
 
 
-.checkout:hover {
+.checkout:hover{
 
     transform:scale(1.03);
 
@@ -306,7 +420,10 @@
 
 
 
-.clear-cart {
+
+
+
+.clear-cart{
 
     width:100%;
 
@@ -328,7 +445,7 @@
 
 
 
-.clear-cart:hover {
+.clear-cart:hover{
 
     border-color:#ff5555;
 
@@ -338,16 +455,24 @@
 
 
 
-/* MOVIL */
+
+
+
+
+
+/* =========================
+   MOVIL
+========================= */
+
 
 @media(max-width:500px){
 
 
-    .cart {
+.cart{
 
-        width:100%;
+    width:100%;
 
-    }
+}
 
 
 }

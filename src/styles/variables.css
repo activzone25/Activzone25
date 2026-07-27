@@ -1,18 +1,22 @@
 :root{
 
---primary:#111;
+    --primary:#00d26a;
+    --primary-hover:#00e878;
 
---secondary:#ffffff;
+    --background:#0b0b0b;
 
---accent:#0ea5e9;
+    --card:#171717;
 
---success:#16a34a;
+    --card-light:#1f1f1f;
 
---danger:#dc2626;
+    --border:#262626;
 
---radius:14px;
+    --white:#ffffff;
 
---shadow:0 8px 24px rgba(0,0,0,.12);
+    --gray:#a6a6a6;
 
---transition:.25s ease;
+    --danger:#ff4d4d;
+
+    --radius:18px;
+
 }

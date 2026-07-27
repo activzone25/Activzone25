@@ -1,4 +1,5 @@
 import "./Cart.css";
+
 import {
   FiX,
   FiTrash2,
@@ -9,7 +10,6 @@ import {
 import { useCart } from "../../context/CartContext";
 
 function Cart({ open, setOpen }) {
-
   const {
     cart,
     removeFromCart,
@@ -18,33 +18,32 @@ function Cart({ open, setOpen }) {
   } = useCart();
 
   const subtotal = cart.reduce(
-    (sum, item) =>
-      sum + item.precio * (item.cantidad || 1),
+    (sum, item) => sum + item.precio * (item.cantidad || 1),
+    0
+  );
+
+  const totalProductos = cart.reduce(
+    (sum, item) => sum + (item.cantidad || 1),
     0
   );
 
   const descuento =
-    cart.reduce(
-      (sum, item) => sum + (item.cantidad || 1),
-      0
-    ) >= 2
-      ? subtotal * 0.10
+    totalProductos >= 2
+      ? subtotal * 0.1
       : 0;
 
   const total = subtotal - descuento;
 
   const enviarWhatsApp = () => {
-
     let mensaje = "🛒 *PEDIDO ACTIVZONE25*\n\n";
 
-    cart.forEach(item => {
+    cart.forEach((item) => {
+      mensaje += `
+👕 ${item.nombre}
 
-      mensaje +=
-`👕 ${item.nombre}
+📏 Talla: ${item.talla}
 
-📏 Talla: ${item.talla || "-"}
-
-🏆 Parche: ${item.parche || "-"}
+🏆 Parche: ${item.parche?.tipo || "Sin parche"}
 
 ✍️ Nombre: ${item.nombrePersonalizado || "-"}
 
@@ -55,7 +54,6 @@ Cantidad: ${item.cantidad || 1}
 -------------------------
 
 `;
-
     });
 
     mensaje += `💰 TOTAL: ${total.toFixed(2)} €`;
@@ -64,11 +62,9 @@ Cantidad: ${item.cantidad || 1}
       `https://wa.me/34647602998?text=${encodeURIComponent(mensaje)}`,
       "_blank"
     );
-
   };
 
   return (
-
     <aside className={`cart ${open ? "active" : ""}`}>
 
       <div className="cart-header">
@@ -81,24 +77,25 @@ Cantidad: ${item.cantidad || 1}
 
       </div>
 
-
       <div className="cart-items">
 
         {cart.length === 0 ? (
 
-          <p>El carrito está vacío</p>
+          <p className="empty-cart">
+            El carrito está vacío
+          </p>
 
         ) : (
 
-          cart.map(item => (
+          cart.map((item) => (
 
             <div
               className="cart-item"
-              key={item.id}
+              key={item.cartId}
             >
 
               <img
-                src={item.imagen}
+                src={item.front}
                 alt={item.nombre}
               />
 
@@ -110,35 +107,22 @@ Cantidad: ${item.cantidad || 1}
 
                 <small>📏 {item.talla}</small>
 
-                <br />
+                <small>
+                  🏆 {item.parche?.tipo || "Sin parche"}
+                </small>
 
-                <small>🏆 {item.parche}</small>
-
-                {item.imagenParche && (
-
-                  <>
-                    <br />
-
-                    <img
-                      src={item.imagenParche}
-                      alt={item.parche}
-                      className="patch-cart"
-                    />
-                  </>
-
+                {item.parche?.imagen && (
+                  <img
+                    src={item.parche.imagen}
+                    alt={item.parche.tipo}
+                    className="patch-cart"
+                  />
                 )}
 
                 {item.nombrePersonalizado && (
-
-                  <>
-                    <br />
-
-                    <small>
-                      ✍️ {item.nombrePersonalizado} #{item.numero}
-                    </small>
-
-                  </>
-
+                  <small>
+                    ✍️ {item.nombrePersonalizado} #{item.numero}
+                  </small>
                 )}
 
                 <div className="quantity">
@@ -146,23 +130,22 @@ Cantidad: ${item.cantidad || 1}
                   <button
                     onClick={() =>
                       updateQuantity(
-                        item.id,
-                        Math.max(
-                          1,
-                          (item.cantidad || 1) - 1
-                        )
+                        item.cartId,
+                        Math.max(1, (item.cantidad || 1) - 1)
                       )
                     }
                   >
                     <FiMinus />
                   </button>
 
-                  <span>{item.cantidad || 1}</span>
+                  <span>
+                    {item.cantidad || 1}
+                  </span>
 
                   <button
                     onClick={() =>
                       updateQuantity(
-                        item.id,
+                        item.cartId,
                         (item.cantidad || 1) + 1
                       )
                     }
@@ -174,7 +157,7 @@ Cantidad: ${item.cantidad || 1}
 
                 <button
                   className="remove-btn"
-                  onClick={() => removeFromCart(item.id)}
+                  onClick={() => removeFromCart(item.cartId)}
                 >
                   <FiTrash2 />
                   Eliminar
@@ -193,16 +176,13 @@ Cantidad: ${item.cantidad || 1}
       <div className="cart-footer">
 
         <p>
-          Subtotal: {subtotal.toFixed(2)} €
+          Subtotal: <strong>{subtotal.toFixed(2)} €</strong>
         </p>
 
         {descuento > 0 && (
-
           <p className="discount">
-            🎉 Descuento 10%:
-            -{descuento.toFixed(2)} €
+            🎉 Descuento 10%: -{descuento.toFixed(2)} €
           </p>
-
         )}
 
         <h3>
@@ -217,22 +197,18 @@ Cantidad: ${item.cantidad || 1}
         </button>
 
         {cart.length > 0 && (
-
           <button
             className="clear-cart"
             onClick={clearCart}
           >
             Vaciar carrito
           </button>
-
         )}
 
       </div>
 
     </aside>
-
   );
-
 }
 
 export default Cart;

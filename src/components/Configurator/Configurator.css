@@ -1,0 +1,133 @@
+.configurator{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.sizes{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+}
+
+.sizes button{
+
+    padding:12px 18px;
+
+    background:#171717;
+
+    color:white;
+
+    border:2px solid #333;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+.sizes button.active{
+
+    background:#00d26a;
+
+    color:black;
+
+}
+
+.patches{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.patches button{
+
+    background:#171717;
+
+    color:white;
+
+    border:2px solid #333;
+
+    border-radius:12px;
+
+    padding:10px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+.patches button.active{
+
+    border-color:#00d26a;
+
+}
+
+.patches img{
+
+    width:40px;
+
+}
+
+.configurator input{
+
+    padding:14px;
+
+    border-radius:10px;
+
+    border:1px solid #333;
+
+    background:#171717;
+
+    color:white;
+
+}
+
+.price{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    color:#00d26a;
+
+}
+
+.cart-button{
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#00d26a;
+
+    color:black;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
