@@ -9,30 +9,46 @@
 
     top:0;
 
-    right:-450px;
+    right:-460px;
 
-    width:400px;
+    width:420px;
 
     height:100vh;
 
-    background:#0b0b0b;
-
-    color:white;
-
-    z-index:999;
-
-    padding:25px;
+    z-index:2000;
 
     display:flex;
 
     flex-direction:column;
 
-    transition:.4s ease;
+    padding:25px;
+
+
+    background:
+
+        rgba(11,11,11,.96);
+
+
+    backdrop-filter:blur(20px);
+
+
+    color:#fff;
+
+
+    border-left:
+
+        1px solid rgba(255,255,255,.08);
+
 
     box-shadow:
-    -15px 0 40px rgba(0,0,0,.6);
+
+        -20px 0 60px rgba(0,0,0,.65);
+
+
+    transition:.45s ease;
 
 }
+
 
 
 .cart.active{
@@ -45,24 +61,26 @@
 
 
 
-
-
-/* =========================
+/* =====================================================
    CABECERA
-========================= */
+===================================================== */
 
 
 .cart-header{
 
     display:flex;
 
+    align-items:center;
+
     justify-content:space-between;
 
-    align-items:center;
 
     padding-bottom:20px;
 
-    border-bottom:1px solid #262626;
+
+    border-bottom:
+
+        1px solid #262626;
 
 }
 
@@ -72,7 +90,9 @@
 
     margin:0;
 
-    font-size:24px;
+    font-size:26px;
+
+    font-weight:900;
 
 }
 
@@ -80,21 +100,43 @@
 
 .cart-header button{
 
-    width:40px;
+    width:42px;
 
-    height:40px;
+    height:42px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
 
     border:none;
 
     border-radius:50%;
 
+
     background:#171717;
 
-    color:white;
+    color:#fff;
+
 
     cursor:pointer;
 
-    font-size:20px;
+    transition:.3s;
+
+}
+
+
+
+.cart-header button:hover{
+
+    background:#00d26a;
+
+    color:#000;
+
+    transform:rotate(90deg);
 
 }
 
@@ -102,11 +144,9 @@
 
 
 
-
-
-/* =========================
+/* =====================================================
    PRODUCTOS
-========================= */
+===================================================== */
 
 
 .cart-items{
@@ -115,10 +155,28 @@
 
     overflow-y:auto;
 
-    padding-top:15px;
+    padding:20px 5px;
 
 }
 
+
+
+/* Scroll */
+
+.cart-items::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+
+.cart-items::-webkit-scrollbar-thumb{
+
+    background:#00d26a;
+
+    border-radius:20px;
+
+}
 
 
 
@@ -130,20 +188,45 @@
 
     gap:15px;
 
+
     padding:15px;
+
 
     margin-bottom:15px;
 
+
     background:
-    linear-gradient(
-        145deg,
-        #181818,
-        #101010
-    );
 
-    border:1px solid #222;
+        linear-gradient(
 
-    border-radius:18px;
+            145deg,
+
+            #1c1c1c,
+
+            #101010
+
+        );
+
+
+    border:
+
+        1px solid #292929;
+
+
+    border-radius:20px;
+
+
+    transition:.3s;
+
+}
+
+
+
+.cart-item:hover{
+
+    border-color:#00d26a;
+
+    transform:translateY(-3px);
 
 }
 
@@ -151,28 +234,35 @@
 
 
 
+/* IMAGEN */
 
-
-/* CAMISETA */
 
 .cart-item > img{
 
     width:90px;
 
-    height:90px;
+    height:100px;
+
 
     object-fit:contain;
 
-    background:#111;
 
-    border-radius:12px;
+    background:#080808;
+
+
+    border-radius:15px;
+
 
     padding:5px;
 
+
     filter:
-    drop-shadow(
-        0 8px 12px rgba(0,0,0,.5)
-    );
+
+        drop-shadow(
+
+            0 10px 15px rgba(0,0,0,.5)
+
+        );
 
 }
 
@@ -180,16 +270,22 @@
 
 
 
+/* INFORMACIÓN */
 
 
-/* INFORMACION */
+.cart-info{
+
+    flex:1;
+
+}
+
 
 
 .cart-info h3{
 
-    margin:0 0 5px;
+    margin:0 0 8px;
 
-    font-size:16px;
+    font-size:17px;
 
 }
 
@@ -197,11 +293,13 @@
 
 .cart-info p{
 
+    margin:0 0 8px;
+
     color:#00d26a;
 
-    font-weight:bold;
+    font-size:18px;
 
-    margin:5px 0;
+    font-weight:900;
 
 }
 
@@ -213,11 +311,9 @@
 
     color:#aaa;
 
-    margin-top:4px;
+    margin-top:5px;
 
 }
-
-
 
 
 
@@ -228,17 +324,15 @@
 
 .patch-cart{
 
-    width:35px !important;
+    width:38px!important;
 
-    height:35px !important;
+    height:38px!important;
 
-    object-fit:contain !important;
+    object-fit:contain!important;
 
-    background:transparent !important;
+    margin-top:10px;
 
-    padding:0 !important;
-
-    margin-top:8px;
+    background:none!important;
 
 }
 
@@ -246,12 +340,9 @@
 
 
 
-
-
-
-/* =========================
+/* =====================================================
    CANTIDAD
-========================= */
+===================================================== */
 
 
 .quantity{
@@ -262,7 +353,8 @@
 
     gap:12px;
 
-    margin:12px 0;
+
+    margin:14px 0;
 
 }
 
@@ -270,25 +362,40 @@
 
 .quantity button{
 
-    width:30px;
+    width:32px;
 
-    height:30px;
+    height:32px;
 
-    border-radius:50%;
-
-    border:none;
-
-    background:#00d26a;
-
-    color:black;
-
-    cursor:pointer;
 
     display:flex;
 
+    align-items:center;
+
     justify-content:center;
 
-    align-items:center;
+
+    border:none;
+
+    border-radius:50%;
+
+
+    background:#00d26a;
+
+
+    color:#000;
+
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+
+.quantity button:hover{
+
+    transform:scale(1.15);
 
 }
 
@@ -296,7 +403,11 @@
 
 .quantity span{
 
-    font-weight:bold;
+    min-width:25px;
+
+    text-align:center;
+
+    font-weight:800;
 
 }
 
@@ -304,12 +415,9 @@
 
 
 
-
-
-
-/* =========================
+/* =====================================================
    ELIMINAR
-========================= */
+===================================================== */
 
 
 .remove-btn{
@@ -318,15 +426,28 @@
 
     align-items:center;
 
-    gap:5px;
+    gap:6px;
+
 
     background:none;
 
     border:none;
 
+
     color:#ff5555;
 
+
     cursor:pointer;
+
+    font-weight:600;
+
+}
+
+
+
+.remove-btn:hover{
+
+    color:#ff0000;
 
 }
 
@@ -334,18 +455,19 @@
 
 
 
-
-
-/* =========================
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 
 .cart-footer{
 
-    border-top:1px solid #262626;
-
     padding-top:20px;
+
+
+    border-top:
+
+        1px solid #262626;
 
 }
 
@@ -359,9 +481,19 @@
 
 
 
+.cart-footer strong{
+
+    color:#fff;
+
+}
+
+
+
 .discount{
 
-    color:#00d26a !important;
+    color:#00d26a!important;
+
+    font-weight:700;
 
 }
 
@@ -369,9 +501,12 @@
 
 .cart-footer h3{
 
-    font-size:26px;
-
     margin:15px 0;
+
+
+    font-size:30px;
+
+    font-weight:900;
 
 }
 
@@ -379,32 +514,38 @@
 
 
 
-
-
-/* =========================
-   BOTONES
-========================= */
+/* =====================================================
+   BOTÓN WHATSAPP
+===================================================== */
 
 
 .checkout{
 
     width:100%;
 
-    padding:16px;
+
+    padding:17px;
+
 
     border:none;
 
-    border-radius:15px;
+
+    border-radius:16px;
+
 
     background:#00d26a;
 
+
     color:#000;
 
-    font-size:16px;
 
-    font-weight:800;
+    font-size:17px;
+
+    font-weight:900;
+
 
     cursor:pointer;
+
 
     transition:.3s;
 
@@ -414,7 +555,12 @@
 
 .checkout:hover{
 
-    transform:scale(1.03);
+    transform:translateY(-3px);
+
+
+    box-shadow:
+
+        0 15px 30px rgba(0,210,106,.35);
 
 }
 
@@ -422,24 +568,37 @@
 
 
 
+/* VACÍAR */
+
 
 .clear-cart{
 
     width:100%;
 
+
     margin-top:12px;
 
-    padding:12px;
+
+    padding:13px;
+
 
     border-radius:15px;
 
-    border:1px solid #333;
+
+    border:
+
+        1px solid #333;
+
 
     background:#171717;
 
-    color:white;
+
+    color:#fff;
+
 
     cursor:pointer;
+
+    transition:.3s;
 
 }
 
@@ -457,22 +616,42 @@
 
 
 
+/* =====================================================
+   CARRITO VACÍO
+===================================================== */
+
+
+.empty-cart{
+
+    text-align:center;
+
+    color:#888;
+
+    margin-top:60px;
+
+    font-size:18px;
+
+}
 
 
 
-/* =========================
+
+
+/* =====================================================
    MOVIL
-========================= */
+===================================================== */
 
 
 @media(max-width:500px){
 
 
-.cart{
+    .cart{
 
-    width:100%;
+        width:100%;
 
-}
+        padding:20px;
+
+    }
 
 
 }

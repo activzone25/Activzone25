@@ -5,15 +5,16 @@ function Hero() {
   return (
     <section className="hero">
 
+      {/* Fondo */}
       <div className="hero-overlay"></div>
-
       <div className="hero-glow hero-glow-left"></div>
       <div className="hero-glow hero-glow-right"></div>
 
+      {/* Contenido */}
       <div className="hero-content">
 
         <span className="hero-tag">
-          ⚽ NUEVA COLECCIÓN 2026/27
+          ⚽ TEMPORADA 2026/27
         </span>
 
         <h1 className="hero-title">
@@ -27,7 +28,7 @@ function Hero() {
         </h2>
 
         <p className="hero-description">
-          Máxima calidad · Personalización +5 € · Parches GRATIS
+          Personaliza tu camiseta con nombre, dorsal y parches oficiales.
         </p>
 
         <div className="hero-buttons">
@@ -40,7 +41,7 @@ function Hero() {
           </Link>
 
           <Link
-            to="/adulto"
+            to="/"
             className="btn-secondary"
           >
             Ver catálogo
@@ -48,7 +49,35 @@ function Hero() {
 
         </div>
 
+        {/* Características */}
+
+        <div className="hero-features">
+
+          <div>
+            🏆
+            <span>Parches GRATIS</span>
+          </div>
+
+          <div>
+            👕
+            <span>2 camisetas por 46 €</span>
+          </div>
+
+          <div>
+            ✍️
+            <span>Personalización +5 €</span>
+          </div>
+
+          <div>
+            🚚
+            <span>Envío rápido</span>
+          </div>
+
+        </div>
+
       </div>
+
+      {/* Flecha */}
 
       <div className="scroll-indicator">
         <span></span>

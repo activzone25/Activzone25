@@ -1,60 +1,163 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState
+} from "react";
+
 
 const FavoritesContext = createContext();
 
+
+
 export function FavoritesProvider({ children }) {
+
 
   const [favorites, setFavorites] = useState(() => {
 
-    const saved = localStorage.getItem("activzone_favorites");
+    try {
 
-    return saved ? JSON.parse(saved) : [];
+      const saved =
+        localStorage.getItem(
+          "activzone_favorites"
+        );
+
+
+      return saved
+        ? JSON.parse(saved)
+        : [];
+
+
+    } catch {
+
+      return [];
+
+    }
 
   });
+
+
+
+
 
   useEffect(() => {
 
     localStorage.setItem(
+
       "activzone_favorites",
+
       JSON.stringify(favorites)
+
     );
 
   }, [favorites]);
 
-  const toggleFavorite = (product) => {
 
-    const exists = favorites.find(
-      item => item.id === product.id
-    );
 
-    if (exists) {
 
-      setFavorites(prev =>
-        prev.filter(item => item.id !== product.id)
+
+
+
+  function toggleFavorite(product){
+
+
+    setFavorites(prev => {
+
+
+      const exists = prev.some(
+
+        item =>
+        item.id === product.id
+
       );
 
-    } else {
 
-      setFavorites(prev => [...prev, product]);
 
-    }
+      if(exists){
 
-  };
 
-  const isFavorite = (id) => {
+        return prev.filter(
 
-    return favorites.some(item => item.id === id);
+          item =>
+          item.id !== product.id
 
-  };
+        );
+
+
+      }
+
+
+
+      return [
+
+        ...prev,
+
+        product
+
+      ];
+
+
+    });
+
+
+  }
+
+
+
+
+
+
+
+  function isFavorite(id){
+
+
+    return favorites.some(
+
+      item =>
+      item.id === id
+
+    );
+
+
+  }
+
+
+
+
+
+
+
+
+  function clearFavorites(){
+
+
+    setFavorites([]);
+
+
+  }
+
+
+
+
+
+
 
   return (
 
     <FavoritesContext.Provider
+
       value={{
+
         favorites,
+
         toggleFavorite,
-        isFavorite
+
+        isFavorite,
+
+        clearFavorites
+
       }}
+
     >
 
       {children}
@@ -63,10 +166,21 @@ export function FavoritesProvider({ children }) {
 
   );
 
+
 }
+
+
+
+
+
+
 
 export function useFavorites(){
 
-  return useContext(FavoritesContext);
+
+  return useContext(
+    FavoritesContext
+  );
+
 
 }

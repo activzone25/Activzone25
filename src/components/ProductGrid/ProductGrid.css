@@ -7,23 +7,41 @@
 
     max-width:1400px;
 
-    margin:80px auto;
+    margin:90px auto;
 
-    padding:0 25px;
+    padding:0 30px;
 
 }
 
 
 
+/* =====================================================
+   CABECERA
+===================================================== */
 
-
-/* CABECERA */
 
 .section-header{
 
     text-align:center;
 
-    margin-bottom:50px;
+    margin-bottom:55px;
+
+}
+
+
+.section-header span{
+
+    display:inline-block;
+
+    margin-bottom:12px;
+
+    color:#00d26a;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
 
 }
 
@@ -31,11 +49,11 @@
 
 .section-header h2{
 
-    font-size:42px;
+    margin:0 0 15px;
 
-    margin-bottom:12px;
+    color:#fff;
 
-    color:white;
+    font-size:44px;
 
     font-weight:900;
 
@@ -45,33 +63,35 @@
 
 .section-header p{
 
-    color:#b3b3b3;
+    margin:0 auto;
+
+    max-width:600px;
+
+    color:#aaa;
 
     font-size:18px;
+
+    line-height:1.6;
 
 }
 
 
 
+.section-header small{
 
+    display:inline-flex;
 
-/* CONTADOR PRODUCTOS */
+    margin-top:22px;
 
-.product-count{
+    padding:8px 20px;
 
-    display:inline-block;
-
-    margin-top:20px;
-
-    padding:8px 18px;
-
-    border-radius:30px;
+    border-radius:999px;
 
     background:#00d26a;
 
     color:#000;
 
-    font-weight:700;
+    font-weight:800;
 
     font-size:14px;
 
@@ -79,9 +99,10 @@
 
 
 
+/* =====================================================
+   GRID
+===================================================== */
 
-
-/* GRID */
 
 .product-grid{
 
@@ -89,32 +110,46 @@
 
     grid-template-columns:
 
-    repeat(
-
-        auto-fill,
-
-        minmax(280px,1fr)
-
-    );
+        repeat(4,1fr);
 
 
-    gap:35px;
-
-    align-items:stretch;
+    gap:30px;
 
 }
 
 
 
+/* =====================================================
+   ANIMACION TARJETAS
+===================================================== */
 
-
-/* ANIMACION ENTRADA */
 
 .product-grid > *{
 
     animation:
 
-    cardShow .45s ease;
+        cardShow .5s ease both;
+
+}
+
+
+.product-grid > *:nth-child(2){
+
+    animation-delay:.05s;
+
+}
+
+
+.product-grid > *:nth-child(3){
+
+    animation-delay:.1s;
+
+}
+
+
+.product-grid > *:nth-child(4){
+
+    animation-delay:.15s;
 
 }
 
@@ -123,92 +158,144 @@
 @keyframes cardShow{
 
 
-from{
+    from{
 
-    opacity:0;
+        opacity:0;
 
-    transform:translateY(20px);
+        transform:
+            translateY(30px);
 
-}
-
-
-to{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
+    }
 
 
-}
+    to{
 
+        opacity:1;
 
+        transform:
+            translateY(0);
 
-
-
-
-
-/* TABLET */
-
-@media(max-width:1000px){
-
-
-.product-grid{
-
-    grid-template-columns:
-
-    repeat(
-
-        auto-fill,
-
-        minmax(240px,1fr)
-
-    );
-
-}
-
+    }
 
 }
 
 
 
+/* =====================================================
+   SIN PRODUCTOS
+===================================================== */
 
 
+.empty-products{
 
-/* MOVIL */
+    text-align:center;
 
-@media(max-width:768px){
+    padding:70px 20px;
 
-
-.product-grid-section{
-
-    margin:50px auto;
-
-    padding:0 15px;
-
-}
-
-
-.section-header h2{
-
-    font-size:32px;
+    color:#fff;
 
 }
 
 
-.section-header p{
+.empty-products h3{
 
-    font-size:16px;
+    font-size:28px;
+
+    margin-bottom:10px;
+
+}
+
+
+.empty-products p{
+
+    color:#999;
 
 }
 
 
-.product-grid{
 
-    gap:20px;
+/* =====================================================
+   TABLET
+===================================================== */
+
+
+@media(max-width:1100px){
+
+
+    .product-grid{
+
+        grid-template-columns:
+
+            repeat(3,1fr);
+
+    }
+
 
 }
+
+
+
+@media(max-width:850px){
+
+
+    .product-grid{
+
+        grid-template-columns:
+
+            repeat(2,1fr);
+
+        gap:22px;
+
+    }
+
+
+}
+
+
+
+/* =====================================================
+   MOVIL
+===================================================== */
+
+
+@media(max-width:600px){
+
+
+    .product-grid-section{
+
+        margin:60px auto;
+
+        padding:0 15px;
+
+    }
+
+
+
+    .section-header h2{
+
+        font-size:32px;
+
+    }
+
+
+
+    .section-header p{
+
+        font-size:15px;
+
+    }
+
+
+
+    .product-grid{
+
+        grid-template-columns:
+
+            1fr;
+
+        gap:20px;
+
+    }
 
 
 }

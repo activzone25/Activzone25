@@ -1,101 +1,226 @@
 import { useState } from "react";
+
 import "./PreviewShirt.css";
 
+
 function PreviewShirt({
-  product,
-  front,
-  back,
-  nombre,
-  numero,
-  parche
+
+    product,
+    front,
+    back,
+    nombre,
+    numero,
+    parche
+
 }) {
 
-  const [lado, setLado] = useState("front");
 
-  const patchPosition =
-    product?.patchesPosition?.[parche?.tipo] || {};
+    const [lado,setLado] = useState("front");
 
-  const namePosition =
-    product?.namePosition || {};
 
-  const numberPosition =
-    product?.numberPosition || {};
 
-  return (
+    const patchPosition =
+        product?.patchesPosition?.[parche?.tipo]
+        ||
+        {};
 
-    <div className="preview">
 
-      <div className="preview-buttons">
 
-        <button
-          className={lado === "front" ? "active" : ""}
-          onClick={() => setLado("front")}
-        >
-          Delante
-        </button>
+    const namePosition =
+        product?.namePosition
+        ||
+        {};
 
-        <button
-          className={lado === "back" ? "active" : ""}
-          onClick={() => setLado("back")}
-        >
-          Detrás
-        </button>
 
-      </div>
 
-      <div className="shirt-container">
+    const numberPosition =
+        product?.numberPosition
+        ||
+        {};
 
-        <img
-          src={lado === "front" ? front : back}
-          className="shirt-image"
-          alt={lado === "front" ? "Parte delantera" : "Parte trasera"}
-        />
 
-        {/* PARCHE */}
 
-        {lado === "front" && parche && (
+    return (
 
-          <img
-            src={parche.imagen}
-            alt={parche.tipo}
-            className="shirt-patch"
-            style={patchPosition}
-          />
 
-        )}
+        <div className="preview">
 
-        {/* NOMBRE */}
 
-        {lado === "back" && nombre && (
 
-          <div
-            className="shirt-name"
-            style={namePosition}
-          >
-            {nombre.toUpperCase()}
-          </div>
+            <div className="preview-buttons">
 
-        )}
 
-        {/* NÚMERO */}
+                <button
 
-        {lado === "back" && numero && (
+                    className={
+                        lado === "front"
+                        ? "active"
+                        : ""
+                    }
 
-          <div
-            className="shirt-number"
-            style={numberPosition}
-          >
-            {numero}
-          </div>
+                    onClick={() =>
+                        setLado("front")
+                    }
 
-        )}
+                >
 
-      </div>
+                    Delante
 
-    </div>
+                </button>
 
-  );
+
+
+                <button
+
+                    className={
+                        lado === "back"
+                        ? "active"
+                        : ""
+                    }
+
+                    onClick={() =>
+                        setLado("back")
+                    }
+
+                >
+
+                    Detrás
+
+                </button>
+
+
+            </div>
+
+
+
+
+
+            <div className="shirt-container">
+
+
+
+                <img
+
+                    src={
+                        lado === "front"
+                        ? front
+                        : back
+                    }
+
+                    className="shirt-image"
+
+                    alt={product.nombre}
+
+                />
+
+
+
+
+
+                {/* PARCHE */}
+
+                {
+                    lado === "front"
+                    &&
+                    parche
+                    &&
+
+                    (
+
+                    <img
+
+                        src={parche.imagen}
+
+                        alt={parche.nombre}
+
+                        className="shirt-patch"
+
+                        style={patchPosition}
+
+                    />
+
+                    )
+
+                }
+
+
+
+
+
+
+                {/* NOMBRE */}
+
+                {
+
+                    lado === "back"
+                    &&
+                    nombre
+                    &&
+
+                    (
+
+                    <div
+
+                        className="shirt-name"
+
+                        style={namePosition}
+
+                    >
+
+                        {nombre.toUpperCase()}
+
+
+                    </div>
+
+                    )
+
+                }
+
+
+
+
+
+
+                {/* DORSAL */}
+
+                {
+
+                    lado === "back"
+                    &&
+                    numero
+                    &&
+
+                    (
+
+                    <div
+
+                        className="shirt-number"
+
+                        style={numberPosition}
+
+                    >
+
+                        {numero}
+
+
+                    </div>
+
+                    )
+
+                }
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+    );
 
 }
+
 
 export default PreviewShirt;

@@ -4,20 +4,24 @@ import products from "../../data/products";
 import ProductCard from "../ProductCard/ProductCard";
 
 
-function ProductGrid({ search = "", category = "Todas" }) {
+function ProductGrid({
+  search = "",
+  category = "Todas"
+}) {
 
 
-  const filteredProducts = products.filter((product) => {
+  const filteredProducts = products.filter((product)=>{
 
 
-    const text = search.toLowerCase();
-
+    const text = search
+      .toLowerCase()
+      .trim();
 
 
     const matchSearch =
 
       product.nombre
-        .toLowerCase()
+        ?.toLowerCase()
         .includes(text)
 
       ||
@@ -25,7 +29,6 @@ function ProductGrid({ search = "", category = "Todas" }) {
       product.equipo
         ?.toLowerCase()
         .includes(text);
-
 
 
 
@@ -46,83 +49,96 @@ function ProductGrid({ search = "", category = "Todas" }) {
 
 
 
-
   return (
 
-
-<section className="product-grid-section">
-
+    <section className="product-grid-section">
 
 
-<div className="section-header">
+      <div className="section-header">
 
 
-<h2>
-🔥 Novedades
-</h2>
+        <span>
+          ⭐ COLECCIÓN 2026/27
+        </span>
 
 
-<p>
-Descubre las últimas equipaciones disponibles.
-</p>
+        <h2>
+          🔥 Novedades
+        </h2>
 
 
-</div>
+        <p>
+          Descubre las últimas equipaciones disponibles.
+        </p>
 
 
+        <small>
+
+          {filteredProducts.length} productos disponibles
+
+        </small>
 
 
-
-<div className="product-grid">
-
-
-{
-
-filteredProducts.length > 0 ? (
-
-
-filteredProducts.map((product)=>(
-
-
-<ProductCard
-
-key={product.id}
-
-product={product}
-
-/>
-
-
-))
-
-
-)
-
-:
-
-(
-
-
-<p>
-No se han encontrado productos.
-</p>
-
-
-)
-
-
-}
+      </div>
 
 
 
-</div>
+      {
+
+        filteredProducts.length > 0 ? (
 
 
+          <div className="product-grid">
 
 
+            {filteredProducts.map((product)=>(
 
-</section>
 
+              <ProductCard
+
+                key={product.id}
+
+                product={product}
+
+              />
+
+
+            ))}
+
+
+          </div>
+
+
+        )
+
+        :
+
+        (
+
+
+          <div className="empty-products">
+
+
+            <h3>
+              😕 No encontramos productos
+            </h3>
+
+
+            <p>
+              Prueba con otra búsqueda o categoría.
+            </p>
+
+
+          </div>
+
+
+        )
+
+
+      }
+
+
+    </section>
 
   );
 

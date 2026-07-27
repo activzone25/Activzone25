@@ -11,12 +11,23 @@ import "./styles/global.css";
 import "./styles/theme.css";
 import "./styles/animations.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+
+ReactDOM.createRoot(
+  document.getElementById("root")
+).render(
+
   <React.StrictMode>
+
     <FavoritesProvider>
+
       <CartProvider>
+
         <App />
+
       </CartProvider>
+
     </FavoritesProvider>
+
   </React.StrictMode>
+
 );

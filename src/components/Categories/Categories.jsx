@@ -1,69 +1,72 @@
+import { Link } from "react-router-dom";
+
+import categories from "../../data/categories";
+
 import "./Categories.css";
 
-const categories = [
-  {
-    nombre: "Todas",
-    imagen: "/img/leagues/all.png"
-  },
-  {
-    nombre: "LaLiga",
-    imagen: "/img/leagues/laliga.png"
-  },
-  {
-    nombre: "Premier League",
-    imagen: "/img/leagues/premier-league.png"
-  },
-  {
-    nombre: "Serie A",
-    imagen: "/img/leagues/serie-a.png"
-  },
-  {
-    nombre: "Bundesliga",
-    imagen: "/img/leagues/bundesliga.png"
-  },
-  {
-    nombre: "Ligue 1",
-    imagen: "/img/leagues/ligue1.png"
-  },
-  {
-    nombre: "Retro",
-    imagen: "/img/leagues/retro.png"
-  }
-];
 
-function Categories({ category, setCategory }) {
-  return (
-    <section className="categories">
+function Categories(){
 
-      <div className="categories-header">
-        <h2>Explora por competición</h2>
-        <p>Elige tu liga favorita.</p>
-      </div>
+    return (
 
-      <div className="categories-grid">
+        <section className="categories">
 
-        {categories.map((item) => (
-          <button
-            key={item.nombre}
-            className={`category-card ${
-              category === item.nombre ? "active" : ""
-            }`}
-            onClick={() => setCategory(item.nombre)}
-          >
-            <img
-              src={item.imagen}
-              alt={item.nombre}
-              className="category-logo"
-            />
+            <div className="section-title">
 
-            <span>{item.nombre}</span>
-          </button>
-        ))}
+                <span>
+                    ⚽ CATEGORÍAS
+                </span>
 
-      </div>
+                <h2>
+                    Encuentra tu estilo
+                </h2>
 
-    </section>
-  );
+            </div>
+
+
+            <div className="categories-grid">
+
+
+                {categories.map((category)=>(
+
+                    <Link
+                        key={category.id}
+                        to={category.link}
+                        className="category-card"
+                    >
+
+                        <img
+                            src={category.image}
+                            alt={category.name}
+                        />
+
+
+                        <div className="category-overlay">
+
+                            <h3>
+                                {category.name}
+                            </h3>
+
+                            <span>
+                                Ver colección →
+                            </span>
+
+                        </div>
+
+
+                    </Link>
+
+                ))}
+
+
+            </div>
+
+
+        </section>
+
+    );
+
 }
+
 
 export default Categories;

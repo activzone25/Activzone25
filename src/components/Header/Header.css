@@ -1,24 +1,35 @@
 /* =====================================================
-   ACTIVZONE25 - HEADER
+   ACTIVZONE25 - HEADER PREMIUM
 ===================================================== */
+
 
 .header{
 
     position:sticky;
-
     top:0;
 
     z-index:1000;
 
     width:100%;
 
-    backdrop-filter:blur(18px);
+    background:
+    rgba(11,11,11,.82);
 
-    background:rgba(11,11,11,.90);
+    backdrop-filter:blur(20px);
 
-    border-bottom:1px solid #222;
+    border-bottom:
+    1px solid rgba(255,255,255,.08);
+
+    animation:
+    headerShow .5s ease;
 
 }
+
+
+
+/* =====================================================
+   CONTENEDOR
+===================================================== */
 
 
 .header-container{
@@ -27,55 +38,71 @@
 
     margin:auto;
 
-    padding:18px 25px;
+    padding:18px 30px;
 
     display:flex;
 
-    justify-content:space-between;
-
     align-items:center;
+
+    justify-content:space-between;
 
     gap:30px;
 
 }
 
 
+
 /* =====================================================
    LOGO
 ===================================================== */
 
-.logo{
 
-    color:#fff;
+.logo{
 
     text-decoration:none;
 
-    font-size:32px;
+    font-size:34px;
 
     font-weight:900;
 
-    letter-spacing:2px;
+    letter-spacing:3px;
 
-    transition:.25s;
+    background:
+    linear-gradient(
+        90deg,
+        #fff,
+        #00d26a
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    transition:.3s;
 
 }
+
 
 .logo:hover{
 
-    color:#00d26a;
+    transform:scale(1.05);
 
 }
+
 
 
 /* =====================================================
    BUSCADOR
 ===================================================== */
 
+
 .search-box{
 
     flex:1;
 
-    max-width:500px;
+    max-width:520px;
+
+    height:52px;
 
     display:flex;
 
@@ -83,39 +110,51 @@
 
     gap:12px;
 
-    padding:14px 18px;
+    padding:0 20px;
 
-    background:#171717;
 
-    border:2px solid #262626;
+    background:
+    rgba(255,255,255,.06);
+
+
+    border:
+    1px solid rgba(255,255,255,.12);
+
 
     border-radius:50px;
 
-    transition:.25s;
+    transition:.3s;
 
 }
+
+
+
+.search-box svg{
+
+    color:#999;
+
+    font-size:19px;
+
+}
+
+
 
 .search-box:focus-within{
 
     border-color:#00d26a;
 
-    box-shadow:0 0 18px rgba(0,210,106,.25);
+    box-shadow:
+    0 0 25px rgba(0,210,106,.25);
 
 }
 
-.search-box svg{
 
-    color:#8a8a8a;
-
-    font-size:18px;
-
-}
 
 .search-box input{
 
-    flex:1;
+    width:100%;
 
-    background:transparent;
+    background:none;
 
     border:none;
 
@@ -127,6 +166,8 @@
 
 }
 
+
+
 .search-box input::placeholder{
 
     color:#777;
@@ -134,9 +175,11 @@
 }
 
 
+
 /* =====================================================
-   BOTONES
+   ACCIONES
 ===================================================== */
+
 
 .header-actions{
 
@@ -144,18 +187,26 @@
 
     align-items:center;
 
-    gap:15px;
+    gap:12px;
 
 }
 
-.menu-btn,
-.cart-btn{
+
+
+/* =====================================================
+   BOTONES ICONO
+===================================================== */
+
+
+.icon-btn{
 
     position:relative;
+
 
     width:48px;
 
     height:48px;
+
 
     display:flex;
 
@@ -163,128 +214,250 @@
 
     align-items:center;
 
-    border:none;
 
-    border-radius:50%;
+    border-radius:14px;
 
-    background:#171717;
+
+    border:
+    1px solid rgba(255,255,255,.12);
+
+
+    background:
+    rgba(255,255,255,.06);
+
 
     color:#fff;
 
+
     cursor:pointer;
 
-    transition:.25s;
+
+    text-decoration:none;
+
+
+    transition:.3s;
 
 }
 
-.menu-btn:hover,
-.cart-btn:hover{
+
+
+.icon-btn svg{
+
+    font-size:21px;
+
+}
+
+
+
+.icon-btn:hover{
 
     background:#00d26a;
 
     color:#000;
 
-    transform:translateY(-2px);
+    transform:
+    translateY(-3px);
 
 }
+
+
+
+/* FAVORITO ACTIVO */
+
+
+.icon-btn:hover svg{
+
+    transform:scale(1.1);
+
+}
+
 
 
 /* =====================================================
    CONTADOR
 ===================================================== */
 
-.cart-count{
+
+.count{
 
     position:absolute;
 
-    top:-4px;
 
-    right:-4px;
+    top:-7px;
+
+    right:-7px;
+
 
     min-width:22px;
 
     height:22px;
 
+
     padding:0 6px;
 
-    border-radius:50px;
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
 
-    background:#ff2b2b;
+    justify-content:center;
+
+
+    background:#ff2d55;
+
 
     color:#fff;
 
+
     font-size:12px;
 
-    font-weight:800;
+    font-weight:900;
 
-    border:2px solid #0b0b0b;
+
+    border-radius:50%;
+
+
+    border:
+    2px solid #0b0b0b;
+
+
+    animation:
+    pop .3s ease;
 
 }
+
+
+
+/* =====================================================
+   ANIMACIONES
+===================================================== */
+
+
+@keyframes headerShow{
+
+
+from{
+
+    opacity:0;
+
+    transform:translateY(-20px);
+
+}
+
+
+to{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+}
+
+
+
+@keyframes pop{
+
+
+from{
+
+    transform:scale(0);
+
+}
+
+
+to{
+
+    transform:scale(1);
+
+}
+
+
+}
+
 
 
 /* =====================================================
    RESPONSIVE
 ===================================================== */
 
+
 @media(max-width:900px){
 
-    .header-container{
 
-        flex-wrap:wrap;
+.header-container{
 
-        gap:18px;
+    flex-wrap:wrap;
 
-    }
-
-    .logo{
-
-        width:100%;
-
-        text-align:center;
-
-        font-size:28px;
-
-    }
-
-    .search-box{
-
-        order:3;
-
-        width:100%;
-
-        max-width:none;
-
-    }
+    padding:15px 20px;
 
 }
 
+
+
+.logo{
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:30px;
+
+}
+
+
+
+.search-box{
+
+    order:3;
+
+    width:100%;
+
+    max-width:none;
+
+}
+
+
+}
+
+
+
 @media(max-width:600px){
 
-    .header-container{
 
-        padding:15px;
+.header-container{
 
-    }
+    padding:14px;
 
-    .menu-btn,
-    .cart-btn{
+}
 
-        width:44px;
 
-        height:44px;
 
-    }
+.logo{
 
-    .logo{
+    font-size:25px;
 
-        font-size:24px;
+}
 
-    }
+
+
+.header-actions{
+
+    gap:8px;
+
+}
+
+
+
+.icon-btn{
+
+    width:44px;
+
+    height:44px;
+
+}
+
 
 }

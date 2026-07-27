@@ -27,6 +27,8 @@ function ProductCard({ product }) {
     champions
   };
 
+  const favorito = isFavorite(product.id);
+
   function addProduct() {
 
     addToCart({
@@ -45,28 +47,38 @@ function ProductCard({ product }) {
 
     <article className="product-card">
 
+      {/* ======================================
+          BADGE
+      ====================================== */}
+
       {product.nuevo && (
 
         <span className="badge new">
+
           ⭐ NUEVO 26/27
+
         </span>
 
       )}
 
-      {/* FAVORITOS */}
+      {/* ======================================
+          FAVORITOS
+      ====================================== */}
 
       <button
-        className={`favorite-btn ${
-          isFavorite(product.id) ? "active" : ""
-        }`}
+        type="button"
+        className={`favorite-btn ${favorito ? "active" : ""}`}
         onClick={() => toggleFavorite(product)}
+        aria-label="Añadir a favoritos"
       >
 
         <FiHeart />
 
       </button>
 
-      {/* IMAGEN */}
+      {/* ======================================
+          IMAGEN
+      ====================================== */}
 
       <div className="product-image-container">
 
@@ -74,31 +86,47 @@ function ProductCard({ product }) {
           className="product-image"
           src={product.front}
           alt={product.nombre}
+          loading="lazy"
+          decoding="async"
         />
 
       </div>
 
-      {/* INFORMACIÓN */}
+      {/* ======================================
+          INFORMACIÓN
+      ====================================== */}
 
       <div className="product-info">
 
         <h3>{product.nombre}</h3>
 
         <p className="season">
+
           Temporada {product.temporada}
+
         </p>
 
         <div className="rating">
+
           ⭐⭐⭐⭐⭐
+
         </div>
 
         <div className="extras">
 
-          <span>✅ Personalización disponible</span>
+          <span>
+            ✅ Personalización disponible
+          </span>
 
-          <span>🏆 Parches GRATIS</span>
+          <span>
+            🏆 Parches GRATIS
+          </span>
 
         </div>
+
+        {/* ======================================
+            PARCHES
+        ====================================== */}
 
         <div className="patch-container">
 
@@ -108,11 +136,16 @@ function ProductCard({ product }) {
               key={patch}
               src={patches[patch]}
               alt={patch}
+              loading="lazy"
             />
 
           ))}
 
         </div>
+
+        {/* ======================================
+            PRECIO
+        ====================================== */}
 
         <div className="price">
 
@@ -120,15 +153,24 @@ function ProductCard({ product }) {
 
         </div>
 
+        {/* ======================================
+            STOCK
+        ====================================== */}
+
         <div className="stock ok">
 
           ● En stock
 
         </div>
 
+        {/* ======================================
+            BOTONES
+        ====================================== */}
+
         <div className="product-buttons">
 
           <button
+            type="button"
             className="add-btn"
             onClick={addProduct}
           >
