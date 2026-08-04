@@ -1,8 +1,9 @@
-/* =====================================================
+/* ==========================================
    ACTIVZONE25 - HERO
-===================================================== */
+========================================== */
 
 .hero{
+
     position:relative;
 
     min-height:90vh;
@@ -12,38 +13,42 @@
     align-items:center;
 
     overflow:hidden;
+
     text-align:center;
 
     background:
-        linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.88)),
-        url("../../assets/banners/banner.jpg") center/cover no-repeat;
+    linear-gradient(
+        rgba(0,0,0,.72),
+        rgba(0,0,0,.88)
+    ),
+    url("../../assets/banners/banner.jpg")
+    center/cover no-repeat;
+
 }
 
-
-/* =====================================================
-   OVERLAY
-===================================================== */
 
 .hero::before{
 
     content:"";
 
     position:absolute;
+
     inset:0;
 
     background:
-        radial-gradient(circle at center,
-        transparent 20%,
-        rgba(0,0,0,.55));
+    radial-gradient(
+        circle at center,
+        transparent 15%,
+        rgba(0,0,0,.55)
+    );
 
     z-index:1;
 
 }
 
 
-/* =====================================================
-   LUCES
-===================================================== */
+
+/* GLOW */
 
 .hero-glow{
 
@@ -56,13 +61,10 @@
 
     filter:blur(130px);
 
-    opacity:.28;
-
-    pointer-events:none;
-
-    z-index:0;
+    opacity:.25;
 
 }
+
 
 .hero-glow-left{
 
@@ -73,9 +75,10 @@
 
 }
 
+
 .hero-glow-right{
 
-    bottom:-220px;
+    bottom:-200px;
     right:-180px;
 
     background:#00ff99;
@@ -83,9 +86,8 @@
 }
 
 
-/* =====================================================
-   CONTENIDO
-===================================================== */
+
+/* CONTENIDO */
 
 .hero-content{
 
@@ -93,28 +95,25 @@
 
     z-index:5;
 
+    width:100%;
+
     max-width:900px;
 
     padding:30px;
 
-    animation:fadeUp .9s ease;
+    animation:fadeUp .8s ease;
 
 }
 
 
-/* =====================================================
-   TAG
-===================================================== */
+
+/* TAG */
 
 .hero-tag{
 
     display:inline-flex;
-    align-items:center;
-    gap:8px;
 
-    padding:10px 24px;
-
-    margin-bottom:25px;
+    padding:10px 22px;
 
     border-radius:999px;
 
@@ -123,56 +122,53 @@
     color:#000;
 
     font-size:14px;
+
     font-weight:800;
 
     box-shadow:
-        0 10px 25px rgba(0,210,106,.30);
+    0 12px 25px rgba(0,210,106,.3);
 
 }
 
 
-/* =====================================================
-   TITULOS
-===================================================== */
+
+/* TITULOS */
 
 .hero-title{
 
-    margin:0;
+    margin-top:25px;
 
-    color:#fff;
+    color:white;
 
-    font-size:76px;
+    font-size:82px;
+
     font-weight:900;
 
     letter-spacing:4px;
 
-    text-transform:uppercase;
-
-    text-shadow:
-        0 8px 25px rgba(0,0,0,.45);
-
 }
+
 
 .hero-subtitle{
 
-    margin:18px 0;
+    margin:20px 0;
 
-    color:#fff;
+    color:white;
 
     font-size:42px;
-    font-weight:700;
 
-    line-height:1.2;
+    font-weight:700;
 
 }
 
+
 .hero-description{
 
-    max-width:720px;
+    max-width:700px;
 
-    margin:0 auto 40px;
+    margin:auto;
 
-    color:#d5d5d5;
+    color:#d2d2d2;
 
     font-size:20px;
 
@@ -181,34 +177,28 @@
 }
 
 
-/* =====================================================
-   BOTONES
-===================================================== */
+
+/* BOTONES */
 
 .hero-buttons{
 
     display:flex;
+
     justify-content:center;
-    align-items:center;
 
     gap:18px;
 
+    margin:45px 0;
+
     flex-wrap:wrap;
 
-    margin-bottom:45px;
-
 }
+
 
 .btn-primary,
 .btn-secondary{
 
-    display:inline-flex;
-    justify-content:center;
-    align-items:center;
-
-    min-width:190px;
-
-    padding:16px 34px;
+    padding:16px 36px;
 
     border-radius:16px;
 
@@ -220,6 +210,7 @@
 
 }
 
+
 .btn-primary{
 
     background:#00d26a;
@@ -228,95 +219,102 @@
 
 }
 
+
 .btn-primary:hover{
 
     transform:translateY(-4px);
 
     box-shadow:
-        0 12px 30px rgba(0,210,106,.35);
+    0 14px 35px rgba(0,210,106,.35);
 
 }
+
 
 .btn-secondary{
 
-    border:2px solid rgba(255,255,255,.5);
+    border:2px solid rgba(255,255,255,.35);
 
-    color:#fff;
+    color:white;
 
-    backdrop-filter:blur(8px);
+    backdrop-filter:blur(10px);
 
 }
+
 
 .btn-secondary:hover{
 
-    background:#fff;
+    background:white;
 
-    color:#000;
+    color:black;
 
 }
 
 
-/* =====================================================
-   FEATURES
-===================================================== */
+
+/* CARACTERISTICAS */
 
 .hero-features{
 
     display:grid;
 
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:
+    repeat(4,1fr);
 
     gap:18px;
 
-    margin-top:20px;
-
 }
 
-.hero-features div{
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    gap:8px;
+.feature-item{
 
     padding:18px;
 
-    background:rgba(255,255,255,.06);
-
-    backdrop-filter:blur(10px);
-
-    border:1px solid rgba(255,255,255,.08);
-
     border-radius:18px;
 
-    color:#fff;
+    background:
+    rgba(255,255,255,.05);
+
+    backdrop-filter:blur(14px);
+
+    border:
+    1px solid rgba(255,255,255,.08);
 
     transition:.3s;
 
 }
 
-.hero-features div:hover{
 
-    transform:translateY(-6px);
+.feature-item:hover{
+
+    transform:translateY(-5px);
 
     border-color:#00d26a;
 
 }
 
-.hero-features span{
 
-    font-size:14px;
+.feature-item span{
 
-    font-weight:600;
+    font-size:28px;
 
 }
 
 
-/* =====================================================
-   SCROLL
-===================================================== */
+.feature-item p{
+
+    margin-top:10px;
+
+    color:white;
+
+    font-weight:600;
+
+    font-size:14px;
+
+}
+
+
+
+/* SCROLL */
 
 .scroll-indicator{
 
@@ -328,29 +326,28 @@
 
     transform:translateX(-50%);
 
-    z-index:5;
-
 }
+
 
 .scroll-indicator span{
 
     display:block;
 
     width:3px;
+
     height:40px;
 
     background:#00d26a;
 
-    border-radius:10px;
+    border-radius:999px;
 
-    animation:scrollMove 1.8s infinite;
+    animation:scrollMove 1.7s infinite;
 
 }
 
 
-/* =====================================================
-   ANIMACIONES
-===================================================== */
+
+/* ANIMACIONES */
 
 @keyframes fadeUp{
 
@@ -372,15 +369,17 @@
 
 }
 
+
 @keyframes scrollMove{
 
     0%{
 
         opacity:0;
 
-        transform:translateY(-10px);
+        transform:translateY(-8px);
 
     }
+
 
     50%{
 
@@ -388,20 +387,20 @@
 
     }
 
+
     100%{
 
         opacity:0;
 
-        transform:translateY(12px);
+        transform:translateY(10px);
 
     }
 
 }
 
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+
+/* RESPONSIVE */
 
 @media(max-width:900px){
 
@@ -411,21 +410,26 @@
 
     }
 
+
     .hero-subtitle{
 
-        font-size:32px;
+        font-size:30px;
 
     }
 
+
     .hero-features{
 
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:
+        repeat(2,1fr);
 
     }
 
 }
 
-@media(max-width:768px){
+
+
+@media(max-width:650px){
 
     .hero{
 
@@ -435,17 +439,20 @@
 
     }
 
+
     .hero-title{
 
-        font-size:44px;
+        font-size:42px;
 
     }
+
 
     .hero-subtitle{
 
-        font-size:26px;
+        font-size:24px;
 
     }
+
 
     .hero-description{
 
@@ -453,11 +460,13 @@
 
     }
 
+
     .hero-buttons{
 
         flex-direction:column;
 
     }
+
 
     .btn-primary,
     .btn-secondary{
@@ -466,7 +475,10 @@
 
         max-width:320px;
 
+        margin:auto;
+
     }
+
 
     .hero-features{
 

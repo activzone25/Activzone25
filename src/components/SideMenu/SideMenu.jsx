@@ -1,70 +1,181 @@
 import { Link } from "react-router-dom";
-import { FiX, FiHome, FiHeart, FiShoppingCart, FiMessageCircle, FiInfo } from "react-icons/fi";
+
+import {
+    FiX,
+    FiHome,
+    FiUser,
+    FiHeart,
+    FiShoppingCart,
+    FiMessageCircle,
+    FiInfo
+} from "react-icons/fi";
 
 import "./SideMenu.css";
 
-function SideMenu({ open, setOpen }) {
-  return (
-    <>
-      <div
-        className={`menu-overlay ${open ? "active" : ""}`}
-        onClick={() => setOpen(false)}
-      />
+function SideMenu({
 
-      <aside className={`side-menu ${open ? "active" : ""}`}>
+    open,
+    setOpen,
+    setCartOpen
 
-        <div className="menu-header">
-          <h2>ACTIVZONE25</h2>
+}) {
 
-          <button onClick={() => setOpen(false)}>
-            <FiX />
-          </button>
-        </div>
+    function closeMenu() {
 
-        <nav>
+        setOpen(false);
 
-          <Link to="/" onClick={() => setOpen(false)}>
-            <FiHome />
-            Inicio
-          </Link>
+    }
 
-          <Link to="/adulto" onClick={() => setOpen(false)}>
-            👕 Adulto
-          </Link>
+    function openCart() {
 
-          <Link to="/nino" onClick={() => setOpen(false)}>
-            🧒 Niño
-          </Link>
+        setOpen(false);
 
-          <Link to="/favoritos" onClick={() => setOpen(false)}>
-            <FiHeart />
-            Favoritos
-          </Link>
+        setCartOpen(true);
 
-          <button onClick={() => setOpen(false)}>
-            <FiShoppingCart />
-            Carrito
-          </button>
+    }
 
-          <a
-            href="https://wa.me/34647602998"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FiMessageCircle />
-            WhatsApp
-          </a>
+    return (
 
-          <Link to="/contacto" onClick={() => setOpen(false)}>
-            <FiInfo />
-            Contacto
-          </Link>
+        <>
 
-        </nav>
+            <div
 
-      </aside>
-    </>
-  );
+                className={`menu-overlay ${open ? "active" : ""}`}
+
+                onClick={closeMenu}
+
+            />
+
+
+
+            <aside className={`side-menu ${open ? "active" : ""}`}>
+
+                <div className="menu-header">
+
+                    <h2>ACTIVZONE25</h2>
+
+                    <button onClick={closeMenu}>
+
+                        <FiX />
+
+                    </button>
+
+                </div>
+
+
+
+                <nav className="menu-links">
+
+                    <Link
+                        to="/"
+                        onClick={closeMenu}
+                    >
+
+                        <FiHome />
+
+                        <span>Inicio</span>
+
+                    </Link>
+
+
+
+                    <Link
+                        to="/adulto"
+                        onClick={closeMenu}
+                    >
+
+                        <FiUser />
+
+                        <span>Adulto</span>
+
+                    </Link>
+
+
+
+                    <Link
+                        to="/nino"
+                        onClick={closeMenu}
+                    >
+
+                        <FiUser />
+
+                        <span>Niño</span>
+
+                    </Link>
+
+
+
+                    <Link
+                        to="/favoritos"
+                        onClick={closeMenu}
+                    >
+
+                        <FiHeart />
+
+                        <span>Favoritos</span>
+
+                    </Link>
+
+
+
+                    <button
+                        className="menu-cart"
+                        onClick={openCart}
+                    >
+
+                        <FiShoppingCart />
+
+                        <span>Carrito</span>
+
+                    </button>
+
+
+
+                    <Link
+                        to="/contacto"
+                        onClick={closeMenu}
+                    >
+
+                        <FiInfo />
+
+                        <span>Contacto</span>
+
+                    </Link>
+
+                </nav>
+
+
+
+                <div className="menu-social">
+
+                    <a
+                        href="https://wa.me/34647602998"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+
+                        <FiMessageCircle />
+
+                        <span>WhatsApp</span>
+
+                    </a>
+
+                </div>
+
+
+
+                <div className="menu-footer">
+
+                    © 2026 ACTIVZONE25
+
+                </div>
+
+            </aside>
+
+        </>
+
+    );
+
 }
 
 export default SideMenu;

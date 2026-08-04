@@ -1,0 +1,100 @@
+/* ==========================================
+   ACTIVZONE25 - CATEGORY PAGE
+========================================== */
+
+
+.category-page{
+
+    max-width:1400px;
+
+    margin:60px auto;
+
+    padding:0 25px;
+
+    color:white;
+
+}
+
+
+
+/* CABECERA */
+
+
+.category-header{
+
+    text-align:center;
+
+    margin-bottom:50px;
+
+}
+
+
+
+.category-header h1{
+
+    margin:15px 0;
+
+    font-size:48px;
+
+    font-weight:900;
+
+}
+
+
+
+.category-header p{
+
+    color:#999;
+
+    font-size:18px;
+
+}
+
+
+
+.section-badge{
+
+    display:inline-block;
+
+    padding:8px 16px;
+
+    border-radius:30px;
+
+
+    background:#00d26a;
+
+    color:#000;
+
+
+    font-size:13px;
+
+    font-weight:900;
+
+}
+
+
+
+
+
+@media(max-width:600px){
+
+
+    .category-page{
+
+        padding:0 15px;
+
+        margin:35px auto;
+
+    }
+
+
+
+    .category-header h1{
+
+        font-size:32px;
+
+    }
+
+
+
+}

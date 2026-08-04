@@ -5,142 +5,216 @@ import ProductCard from "../ProductCard/ProductCard";
 
 
 function ProductGrid({
-  search = "",
-  category = "Todas"
+
+    search = "",
+
+    category = "Todas"
+
 }) {
 
 
-  const filteredProducts = products.filter((product)=>{
-
-
     const text = search
-      .toLowerCase()
-      .trim();
+        .toLowerCase()
+        .trim();
 
 
-    const matchSearch =
 
-      product.nombre
-        ?.toLowerCase()
-        .includes(text)
+    const filteredProducts = products
 
-      ||
+        .filter(product => {
 
-      product.equipo
-        ?.toLowerCase()
-        .includes(text);
 
+            const nombre =
+                product.nombre?.toLowerCase() || "";
 
 
-    const matchCategory =
+            const equipo =
+                product.equipo?.toLowerCase() || "";
 
-      category === "Todas"
 
-      ||
 
-      product.liga === category;
+            const matchSearch =
 
+                nombre.includes(text) ||
 
+                equipo.includes(text);
 
-    return matchSearch && matchCategory;
 
 
-  });
+            const matchCategory =
 
+                category === "Todas" ||
 
+                product.liga === category ||
 
-  return (
+                product.categoria === category;
 
-    <section className="product-grid-section">
 
 
-      <div className="section-header">
+            const disponible =
 
+                product.disponible !== false;
 
-        <span>
-          ⭐ COLECCIÓN 2026/27
-        </span>
 
 
-        <h2>
-          🔥 Novedades
-        </h2>
+            return (
 
+                matchSearch &&
 
-        <p>
-          Descubre las últimas equipaciones disponibles.
-        </p>
+                matchCategory &&
 
+                disponible
 
-        <small>
+            );
 
-          {filteredProducts.length} productos disponibles
 
-        </small>
+        })
 
 
-      </div>
 
+        .sort((a,b)=>
 
+            Number(b.nuevo) -
 
-      {
+            Number(a.nuevo)
 
-        filteredProducts.length > 0 ? (
+        );
 
 
-          <div className="product-grid">
 
 
-            {filteredProducts.map((product)=>(
 
 
-              <ProductCard
 
-                key={product.id}
+    return (
 
-                product={product}
+        <section className="product-grid-section">
 
-              />
 
 
-            ))}
+            <div className="section-header">
 
 
-          </div>
+                <span className="section-badge">
 
+                    ⭐ COLECCIÓN 2026/27
 
-        )
+                </span>
 
-        :
 
-        (
 
+                <h2>
 
-          <div className="empty-products">
+                    🔥 Novedades
 
+                </h2>
 
-            <h3>
-              😕 No encontramos productos
-            </h3>
 
 
-            <p>
-              Prueba con otra búsqueda o categoría.
-            </p>
+                <p>
 
+                    Descubre las últimas equipaciones disponibles.
 
-          </div>
+                </p>
 
 
-        )
 
+                <small>
 
-      }
+                    {filteredProducts.length}
 
+                    {" "}
 
-    </section>
+                    {filteredProducts.length === 1
 
-  );
+                        ? "producto disponible"
+
+                        : "productos disponibles"
+
+                    }
+
+
+                </small>
+
+
+            </div>
+
+
+
+
+
+
+
+            {
+
+                filteredProducts.length ? (
+
+
+                    <div className="product-grid">
+
+
+                        {
+
+                            filteredProducts.map(product => (
+
+
+                                <ProductCard
+
+                                    key={product.id}
+
+                                    product={product}
+
+                                />
+
+
+                            ))
+
+                        }
+
+
+                    </div>
+
+
+                )
+
+
+                :
+
+
+                (
+
+
+                    <div className="empty-products">
+
+
+                        <h3>
+
+                            😕 No encontramos productos
+
+                        </h3>
+
+
+                        <p>
+
+                            Prueba con otra búsqueda o categoría.
+
+                        </p>
+
+
+                    </div>
+
+
+                )
+
+
+            }
+
+
+
+        </section>
+
+    );
+
 
 }
 

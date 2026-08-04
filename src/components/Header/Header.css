@@ -6,24 +6,31 @@
 .header{
 
     position:sticky;
+
     top:0;
 
     z-index:1000;
 
     width:100%;
 
+
     background:
-    rgba(11,11,11,.82);
+
+    rgba(11,11,11,.85);
+
 
     backdrop-filter:blur(20px);
 
+
     border-bottom:
+
     1px solid rgba(255,255,255,.08);
 
-    animation:
-    headerShow .5s ease;
+
+    animation:headerShow .5s ease;
 
 }
+
 
 
 
@@ -38,7 +45,9 @@
 
     margin:auto;
 
+
     padding:18px 30px;
+
 
     display:flex;
 
@@ -46,9 +55,12 @@
 
     justify-content:space-between;
 
+
     gap:30px;
 
 }
+
+
 
 
 
@@ -61,26 +73,34 @@
 
     text-decoration:none;
 
+
     font-size:34px;
+
 
     font-weight:900;
 
+
     letter-spacing:3px;
 
+
     background:
+
     linear-gradient(
         90deg,
-        #fff,
+        #ffffff,
         #00d26a
     );
+
 
     -webkit-background-clip:text;
 
     -webkit-text-fill-color:transparent;
 
+
     transition:.3s;
 
 }
+
 
 
 .logo:hover{
@@ -88,6 +108,8 @@
     transform:scale(1.05);
 
 }
+
+
 
 
 
@@ -100,40 +122,38 @@
 
     flex:1;
 
+
     max-width:520px;
 
+
     height:52px;
+
 
     display:flex;
 
     align-items:center;
 
+
     gap:12px;
+
 
     padding:0 20px;
 
 
     background:
+
     rgba(255,255,255,.06);
 
 
     border:
+
     1px solid rgba(255,255,255,.12);
 
 
     border-radius:50px;
 
+
     transition:.3s;
-
-}
-
-
-
-.search-box svg{
-
-    color:#999;
-
-    font-size:19px;
 
 }
 
@@ -143,8 +163,20 @@
 
     border-color:#00d26a;
 
+
     box-shadow:
+
     0 0 25px rgba(0,210,106,.25);
+
+}
+
+
+
+.search-icon{
+
+    color:#999;
+
+    font-size:19px;
 
 }
 
@@ -154,15 +186,15 @@
 
     width:100%;
 
+
     background:none;
 
     border:none;
 
     outline:none;
 
-    color:#fff;
 
-    font-size:15px;
+    color:white;
 
 }
 
@@ -173,6 +205,8 @@
     color:#777;
 
 }
+
+
 
 
 
@@ -187,15 +221,12 @@
 
     align-items:center;
 
+
     gap:12px;
 
 }
 
 
-
-/* =====================================================
-   BOTONES ICONO
-===================================================== */
 
 
 .icon-btn{
@@ -210,23 +241,25 @@
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
+
+    justify-content:center;
 
 
     border-radius:14px;
 
 
     border:
+
     1px solid rgba(255,255,255,.12);
 
 
     background:
+
     rgba(255,255,255,.06);
 
 
-    color:#fff;
+    color:white;
 
 
     cursor:pointer;
@@ -255,21 +288,12 @@
 
     color:#000;
 
-    transform:
-    translateY(-3px);
+
+    transform:translateY(-3px);
 
 }
 
 
-
-/* FAVORITO ACTIVO */
-
-
-.icon-btn:hover svg{
-
-    transform:scale(1.1);
-
-}
 
 
 
@@ -293,9 +317,6 @@
     height:22px;
 
 
-    padding:0 6px;
-
-
     display:flex;
 
     align-items:center;
@@ -303,13 +324,17 @@
     justify-content:center;
 
 
+    padding:0 6px;
+
+
     background:#ff2d55;
 
 
-    color:#fff;
+    color:white;
 
 
     font-size:12px;
+
 
     font-weight:900;
 
@@ -318,13 +343,57 @@
 
 
     border:
+
     2px solid #0b0b0b;
 
 
-    animation:
-    pop .3s ease;
+    animation:pop .3s ease;
 
 }
+
+
+
+
+
+/* =====================================================
+   MENU MOVIL
+===================================================== */
+
+
+.menu-mobile{
+
+    display:none;
+
+
+    width:45px;
+
+    height:45px;
+
+
+    border:none;
+
+    border-radius:14px;
+
+
+    background:#171717;
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+}
+
+
+
+.menu-mobile svg{
+
+    font-size:22px;
+
+}
+
+
 
 
 
@@ -335,24 +404,22 @@
 
 @keyframes headerShow{
 
+    from{
 
-from{
+        opacity:0;
 
-    opacity:0;
+        transform:translateY(-20px);
 
-    transform:translateY(-20px);
-
-}
+    }
 
 
-to{
+    to{
 
-    opacity:1;
+        opacity:1;
 
-    transform:translateY(0);
+        transform:translateY(0);
 
-}
-
+    }
 
 }
 
@@ -360,104 +427,125 @@ to{
 
 @keyframes pop{
 
+    from{
 
-from{
+        transform:scale(0);
 
-    transform:scale(0);
-
-}
+    }
 
 
-to{
+    to{
 
-    transform:scale(1);
+        transform:scale(1);
 
-}
-
+    }
 
 }
+
+
 
 
 
 /* =====================================================
-   RESPONSIVE
+   TABLET
 ===================================================== */
 
 
 @media(max-width:900px){
 
 
-.header-container{
+    .header-container{
 
-    flex-wrap:wrap;
+        padding:15px 20px;
 
-    padding:15px 20px;
+        gap:15px;
+
+    }
+
+
+
+    .menu-mobile{
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:center;
+
+    }
+
+
+
+    .logo{
+
+        font-size:28px;
+
+    }
+
+
+
+    .search-box{
+
+        order:3;
+
+        width:100%;
+
+        max-width:none;
+
+    }
 
 }
 
 
 
-.logo{
-
-    width:100%;
-
-    text-align:center;
-
-    font-size:30px;
-
-}
 
 
-
-.search-box{
-
-    order:3;
-
-    width:100%;
-
-    max-width:none;
-
-}
-
-
-}
-
+/* =====================================================
+   MOVIL
+===================================================== */
 
 
 @media(max-width:600px){
 
 
-.header-container{
+    .header-container{
 
-    padding:14px;
+        padding:14px;
 
-}
-
-
-
-.logo{
-
-    font-size:25px;
-
-}
+    }
 
 
 
-.header-actions{
+    .logo{
 
-    gap:8px;
+        font-size:23px;
 
-}
+    }
 
 
 
-.icon-btn{
+    .header-actions{
 
-    width:44px;
+        gap:8px;
 
-    height:44px;
+    }
 
-}
 
+
+    .icon-btn{
+
+        width:44px;
+
+        height:44px;
+
+    }
+
+
+
+    .search-box{
+
+        height:48px;
+
+    }
 
 }

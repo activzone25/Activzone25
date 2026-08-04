@@ -1,19 +1,20 @@
-/* =====================================================
+/* ==========================================
    ACTIVZONE25 - FAVORITES
-===================================================== */
+========================================== */
 
 
 .favorites-page{
 
-    max-width:1400px;
+    min-height:100vh;
 
-    margin:80px auto;
+    padding:80px 25px;
 
-    padding:0 25px;
+    background:#0b0b0b;
 
-    color:#fff;
+    color:white;
 
 }
+
 
 
 
@@ -29,11 +30,11 @@
 
 .favorites-header h1{
 
-    font-size:42px;
+    margin:15px 0;
+
+    font-size:48px;
 
     font-weight:900;
-
-    margin-bottom:10px;
 
 }
 
@@ -43,64 +44,35 @@
 
     color:#aaa;
 
-    font-size:18px;
-
 }
 
 
 
-/* VACÍO */
 
+.clear-favorites{
 
-.empty-favorites{
+    margin-top:20px;
 
-    text-align:center;
+    padding:13px 25px;
 
-    padding:60px 20px;
-
-    background:#111;
-
-    border-radius:25px;
-
-    border:1px solid #222;
-
-}
-
-
-
-.empty-favorites h2{
-
-    font-size:28px;
-
-}
-
-
-
-.empty-favorites p{
-
-    color:#999;
-
-    margin:15px 0 30px;
-
-}
-
-
-
-.back-shop{
-
-    display:inline-block;
-
-    padding:14px 30px;
-
-    background:#00d26a;
-
-    color:#000;
 
     border-radius:14px;
 
-    text-decoration:none;
+
+    background:#171717;
+
+
+    border:1px solid #333;
+
+
+    color:white;
+
 
     font-weight:800;
+
+
+    cursor:pointer;
+
 
     transition:.3s;
 
@@ -108,30 +80,121 @@
 
 
 
-.back-shop:hover{
+.clear-favorites:hover{
 
-    transform:translateY(-3px);
+    border-color:#ff5555;
+
+    color:#ff5555;
+
+}
+
+
+
+
+.favorites-grid{
+
+    max-width:1400px;
+
+    margin:auto;
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(auto-fill,minmax(260px,1fr));
+
+
+    gap:25px;
 
 }
 
 
 
-@media(max-width:768px){
 
 
-.favorites-page{
+.favorites-empty{
 
-    margin:50px auto;
+    min-height:40vh;
 
-    padding:0 15px;
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    text-align:center;
 
 }
 
 
-.favorites-header h1{
+
+.favorites-empty h2{
 
     font-size:32px;
 
 }
+
+
+
+.favorites-empty p{
+
+    color:#aaa;
+
+}
+
+
+
+
+
+.back-shop{
+
+    margin-top:25px;
+
+
+    padding:15px 35px;
+
+
+    background:#00d26a;
+
+
+    color:#000;
+
+
+    border-radius:15px;
+
+
+    text-decoration:none;
+
+
+    font-weight:900;
+
+}
+
+
+
+
+
+@media(max-width:600px){
+
+
+    .favorites-page{
+
+        padding:50px 15px;
+
+    }
+
+
+
+    .favorites-header h1{
+
+        font-size:32px;
+
+    }
+
 
 }

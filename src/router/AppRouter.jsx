@@ -1,50 +1,62 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+BrowserRouter,
+Routes,
+Route
+} from "react-router-dom";
+
 
 import Home from "../pages/Home";
 import Adult from "../pages/Adult";
 import Kids from "../pages/Kids";
-import Product from "../pages/ProductPage/ProductPage";
+import ProductPage from "../pages/ProductPage/ProductPage";
 import Favorites from "../pages/Favorites";
 import NotFound from "../pages/NotFound";
 
-function AppRouter() {
-  return (
-    <BrowserRouter>
-      <Routes>
 
-        <Route
-          path="/"
-          element={<Home />}
-        />
+function AppRouter(){
 
-        <Route
-          path="/adulto"
-          element={<Adult />}
-        />
 
-        <Route
-          path="/nino"
-          element={<Kids />}
-        />
+return (
 
-        <Route
-          path="/producto/:slug"
-          element={<Product />}
-        />
+<BrowserRouter>
 
-        <Route
-          path="/favoritos"
-          element={<Favorites />}
-        />
+<Routes>
 
-        <Route
-          path="*"
-          element={<NotFound />}
-        />
 
-      </Routes>
-    </BrowserRouter>
-  );
+<Route path="/" element={<Home/>}/>
+
+
+<Route path="/adulto" element={<Adult/>}/>
+
+
+<Route path="/nino" element={<Kids/>}/>
+
+
+<Route 
+path="/producto/:slug"
+element={<ProductPage/>}
+/>
+
+
+<Route
+path="/favoritos"
+element={<Favorites/>}
+/>
+
+
+<Route
+path="*"
+element={<NotFound/>}
+/>
+
+
+</Routes>
+
+</BrowserRouter>
+
+);
+
 }
+
 
 export default AppRouter;

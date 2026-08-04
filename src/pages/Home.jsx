@@ -1,95 +1,55 @@
 import { useState } from "react";
 
-import Header from "../components/Header/Header";
 import Hero from "../components/Hero/Hero";
 import Categories from "../components/Categories/Categories";
 import ProductGrid from "../components/ProductGrid/ProductGrid";
-import Cart from "../components/Cart/Cart";
-import SideMenu from "../components/SideMenu/SideMenu";
 
 import "./Home.css";
 
 
-function Home() {
-
-  const [search, setSearch] = useState("");
-
-  const [category, setCategory] = useState("Todas");
-
-  const [cartOpen, setCartOpen] = useState(false);
-
-  const [menuOpen, setMenuOpen] = useState(false);
+function Home({search=""}){
 
 
-  return (
-
-    <>
-
-      <Header
-
-        search={search}
-
-        setSearch={setSearch}
-
-        setCartOpen={setCartOpen}
-
-        setMenuOpen={setMenuOpen}
-
-      />
+const [category,setCategory]=useState("Todas");
 
 
-      <main>
+return (
+
+<main>
 
 
-        <Hero />
+<Hero />
 
 
-        <Categories
+<Categories
 
-          category={category}
+category={category}
 
-          setCategory={setCategory}
+setCategory={setCategory}
 
-        />
-
-
-        <section id="productos">
-
-          <ProductGrid
-
-            search={search}
-
-            category={category}
-
-          />
-
-        </section>
+/>
 
 
-      </main>
+<section id="productos">
 
 
-      <Cart
+<ProductGrid
 
-        open={cartOpen}
+search={search}
 
-        setOpen={setCartOpen}
+category={category}
 
-      />
-
-
-      <SideMenu
-
-        open={menuOpen}
-
-        setOpen={setMenuOpen}
-
-      />
+/>
 
 
-    </>
+</section>
 
-  );
+
+</main>
+
+
+);
+
 
 }
 

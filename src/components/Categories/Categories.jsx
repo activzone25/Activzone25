@@ -1,72 +1,63 @@
-import { Link } from "react-router-dom";
-
-import categories from "../../data/categories";
-
 import "./Categories.css";
 
+const categories = [
+  {
+    id: "Todas",
+    icon: "🌍",
+    name: "Todas"
+  },
+  {
+    id: "LaLiga",
+    icon: "🇪🇸",
+    name: "LaLiga"
+  },
+  {
+    id: "Premier League",
+    icon: "🏴",
+    name: "Premier"
+  },
+  {
+    id: "Bundesliga",
+    icon: "🇩🇪",
+    name: "Bundesliga"
+  },
+  {
+    id: "Ligue 1",
+    icon: "🇫🇷",
+    name: "Ligue 1"
+  }
+];
 
-function Categories(){
+function Categories({ category, setCategory }) {
+  return (
+    <section className="categories">
 
-    return (
+      <div className="categories-container">
 
-        <section className="categories">
+        {categories.map((item) => (
 
-            <div className="section-title">
+          <button
+            key={item.id}
+            className={category === item.id ? "active" : ""}
+            onClick={() => setCategory(item.id)}
+          >
 
-                <span>
-                    ⚽ CATEGORÍAS
-                </span>
+            <span className="category-icon">
+              {item.icon}
+            </span>
 
-                <h2>
-                    Encuentra tu estilo
-                </h2>
+            <span>
+              {item.name}
+            </span>
 
-            </div>
+          </button>
 
+        ))}
 
-            <div className="categories-grid">
+      </div>
 
-
-                {categories.map((category)=>(
-
-                    <Link
-                        key={category.id}
-                        to={category.link}
-                        className="category-card"
-                    >
-
-                        <img
-                            src={category.image}
-                            alt={category.name}
-                        />
-
-
-                        <div className="category-overlay">
-
-                            <h3>
-                                {category.name}
-                            </h3>
-
-                            <span>
-                                Ver colección →
-                            </span>
-
-                        </div>
-
-
-                    </Link>
-
-                ))}
-
-
-            </div>
-
-
-        </section>
-
-    );
-
+    </section>
+  );
 }
-
 
 export default Categories;

@@ -1,8 +1,8 @@
 import {
-  createContext,
-  useContext,
-  useEffect,
-  useState
+    createContext,
+    useContext,
+    useEffect,
+    useState
 } from "react";
 
 
@@ -13,149 +13,223 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
 
 
-  const [cart, setCart] = useState(() => {
+    const [cart, setCart] = useState(() => {
 
-    const saved = localStorage.getItem(
-      "activzone_cart"
-    );
+        try {
+
+            const saved =
+                localStorage.getItem(
+                    "activzone_cart"
+                );
+
+            return saved
+                ? JSON.parse(saved)
+                : [];
 
 
-    return saved
-      ? JSON.parse(saved)
-      : [];
+        } catch {
 
-  });
+            return [];
 
+        }
 
-
-  useEffect(() => {
-
-    localStorage.setItem(
-      "activzone_cart",
-      JSON.stringify(cart)
-    );
-
-  }, [cart]);
+    });
 
 
 
 
 
-  function addToCart(product){
+    useEffect(() => {
 
+        localStorage.setItem(
 
-    setCart(prevCart => {
+            "activzone_cart",
 
+            JSON.stringify(cart)
 
-      const parcheTipo =
-        product.parche?.tipo || "sin-parche";
+        );
 
-
-
-      const cartId = [
-
-        product.id,
-
-        product.talla || "sin-talla",
-
-        product.nombrePersonalizado || "",
-
-        product.numero || "",
-
-        parcheTipo
-
-      ].join("-");
+    }, [cart]);
 
 
 
 
 
-      const existe = prevCart.find(
-        item => item.cartId === cartId
-      );
+
+
+    function addToCart(product){
+
+
+        setCart(prevCart => {
+
+
+            const parche =
+
+                product.parche?.tipo
+                ||
+                "sin-parche";
+
+
+
+            const cartId = [
+
+                product.id,
+
+                product.talla || "sin-talla",
+
+                product.nombrePersonalizado || "",
+
+                product.numero || "",
+
+                parche
+
+            ].join("-");
 
 
 
 
-      if(existe){
+
+            const existe = prevCart.find(
+
+                item =>
+                    item.cartId === cartId
+
+            );
 
 
-        return prevCart.map(item =>
 
 
-          item.cartId === cartId
 
-          ?
-
-          {
-
-            ...item,
-
-            cantidad:
-              (item.cantidad || 1) + 1
-
-          }
+            if(existe){
 
 
-          :
+                return prevCart.map(item =>
 
-          item
+
+                    item.cartId === cartId
+
+                    ?
+
+                    {
+
+                        ...item,
+
+                        cantidad:
+                            (item.cantidad || 1) + 1
+
+                    }
+
+
+                    :
+
+                    item
+
+
+                );
+
+
+            }
+
+
+
+
+
+
+
+            return [
+
+                ...prevCart,
+
+                {
+
+                    ...product,
+
+                    cartId,
+
+                    cantidad:1
+
+                }
+
+            ];
+
+
+
+        });
+
+
+    }
+
+
+
+
+
+
+
+
+
+    function removeFromCart(cartId){
+
+
+        setCart(prev =>
+
+            prev.filter(
+
+                item =>
+                    item.cartId !== cartId
+
+            )
+
+        );
+
+
+    }
+
+
+
+
+
+
+
+
+
+    function updateQuantity(cartId, cantidad){
+
+
+        setCart(prev =>
+
+
+            prev.map(item =>
+
+
+                item.cartId === cartId
+
+                ?
+
+                {
+
+                    ...item,
+
+                    cantidad:
+                        Math.max(
+                            1,
+                            cantidad
+                        )
+
+                }
+
+
+                :
+
+                item
+
+
+            )
 
 
         );
 
 
-      }
-
-
-
-
-
-      return [
-
-        ...prevCart,
-
-
-        {
-
-          ...product,
-
-          cartId,
-
-          cantidad:1
-
-        }
-
-
-      ];
-
-    });
-
-
-  }
-
-
-
-
-
-
-
-  function removeFromCart(cartId){
-
-
-    setCart(prev =>
-
-      prev.filter(
-
-        item =>
-        item.cartId !== cartId
-
-      )
-
-    );
-
-
-  }
+    }
 
 
 
@@ -164,87 +238,46 @@ export function CartProvider({ children }) {
 
 
 
-  function updateQuantity(cartId,cantidad){
+
+    function clearCart(){
+
+        setCart([]);
+
+    }
 
 
-    setCart(prev =>
 
 
-      prev.map(item =>
 
 
-        item.cartId === cartId
-
-        ?
-
-        {
-
-          ...item,
-
-          cantidad:
-          Math.max(1,cantidad)
-
-        }
 
 
-        :
 
-        item
+    return (
 
+        <CartContext.Provider
 
-      )
+            value={{
 
+                cart,
+
+                addToCart,
+
+                removeFromCart,
+
+                updateQuantity,
+
+                clearCart
+
+            }}
+
+        >
+
+            {children}
+
+        </CartContext.Provider>
 
     );
-
-
-  }
-
-
-
-
-
-
-
-
-  function clearCart(){
-
-    setCart([]);
-
-  }
-
-
-
-
-
-
-
-
-  return (
-
-    <CartContext.Provider
-
-      value={{
-
-        cart,
-
-        addToCart,
-
-        removeFromCart,
-
-        updateQuantity,
-
-        clearCart
-
-      }}
-
-    >
-
-      {children}
-
-    </CartContext.Provider>
-
-  );
 
 
 }
@@ -255,8 +288,14 @@ export function CartProvider({ children }) {
 
 
 
+
+
 export function useCart(){
 
-  return useContext(CartContext);
+
+    return useContext(
+        CartContext
+    );
+
 
 }

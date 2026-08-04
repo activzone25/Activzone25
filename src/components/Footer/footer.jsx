@@ -1,6 +1,6 @@
+import { Link } from "react-router-dom";
 import {
   FiInstagram,
-  FiFacebook,
   FiMessageCircle,
   FiMail
 } from "react-icons/fi";
@@ -8,82 +8,99 @@ import {
 import "./Footer.css";
 
 function Footer() {
-  return (
-    <footer className="footer">
 
-      <div className="footer-container">
+    return (
 
-        <div className="footer-brand">
+        <footer className="footer">
 
-          <h2>ACTIVZONE25</h2>
+            <div className="footer-container">
 
-          <p>
-            Camisetas de fútbol 2026/27 de máxima calidad con
-            personalización y parches oficiales.
-          </p>
+                <div>
 
-        </div>
+                    <h2 className="footer-logo">
+                        ACTIVZONE25
+                    </h2>
 
-        <div className="footer-links">
+                    <p className="footer-description">
+                        Camisetas de fútbol temporada 2026/27 con calidad premium.
+                        Personalización con nombre, dorsal y parches oficiales.
+                    </p>
 
-          <h3>Enlaces</h3>
+                </div>
 
-          <a href="#productos">
-            Productos
-          </a>
 
-          <a href="#">
-            Personalización
-          </a>
 
-          <a href="#">
-            Contacto
-          </a>
+                <div>
 
-        </div>
+                    <h3 className="footer-title">
+                        Navegación
+                    </h3>
 
-        <div className="footer-contact">
+                    <div className="footer-links">
 
-          <h3>Contacto</h3>
+                        <Link to="/">
+                            Inicio
+                        </Link>
 
-          <p>
-            <FiMail /> activzone25@gmail.com
-          </p>
+                        <Link to="/adulto">
+                            Adulto
+                        </Link>
 
-          <p>
-            <FiMessageCircle /> +34 647 602 998
-          </p>
+                        <Link to="/favoritos">
+                            Favoritos
+                        </Link>
 
-        </div>
+                    </div>
 
-        <div className="footer-social">
+                </div>
 
-          <h3>Síguenos</h3>
 
-          <div className="social-icons">
 
-            <a href="#">
-              <FiInstagram />
-            </a>
+                <div>
 
-            <a href="#">
-              <FiFacebook />
-            </a>
+                    <h3 className="footer-title">
+                        Contacto
+                    </h3>
 
-          </div>
+                    <div className="footer-social">
 
-        </div>
+                        <a
+                            href="#"
+                            aria-label="Instagram"
+                        >
+                            <FiInstagram />
+                        </a>
 
-      </div>
+                        <a
+                            href="#"
+                            aria-label="WhatsApp"
+                        >
+                            <FiMessageCircle />
+                        </a>
 
-      <div className="footer-bottom">
+                        <a
+                            href="mailto:info@activzone25.com"
+                            aria-label="Email"
+                        >
+                            <FiMail />
+                        </a>
 
-        © {new Date().getFullYear()} ACTIVZONE25 · Todos los derechos reservados.
+                    </div>
 
-      </div>
+                </div>
 
-    </footer>
-  );
+            </div>
+
+            <div className="footer-bottom">
+
+                © {new Date().getFullYear()} ACTIVZONE25 · Todos los derechos reservados.
+
+            </div>
+
+        </footer>
+
+    );
+
 }
 
 export default Footer;

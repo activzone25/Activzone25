@@ -1,205 +1,310 @@
 import { Link } from "react-router-dom";
+
 import {
-  FiHeart,
-  FiShoppingCart,
-  FiEye
+    FiHeart,
+    FiArrowRight,
+    FiShoppingCart
 } from "react-icons/fi";
 
-import { useCart } from "../../context/CartContext";
-import { useFavorites } from "../../context/FavoritesContext";
 
-import laliga from "../../assets/parches/laliga.png";
-import champions from "../../assets/parches/champions.png";
+import { useFavorites } from "../../context/FavoritesContext";
+import { useCart } from "../../context/CartContext";
 
 import "./ProductCard.css";
 
+
+
 function ProductCard({ product }) {
 
-  const { addToCart } = useCart();
 
-  const {
-    toggleFavorite,
-    isFavorite
-  } = useFavorites();
+    const {
+        toggleFavorite,
+        isFavorite
 
-  const patches = {
-    laliga,
-    champions
-  };
+    } = useFavorites();
 
-  const favorito = isFavorite(product.id);
 
-  function addProduct() {
 
-    addToCart({
+    const {
+        addToCart
 
-      ...product,
+    } = useCart();
 
-      imagen: product.front,
 
-      cantidad: 1
 
-    });
 
-  }
+    const favorite = isFavorite(product.id);
 
-  return (
 
-    <article className="product-card">
 
-      {/* ======================================
-          BADGE
-      ====================================== */}
 
-      {product.nuevo && (
 
-        <span className="badge new">
+    function handleFavorite(e){
 
-          ⭐ NUEVO 26/27
+        e.preventDefault();
 
-        </span>
+        e.stopPropagation();
 
-      )}
+        toggleFavorite(product);
 
-      {/* ======================================
-          FAVORITOS
-      ====================================== */}
+    }
 
-      <button
-        type="button"
-        className={`favorite-btn ${favorito ? "active" : ""}`}
-        onClick={() => toggleFavorite(product)}
-        aria-label="Añadir a favoritos"
-      >
 
-        <FiHeart />
 
-      </button>
 
-      {/* ======================================
-          IMAGEN
-      ====================================== */}
 
-      <div className="product-image-container">
 
-        <img
-          className="product-image"
-          src={product.front}
-          alt={product.nombre}
-          loading="lazy"
-          decoding="async"
-        />
+    function handleAddCart(e){
 
-      </div>
+        e.preventDefault();
 
-      {/* ======================================
-          INFORMACIÓN
-      ====================================== */}
+        e.stopPropagation();
 
-      <div className="product-info">
 
-        <h3>{product.nombre}</h3>
+        addToCart({
 
-        <p className="season">
+            ...product,
 
-          Temporada {product.temporada}
+            imagen:product.front,
 
-        </p>
+            talla:"M",
 
-        <div className="rating">
+            cantidad:1
 
-          ⭐⭐⭐⭐⭐
+        });
 
-        </div>
+    }
 
-        <div className="extras">
 
-          <span>
-            ✅ Personalización disponible
-          </span>
 
-          <span>
-            🏆 Parches GRATIS
-          </span>
 
-        </div>
 
-        {/* ======================================
-            PARCHES
-        ====================================== */}
+    return (
 
-        <div className="patch-container">
 
-          {product.parches?.map((patch) => (
+        <Link
 
-            <img
-              key={patch}
-              src={patches[patch]}
-              alt={patch}
-              loading="lazy"
-            />
-
-          ))}
-
-        </div>
-
-        {/* ======================================
-            PRECIO
-        ====================================== */}
-
-        <div className="price">
-
-          {product.precio} €
-
-        </div>
-
-        {/* ======================================
-            STOCK
-        ====================================== */}
-
-        <div className="stock ok">
-
-          ● En stock
-
-        </div>
-
-        {/* ======================================
-            BOTONES
-        ====================================== */}
-
-        <div className="product-buttons">
-
-          <button
-            type="button"
-            className="add-btn"
-            onClick={addProduct}
-          >
-
-            <FiShoppingCart />
-
-            Añadir
-
-          </button>
-
-          <Link
             to={`/producto/${product.slug}`}
-            className="view-btn"
-          >
 
-            <FiEye />
+            className="product-card"
 
-            Ver
+        >
 
-          </Link>
 
-        </div>
 
-      </div>
 
-    </article>
+            <div className="product-image">
 
-  );
+
+
+
+
+                {
+                    product.nuevo && (
+
+                        <span className="badge">
+
+                            ⭐ NUEVO 26/27
+
+                        </span>
+
+                    )
+                }
+
+
+
+
+
+
+                <button
+
+                    className={`favorite-btn ${
+                        favorite ? "active" : ""
+                    }`}
+
+                    onClick={handleFavorite}
+
+                    aria-label="Favorito"
+
+                >
+
+                    <FiHeart />
+
+                </button>
+
+
+
+
+
+
+
+                <img
+
+                    src={product.front}
+
+                    alt={product.nombre}
+
+                />
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div className="product-info">
+
+
+
+
+
+                <span className="league">
+
+                    {product.liga}
+
+                </span>
+
+
+
+
+
+
+                <h3>
+
+                    {product.nombre}
+
+                </h3>
+
+
+
+
+
+
+                <p>
+
+                    Temporada {product.temporada}
+
+                </p>
+
+
+
+
+
+
+
+                <div className="product-tags">
+
+
+
+                    {
+                        product.parches?.length > 0 && (
+
+                            <span>
+
+                                🏆 Parches GRATIS
+
+                            </span>
+
+                        )
+                    }
+
+
+
+
+
+                    {
+                        product.personalizable !== false && (
+
+                            <span>
+
+                                ✍️ Personalizable
+
+                            </span>
+
+                        )
+                    }
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <div className="stars">
+
+                    ⭐⭐⭐⭐⭐
+
+                </div>
+
+
+
+
+
+
+
+                <div className="price">
+
+                    {product.precio} €
+
+                </div>
+
+
+
+
+
+
+
+                <button
+
+                    className="quick-cart"
+
+                    onClick={handleAddCart}
+
+                >
+
+                    <FiShoppingCart />
+
+                    Añadir al carrito
+
+                </button>
+
+
+
+
+
+
+
+
+                <div className="view-product">
+
+                    Ver producto
+
+                    <FiArrowRight />
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+        </Link>
+
+
+    );
 
 }
+
 
 export default ProductCard;

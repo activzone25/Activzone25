@@ -4,20 +4,13 @@
 
 .footer{
 
-    margin-top:80px;
+    margin-top:100px;
 
     background:#0b0b0b;
 
-    border-top:1px solid #222;
-
-    color:#fff;
+    border-top:1px solid rgba(255,255,255,.08);
 
 }
-
-
-/* =====================================================
-   CONTENEDOR
-===================================================== */
 
 .footer-container{
 
@@ -25,59 +18,76 @@
 
     margin:auto;
 
-    padding:60px 25px;
+    padding:60px 30px 35px;
 
     display:grid;
 
-    grid-template-columns:2fr 1fr 1fr 1fr;
+    grid-template-columns:
+        2fr 1fr 1fr;
 
-    gap:40px;
+    gap:50px;
 
 }
 
 
 /* =====================================================
-   MARCA
+   LOGO
 ===================================================== */
 
-.footer-brand h2{
+.footer-logo{
 
-    margin:0 0 15px;
-
-    font-size:32px;
+    font-size:34px;
 
     font-weight:900;
 
-    letter-spacing:2px;
-
-}
-
-.footer-brand p{
-
-    color:#9c9c9c;
-
-    line-height:1.7;
-
-}
-
-
-/* =====================================================
-   TÍTULOS
-===================================================== */
-
-.footer-links h3,
-.footer-contact h3,
-.footer-social h3{
+    letter-spacing:3px;
 
     margin-bottom:18px;
 
-    font-size:18px;
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #00d26a
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+.footer-description{
+
+    max-width:420px;
+
+    color:#999;
+
+    line-height:1.8;
+
+    font-size:15px;
 
 }
 
 
 /* =====================================================
-   ENLACES
+   TITULOS
+===================================================== */
+
+.footer-title{
+
+    color:#fff;
+
+    font-size:18px;
+
+    margin-bottom:20px;
+
+    font-weight:800;
+
+}
+
+
+/* =====================================================
+   LISTAS
 ===================================================== */
 
 .footer-links{
@@ -86,13 +96,13 @@
 
     flex-direction:column;
 
-    gap:12px;
+    gap:14px;
 
 }
 
 .footer-links a{
 
-    color:#bdbdbd;
+    color:#999;
 
     text-decoration:none;
 
@@ -104,49 +114,26 @@
 
     color:#00d26a;
 
-}
-
-
-/* =====================================================
-   CONTACTO
-===================================================== */
-
-.footer-contact{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:12px;
-
-}
-
-.footer-contact p{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    color:#bdbdbd;
+    transform:translateX(5px);
 
 }
 
 
 /* =====================================================
-   REDES
+   SOCIAL
 ===================================================== */
 
-.social-icons{
+.footer-social{
 
     display:flex;
 
-    gap:15px;
+    gap:14px;
+
+    margin-top:20px;
 
 }
 
-.social-icons a{
+.footer-social a{
 
     width:46px;
 
@@ -158,9 +145,9 @@
 
     align-items:center;
 
-    border-radius:50%;
+    border-radius:14px;
 
-    background:#171717;
+    background:#181818;
 
     color:#fff;
 
@@ -172,28 +159,28 @@
 
 }
 
-.social-icons a:hover{
+.footer-social a:hover{
 
     background:#00d26a;
 
     color:#000;
 
-    transform:translateY(-3px);
+    transform:translateY(-4px);
 
 }
 
 
 /* =====================================================
-   FOOTER INFERIOR
+   COPYRIGHT
 ===================================================== */
 
 .footer-bottom{
 
+    border-top:1px solid rgba(255,255,255,.08);
+
     padding:22px;
 
     text-align:center;
-
-    border-top:1px solid #222;
 
     color:#777;
 
@@ -210,29 +197,19 @@
 
     .footer-container{
 
-        grid-template-columns:1fr 1fr;
-
-    }
-
-}
-
-@media(max-width:650px){
-
-    .footer-container{
-
         grid-template-columns:1fr;
 
         text-align:center;
 
     }
 
-    .footer-contact p{
+    .footer-description{
 
-        justify-content:center;
+        margin:auto;
 
     }
 
-    .social-icons{
+    .footer-social{
 
         justify-content:center;
 

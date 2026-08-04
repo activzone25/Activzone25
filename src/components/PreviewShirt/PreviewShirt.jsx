@@ -15,210 +15,202 @@ function PreviewShirt({
 }) {
 
 
-    const [lado,setLado] = useState("front");
+const [lado,setLado] = useState("front");
 
 
 
-    const patchPosition =
-        product?.patchesPosition?.[parche?.tipo]
-        ||
-        {};
+const positions = product?.positions || {};
 
 
 
-    const namePosition =
-        product?.namePosition
-        ||
-        {};
+const namePosition =
+positions.back?.name || {};
 
 
 
-    const numberPosition =
-        product?.numberPosition
-        ||
-        {};
+const numberPosition =
+positions.back?.number || {};
 
 
 
-    return (
+const patchPosition =
+positions.front?.patch?.[parche?.tipo] || {};
 
 
-        <div className="preview">
 
 
 
-            <div className="preview-buttons">
 
 
-                <button
+return (
 
-                    className={
-                        lado === "front"
-                        ? "active"
-                        : ""
-                    }
+<div className="preview">
 
-                    onClick={() =>
-                        setLado("front")
-                    }
 
-                >
 
-                    Delante
+<div className="preview-buttons">
 
-                </button>
 
+<button
 
+className={
+lado === "front"
+?
+"active"
+:
+""
+}
 
-                <button
+onClick={()=>
+setLado("front")
+}
 
-                    className={
-                        lado === "back"
-                        ? "active"
-                        : ""
-                    }
+>
 
-                    onClick={() =>
-                        setLado("back")
-                    }
+Delante
 
-                >
+</button>
 
-                    Detrás
 
-                </button>
 
+<button
 
-            </div>
+className={
+lado === "back"
+?
+"active"
+:
+""
+}
 
+onClick={()=>
+setLado("back")
+}
 
+>
 
+Detrás
 
+</button>
 
-            <div className="shirt-container">
 
 
+</div>
 
-                <img
 
-                    src={
-                        lado === "front"
-                        ? front
-                        : back
-                    }
 
-                    className="shirt-image"
 
-                    alt={product.nombre}
 
-                />
 
 
+<div className="shirt-container">
 
 
 
-                {/* PARCHE */}
+<img
 
-                {
-                    lado === "front"
-                    &&
-                    parche
-                    &&
+src={
+lado === "front"
+?
+front
+:
+back
+}
 
-                    (
+className="shirt-image"
 
-                    <img
+alt={product?.nombre}
 
-                        src={parche.imagen}
+/>
 
-                        alt={parche.nombre}
 
-                        className="shirt-patch"
 
-                        style={patchPosition}
 
-                    />
 
-                    )
 
-                }
+{/* PARCHE */}
 
+{
 
+lado==="front" &&
+parche &&
 
+<img
 
+src={parche.imagen}
 
+alt={parche.nombre}
 
-                {/* NOMBRE */}
+className="shirt-patch"
 
-                {
+style={patchPosition}
 
-                    lado === "back"
-                    &&
-                    nombre
-                    &&
+/>
 
-                    (
+}
 
-                    <div
 
-                        className="shirt-name"
 
-                        style={namePosition}
 
-                    >
 
-                        {nombre.toUpperCase()}
 
 
-                    </div>
+{/* NOMBRE */}
 
-                    )
+{
 
-                }
+lado==="back" &&
+nombre &&
 
+<div
 
+className="shirt-name"
 
+style={namePosition}
 
+>
 
+{nombre.toUpperCase()}
 
-                {/* DORSAL */}
+</div>
 
-                {
+}
 
-                    lado === "back"
-                    &&
-                    numero
-                    &&
 
-                    (
 
-                    <div
 
-                        className="shirt-number"
 
-                        style={numberPosition}
 
-                    >
 
-                        {numero}
+{/* DORSAL */}
 
+{
 
-                    </div>
+lado==="back" &&
+numero &&
 
-                    )
+<div
 
-                }
+className="shirt-number"
 
+style={numberPosition}
 
+>
 
-            </div>
+{numero}
 
+</div>
 
+}
 
-        </div>
 
 
-    );
+</div>
+
+
+</div>
+
+);
 
 }
 

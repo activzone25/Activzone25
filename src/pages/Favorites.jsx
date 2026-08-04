@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import { useFavorites } from "../context/FavoritesContext";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
-import ProductCard from "../components/ProductCard/ProductCard";
+import { useFavorites } from "../../context/FavoritesContext";
 
 import "./Favorites.css";
 
@@ -10,101 +10,167 @@ import "./Favorites.css";
 function Favorites(){
 
 
-  const { favorites } = useFavorites();
+    const {
+        favorites,
+        clearFavorites
 
-
-
-  return (
-
-
-    <main className="favorites-page">
-
-
-      <div className="favorites-header">
-
-
-        <h1>
-          ❤️ Mis Favoritos
-        </h1>
-
-
-        <p>
-          Tus camisetas guardadas para comprar más tarde.
-        </p>
-
-
-      </div>
+    } = useFavorites();
 
 
 
 
+    return (
 
-      {
-        favorites.length === 0 ? (
-
-
-          <div className="empty-favorites">
+        <main className="favorites-page">
 
 
-            <h2>
-              No tienes camisetas guardadas
-            </h2>
+
+            <section className="favorites-header">
 
 
-            <p>
-              Añade tus equipaciones favoritas pulsando el corazón.
-            </p>
+                <span className="section-badge">
+
+                    ❤️ FAVORITOS
+
+                </span>
 
 
-            <Link
-              to="/"
-              className="back-shop"
-            >
-              Ver catálogo
-            </Link>
+
+                <h1>
+
+                    Mis favoritos
+
+                </h1>
 
 
-          </div>
+
+                <p>
+
+                    {favorites.length}
+
+                    {" "}
+
+                    {
+                        favorites.length === 1
+                        ? "camiseta guardada"
+                        : "camisetas guardadas"
+                    }
+
+                </p>
 
 
-        ) : (
 
 
-          <div className="product-grid">
+
+
+                {
+                    favorites.length > 0 && (
+
+                        <button
+
+                            className="clear-favorites"
+
+                            onClick={clearFavorites}
+
+                        >
+
+                            Vaciar favoritos
+
+                        </button>
+
+                    )
+                }
+
+
+            </section>
+
+
+
+
+
 
 
             {
-              favorites.map(product => (
+                favorites.length > 0 ? (
 
 
-                <ProductCard
-
-                  key={product.id}
-
-                  product={product}
-
-                />
+                    <div className="favorites-grid">
 
 
-              ))
+                        {
+                            favorites.map(product => (
+
+
+                                <ProductCard
+
+                                    key={product.id}
+
+                                    product={product}
+
+                                />
+
+
+                            ))
+                        }
+
+
+                    </div>
+
+
+
+                )
+
+                :
+
+
+                (
+
+                    <section className="favorites-empty">
+
+
+                        <h2>
+
+                            No tienes favoritos ❤️
+
+                        </h2>
+
+
+
+                        <p>
+
+                            Guarda tus camisetas favoritas para verlas aquí.
+
+                        </p>
+
+
+
+
+
+                        <Link
+
+                            to="/"
+
+                            className="back-shop"
+
+                        >
+
+                            Ver catálogo
+
+                        </Link>
+
+
+
+                    </section>
+
+                )
 
             }
 
 
-          </div>
 
+        </main>
 
-        )
-
-      }
-
-
-
-    </main>
-
-
-  );
-
+    );
 
 }
 

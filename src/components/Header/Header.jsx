@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
 import {
-  FiSearch,
-  FiShoppingCart,
-  FiMenu,
-  FiHeart
+    FiSearch,
+    FiShoppingCart,
+    FiMenu,
+    FiHeart
 } from "react-icons/fi";
 
 import { useCart } from "../../context/CartContext";
@@ -15,209 +15,208 @@ import "./Header.css";
 
 function Header({
 
-  search = "",
-
-  setSearch = () => {},
-
-  setCartOpen = () => {},
-
-  setMenuOpen = () => {}
+    search = "",
+    setSearch = () => {},
+    setCartOpen = () => {},
+    setMenuOpen = () => {}
 
 }) {
 
 
-  const { cart } = useCart();
+    const { cart } = useCart();
 
-  const { favorites } = useFavorites();
+    const { favorites } = useFavorites();
 
 
 
+    const totalProductos = cart.reduce(
 
-  const totalProductos = cart.reduce(
+        (total,item) =>
+            total + (item.cantidad || 1),
 
-    (total, item) =>
+        0
 
-      total + (item.cantidad || 1),
+    );
 
-    0
 
-  );
 
 
 
+    return (
 
+        <header className="header">
 
-  return (
 
-    <header className="header">
+            <div className="header-container">
 
 
-      <div className="header-container">
 
+                <button
 
+                    className="menu-mobile"
 
-        {/* LOGO */}
+                    onClick={() => setMenuOpen(true)}
 
-        <Link
-          to="/"
-          className="logo"
-        >
+                >
 
-          ACTIVZONE25
+                    <FiMenu />
 
-        </Link>
+                </button>
 
 
 
 
 
 
-        {/* BUSCADOR */}
+                <Link
 
-        <div className="search-box">
+                    to="/"
 
+                    className="logo"
 
-          <FiSearch />
+                >
 
+                    ACTIVZONE25
 
-          <input
+                </Link>
 
-            type="text"
 
-            value={search}
 
-            placeholder="Buscar camiseta..."
 
-            onChange={(e)=>
 
-              setSearch(e.target.value)
 
-            }
 
-          />
 
+                <div className="search-box">
 
-        </div>
 
+                    <FiSearch className="search-icon"/>
 
 
 
+                    <input
 
+                        type="text"
 
+                        placeholder="Buscar camiseta..."
 
-        {/* ACCIONES */}
+                        value={search}
 
-        <div className="header-actions">
+                        onChange={(e)=>
+                            setSearch(e.target.value)
+                        }
 
+                    />
 
 
+                </div>
 
 
-          {/* FAVORITOS */}
 
 
-          <Link
 
-            to="/favoritos"
 
-            className="icon-btn"
 
-            aria-label="Favoritos"
 
-          >
+                <div className="header-actions">
 
 
-            <FiHeart />
 
 
-            {favorites.length > 0 && (
 
-              <span className="count">
+                    <Link
 
-                {favorites.length}
+                        to="/favoritos"
 
-              </span>
+                        className="icon-btn"
 
-            )}
+                    >
 
+                        <FiHeart/>
 
-          </Link>
 
+                        {
+                            favorites.length > 0 && (
 
+                                <span className="count">
 
+                                    {favorites.length}
 
+                                </span>
 
+                            )
+                        }
 
 
+                    </Link>
 
-          {/* CARRITO */}
 
 
-          <button
 
-            className="icon-btn"
 
-            onClick={()=>setCartOpen(true)}
 
-            aria-label="Carrito"
 
-          >
 
+                    <button
 
-            <FiShoppingCart />
+                        className="icon-btn"
 
+                        onClick={() => setCartOpen(true)}
 
-            {totalProductos > 0 && (
+                    >
 
-              <span className="count">
 
-                {totalProductos}
+                        <FiShoppingCart/>
 
-              </span>
 
-            )}
+                        {
+                            totalProductos > 0 && (
 
+                                <span className="count">
 
-          </button>
+                                    {totalProductos}
 
+                                </span>
 
+                            )
+                        }
 
 
+                    </button>
 
 
 
-          {/* MENU */}
 
 
-          <button
 
-            className="icon-btn menu-btn"
 
-            onClick={()=>setMenuOpen(true)}
 
-            aria-label="Menú"
+                    <button
 
-          >
+                        className="icon-btn menu-btn"
 
+                        onClick={() => setMenuOpen(true)}
 
-            <FiMenu />
+                    >
 
+                        <FiMenu/>
 
-          </button>
+                    </button>
 
 
 
 
+                </div>
 
-        </div>
 
 
-      </div>
+            </div>
 
 
-    </header>
 
-  );
+        </header>
+
+    );
 
 }
 

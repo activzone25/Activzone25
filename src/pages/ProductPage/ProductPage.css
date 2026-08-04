@@ -5,20 +5,20 @@
 
 .product-page{
 
-    color:#fff;
-
     max-width:1400px;
 
     margin:60px auto;
 
     padding:0 25px;
 
+    color:#fff;
+
 }
 
 
 
 /* ==========================================
-   CONTENEDOR PRINCIPAL
+   CONTENIDO
 ========================================== */
 
 
@@ -26,18 +26,21 @@
 
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+    1fr 1fr;
 
     gap:60px;
 
     align-items:start;
+
+    animation:pageShow .5s ease;
 
 }
 
 
 
 /* ==========================================
-   PREVIEW
+   PREVIEW CAMISETA
 ========================================== */
 
 
@@ -50,17 +53,31 @@
         #090909
     );
 
+
     border:1px solid #262626;
 
-    border-radius:28px;
 
-    padding:40px;
+    border-radius:30px;
+
+
+    padding:45px;
+
+
+    min-height:600px;
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
 
     box-shadow:
-    0 20px 50px rgba(0,0,0,.45);
+
+    0 25px 60px rgba(0,0,0,.45);
 
 }
-
 
 
 
@@ -82,11 +99,11 @@
 
 .detail-info h1{
 
-    font-size:42px;
+    margin:0;
+
+    font-size:44px;
 
     font-weight:900;
-
-    margin:0 0 10px;
 
 }
 
@@ -94,9 +111,11 @@
 
 .detail-info p{
 
+    margin-top:10px;
+
     color:#999;
 
-    font-size:16px;
+    font-size:17px;
 
 }
 
@@ -104,13 +123,13 @@
 
 .detail-info h2{
 
+    margin:25px 0;
+
     color:#00d26a;
 
-    font-size:42px;
+    font-size:44px;
 
     font-weight:900;
-
-    margin:25px 0;
 
 }
 
@@ -126,6 +145,8 @@
 
 
 
+
+
 /* ==========================================
    TALLAS
 ========================================== */
@@ -135,9 +156,9 @@
 
     display:flex;
 
-    gap:12px;
-
     flex-wrap:wrap;
+
+    gap:12px;
 
 }
 
@@ -145,21 +166,30 @@
 
 .sizes button{
 
-    width:58px;
+    width:60px;
 
-    height:50px;
+    height:52px;
 
-    border-radius:12px;
 
-    border:2px solid #333;
+    background:#151515;
 
-    background:#171717;
 
     color:#fff;
 
-    font-weight:800;
+
+    border:
+
+    2px solid #333;
+
+
+    border-radius:15px;
+
+
+    font-weight:900;
+
 
     cursor:pointer;
+
 
     transition:.25s;
 
@@ -170,6 +200,8 @@
 .sizes button:hover{
 
     border-color:#00d26a;
+
+    transform:translateY(-3px);
 
 }
 
@@ -190,7 +222,7 @@
 
 
 /* ==========================================
-   INPUTS PERSONALIZACIÓN
+   INPUTS
 ========================================== */
 
 
@@ -198,23 +230,34 @@
 
     width:100%;
 
-    max-width:400px;
+    max-width:420px;
 
-    padding:15px;
+
+    padding:16px;
+
 
     margin-bottom:12px;
 
+
     background:#111;
 
-    border:2px solid #333;
-
-    border-radius:14px;
 
     color:white;
 
-    font-size:15px;
+
+    border:
+
+    2px solid #333;
+
+
+    border-radius:15px;
+
 
     outline:none;
+
+
+    font-size:15px;
+
 
     transition:.25s;
 
@@ -226,8 +269,10 @@
 
     border-color:#00d26a;
 
+
     box-shadow:
-    0 0 15px rgba(0,210,106,.2);
+
+    0 0 25px rgba(0,210,106,.25);
 
 }
 
@@ -244,9 +289,9 @@
 
     display:flex;
 
-    gap:15px;
-
     flex-wrap:wrap;
+
+    gap:15px;
 
 }
 
@@ -254,29 +299,39 @@
 
 .patch-options button{
 
-    width:130px;
+    width:140px;
 
-    height:120px;
+    height:130px;
+
+
+    background:#151515;
+
+
+    border:
+
+    2px solid #333;
+
+
+    border-radius:18px;
+
+
+    color:#fff;
+
 
     display:flex;
 
     flex-direction:column;
 
+    align-items:center;
+
     justify-content:center;
 
-    align-items:center;
 
     gap:10px;
 
-    background:#171717;
-
-    border:2px solid #333;
-
-    border-radius:15px;
-
-    color:white;
 
     cursor:pointer;
+
 
     transition:.25s;
 
@@ -298,9 +353,10 @@
 
     border-color:#00d26a;
 
+
     box-shadow:
 
-    0 0 20px rgba(0,210,106,.35);
+    0 0 25px rgba(0,210,106,.35);
 
 }
 
@@ -308,9 +364,9 @@
 
 .patch-options img{
 
-    width:55px;
+    width:60px;
 
-    height:55px;
+    height:60px;
 
     object-fit:contain;
 
@@ -322,7 +378,7 @@
 
     font-size:14px;
 
-    font-weight:700;
+    font-weight:800;
 
 }
 
@@ -339,25 +395,36 @@
 
     width:100%;
 
-    max-width:400px;
+
+    max-width:420px;
+
 
     margin-top:35px;
 
+
     padding:18px;
 
-    background:#00d26a;
-
-    color:#000;
 
     border:none;
 
-    border-radius:16px;
+
+    border-radius:18px;
+
+
+    background:#00d26a;
+
+
+    color:#000;
+
 
     font-size:19px;
 
+
     font-weight:900;
 
+
     cursor:pointer;
+
 
     transition:.3s;
 
@@ -369,9 +436,10 @@
 
     transform:translateY(-4px);
 
+
     box-shadow:
 
-    0 12px 30px rgba(0,210,106,.35);
+    0 15px 35px rgba(0,210,106,.35);
 
 }
 
@@ -388,7 +456,7 @@
 
 
 /* ==========================================
-   PRODUCTO NO ENCONTRADO
+   ERROR PRODUCTO
 ========================================== */
 
 
@@ -396,13 +464,15 @@
 
     min-height:50vh;
 
+
     display:flex;
 
     justify-content:center;
 
     align-items:center;
 
-    color:white;
+
+    color:#fff;
 
 }
 
@@ -411,63 +481,102 @@
 
 
 /* ==========================================
-   RESPONSIVE
+   ANIMACIÓN
+========================================== */
+
+
+@keyframes pageShow{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+
+
+/* ==========================================
+   TABLET / MÓVIL
 ========================================== */
 
 
 @media(max-width:900px){
 
 
-    .product-page{
+.product-page{
 
-        padding:0 15px;
+    margin:35px auto;
 
-        margin:35px auto;
+    padding:0 15px;
 
-    }
-
-
-    .product-detail{
-
-        grid-template-columns:1fr;
-
-        gap:35px;
-
-    }
+}
 
 
-    .detail-preview{
 
-        padding:20px;
+.product-detail{
 
-    }
+    grid-template-columns:1fr;
 
+    gap:35px;
 
-    .detail-info h1{
-
-        font-size:32px;
-
-    }
+}
 
 
-    .detail-info h2{
 
-        font-size:34px;
+.detail-preview{
 
-    }
+    min-height:auto;
 
+    padding:25px;
 
-    .patch-options{
-
-        justify-content:center;
-
-    }
+}
 
 
-    .add-cart{
 
-        max-width:100%;
+.detail-info h1{
 
-    }
+    font-size:34px;
+
+}
+
+
+
+.detail-info h2{
+
+    font-size:36px;
+
+}
+
+
+
+.patch-options{
+
+    justify-content:center;
+
+}
+
+
+
+.add-cart{
+
+    max-width:100%;
+
+}
+
 
 }

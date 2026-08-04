@@ -1,7 +1,14 @@
-// ==========================================
+// ======================================================
 // ACTIVZONE25 - PRODUCTS
-// ==========================================
+// ======================================================
 
+
+// ======================================================
+// IMPORTS CAMISETAS
+// ======================================================
+
+
+// LALIGA
 
 import barcaFront from "../assets/camisetas/barcelona/front.png";
 import barcaBack from "../assets/camisetas/barcelona/back.png";
@@ -9,44 +16,130 @@ import barcaBack from "../assets/camisetas/barcelona/back.png";
 import madridFront from "../assets/camisetas/realmadrid/front.png";
 import madridBack from "../assets/camisetas/realmadrid/back.png";
 
+import betisFront from "../assets/camisetas/betis/front.png";
+import betisBack from "../assets/camisetas/betis/back.png";
+
+import valenciaFront from "../assets/camisetas/valencia/front.png";
+import valenciaBack from "../assets/camisetas/valencia/back.png";
 
 
 
-// ==========================================
+// PREMIER
+
+import arsenalFront from "../assets/camisetas/arsenal/front.png";
+import arsenalBack from "../assets/camisetas/arsenal/back.png";
+
+import cityFront from "../assets/camisetas/city/front.png";
+import cityBack from "../assets/camisetas/city/back.png";
+
+
+
+// BUNDESLIGA
+
+import bayernFront from "../assets/camisetas/bayern/front.png";
+import bayernBack from "../assets/camisetas/bayern/back.png";
+
+import dortmundFront from "../assets/camisetas/dortmund/front.png";
+import dortmundBack from "../assets/camisetas/dortmund/back.png";
+
+
+
+// LIGUE 1
+
+import parisFront from "../assets/camisetas/paris/front.png";
+import parisBack from "../assets/camisetas/paris/back.png";
+
+
+
+
+// ======================================================
+// POSICIONES GENERALES
+// ======================================================
+
+
+const positions = {
+
+    front:{
+
+        patch:{
+
+            laliga:{
+                top:"32%",
+                left:"18%",
+                width:"34px"
+            },
+
+
+            champions:{
+                top:"32%",
+                left:"18%",
+                width:"34px"
+            }
+
+        }
+
+    },
+
+
+    back:{
+
+
+        name:{
+
+            top:"24%",
+            left:"50%",
+            transform:"translateX(-50%)"
+
+        },
+
+
+        number:{
+
+            top:"40%",
+            left:"50%",
+            transform:"translateX(-50%)"
+
+        }
+
+    }
+
+};
+
+
+
+
+// ======================================================
 // PRODUCTOS
-// ==========================================
+// ======================================================
 
 
 const products = [
 
 
-
-// ==========================================
-// FC BARCELONA
-// ==========================================
-
 {
 id:1,
-slug:"fc-barcelona-local-26-27",
+
+slug:"barcelona-26-27",
 
 nombre:"FC Barcelona",
+
 equipo:"Barcelona",
 
 liga:"LaLiga",
-categoria:"Adulto",
 
 temporada:"2026/27",
 
+categoria:"Adulto",
+
 precio:25,
 
-front:barcaFront,
-back:barcaBack,
-
-disponible:true,
-personalizable:true,
-parcheGratis:true,
 nuevo:true,
 
+disponible:true,
+
+front:barcaFront,
+
+back:barcaBack,
 
 parches:[
 "laliga",
@@ -54,57 +147,36 @@ parches:[
 ],
 
 
-patchesPosition:{
-
-laliga:{
-top:"35%",
-left:"22%",
-width:"32px"
-},
-
-champions:{
-top:"32%",
-left:"22%",
-width:"35px"
-}
+positions
 
 },
 
 
-...defaultPositions
-
-},
-
-
-
-// ==========================================
-// REAL MADRID
-// ==========================================
 
 {
 id:2,
 
-slug:"real-madrid-local-26-27",
+slug:"real-madrid-26-27",
 
 nombre:"Real Madrid",
+
 equipo:"Real Madrid",
 
 liga:"LaLiga",
 
-categoria:"Adulto",
-
 temporada:"2026/27",
+
+categoria:"Adulto",
 
 precio:25,
 
-front:madridFront,
-back:madridBack,
-
-disponible:true,
-personalizable:true,
-parcheGratis:true,
 nuevo:true,
 
+disponible:true,
+
+front:madridFront,
+
+back:madridBack,
 
 parches:[
 "laliga",
@@ -112,749 +184,294 @@ parches:[
 ],
 
 
-patchesPosition:{
-
-laliga:{
-top:"37%",
-left:"34%",
-width:"30px"
-},
-
-champions:{
-top:"33%",
-left:"22%",
-width:"34px"
-}
+positions
 
 },
 
 
-...defaultPositions
-
-},
-
-
-
-// ==========================================
-// VILLARREAL
-// ==========================================
 
 {
 id:3,
 
-slug:"villarreal-local-26-27",
-
-nombre:"Villarreal CF",
-equipo:"Villarreal",
-
-liga:"LaLiga",
-
-categoria:"Adulto",
-
-temporada:"2026/27",
-
-precio:25,
-
-front:villarrealFront,
-back:villarrealBack,
-
-disponible:true,
-personalizable:true,
-parcheGratis:true,
-nuevo:true,
-
-
-parches:[
-"laliga"
-],
-
-
-patchesPosition:{
-
-laliga:{
-top:"35%",
-left:"22%",
-width:"32px"
-}
-
-},
-
-
-...defaultPositions
-
-},
-
-
-
-// ==========================================
-// ATLETICO
-// ==========================================
-
-{
-id:4,
-
-slug:"atletico-local-26-27",
-
-nombre:"Atlético de Madrid",
-equipo:"Atlético",
-
-liga:"LaLiga",
-
-categoria:"Adulto",
-
-temporada:"2026/27",
-
-precio:25,
-
-front:atleticoFront,
-back:atleticoBack,
-
-
-disponible:true,
-personalizable:true,
-parcheGratis:true,
-nuevo:true,
-
-
-parches:[
-"laliga"
-],
-
-
-patchesPosition:{
-
-laliga:{
-top:"36%",
-left:"22%",
-width:"32px"
-}
-
-},
-
-
-...defaultPositions
-
-},
-
-
-
-// ==========================================
-// BETIS
-// ==========================================
-
-{
-id:5,
-
-slug:"betis-local-26-27",
+slug:"betis-26-27",
 
 nombre:"Real Betis",
+
 equipo:"Betis",
 
 liga:"LaLiga",
 
-categoria:"Adulto",
-
 temporada:"2026/27",
+
+categoria:"Adulto",
 
 precio:25,
 
-front:betisFront,
-back:betisBack,
-
-
-disponible:true,
-personalizable:true,
-parcheGratis:true,
 nuevo:true,
 
+disponible:true,
+
+front:betisFront,
+
+back:betisBack,
 
 parches:[
 "laliga"
 ],
 
 
-patchesPosition:{
-
-laliga:{
-top:"35%",
-left:"22%",
-width:"32px"
-}
+positions
 
 },
 
 
-...defaultPositions
-
-},
-
-
-
-// ==========================================
-// CELTA
-// ==========================================
 
 {
-id:6,
+id:4,
 
-slug:"celta-local-26-27",
+slug:"valencia-26-27",
 
-nombre:"Celta de Vigo",
-equipo:"Celta",
+nombre:"Valencia CF",
+
+equipo:"Valencia",
 
 liga:"LaLiga",
 
-categoria:"Adulto",
-
 temporada:"2026/27",
+
+categoria:"Adulto",
 
 precio:25,
 
-front:celtaFront,
-back:celtaBack,
-
-
-disponible:true,
-personalizable:true,
-parcheGratis:true,
 nuevo:true,
 
+disponible:true,
+
+front:valenciaFront,
+
+back:valenciaBack,
 
 parches:[
 "laliga"
 ],
 
 
-patchesPosition:{
-
-laliga:{
-top:"35%",
-left:"22%",
-width:"32px"
-}
+positions
 
 },
 
+// ======================================================
+// PREMIER LEAGUE
+// ======================================================
 
-...defaultPositions
-
-},
-
-// ==========================================
-// ARSENAL
-// ==========================================
 
 {
-id:7,
+id:5,
 
-slug:"arsenal-local-26-27",
+slug:"arsenal-26-27",
 
-nombre:"Arsenal",
+nombre:"Arsenal FC",
 
 equipo:"Arsenal",
 
 liga:"Premier League",
 
-categoria:"Adulto",
-
 temporada:"2026/27",
+
+categoria:"Adulto",
 
 precio:25,
 
-front:arsenalFront,
-back:arsenalBack,
-
-
-disponible:true,
-personalizable:true,
-parcheGratis:true,
 nuevo:true,
 
+disponible:true,
+
+front:arsenalFront,
+
+back:arsenalBack,
 
 parches:[
 "champions"
 ],
 
 
-patchesPosition:{
-
-champions:{
-top:"33%",
-left:"22%",
-width:"35px"
-}
-
-},
-
-
-...defaultPositions
+positions
 
 },
 
 
 
-// ==========================================
-// MANCHESTER CITY
-// ==========================================
+
+{
+id:6,
+
+slug:"manchester-city-26-27",
+
+nombre:"Manchester City",
+
+equipo:"Manchester City",
+
+liga:"Premier League",
+
+temporada:"2026/27",
+
+categoria:"Adulto",
+
+precio:25,
+
+nuevo:true,
+
+disponible:true,
+
+front:cityFront,
+
+back:cityBack,
+
+parches:[
+"champions"
+],
+
+
+positions
+
+},
+
+
+
+
+
+// ======================================================
+// BUNDESLIGA
+// ======================================================
+
+
+{
+id:7,
+
+slug:"bayern-26-27",
+
+nombre:"Bayern Munich",
+
+equipo:"Bayern",
+
+liga:"Bundesliga",
+
+temporada:"2026/27",
+
+categoria:"Adulto",
+
+precio:25,
+
+nuevo:true,
+
+disponible:true,
+
+front:bayernFront,
+
+back:bayernBack,
+
+parches:[
+"champions"
+],
+
+
+positions
+
+},
+
+
+
+
 
 {
 id:8,
 
-slug:"manchester-city-local-26-27",
+slug:"dortmund-26-27",
 
-nombre:"Manchester City FC",
+nombre:"Borussia Dortmund",
 
-equipo:"City",
+equipo:"Dortmund",
 
-liga:"Premier League",
-
-categoria:"Adulto",
+liga:"Bundesliga",
 
 temporada:"2026/27",
 
+categoria:"Adulto",
+
 precio:25,
 
-
-front:cityFront,
-back:cityBack,
-
-
-disponible:true,
-personalizable:true,
-parcheGratis:true,
 nuevo:true,
 
+disponible:true,
+
+front:dortmundFront,
+
+back:dortmundBack,
 
 parches:[
 "champions"
 ],
 
 
-patchesPosition:{
-
-champions:{
-top:"33%",
-left:"22%",
-width:"35px"
-}
-
-},
-
-
-...defaultPositions
+positions
 
 },
 
 
 
-// ==========================================
-// MANCHESTER UNITED
-// ==========================================
+
+
+
+// ======================================================
+// LIGUE 1
+// ======================================================
+
 
 {
 id:9,
 
-slug:"man-utd-local-26-27",
+slug:"psg-26-27",
 
-nombre:"Manchester United",
+nombre:"Paris Saint-Germain",
 
-equipo:"Man Utd",
+equipo:"PSG",
 
-liga:"Premier League",
-
-categoria:"Adulto",
+liga:"Ligue 1",
 
 temporada:"2026/27",
 
+categoria:"Adulto",
+
 precio:25,
 
-front:manutdFront,
-back:manutdBack,
-
-
-disponible:true,
-personalizable:true,
-parcheGratis:true,
 nuevo:true,
 
+disponible:true,
+
+front:parisFront,
+
+back:parisBack,
 
 parches:[
 "champions"
 ],
 
 
-patchesPosition:{
+positions
 
-champions:{
-top:"33%",
-left:"22%",
-width:"35px"
 }
 
-},
 
-
-...defaultPositions
-
-},
-
-// ==========================================
-// BAYERN MÜNCHEN
-// ==========================================
-
-{
-    id:13,
-
-    slug:"bayern-local-26-27",
-
-    nombre:"Bayern München",
-
-    equipo:"Bayern",
-
-    liga:"Bundesliga",
-
-    categoria:"Adulto",
-
-    temporada:"2026/27",
-
-    precio:25,
-
-    front:bayernFront,
-
-    back:bayernBack,
-
-
-    disponible:true,
-
-    personalizable:true,
-
-    parcheGratis:true,
-
-    nuevo:true,
-
-
-    parches:[
-        "champions"
-    ],
-
-
-    patchesPosition:{
-
-        champions:{
-            top:"33%",
-            left:"22%",
-            width:"35px"
-        }
-
-    },
-
-
-    ...defaultPositions
-
-},
-
-
-
-// ==========================================
-// BORUSSIA DORTMUND
-// ==========================================
-
-{
-
-    id:14,
-
-    slug:"borussia-dortmund-local-26-27",
-
-    nombre:"Borussia Dortmund",
-
-    equipo:"Dortmund",
-
-    liga:"Bundesliga",
-
-    categoria:"Adulto",
-
-    temporada:"2026/27",
-
-    precio:25,
-
-
-    front:dortmundFront,
-
-    back:dortmundBack,
-
-
-    disponible:true,
-
-    personalizable:true,
-
-    parcheGratis:true,
-
-    nuevo:true,
-
-
-    parches:[
-        "champions"
-    ],
-
-
-    patchesPosition:{
-
-        champions:{
-            top:"34%",
-            left:"22%",
-            width:"35px"
-        }
-
-    },
-
-
-    ...defaultPositions
-
-},
-
-
-
-// ==========================================
-// RB LEIPZIG
-// ==========================================
-
-{
-
-    id:15,
-
-    slug:"rb-leipzig-local-26-27",
-
-    nombre:"RB Leipzig",
-
-    equipo:"Leipzig",
-
-    liga:"Bundesliga",
-
-    categoria:"Adulto",
-
-    temporada:"2026/27",
-
-    precio:25,
-
-
-    front:leipzigFront,
-
-    back:leipzigBack,
-
-
-    disponible:true,
-
-    personalizable:true,
-
-    parcheGratis:true,
-
-    nuevo:true,
-
-
-    parches:[
-        "champions"
-    ],
-
-
-    patchesPosition:{
-
-        champions:{
-            top:"33%",
-            left:"22%",
-            width:"35px"
-        }
-
-    },
-
-
-    ...defaultPositions
-
-},
-
-
-
-// ==========================================
-// STUTTGART
-// ==========================================
-
-{
-
-    id:16,
-
-    slug:"stuttgart-local-26-27",
-
-    nombre:"VfB Stuttgart",
-
-    equipo:"Stuttgart",
-
-    liga:"Bundesliga",
-
-    categoria:"Adulto",
-
-    temporada:"2026/27",
-
-    precio:25,
-
-
-    front:stuttgartFront,
-
-    back:stuttgartBack,
-
-
-    disponible:true,
-
-    personalizable:true,
-
-    parcheGratis:true,
-
-    nuevo:true,
-
-
-    parches:[
-        "champions"
-    ],
-
-
-    patchesPosition:{
-
-        champions:{
-            top:"33%",
-            left:"22%",
-            width:"35px"
-        }
-
-    },
-
-
-    ...defaultPositions
-
-},
-
-
-
-// ==========================================
-// BAYER LEVERKUSEN
-// ==========================================
-
-{
-
-    id:17,
-
-    slug:"bayer-leverkusen-local-26-27",
-
-    nombre:"Bayer Leverkusen",
-
-    equipo:"Leverkusen",
-
-    liga:"Bundesliga",
-
-    categoria:"Adulto",
-
-    temporada:"2026/27",
-
-    precio:25,
-
-
-    front:leverkusenFront,
-
-    back:leverkusenBack,
-
-
-    disponible:true,
-
-    personalizable:true,
-
-    parcheGratis:true,
-
-    nuevo:true,
-
-
-    parches:[
-        "champions"
-    ],
-
-
-    patchesPosition:{
-
-        champions:{
-            top:"33%",
-            left:"22%",
-            width:"35px"
-        }
-
-    },
-
-
-    ...defaultPositions
-
-},
-
-
-
-// ==========================================
-// EINTRACHT FRANKFURT
-// ==========================================
-
-{
-
-    id:18,
-
-    slug:"eintracht-frankfurt-local-26-27",
-
-    nombre:"Eintracht Frankfurt",
-
-    equipo:"Frankfurt",
-
-    liga:"Bundesliga",
-
-    categoria:"Adulto",
-
-    temporada:"2026/27",
-
-    precio:25,
-
-
-    front:frankfurtFront,
-
-    back:frankfurtBack,
-
-
-    disponible:true,
-
-    personalizable:true,
-
-    parcheGratis:true,
-
-    nuevo:true,
-
-
-    parches:[
-        "champions"
-    ],
-
-
-    patchesPosition:{
-
-        champions:{
-            top:"33%",
-            left:"22%",
-            width:"35px"
-        }
-
-    },
-
-
-    ...defaultPositions
-
-}
 
 
 
 ];
 
 
-// ==========================================
+
+// ======================================================
 // EXPORT
-// ==========================================
+// ======================================================
+
 
 export default products;

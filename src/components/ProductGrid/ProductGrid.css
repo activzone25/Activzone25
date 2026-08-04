@@ -1,301 +1,163 @@
 /* =====================================================
-   ACTIVZONE25 - PRODUCT GRID PREMIUM
+   ACTIVZONE25 - PRODUCT GRID
 ===================================================== */
-
 
 .product-grid-section{
-
     max-width:1400px;
-
     margin:90px auto;
-
     padding:0 30px;
-
 }
 
-
-
-/* =====================================================
-   CABECERA
-===================================================== */
-
+/* =======================
+   HEADER
+======================= */
 
 .section-header{
-
     text-align:center;
-
-    margin-bottom:55px;
-
+    margin-bottom:60px;
 }
 
-
-.section-header span{
-
+.section-badge{
     display:inline-block;
-
-    margin-bottom:12px;
-
+    padding:8px 18px;
+    border-radius:999px;
+    background:rgba(0,210,106,.12);
     color:#00d26a;
-
     font-size:14px;
-
-    font-weight:900;
-
+    font-weight:800;
     letter-spacing:1px;
-
+    border:1px solid rgba(0,210,106,.35);
 }
-
-
 
 .section-header h2{
-
-    margin:0 0 15px;
-
+    margin:18px 0 15px;
     color:#fff;
-
-    font-size:44px;
-
+    font-size:46px;
     font-weight:900;
-
+    position:relative;
 }
 
-
+.section-header h2::after{
+    content:"";
+    display:block;
+    width:90px;
+    height:4px;
+    margin:16px auto 0;
+    border-radius:999px;
+    background:#00d26a;
+}
 
 .section-header p{
-
-    margin:0 auto;
-
-    max-width:600px;
-
-    color:#aaa;
-
-    font-size:18px;
-
-    line-height:1.6;
-
+    max-width:650px;
+    margin:auto;
+    color:#9d9d9d;
+    line-height:1.7;
+    font-size:17px;
 }
-
-
 
 .section-header small{
-
-    display:inline-flex;
-
-    margin-top:22px;
-
-    padding:8px 20px;
-
+    display:inline-block;
+    margin-top:24px;
+    padding:10px 20px;
     border-radius:999px;
-
     background:#00d26a;
-
     color:#000;
-
     font-weight:800;
-
-    font-size:14px;
-
 }
 
-
-
-/* =====================================================
+/* =======================
    GRID
-===================================================== */
-
+======================= */
 
 .product-grid{
-
     display:grid;
-
-    grid-template-columns:
-
-        repeat(4,1fr);
-
-
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     gap:30px;
-
 }
 
+/* =======================
+   ANIMACIÓN
+======================= */
 
-
-/* =====================================================
-   ANIMACION TARJETAS
-===================================================== */
-
-
-.product-grid > *{
-
-    animation:
-
-        cardShow .5s ease both;
-
+.product-grid>*{
+    opacity:0;
+    animation:fadeUp .55s ease forwards;
 }
 
+.product-grid>*:nth-child(2){animation-delay:.05s;}
+.product-grid>*:nth-child(3){animation-delay:.10s;}
+.product-grid>*:nth-child(4){animation-delay:.15s;}
+.product-grid>*:nth-child(5){animation-delay:.20s;}
+.product-grid>*:nth-child(6){animation-delay:.25s;}
+.product-grid>*:nth-child(7){animation-delay:.30s;}
+.product-grid>*:nth-child(8){animation-delay:.35s;}
 
-.product-grid > *:nth-child(2){
-
-    animation-delay:.05s;
-
-}
-
-
-.product-grid > *:nth-child(3){
-
-    animation-delay:.1s;
-
-}
-
-
-.product-grid > *:nth-child(4){
-
-    animation-delay:.15s;
-
-}
-
-
-
-@keyframes cardShow{
-
+@keyframes fadeUp{
 
     from{
-
         opacity:0;
-
-        transform:
-            translateY(30px);
-
+        transform:translateY(30px);
     }
-
 
     to{
-
         opacity:1;
-
-        transform:
-            translateY(0);
-
+        transform:translateY(0);
     }
 
 }
 
-
-
-/* =====================================================
+/* =======================
    SIN PRODUCTOS
-===================================================== */
-
+======================= */
 
 .empty-products{
-
+    padding:80px 20px;
     text-align:center;
-
-    padding:70px 20px;
-
-    color:#fff;
-
+    color:white;
 }
-
 
 .empty-products h3{
-
     font-size:28px;
-
-    margin-bottom:10px;
-
+    margin-bottom:12px;
 }
-
 
 .empty-products p{
-
     color:#999;
-
 }
 
-
-
-/* =====================================================
+/* =======================
    TABLET
-===================================================== */
+======================= */
 
+@media(max-width:900px){
 
-@media(max-width:1100px){
-
-
-    .product-grid{
-
-        grid-template-columns:
-
-            repeat(3,1fr);
-
+    .product-grid-section{
+        padding:0 20px;
     }
 
+    .section-header h2{
+        font-size:38px;
+    }
 
 }
 
-
-
-@media(max-width:850px){
-
-
-    .product-grid{
-
-        grid-template-columns:
-
-            repeat(2,1fr);
-
-        gap:22px;
-
-    }
-
-
-}
-
-
-
-/* =====================================================
-   MOVIL
-===================================================== */
-
+/* =======================
+   MÓVIL
+======================= */
 
 @media(max-width:600px){
 
-
     .product-grid-section{
-
         margin:60px auto;
-
         padding:0 15px;
-
     }
-
-
 
     .section-header h2{
-
-        font-size:32px;
-
+        font-size:30px;
     }
-
-
 
     .section-header p{
-
         font-size:15px;
-
     }
-
-
-
-    .product-grid{
-
-        grid-template-columns:
-
-            1fr;
-
-        gap:20px;
-
-    }
-
 
 }

@@ -1,8 +1,8 @@
 import {
-  createContext,
-  useContext,
-  useEffect,
-  useState
+    createContext,
+    useContext,
+    useEffect,
+    useState
 } from "react";
 
 
@@ -13,94 +13,48 @@ const FavoritesContext = createContext();
 export function FavoritesProvider({ children }) {
 
 
-  const [favorites, setFavorites] = useState(() => {
-
-    try {
-
-      const saved =
-        localStorage.getItem(
-          "activzone_favorites"
-        );
+    const [favorites, setFavorites] = useState(() => {
 
 
-      return saved
-        ? JSON.parse(saved)
-        : [];
+        try {
 
 
-    } catch {
-
-      return [];
-
-    }
-
-  });
+            const saved = localStorage.getItem(
+                "activzone_favorites"
+            );
 
 
+            return saved
+                ? JSON.parse(saved)
+                : [];
 
 
+        } catch {
 
-  useEffect(() => {
+            return [];
 
-    localStorage.setItem(
-
-      "activzone_favorites",
-
-      JSON.stringify(favorites)
-
-    );
-
-  }, [favorites]);
-
-
-
-
-
-
-
-  function toggleFavorite(product){
-
-
-    setFavorites(prev => {
-
-
-      const exists = prev.some(
-
-        item =>
-        item.id === product.id
-
-      );
-
-
-
-      if(exists){
-
-
-        return prev.filter(
-
-          item =>
-          item.id !== product.id
-
-        );
-
-
-      }
-
-
-
-      return [
-
-        ...prev,
-
-        product
-
-      ];
+        }
 
 
     });
 
 
-  }
+
+
+
+    useEffect(() => {
+
+
+        localStorage.setItem(
+
+            "activzone_favorites",
+
+            JSON.stringify(favorites)
+
+        );
+
+
+    }, [favorites]);
 
 
 
@@ -108,68 +62,115 @@ export function FavoritesProvider({ children }) {
 
 
 
-  function isFavorite(id){
+
+    function toggleFavorite(product){
 
 
-    return favorites.some(
+        setFavorites(current => {
 
-      item =>
-      item.id === id
+
+            const exists = current.some(
+
+                item => item.id === product.id
+
+            );
+
+
+
+            if(exists){
+
+
+                return current.filter(
+
+                    item => item.id !== product.id
+
+                );
+
+
+            }
+
+
+
+            return [
+
+                ...current,
+
+                product
+
+            ];
+
+
+        });
+
+
+    }
+
+
+
+
+
+
+
+
+    function isFavorite(id){
+
+
+        return favorites.some(
+
+            item => item.id === id
+
+        );
+
+
+    }
+
+
+
+
+
+
+
+
+    function clearFavorites(){
+
+
+        setFavorites([]);
+
+
+    }
+
+
+
+
+
+
+
+
+    return (
+
+        <FavoritesContext.Provider
+
+            value={{
+
+                favorites,
+
+                toggleFavorite,
+
+                isFavorite,
+
+                clearFavorites
+
+            }}
+
+        >
+
+            {children}
+
+        </FavoritesContext.Provider>
 
     );
 
-
-  }
-
-
-
-
-
-
-
-
-  function clearFavorites(){
-
-
-    setFavorites([]);
-
-
-  }
-
-
-
-
-
-
-
-  return (
-
-    <FavoritesContext.Provider
-
-      value={{
-
-        favorites,
-
-        toggleFavorite,
-
-        isFavorite,
-
-        clearFavorites
-
-      }}
-
-    >
-
-      {children}
-
-    </FavoritesContext.Provider>
-
-  );
-
-
 }
-
-
 
 
 
@@ -178,9 +179,7 @@ export function FavoritesProvider({ children }) {
 export function useFavorites(){
 
 
-  return useContext(
-    FavoritesContext
-  );
+    return useContext(FavoritesContext);
 
 
 }

@@ -1,461 +1,339 @@
-/* =====================================================
-   ACTIVZONE25 - PRODUCT CARD
-===================================================== */
+/* ==========================================
+   ACTIVZONE25 - PRODUCT GRID PREMIUM
+========================================== */
 
-.product-card{
-    position:relative;
-    display:flex;
-    flex-direction:column;
 
-    background:linear-gradient(145deg,#1b1b1b,#090909);
+/* CONTENEDOR */
 
-    border:1px solid #262626;
-    border-radius:24px;
+.product-grid-section{
 
-    overflow:hidden;
+    max-width:1400px;
 
-    box-shadow:0 15px 40px rgba(0,0,0,.45);
+    margin:0 auto;
 
-    transition:
-        transform .35s ease,
-        border-color .35s ease,
-        box-shadow .35s ease;
-}
+    padding:60px 25px;
 
-/* Brillo */
-
-.product-card::before{
-
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:linear-gradient(
-        120deg,
-        transparent 20%,
-        rgba(255,255,255,.08) 50%,
-        transparent 80%
-    );
-
-    transform:translateX(-120%);
-
-    transition:.8s;
-
-    pointer-events:none;
-
-}
-
-.product-card:hover{
-
-    transform:translateY(-10px);
-
-    border-color:#00d26a;
-
-    box-shadow:
-        0 25px 60px rgba(0,210,106,.25);
-
-}
-
-.product-card:hover::before{
-
-    transform:translateX(120%);
+    color:white;
 
 }
 
 
-/* =====================================================
-   IMAGEN
-===================================================== */
 
-.product-image-container{
 
-    position:relative;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+/* ==========================================
+   CABECERA
+========================================== */
 
-    min-height:330px;
 
-    padding:25px;
+.section-header{
 
-    background:
-        radial-gradient(circle,#222,#111);
+    text-align:center;
 
-}
-
-.product-image{
-
-    width:100%;
-    max-width:260px;
-    height:300px;
-
-    object-fit:contain;
-
-    filter:drop-shadow(0 20px 25px rgba(0,0,0,.55));
-
-    will-change:transform;
-
-    transition:
-        transform .35s ease,
-        filter .35s ease;
-
-}
-
-.product-card:hover .product-image{
-
-    transform:
-        scale(1.08)
-        rotate(-2deg);
+    margin-bottom:45px;
 
 }
 
 
-/* =====================================================
-   BADGE
-===================================================== */
 
-.badge{
+.section-badge{
 
-    position:absolute;
+    display:inline-block;
 
-    top:18px;
-    left:18px;
+    padding:8px 18px;
 
-    padding:8px 15px;
+
+    background:#00d26a;
+
+
+    color:#000;
+
 
     border-radius:30px;
 
+
     font-size:12px;
-    font-weight:800;
 
-    z-index:20;
 
-}
-
-.badge.new{
-
-    background:#00d26a;
-
-    color:#000;
+    font-weight:900;
 
 }
 
 
-/* =====================================================
-   FAVORITOS
-===================================================== */
 
-.favorite-btn{
 
-    position:absolute;
 
-    top:18px;
-    right:18px;
+.section-header h2{
 
-    width:44px;
-    height:44px;
+    margin:18px 0 10px;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
 
-    background:rgba(255,255,255,.12);
+    font-size:46px;
 
-    backdrop-filter:blur(12px);
 
-    border:none;
-    border-radius:50%;
+    font-weight:900;
 
-    color:#fff;
-
-    cursor:pointer;
-
-    z-index:20;
-
-    transition:.3s;
-
-}
-
-.favorite-btn svg{
-
-    font-size:20px;
-
-}
-
-.favorite-btn:hover{
-
-    background:#00d26a;
-
-    color:#000;
-
-    transform:scale(1.08);
-
-}
-
-.favorite-btn.active{
-
-    background:#ff2d55;
-
-    color:#fff;
-
-    box-shadow:0 0 20px rgba(255,45,85,.45);
-
-}
-
-.favorite-btn.active svg{
-
-    fill:currentColor;
 
 }
 
 
-/* =====================================================
-   INFORMACIÓN
-===================================================== */
 
-.product-info{
+.section-header p{
 
-    display:flex;
-    flex-direction:column;
+    margin:0;
 
-    gap:12px;
-
-    padding:24px;
-
-}
-
-.product-info h3{
-
-    color:#fff;
-
-    font-size:21px;
-    font-weight:800;
-
-}
-
-.season{
 
     color:#999;
 
-    font-size:14px;
+
+    font-size:17px;
 
 }
 
-.rating{
 
-    color:#ffc107;
 
-    font-size:18px;
+.section-header small{
+
+    display:block;
+
+
+    margin-top:15px;
+
+
+    color:#00d26a;
+
+
+    font-weight:800;
 
 }
 
-.extras{
+
+
+
+
+/* ==========================================
+   GRID PRODUCTOS
+========================================== */
+
+
+.product-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(
+        auto-fill,
+        minmax(260px,1fr)
+    );
+
+
+    gap:28px;
+
+
+}
+
+
+
+
+
+
+/* ==========================================
+   SIN PRODUCTOS
+========================================== */
+
+
+.empty-products{
+
+
+    min-height:300px;
+
 
     display:flex;
+
+
     flex-direction:column;
 
-    gap:8px;
 
-    color:#ddd;
-
-    font-size:14px;
-
-}
-
-
-/* =====================================================
-   PARCHES
-===================================================== */
-
-.patch-container{
-
-    display:flex;
     justify-content:center;
 
-    gap:12px;
 
-}
-
-.patch-container img{
-
-    width:30px;
-    height:30px;
-
-    object-fit:contain;
-
-    filter:drop-shadow(0 3px 5px rgba(0,0,0,.5));
-
-    transition:.25s;
-
-}
-
-.patch-container img:hover{
-
-    transform:scale(1.25);
-
-}
-
-
-/* =====================================================
-   PRECIO
-===================================================== */
-
-.price{
-
-    color:#00d26a;
-
-    font-size:32px;
-    font-weight:900;
-
-    text-shadow:0 0 15px rgba(0,210,106,.25);
-
-}
-
-.price::after{
-
-    content:" IVA incl.";
-
-    margin-left:4px;
-
-    color:#777;
-
-    font-size:12px;
-    font-weight:500;
-
-}
-
-
-/* =====================================================
-   STOCK
-===================================================== */
-
-.stock{
-
-    font-weight:700;
-
-}
-
-.stock.ok{
-
-    color:#00d26a;
-
-}
-
-
-/* =====================================================
-   BOTONES
-===================================================== */
-
-.product-buttons{
-
-    display:flex;
-
-    gap:12px;
-
-    margin-top:auto;
-
-}
-
-.add-btn,
-.view-btn{
-
-    flex:1;
-
-    display:flex;
-    justify-content:center;
     align-items:center;
 
-    gap:8px;
 
-    padding:14px;
+    text-align:center;
 
-    border-radius:14px;
 
-    font-weight:700;
+    color:white;
 
-    text-decoration:none;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-.add-btn{
-
-    background:#00d26a;
-
-    color:#000;
-
-    border:none;
-
-}
-
-.add-btn:hover{
-
-    background:#fff;
-
-    transform:translateY(-3px);
-
-    box-shadow:0 10px 25px rgba(0,210,106,.35);
-
-}
-
-.view-btn{
-
-    background:#222;
-
-    color:#fff;
-
-    border:1px solid #333;
-
-}
-
-.view-btn:hover{
-
-    color:#00d26a;
-
-    border-color:#00d26a;
 
 }
 
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
 
-@media (max-width:768px){
+.empty-products h3{
 
-    .product-image-container{
 
-        min-height:280px;
+    font-size:28px;
+
+
+}
+
+
+
+.empty-products p{
+
+
+    color:#999;
+
+
+}
+
+
+
+
+
+/* ==========================================
+   ANIMACIÓN
+========================================== */
+
+
+.product-grid > *{
+
+
+    animation:gridShow .5s ease;
+
+
+}
+
+
+
+
+@keyframes gridShow{
+
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
 
     }
 
-    .product-image{
 
-        height:250px;
+    to{
 
-    }
+        opacity:1;
 
-    .product-info{
-
-        padding:20px;
+        transform:translateY(0);
 
     }
 
-    .price{
+}
 
-        font-size:28px;
+
+
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+
+@media(max-width:900px){
+
+
+    .product-grid-section{
+
+        padding:45px 20px;
 
     }
 
-    .product-buttons{
 
-        flex-direction:column;
+
+    .section-header h2{
+
+        font-size:36px;
 
     }
+
+
+
+    .product-grid{
+
+        gap:20px;
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   MÓVIL
+========================================== */
+
+
+@media(max-width:600px){
+
+
+    .product-grid-section{
+
+        padding:35px 15px;
+
+    }
+
+
+
+    .section-header h2{
+
+        font-size:30px;
+
+    }
+
+
+
+    .section-header p{
+
+        font-size:15px;
+
+    }
+
+
+
+    .product-grid{
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+
+        gap:15px;
+
+    }
+
+
+}
+
+
+
+@media(max-width:420px){
+
+
+    .product-grid{
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
 
 }

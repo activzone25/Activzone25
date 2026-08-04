@@ -13,21 +13,21 @@ import "./styles/animations.css";
 
 
 ReactDOM.createRoot(
-  document.getElementById("root")
+    document.getElementById("root")
 ).render(
 
-  <React.StrictMode>
+    <React.StrictMode>
 
-    <FavoritesProvider>
+        <CartProvider>
 
-      <CartProvider>
+            <FavoritesProvider>
 
-        <App />
+                <App />
 
-      </CartProvider>
+            </FavoritesProvider>
 
-    </FavoritesProvider>
+        </CartProvider>
 
-  </React.StrictMode>
+    </React.StrictMode>
 
 );

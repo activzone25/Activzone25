@@ -1,83 +1,263 @@
+/* =====================================================
+   ACTIVZONE25 - SIDE MENU
+===================================================== */
+
 .menu-overlay{
+
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.45);
-    backdrop-filter:blur(4px);
+
+    background:rgba(0,0,0,.55);
+
+    backdrop-filter:blur(5px);
+
     opacity:0;
     visibility:hidden;
-    transition:.3s;
+
+    transition:.35s;
+
     z-index:998;
+
 }
 
 .menu-overlay.active{
+
     opacity:1;
     visibility:visible;
+
 }
 
+
+/* =====================================================
+   MENU
+===================================================== */
+
 .side-menu{
+
     position:fixed;
+
     top:0;
-    left:-320px;
-    width:300px;
+    left:-340px;
+
+    width:320px;
     height:100vh;
-    background:#111;
-    z-index:999;
-    transition:.35s;
+
     display:flex;
     flex-direction:column;
-    box-shadow:10px 0 40px rgba(0,0,0,.45);
+
+    background:#111;
+
+    border-right:1px solid rgba(255,255,255,.08);
+
+    box-shadow:15px 0 45px rgba(0,0,0,.55);
+
+    transition:.4s ease;
+
+    z-index:999;
+
 }
 
 .side-menu.active{
+
     left:0;
+
 }
 
+
+/* =====================================================
+   HEADER
+===================================================== */
+
 .menu-header{
+
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:22px;
+
+    padding:24px;
+
     border-bottom:1px solid #222;
+
 }
 
 .menu-header h2{
+
     margin:0;
+
+    font-size:26px;
+    font-weight:900;
+
     color:#00d26a;
+
+    letter-spacing:2px;
+
 }
 
 .menu-header button{
-    background:none;
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
     border:none;
+    border-radius:50%;
+
+    background:#1b1b1b;
+
     color:#fff;
-    font-size:24px;
+
     cursor:pointer;
+
+    transition:.25s;
+
 }
 
-.side-menu nav{
+.menu-header button:hover{
+
+    background:#00d26a;
+
+    color:#000;
+
+    transform:rotate(90deg);
+
+}
+
+
+/* =====================================================
+   LINKS
+===================================================== */
+
+.menu-links{
+
     display:flex;
     flex-direction:column;
+
     padding:20px;
+
+    gap:8px;
+
 }
 
-.side-menu nav a,
-.side-menu nav button{
+.menu-links a,
+.menu-links button{
+
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    padding:16px 18px;
+
+    border:none;
+    border-radius:14px;
+
+    background:none;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:16px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.menu-links svg{
+
+    font-size:20px;
+
+}
+
+.menu-links a:hover,
+.menu-links button:hover{
+
+    background:#00d26a;
+
+    color:#000;
+
+    transform:translateX(6px);
+
+}
+
+
+/* =====================================================
+   SOCIAL
+===================================================== */
+
+.menu-social{
+
+    margin-top:auto;
+
+    padding:20px;
+
+    border-top:1px solid #222;
+
+}
+
+.menu-social a{
+
     display:flex;
     align-items:center;
     gap:12px;
-    padding:16px;
-    margin-bottom:8px;
+
+    padding:14px;
+
     color:#fff;
+
     text-decoration:none;
-    background:none;
-    border:none;
-    border-radius:12px;
-    cursor:pointer;
+
+    border-radius:14px;
+
     transition:.25s;
-    font-size:16px;
+
 }
 
-.side-menu nav a:hover,
-.side-menu nav button:hover{
+.menu-social a:hover{
+
     background:#00d26a;
+
     color:#000;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.menu-footer{
+
+    padding:20px;
+
+    text-align:center;
+
+    color:#777;
+
+    font-size:13px;
+
+    border-top:1px solid #222;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:480px){
+
+    .side-menu{
+
+        width:100%;
+
+        left:-100%;
+
+    }
+
 }
