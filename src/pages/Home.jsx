@@ -2,56 +2,46 @@ import { useState } from "react";
 
 import Hero from "../components/Hero/Hero";
 import Categories from "../components/Categories/Categories";
+import PriceFilter from "../components/PriceFilter/PriceFilter";
 import ProductGrid from "../components/ProductGrid/ProductGrid";
 
 import "./Home.css";
 
+function Home({ search = "" }) {
 
-function Home({search=""}){
+    const [category, setCategory] = useState("Todas");
+    const [maxPrice, setMaxPrice] = useState(40);
 
+    return (
 
-const [category,setCategory]=useState("Todas");
+        <main>
 
+            <Hero />
 
-return (
+            <Categories
+                category={category}
+                setCategory={setCategory}
+            />
 
-<main>
+            <PriceFilter
+                maxPrice={maxPrice}
+                setMaxPrice={setMaxPrice}
+            />
 
+            <section id="productos">
 
-<Hero />
+                <ProductGrid
+                    search={search}
+                    category={category}
+                    maxPrice={maxPrice}
+                />
 
+            </section>
 
-<Categories
+        </main>
 
-category={category}
-
-setCategory={setCategory}
-
-/>
-
-
-<section id="productos">
-
-
-<ProductGrid
-
-search={search}
-
-category={category}
-
-/>
-
-
-</section>
-
-
-</main>
-
-
-);
-
+    );
 
 }
-
 
 export default Home;

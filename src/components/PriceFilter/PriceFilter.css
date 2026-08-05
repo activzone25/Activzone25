@@ -1,0 +1,38 @@
+.price-filter{
+
+    max-width:1200px;
+    margin:30px auto;
+    padding:20px;
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    color:white;
+
+}
+
+.price-filter h3{
+
+    font-size:16px;
+
+}
+
+.price-filter input{
+
+    flex:1;
+    accent-color:#00d26a;
+
+}
+
+.price-filter span{
+
+    min-width:60px;
+
+    text-align:right;
+
+    color:#00d26a;
+
+    font-weight:700;
+
+}

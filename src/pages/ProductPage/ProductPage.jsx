@@ -1,62 +1,55 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
-import {
-    FiHeart,
-    FiArrowRight,
-    FiShoppingCart
-} from "react-icons/fi";
+import products from "../../data/products";
 
-import { useFavorites } from "../../context/FavoritesContext";
 import { useCart } from "../../context/CartContext";
 
-import "./ProductCard.css";
+import "./ProductPage.css";
 
 
-function ProductCard({ product }) {
+function ProductPage(){
+
+    const { slug } = useParams();
+
+    const { addToCart } = useCart();
 
 
-    const {
-        toggleFavorite,
-        isFavorite
-    } = useFavorites();
+    const product = products.find(
+
+        item => item.slug === slug
+
+    );
 
 
+    const [side,setSide] = useState("front");
 
-    const {
-        addToCart
-    } = useCart();
+    const [size,setSize] = useState("M");
 
+    const [name,setName] = useState("");
 
+    const [number,setNumber] = useState("");
 
-
-    const favorite = isFavorite(product.id);
-
-
+    const [patch,setPatch] = useState("");
 
 
+    if(!product){
 
-    function handleFavorite(e){
+        return (
 
-        e.preventDefault();
+            <div className="not-found">
 
-        e.stopPropagation();
+                Producto no encontrado
 
-        toggleFavorite(product);
+            </div>
+
+        );
 
     }
 
 
 
-
-
-
-
-    function handleAddCart(e){
-
-        e.preventDefault();
-
-        e.stopPropagation();
-
+    function handleAddCart(){
 
 
         addToCart({
@@ -65,161 +58,143 @@ function ProductCard({ product }) {
 
             imagen: product.front,
 
-            talla:"M",
+            talla:size,
+
+            nombrePersonalizado:name,
+
+            numero:number,
+
+            parche:{
+
+                tipo:patch
+
+            },
 
             cantidad:1
 
         });
 
+
     }
-
-
-
 
 
 
     return (
 
-        <Link
+        <main className="product-page">
 
-            to={`/producto/${product.slug}`}
 
-            className="product-card"
+            <section className="product-detail">
 
-        >
 
+                <div className="product-gallery">
 
 
-            <div className="product-image">
+                   <div className="shirt-preview">
 
+    <img
 
+        src={
+            side === "front"
+            ? product.front
+            : product.back
+        }
 
-                {
-                    product.nuevo && (
+        alt={product.nombre}
 
-                        <span className="badge">
+    />
 
-                            ⭐ NUEVO 26/27
 
-                        </span>
+    {
+        side === "back" && name && (
 
-                    )
-                }
+            <span
+                className="shirt-name"
+                style={product.positions.back.name}
+            >
 
+                {name.toUpperCase()}
 
+            </span>
 
+        )
+    }
 
 
 
-                <button
+    {
+        side === "back" && number && (
 
-                    className={`favorite-btn ${
-                        favorite ? "active" : ""
-                    }`}
+            <span
+                className="shirt-number"
+                style={product.positions.back.number}
+            >
 
-                    onClick={handleFavorite}
+                {number}
 
-                >
+            </span>
 
-                    <FiHeart />
+        )
+    }
 
-                </button>
 
 
+    {
+        patch && (
 
+            <span
+                className="shirt-patch"
+                style={product.positions.front.patch[patch]}
+            >
 
+                🏆
 
+            </span>
 
+        )
+    }
 
-                <img
 
-                    src={product.front}
+</div>
+                    <div className="gallery-buttons">
 
-                    alt={product.nombre}
 
-                />
+                        <button
 
+                            className={
+                                side==="front"
+                                ? "active"
+                                : ""
+                            }
 
+                            onClick={()=>setSide("front")}
 
-            </div>
+                        >
 
+                            Delantera
 
+                        </button>
 
 
 
+                        <button
 
+                            className={
+                                side==="back"
+                                ? "active"
+                                : ""
+                            }
 
+                            onClick={()=>setSide("back")}
 
+                        >
 
-            <div className="product-info">
+                            Trasera
 
+                        </button>
 
 
-
-
-                <span className="league">
-
-                    {product.liga}
-
-                </span>
-
-
-
-
-
-
-                <h3>
-
-                    {product.nombre}
-
-                </h3>
-
-
-
-
-
-
-                <p>
-
-                    Temporada {product.temporada}
-
-                </p>
-
-
-
-
-
-
-
-                <div className="product-tags">
-
-
-                    {
-                        product.parches?.length > 0 && (
-
-                            <span>
-
-                                🏆 Parches GRATIS
-
-                            </span>
-
-                        )
-                    }
-
-
-
-                    {
-                        product.personalizable !== false && (
-
-                            <span>
-
-                                ✍️ Personalizable
-
-                            </span>
-
-                        )
-                    }
-
+                    </div>
 
 
                 </div>
@@ -227,79 +202,159 @@ function ProductCard({ product }) {
 
 
 
+                <div className="product-options">
+
+
+                    <span className="league">
+
+                        {product.liga}
+
+                    </span>
+
+
+                    <h1>
+
+                        {product.nombre}
+
+                    </h1>
+
+
+                    <div className="price">
+
+                        {product.precio} €
+
+                    </div>
 
 
 
-                <div className="stars">
+                    <h3>
 
-                    ⭐⭐⭐⭐⭐
+                        Talla
+
+                    </h3>
+
+
+                    <div className="sizes">
+
+
+                        {
+                            ["S","M","L","XL","2XL"].map(item=>(
+
+                                <button
+
+                                    key={item}
+
+                                    className={
+                                        size===item
+                                        ? "active"
+                                        :""
+                                    }
+
+                                    onClick={()=>setSize(item)}
+
+                                >
+
+                                    {item}
+
+                                </button>
+
+                            ))
+                        }
+
+
+                    </div>
+
+
+
+                    <h3>
+                        Personalización
+                    </h3>
+
+
+                    <input
+
+                        placeholder="Nombre"
+
+                        value={name}
+
+                        onChange={
+                            e=>setName(e.target.value)
+                        }
+
+                    />
+
+
+                    <input
+
+                        placeholder="Número"
+
+                        value={number}
+
+                        onChange={
+                            e=>setNumber(e.target.value)
+                        }
+
+                    />
+
+
+
+                    <h3>
+                        Parche
+                    </h3>
+
+
+                    <select
+
+                        value={patch}
+
+                        onChange={
+                            e=>setPatch(e.target.value)
+                        }
+
+                    >
+
+                        <option value="">
+                            Sin parche
+                        </option>
+
+                        <option value="laliga">
+                            🏆 LaLiga GRATIS
+                        </option>
+
+                        <option value="champions">
+                            ⭐ Champions GRATIS
+                        </option>
+
+
+                    </select>
+
+
+
+
+                    <button
+
+                        className="add-cart"
+
+                        onClick={handleAddCart}
+
+                    >
+
+                        🛒 Añadir al carrito
+
+                    </button>
+
 
                 </div>
 
 
+            </section>
 
 
-
-
-
-                <div className="price">
-
-                    {product.precio} €
-
-                </div>
-
-
-
-
-
-
-
-
-                <button
-
-                    className="quick-cart"
-
-                    onClick={handleAddCart}
-
-                >
-
-                    <FiShoppingCart />
-
-                    Añadir al carrito
-
-
-                </button>
-
-
-
-
-
-
-
-
-                <div className="view-product">
-
-                    Ver producto
-
-                    <FiArrowRight />
-
-                </div>
-
-
-
-
-
-
-            </div>
-
-
-
-
-        </Link>
+        </main>
 
     );
 
 }
 
 
-export default ProductCard;
+export default ProductPage;

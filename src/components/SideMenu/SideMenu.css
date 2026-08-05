@@ -1,76 +1,75 @@
-/* =====================================================
+/* ==========================================
    ACTIVZONE25 - SIDE MENU
-===================================================== */
+========================================== */
 
 .menu-overlay{
 
     position:fixed;
     inset:0;
 
-    background:rgba(0,0,0,.55);
+    background:rgba(0,0,0,.65);
 
-    backdrop-filter:blur(5px);
+    backdrop-filter:blur(4px);
 
     opacity:0;
     visibility:hidden;
 
-    transition:.35s;
+    transition:.3s;
 
     z-index:998;
 
 }
 
-.menu-overlay.active{
+.menu-overlay.show{
 
     opacity:1;
     visibility:visible;
 
 }
 
-
-/* =====================================================
-   MENU
-===================================================== */
+/* ========================================== */
 
 .side-menu{
 
     position:fixed;
 
     top:0;
-    left:-340px;
+    left:-320px;
 
-    width:320px;
+    width:300px;
+    max-width:85%;
+
     height:100vh;
+
+    background:rgba(18,18,18,.96);
+
+    backdrop-filter:blur(18px);
+
+    border-right:1px solid rgba(255,255,255,.08);
 
     display:flex;
     flex-direction:column;
 
-    background:#111;
-
-    border-right:1px solid rgba(255,255,255,.08);
-
-    box-shadow:15px 0 45px rgba(0,0,0,.55);
-
-    transition:.4s ease;
+    transition:.35s ease;
 
     z-index:999;
 
+    box-shadow:15px 0 45px rgba(0,0,0,.45);
+
 }
 
-.side-menu.active{
+.side-menu.open{
 
     left:0;
 
 }
 
-
-/* =====================================================
-   HEADER
-===================================================== */
+/* ========================================== */
 
 .menu-header{
 
     display:flex;
+
     justify-content:space-between;
     align-items:center;
 
@@ -82,12 +81,11 @@
 
 .menu-header h2{
 
-    margin:0;
+    color:#00d26a;
 
     font-size:26px;
-    font-weight:900;
 
-    color:#00d26a;
+    font-weight:900;
 
     letter-spacing:2px;
 
@@ -98,20 +96,17 @@
     width:42px;
     height:42px;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
     border:none;
-    border-radius:50%;
 
-    background:#1b1b1b;
+    border-radius:12px;
+
+    background:#191919;
 
     color:#fff;
 
     cursor:pointer;
 
-    transition:.25s;
+    transition:.3s;
 
 }
 
@@ -121,142 +116,75 @@
 
     color:#000;
 
-    transform:rotate(90deg);
-
 }
 
+/* ========================================== */
 
-/* =====================================================
-   LINKS
-===================================================== */
-
-.menu-links{
+.side-menu nav{
 
     display:flex;
+
     flex-direction:column;
 
-    padding:20px;
-
-    gap:8px;
+    padding:20px 0;
 
 }
 
-.menu-links a,
-.menu-links button{
+/* ========================================== */
+
+.side-menu nav a{
 
     display:flex;
+
     align-items:center;
+
     gap:14px;
 
-    padding:16px 18px;
-
-    border:none;
-    border-radius:14px;
-
-    background:none;
+    padding:16px 26px;
 
     color:#fff;
 
     text-decoration:none;
 
     font-size:16px;
-    font-weight:600;
 
-    cursor:pointer;
+    font-weight:700;
 
-    transition:.25s;
+    transition:.3s;
 
 }
 
-.menu-links svg{
+.side-menu nav a svg{
 
     font-size:20px;
 
 }
 
-.menu-links a:hover,
-.menu-links button:hover{
+.side-menu nav a:hover{
 
     background:#00d26a;
 
     color:#000;
 
-    transform:translateX(6px);
+    padding-left:34px;
 
 }
 
+/* ========================================== */
 
-/* =====================================================
-   SOCIAL
-===================================================== */
+.side-menu nav a:not(:last-child){
 
-.menu-social{
-
-    margin-top:auto;
-
-    padding:20px;
-
-    border-top:1px solid #222;
+    border-bottom:1px solid rgba(255,255,255,.04);
 
 }
 
-.menu-social a{
+/* ========================================== */
 
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    padding:14px;
-
-    color:#fff;
-
-    text-decoration:none;
-
-    border-radius:14px;
-
-    transition:.25s;
-
-}
-
-.menu-social a:hover{
-
-    background:#00d26a;
-
-    color:#000;
-
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-.menu-footer{
-
-    padding:20px;
-
-    text-align:center;
-
-    color:#777;
-
-    font-size:13px;
-
-    border-top:1px solid #222;
-
-}
-
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media(max-width:480px){
+@media(max-width:600px){
 
     .side-menu{
 
-        width:100%;
-
-        left:-100%;
+        width:280px;
 
     }
 

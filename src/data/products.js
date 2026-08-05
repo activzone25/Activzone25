@@ -105,373 +105,160 @@ const positions = {
 
 };
 
+// ======================================================
+// CONFIGURACIÓN COMÚN
+// ======================================================
 
-
+const baseProduct = {
+    categoria: "Adulto",
+    temporada: "2026/27",
+    precio: 25,
+    precioAnterior: 35,
+    oferta: true,
+    nuevo: true,
+    disponible: true,
+    stock: 20,
+    rating: 4.9,
+    opiniones: 100,
+    envio: "24/48 h",
+    personalizable: true,
+    positions
+};
 
 // ======================================================
 // PRODUCTOS
 // ======================================================
 
-
 const products = [
 
-
-{
-id:1,
-
-slug:"barcelona-26-27",
-
-nombre:"FC Barcelona",
-
-equipo:"Barcelona",
-
-liga:"LaLiga",
-
-temporada:"2026/27",
-
-categoria:"Adulto",
-
-precio:25,
-
-nuevo:true,
-
-disponible:true,
-
-front:barcaFront,
-
-back:barcaBack,
-
-parches:[
-"laliga",
-"champions"
-],
-
-
-positions
-
-},
-
-
-
-{
-id:2,
-
-slug:"real-madrid-26-27",
-
-nombre:"Real Madrid",
-
-equipo:"Real Madrid",
-
-liga:"LaLiga",
-
-temporada:"2026/27",
-
-categoria:"Adulto",
-
-precio:25,
-
-nuevo:true,
-
-disponible:true,
-
-front:madridFront,
-
-back:madridBack,
-
-parches:[
-"laliga",
-"champions"
-],
-
-
-positions
-
-},
-
-
-
-{
-id:3,
-
-slug:"betis-26-27",
-
-nombre:"Real Betis",
-
-equipo:"Betis",
-
-liga:"LaLiga",
-
-temporada:"2026/27",
-
-categoria:"Adulto",
-
-precio:25,
-
-nuevo:true,
-
-disponible:true,
-
-front:betisFront,
-
-back:betisBack,
-
-parches:[
-"laliga"
-],
-
-
-positions
-
-},
-
-
-
-{
-id:4,
-
-slug:"valencia-26-27",
-
-nombre:"Valencia CF",
-
-equipo:"Valencia",
-
-liga:"LaLiga",
-
-temporada:"2026/27",
-
-categoria:"Adulto",
-
-precio:25,
-
-nuevo:true,
-
-disponible:true,
-
-front:valenciaFront,
-
-back:valenciaBack,
-
-parches:[
-"laliga"
-],
-
-
-positions
-
-},
-
-// ======================================================
-// PREMIER LEAGUE
-// ======================================================
-
-
-{
-id:5,
-
-slug:"arsenal-26-27",
-
-nombre:"Arsenal FC",
-
-equipo:"Arsenal",
-
-liga:"Premier League",
-
-temporada:"2026/27",
-
-categoria:"Adulto",
-
-precio:25,
-
-nuevo:true,
-
-disponible:true,
-
-front:arsenalFront,
-
-back:arsenalBack,
-
-parches:[
-"champions"
-],
-
-
-positions
-
-},
-
-
-
-
-{
-id:6,
-
-slug:"manchester-city-26-27",
-
-nombre:"Manchester City",
-
-equipo:"Manchester City",
-
-liga:"Premier League",
-
-temporada:"2026/27",
-
-categoria:"Adulto",
-
-precio:25,
-
-nuevo:true,
-
-disponible:true,
-
-front:cityFront,
-
-back:cityBack,
-
-parches:[
-"champions"
-],
-
-
-positions
-
-},
-
-
-
-
-
-// ======================================================
-// BUNDESLIGA
-// ======================================================
-
-
-{
-id:7,
-
-slug:"bayern-26-27",
-
-nombre:"Bayern Munich",
-
-equipo:"Bayern",
-
-liga:"Bundesliga",
-
-temporada:"2026/27",
-
-categoria:"Adulto",
-
-precio:25,
-
-nuevo:true,
-
-disponible:true,
-
-front:bayernFront,
-
-back:bayernBack,
-
-parches:[
-"champions"
-],
-
-
-positions
-
-},
-
-
-
-
-
-{
-id:8,
-
-slug:"dortmund-26-27",
-
-nombre:"Borussia Dortmund",
-
-equipo:"Dortmund",
-
-liga:"Bundesliga",
-
-temporada:"2026/27",
-
-categoria:"Adulto",
-
-precio:25,
-
-nuevo:true,
-
-disponible:true,
-
-front:dortmundFront,
-
-back:dortmundBack,
-
-parches:[
-"champions"
-],
-
-
-positions
-
-},
-
-
-
-
-
-
-// ======================================================
-// LIGUE 1
-// ======================================================
-
-
-{
-id:9,
-
-slug:"psg-26-27",
-
-nombre:"Paris Saint-Germain",
-
-equipo:"PSG",
-
-liga:"Ligue 1",
-
-temporada:"2026/27",
-
-categoria:"Adulto",
-
-precio:25,
-
-nuevo:true,
-
-disponible:true,
-
-front:parisFront,
-
-back:parisBack,
-
-parches:[
-"champions"
-],
-
-
-positions
-
-}
-
-
-
-
+    {
+        ...baseProduct,
+        id: 1,
+        slug: "barcelona-26-27",
+        nombre: "FC Barcelona",
+        equipo: "Barcelona",
+        liga: "LaLiga",
+        front: barcaFront,
+        back: barcaBack,
+        parches: ["laliga", "champions"]
+    },
+
+    {
+        ...baseProduct,
+        id: 2,
+        slug: "real-madrid-26-27",
+        nombre: "Real Madrid",
+        equipo: "Real Madrid",
+        liga: "LaLiga",
+        rating: 5.0,
+        opiniones: 214,
+        front: madridFront,
+        back: madridBack,
+        parches: ["laliga", "champions"]
+    },
+
+    {
+        ...baseProduct,
+        id: 3,
+        slug: "betis-26-27",
+        nombre: "Real Betis",
+        equipo: "Betis",
+        liga: "LaLiga",
+        stock: 12,
+        rating: 4.8,
+        opiniones: 67,
+        front: betisFront,
+        back: betisBack,
+        parches: ["laliga"]
+    },
+
+    {
+        ...baseProduct,
+        id: 4,
+        slug: "valencia-26-27",
+        nombre: "Valencia CF",
+        equipo: "Valencia",
+        liga: "LaLiga",
+        stock: 10,
+        rating: 4.7,
+        opiniones: 52,
+        front: valenciaFront,
+        back: valenciaBack,
+        parches: ["laliga"]
+    },
+
+    {
+        ...baseProduct,
+        id: 5,
+        slug: "arsenal-26-27",
+        nombre: "Arsenal FC",
+        equipo: "Arsenal",
+        liga: "Premier League",
+        stock: 15,
+        opiniones: 139,
+        front: arsenalFront,
+        back: arsenalBack,
+        parches: ["champions"]
+    },
+
+    {
+        ...baseProduct,
+        id: 6,
+        slug: "manchester-city-26-27",
+        nombre: "Manchester City",
+        equipo: "Manchester City",
+        liga: "Premier League",
+        stock: 17,
+        opiniones: 145,
+        front: cityFront,
+        back: cityBack,
+        parches: ["champions"]
+    },
+
+    {
+        ...baseProduct,
+        id: 7,
+        slug: "bayern-26-27",
+        nombre: "Bayern Munich",
+        equipo: "Bayern",
+        liga: "Bundesliga",
+        stock: 14,
+        rating: 4.8,
+        opiniones: 96,
+        front: bayernFront,
+        back: bayernBack,
+        parches: ["champions"]
+    },
+
+    {
+        ...baseProduct,
+        id: 8,
+        slug: "dortmund-26-27",
+        nombre: "Borussia Dortmund",
+        equipo: "Dortmund",
+        liga: "Bundesliga",
+        stock: 11,
+        rating: 4.8,
+        opiniones: 81,
+        front: dortmundFront,
+        back: dortmundBack,
+        parches: ["champions"]
+    },
+
+    {
+        ...baseProduct,
+        id: 9,
+        slug: "psg-26-27",
+        nombre: "Paris Saint-Germain",
+        equipo: "PSG",
+        liga: "Ligue 1",
+        stock: 16,
+        opiniones: 158,
+        front: parisFront,
+        back: parisBack,
+        parches: ["champions"]
+    }
 
 ];
-
-
-
-// ======================================================
-// EXPORT
-// ======================================================
-
 
 export default products;

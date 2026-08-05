@@ -1,174 +1,69 @@
 import { Link } from "react-router-dom";
 
 import {
-    FiX,
     FiHome,
-    FiUser,
     FiHeart,
     FiShoppingCart,
-    FiMessageCircle,
-    FiInfo
+    FiUser,
+    FiX
 } from "react-icons/fi";
 
 import "./SideMenu.css";
 
-function SideMenu({
-
-    open,
-    setOpen,
-    setCartOpen
-
-}) {
-
-    function closeMenu() {
-
-        setOpen(false);
-
-    }
-
-    function openCart() {
-
-        setOpen(false);
-
-        setCartOpen(true);
-
-    }
+function SideMenu({ open, onClose }) {
 
     return (
 
         <>
 
             <div
-
-                className={`menu-overlay ${open ? "active" : ""}`}
-
-                onClick={closeMenu}
-
+                className={`menu-overlay ${open ? "show" : ""}`}
+                onClick={onClose}
             />
 
-
-
-            <aside className={`side-menu ${open ? "active" : ""}`}>
+            <aside className={`side-menu ${open ? "open" : ""}`}>
 
                 <div className="menu-header">
 
                     <h2>ACTIVZONE25</h2>
 
-                    <button onClick={closeMenu}>
-
+                    <button onClick={onClose}>
                         <FiX />
-
                     </button>
 
                 </div>
 
+                <nav>
 
-
-                <nav className="menu-links">
-
-                    <Link
-                        to="/"
-                        onClick={closeMenu}
-                    >
-
+                    <Link to="/" onClick={onClose}>
                         <FiHome />
-
-                        <span>Inicio</span>
-
+                        Inicio
                     </Link>
 
-
-
-                    <Link
-                        to="/adulto"
-                        onClick={closeMenu}
-                    >
-
-                        <FiUser />
-
-                        <span>Adulto</span>
-
+                    <Link to="/adulto" onClick={onClose}>
+                        👕 Adulto
                     </Link>
 
-
-
-                    <Link
-                        to="/nino"
-                        onClick={closeMenu}
-                    >
-
-                        <FiUser />
-
-                        <span>Niño</span>
-
+                    <Link to="/nino" onClick={onClose}>
+                        🧒 Niño
                     </Link>
 
-
-
-                    <Link
-                        to="/favoritos"
-                        onClick={closeMenu}
-                    >
-
+                    <Link to="/favoritos" onClick={onClose}>
                         <FiHeart />
-
-                        <span>Favoritos</span>
-
+                        Favoritos
                     </Link>
 
-
-
-                    <button
-                        className="menu-cart"
-                        onClick={openCart}
-                    >
-
+                    <a href="#">
                         <FiShoppingCart />
-
-                        <span>Carrito</span>
-
-                    </button>
-
-
-
-                    <Link
-                        to="/contacto"
-                        onClick={closeMenu}
-                    >
-
-                        <FiInfo />
-
-                        <span>Contacto</span>
-
-                    </Link>
-
-                </nav>
-
-
-
-                <div className="menu-social">
-
-                    <a
-                        href="https://wa.me/34647602998"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-
-                        <FiMessageCircle />
-
-                        <span>WhatsApp</span>
-
+                        Seguimiento pedido
                     </a>
 
-                </div>
+                    <a href="#">
+                        <FiUser />
+                        Contacto
+                    </a>
 
-
-
-                <div className="menu-footer">
-
-                    © 2026 ACTIVZONE25
-
-                </div>
+                </nav>
 
             </aside>
 
