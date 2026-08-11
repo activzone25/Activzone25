@@ -7,9 +7,7 @@
 // IMPORTS CAMISETAS
 // ======================================================
 
-
 // LALIGA
-
 import barcaFront from "../assets/camisetas/barcelona/front.png";
 import barcaBack from "../assets/camisetas/barcelona/back.png";
 
@@ -22,108 +20,86 @@ import betisBack from "../assets/camisetas/betis/back.png";
 import valenciaFront from "../assets/camisetas/valencia/front.png";
 import valenciaBack from "../assets/camisetas/valencia/back.png";
 
-
-
 // PREMIER
-
 import arsenalFront from "../assets/camisetas/arsenal/front.png";
 import arsenalBack from "../assets/camisetas/arsenal/back.png";
 
 import cityFront from "../assets/camisetas/city/front.png";
 import cityBack from "../assets/camisetas/city/back.png";
 
-
-
 // BUNDESLIGA
-
 import bayernFront from "../assets/camisetas/bayern/front.png";
 import bayernBack from "../assets/camisetas/bayern/back.png";
 
 import dortmundFront from "../assets/camisetas/dortmund/front.png";
 import dortmundBack from "../assets/camisetas/dortmund/back.png";
 
-
-
 // LIGUE 1
-
 import parisFront from "../assets/camisetas/paris/front.png";
 import parisBack from "../assets/camisetas/paris/back.png";
 
 
-
-
 // ======================================================
-// POSICIONES GENERALES
+// POSICIONES POR DEFECTO
 // ======================================================
 
+const defaultPositions = {
 
-const positions = {
-
-    front:{
-
-        patch:{
-
-            laliga:{
-                top:"32%",
-                left:"18%",
-                width:"34px"
-            },
-
-
-            champions:{
-                top:"32%",
-                left:"18%",
-                width:"34px"
-            }
-
-        }
-
+    patch: {
+        top: "32%",
+        left: "18%",
+        width: "42px"
     },
 
+    name: {
+        top: "29%",
+        left: "50%",
+        transform: "translateX(-50%)"
+    },
 
-    back:{
-
-
-        name:{
-
-            top:"24%",
-            left:"50%",
-            transform:"translateX(-50%)"
-
-        },
-
-
-        number:{
-
-            top:"40%",
-            left:"50%",
-            transform:"translateX(-50%)"
-
-        }
-
+    number: {
+        top: "46%",
+        left: "50%",
+        transform: "translateX(-50%)"
     }
 
 };
 
+
 // ======================================================
-// CONFIGURACIÓN COMÚN
+// CONFIGURACIÓN BASE
 // ======================================================
 
 const baseProduct = {
+
     categoria: "Adulto",
+
     temporada: "2026/27",
+
     precio: 25,
+
     precioAnterior: 35,
+
     oferta: true,
+
     nuevo: true,
+
     disponible: true,
+
     stock: 20,
+
     rating: 4.9,
+
     opiniones: 100,
+
     envio: "24/48 h",
+
     personalizable: true,
-    positions
+
+    positions: defaultPositions
+
 };
+
 
 // ======================================================
 // PRODUCTOS
