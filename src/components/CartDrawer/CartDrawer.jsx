@@ -9,6 +9,7 @@ import { useCart } from "../../context/CartContext";
 
 import "./CartDrawer.css";
 
+
 function CartDrawer({ open, onClose }) {
 
     const {
@@ -20,38 +21,79 @@ function CartDrawer({ open, onClose }) {
         clearCart
     } = useCart();
 
+
+    // ==========================================
+    // TOTAL DE CAMISETAS
+    // ==========================================
+
+    const totalProductos = cart.reduce(
+        (total, item) =>
+            total + (item.cantidad || 1),
+        0
+    );
+
+
+    // ==========================================
+    // DESCUENTO
+    // 10% POR CADA PAREJA DE 2 CAMISETAS
+    // ==========================================
+
+    const parejas = Math.floor(
+        totalProductos / 2
+    );
+
+    const descuento =
+        parejas * (25 * 2 * 0.10);
+
+
+    // ==========================================
+    // TOTAL
+    // ==========================================
+
     const total =
-        cart.length >= 2
-            ? subtotal * 0.9
-            : subtotal;
+        subtotal - descuento;
+
+
+    // ==========================================
+    // WHATSAPP
+    // ==========================================
 
     function comprarWhatsApp() {
+
+        if (!cart.length) return;
+
 
         let mensaje =
 `🛒 *PEDIDO ACTIVZONE25*
 
 `;
 
+
         cart.forEach(item => {
 
             mensaje +=
 `👕 ${item.nombre}
-📏 ${item.talla}
-🔢 Cantidad: ${item.cantidad}
-💰 ${item.precio} €
+📏 Talla: ${item.talla || "-"}
+🔢 Cantidad: ${item.cantidad || 1}
+💰 Precio: ${(
+    Number(item.precio || 0) *
+    (item.cantidad || 1)
+).toFixed(2)} €
 
 `;
 
-            if(item.nombrePersonalizado){
+
+            if (item.nombrePersonalizado) {
 
                 mensaje +=
-`✍️ ${item.nombrePersonalizado}
+`✍️ Nombre: ${item.nombrePersonalizado}
 
 `;
 
             }
 
-            if(item.numero){
+
+            if (item.numero) {
 
                 mensaje +=
 `🔢 Dorsal: ${item.numero}
@@ -60,37 +102,77 @@ function CartDrawer({ open, onClose }) {
 
             }
 
-        });
 
-        mensaje +=
-`----------------------
+            if (item.parche?.tipo) {
 
-💰 Total: ${total.toFixed(2)} €
+                mensaje +=
+`🏆 Parche: ${item.parche.tipo}
 
 `;
 
+            }
+
+
+            mensaje +=
+`----------------------
+
+`;
+
+        });
+
+
+        mensaje +=
+`💰 Subtotal: ${subtotal.toFixed(2)} €
+
+`;
+
+
+        if (descuento > 0) {
+
+            mensaje +=
+`🎁 Descuento 10% por cada 2 camisetas: -${descuento.toFixed(2)} €
+
+`;
+
+        }
+
+
+        mensaje +=
+`💰 TOTAL: ${total.toFixed(2)} €`;
+
+
         window.open(
-
-`https://wa.me/34647602998?text=${encodeURIComponent(mensaje)}`,
-
-"_blank"
-
-);
+            `https://wa.me/34647602998?text=${encodeURIComponent(mensaje)}`,
+            "_blank"
+        );
 
     }
+
 
     return (
 
         <>
 
+            {/* OVERLAY */}
+
             <div
-                className={`cart-overlay ${open ? "show" : ""}`}
+                className={`cart-overlay ${
+                    open ? "show" : ""
+                }`}
                 onClick={onClose}
             />
 
+
+            {/* CARRITO */}
+
             <aside
-                className={`cart-drawer ${open ? "open" : ""}`}
+                className={`cart-drawer ${
+                    open ? "open" : ""
+                }`}
             >
+
+
+                {/* HEADER */}
 
                 <div className="cart-header">
 
@@ -98,164 +180,207 @@ function CartDrawer({ open, onClose }) {
                         🛒 Mi carrito
                     </h2>
 
-                    <button onClick={onClose}>
+
+                    <button
+                        onClick={onClose}
+                        aria-label="Cerrar carrito"
+                    >
                         <FiX />
                     </button>
 
                 </div>
 
-                {
 
-                    cart.length === 0 ?
+                {/* CONTENIDO */}
 
-                    (
+                {cart.length === 0 ? (
 
-                        <div className="cart-empty">
+                    <div className="cart-empty">
 
-                            <h3>
-                                Tu carrito está vacío
-                            </h3>
+                        <h3>
+                            Tu carrito está vacío
+                        </h3>
 
-                            <p>
-                                Añade alguna camiseta.
-                            </p>
+                        <p>
+                            Añade alguna camiseta.
+                        </p>
 
-                        </div>
+                    </div>
 
-                    )
+                ) : (
 
-                    :
+                    <>
 
-                    (
 
-                        <>
+                        {/* PRODUCTOS */}
 
-                            <div className="cart-items">
+                        <div className="cart-items">
 
-                                {
+                            {cart.map(item => (
 
-                                    cart.map(item => (
+                                <div
+                                    key={item.cartId}
+                                    className="cart-item"
+                                >
 
-                                        <div
-                                            key={item.cartId}
-                                            className="cart-item"
-                                        >
 
-                                            <img
-                                                src={item.imagen}
-                                                alt={item.nombre}
-                                            />
+                                    <img
+                                        src={item.imagen}
+                                        alt={item.nombre}
+                                    />
 
-                                            <div className="cart-info">
 
-                                                <h4>
-                                                    {item.nombre}
-                                                </h4>
+                                    <div className="cart-info">
 
-                                                <p>
-                                                    Talla {item.talla}
-                                                </p>
+                                        <h4>
+                                            {item.nombre}
+                                        </h4>
 
-                                                <strong>
-                                                    {item.precio} €
-                                                </strong>
 
-                                                <div className="qty">
+                                        <p>
+                                            Talla {item.talla}
+                                        </p>
 
-                                                    <button
-                                                        onClick={() =>
-                                                            decreaseQuantity(item.cartId)
-                                                        }
-                                                    >
-                                                        <FiMinus />
-                                                    </button>
 
-                                                    <span>
-                                                        {item.cantidad}
-                                                    </span>
+                                        <strong>
+                                            {Number(
+                                                item.precio || 0
+                                            ).toFixed(2)} €
+                                        </strong>
 
-                                                    <button
-                                                        onClick={() =>
-                                                            increaseQuantity(item.cartId)
-                                                        }
-                                                    >
-                                                        <FiPlus />
-                                                    </button>
 
-                                                </div>
+                                        {item.nombrePersonalizado && (
 
-                                            </div>
+                                            <small>
+                                                ✍️{" "}
+                                                {item.nombrePersonalizado}
+                                                {item.numero &&
+                                                    ` #${item.numero}`}
+                                            </small>
+
+                                        )}
+
+
+                                        <div className="qty">
 
                                             <button
-                                                className="remove-item"
                                                 onClick={() =>
-                                                    removeFromCart(item.cartId)
+                                                    decreaseQuantity(
+                                                        item.cartId
+                                                    )
                                                 }
+                                                aria-label="Reducir cantidad"
                                             >
-                                                <FiTrash2 />
+                                                <FiMinus />
+                                            </button>
+
+
+                                            <span>
+                                                {item.cantidad || 1}
+                                            </span>
+
+
+                                            <button
+                                                onClick={() =>
+                                                    increaseQuantity(
+                                                        item.cartId
+                                                    )
+                                                }
+                                                aria-label="Aumentar cantidad"
+                                            >
+                                                <FiPlus />
                                             </button>
 
                                         </div>
 
-                                    ))
+                                    </div>
 
-                                }
+
+                                    <button
+                                        className="remove-item"
+                                        onClick={() =>
+                                            removeFromCart(
+                                                item.cartId
+                                            )
+                                        }
+                                        aria-label="Eliminar producto"
+                                    >
+                                        <FiTrash2 />
+                                    </button>
+
+                                </div>
+
+                            ))}
+
+                        </div>
+
+
+                        {/* FOOTER */}
+
+                        <div className="cart-footer">
+
+
+                            <div className="subtotal">
+
+                                <span>
+                                    Subtotal
+                                </span>
+
+                                <strong>
+                                    {subtotal.toFixed(2)} €
+                                </strong>
 
                             </div>
 
-                            <div className="cart-footer">
 
-                                {
+                            {descuento > 0 && (
 
-                                    cart.length >= 2 && (
+                                <div className="discount">
 
-                                        <div className="discount">
+                                    🎁 Descuento 10% por cada 2 camisetas
 
-                                            🎁 Descuento aplicado (-10%)
+                                    <strong>
+                                        -{descuento.toFixed(2)} €
+                                    </strong>
 
-                                        </div>
+                                </div>
 
-                                    )
+                            )}
 
-                                }
 
-                                <h3>
+                            <div className="cart-total">
 
+                                <span>
                                     Total
+                                </span>
 
-                                    <span>
-
-                                        {total.toFixed(2)} €
-
-                                    </span>
-
-                                </h3>
-
-                                <button
-                                    className="buy-btn"
-                                    onClick={comprarWhatsApp}
-                                >
-
-                                    Comprar por WhatsApp
-
-                                </button>
-
-                                <button
-                                    className="clear-btn"
-                                    onClick={clearCart}
-                                >
-
-                                    Vaciar carrito
-
-                                </button>
+                                <strong>
+                                    {total.toFixed(2)} €
+                                </strong>
 
                             </div>
 
-                        </>
 
-                    )
+                            <button
+                                className="buy-btn"
+                                onClick={comprarWhatsApp}
+                            >
+                                📲 Comprar por WhatsApp
+                            </button>
 
-                }
+
+                            <button
+                                className="clear-btn"
+                                onClick={clearCart}
+                            >
+                                Vaciar carrito
+                            </button>
+
+                        </div>
+
+                    </>
+
+                )}
 
             </aside>
 
@@ -264,5 +389,6 @@ function CartDrawer({ open, onClose }) {
     );
 
 }
+
 
 export default CartDrawer;

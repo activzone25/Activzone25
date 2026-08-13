@@ -7,97 +7,163 @@ import {
 
 const CartContext = createContext();
 
+const CART_STORAGE_KEY = "activzone_cart";
+
+
 export function CartProvider({ children }) {
 
     const [cart, setCart] = useState(() => {
+
         try {
-            const saved = localStorage.getItem("activzone_cart");
-            return saved ? JSON.parse(saved) : [];
+
+            const saved = localStorage.getItem(
+                CART_STORAGE_KEY
+            );
+
+            return saved
+                ? JSON.parse(saved)
+                : [];
+
         } catch {
+
             return [];
+
         }
+
     });
 
+
+    // ==========================================
+    // GUARDAR CARRITO
+    // ==========================================
+
     useEffect(() => {
+
         localStorage.setItem(
-            "activzone_cart",
+            CART_STORAGE_KEY,
             JSON.stringify(cart)
         );
+
     }, [cart]);
+
+
+    // ==========================================
+    // AÑADIR AL CARRITO
+    // ==========================================
 
     function addToCart(product) {
 
-        setCart(prev => {
+        setCart(prevCart => {
 
             const parche =
                 product.parche?.tipo || "sin-parche";
 
+            const talla =
+                product.talla || "sin-talla";
+
+            const nombre =
+                product.nombrePersonalizado || "";
+
+            const numero =
+                product.numero || "";
+
+
             const cartId = [
                 product.id,
-                product.talla || "sin-talla",
-                product.nombrePersonalizado || "",
-                product.numero || "",
+                talla,
+                nombre,
+                numero,
                 parche
             ].join("-");
 
-            const existe = prev.find(
+
+            const existingProduct = prevCart.find(
                 item => item.cartId === cartId
             );
 
-            if (existe) {
 
-                return prev.map(item =>
+            if (existingProduct) {
+
+                return prevCart.map(item =>
                     item.cartId === cartId
                         ? {
-                              ...item,
-                              cantidad: item.cantidad + 1
-                          }
+                            ...item,
+                            cantidad:
+                                Number(item.cantidad || 1) + 1
+                        }
                         : item
                 );
+
             }
 
+
             return [
-                ...prev,
+                ...prevCart,
+
                 {
                     ...product,
                     cartId,
                     cantidad: 1
                 }
+
             ];
+
         });
+
     }
 
+
+    // ==========================================
+    // ELIMINAR PRODUCTO
+    // ==========================================
+
     function removeFromCart(cartId) {
-        setCart(prev =>
-            prev.filter(item => item.cartId !== cartId)
+
+        setCart(prevCart =>
+            prevCart.filter(
+                item => item.cartId !== cartId
+            )
         );
+
     }
+
+
+    // ==========================================
+    // AUMENTAR CANTIDAD
+    // ==========================================
 
     function increaseQuantity(cartId) {
 
-        setCart(prev =>
-            prev.map(item =>
+        setCart(prevCart =>
+            prevCart.map(item =>
                 item.cartId === cartId
                     ? {
-                          ...item,
-                          cantidad: item.cantidad + 1
-                      }
+                        ...item,
+                        cantidad:
+                            Number(item.cantidad || 1) + 1
+                    }
                     : item
             )
         );
 
     }
 
+
+    // ==========================================
+    // DISMINUIR CANTIDAD
+    // ==========================================
+
     function decreaseQuantity(cartId) {
 
-        setCart(prev =>
-            prev
+        setCart(prevCart =>
+            prevCart
                 .map(item =>
                     item.cartId === cartId
                         ? {
-                              ...item,
-                              cantidad: item.cantidad - 1
-                          }
+                            ...item,
+                            cantidad:
+                                Number(item.cantidad || 1) - 1
+                        }
                         : item
                 )
                 .filter(item => item.cantidad > 0)
@@ -105,54 +171,107 @@ export function CartProvider({ children }) {
 
     }
 
+
+    // ==========================================
+    // ACTUALIZAR CANTIDAD
+    // ==========================================
+
     function updateQuantity(cartId, cantidad) {
 
-        setCart(prev =>
-            prev.map(item =>
+        const nuevaCantidad = Math.max(
+            1,
+            Number(cantidad)
+        );
+
+
+        setCart(prevCart =>
+            prevCart.map(item =>
                 item.cartId === cartId
                     ? {
-                          ...item,
-                          cantidad: Math.max(1, cantidad)
-                      }
+                        ...item,
+                        cantidad: nuevaCantidad
+                    }
                     : item
             )
         );
 
     }
 
+
+    // ==========================================
+    // VACIAR CARRITO
+    // ==========================================
+
     function clearCart() {
+
         setCart([]);
+
     }
 
+
+    // ==========================================
+    // SUBTOTAL
+    // ==========================================
+
     const subtotal = cart.reduce(
-        (total, item) => total + item.precio * item.cantidad,
+        (total, item) =>
+            total +
+            Number(item.precio || 0) *
+            Number(item.cantidad || 0),
         0
     );
+
+
+    // ==========================================
+    // TOTAL PRODUCTOS
+    // ==========================================
 
     const totalProductos = cart.reduce(
-        (total, item) => total + item.cantidad,
+        (total, item) =>
+            total +
+            Number(item.cantidad || 0),
         0
     );
 
+
+    // ==========================================
+    // CONTEXT
+    // ==========================================
+
     return (
+
         <CartContext.Provider
             value={{
                 cart,
                 subtotal,
                 totalProductos,
+
                 addToCart,
                 removeFromCart,
-                updateQuantity,
+
                 increaseQuantity,
                 decreaseQuantity,
+                updateQuantity,
+
                 clearCart
             }}
         >
+
             {children}
+
         </CartContext.Provider>
+
     );
+
 }
 
+
+// ==========================================
+// HOOK
+// ==========================================
+
 export function useCart() {
+
     return useContext(CartContext);
+
 }

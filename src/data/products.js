@@ -2,9 +2,8 @@
 // ACTIVZONE25 - PRODUCTS
 // ======================================================
 
-
 // ======================================================
-// IMPORTS CAMISETAS
+// IMPORTS
 // ======================================================
 
 // LALIGA
@@ -20,7 +19,7 @@ import betisBack from "../assets/camisetas/betis/back.png";
 import valenciaFront from "../assets/camisetas/valencia/front.png";
 import valenciaBack from "../assets/camisetas/valencia/back.png";
 
-// PREMIER
+// PREMIER LEAGUE
 import arsenalFront from "../assets/camisetas/arsenal/front.png";
 import arsenalBack from "../assets/camisetas/arsenal/back.png";
 
@@ -40,34 +39,34 @@ import parisBack from "../assets/camisetas/paris/back.png";
 
 
 // ======================================================
-// POSICIONES POR DEFECTO
+// POSICIONES GENERALES
 // ======================================================
 
 const defaultPositions = {
 
     patch: {
         top: "32%",
-        left: "18%",
+        left: "8%",
         width: "42px"
     },
 
     name: {
         top: "29%",
         left: "50%",
-        transform: "translateX(-50%)"
+        transform: "translate(-50%, -50%)"
     },
 
     number: {
         top: "46%",
         left: "50%",
-        transform: "translateX(-50%)"
+        transform: "translate(-50%, -50%)"
     }
 
 };
 
 
 // ======================================================
-// CONFIGURACIÓN BASE
+// CONFIGURACIÓN COMÚN
 // ======================================================
 
 const baseProduct = {
@@ -109,132 +108,209 @@ const products = [
 
     {
         ...baseProduct,
+
         id: 1,
         slug: "barcelona-26-27",
+
         nombre: "FC Barcelona",
         equipo: "Barcelona",
         liga: "LaLiga",
+
         front: barcaFront,
         back: barcaBack,
-        parches: ["laliga", "champions"]
+
+        parches: [
+            "laliga",
+            "champions"
+        ]
     },
+
 
     {
         ...baseProduct,
+
         id: 2,
         slug: "real-madrid-26-27",
+
         nombre: "Real Madrid",
         equipo: "Real Madrid",
         liga: "LaLiga",
+
         rating: 5.0,
         opiniones: 214,
+
         front: madridFront,
         back: madridBack,
-        parches: ["laliga", "champions"]
+
+        parches: [
+            "laliga",
+            "champions"
+        ]
     },
+
 
     {
         ...baseProduct,
+
         id: 3,
         slug: "betis-26-27",
+
         nombre: "Real Betis",
         equipo: "Betis",
         liga: "LaLiga",
+
         stock: 12,
         rating: 4.8,
         opiniones: 67,
+
         front: betisFront,
         back: betisBack,
-        parches: ["laliga"]
+
+        parches: [
+            "laliga"
+        ]
     },
+
 
     {
         ...baseProduct,
+
         id: 4,
         slug: "valencia-26-27",
+
         nombre: "Valencia CF",
         equipo: "Valencia",
         liga: "LaLiga",
+
         stock: 10,
         rating: 4.7,
         opiniones: 52,
+
         front: valenciaFront,
         back: valenciaBack,
-        parches: ["laliga"]
+
+        parches: [
+            "laliga"
+        ]
     },
+
 
     {
         ...baseProduct,
+
         id: 5,
         slug: "arsenal-26-27",
+
         nombre: "Arsenal FC",
         equipo: "Arsenal",
         liga: "Premier League",
+
         stock: 15,
         opiniones: 139,
+
         front: arsenalFront,
         back: arsenalBack,
-        parches: ["champions"]
+
+        parches: [
+            "champions"
+        ]
     },
+
 
     {
         ...baseProduct,
+
         id: 6,
         slug: "manchester-city-26-27",
+
         nombre: "Manchester City",
         equipo: "Manchester City",
         liga: "Premier League",
+
         stock: 17,
         opiniones: 145,
+
         front: cityFront,
         back: cityBack,
-        parches: ["champions"]
+
+        parches: [
+            "champions"
+        ]
     },
+
 
     {
         ...baseProduct,
+
         id: 7,
         slug: "bayern-26-27",
+
         nombre: "Bayern Munich",
         equipo: "Bayern",
         liga: "Bundesliga",
+
         stock: 14,
         rating: 4.8,
         opiniones: 96,
+
         front: bayernFront,
         back: bayernBack,
-        parches: ["champions"]
+
+        parches: [
+            "champions"
+        ]
     },
+
 
     {
         ...baseProduct,
+
         id: 8,
         slug: "dortmund-26-27",
+
         nombre: "Borussia Dortmund",
         equipo: "Dortmund",
         liga: "Bundesliga",
+
         stock: 11,
         rating: 4.8,
         opiniones: 81,
+
         front: dortmundFront,
         back: dortmundBack,
-        parches: ["champions"]
+
+        parches: [
+            "champions"
+        ]
     },
+
 
     {
         ...baseProduct,
+
         id: 9,
         slug: "psg-26-27",
+
         nombre: "Paris Saint-Germain",
         equipo: "PSG",
         liga: "Ligue 1",
+
         stock: 16,
         opiniones: 158,
+
         front: parisFront,
         back: parisBack,
-        parches: ["champions"]
+
+        parches: [
+            "champions"
+        ]
     }
 
 ];
+
+
+// ======================================================
+// EXPORT
+// ======================================================
 
 export default products;

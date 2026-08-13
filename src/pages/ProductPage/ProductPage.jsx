@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import products from "../../data/products";
-
 import { useCart } from "../../context/CartContext";
 
 import laligaPatch from "../../assets/parches/laliga.png";
@@ -22,12 +21,20 @@ function ProductPage() {
     );
 
 
+    // ==========================================
+    // ESTADOS
+    // ==========================================
+
     const [side, setSide] = useState("front");
     const [size, setSize] = useState("M");
     const [name, setName] = useState("");
     const [number, setNumber] = useState("");
     const [patch, setPatch] = useState("");
 
+
+    // ==========================================
+    // PRODUCTO NO ENCONTRADO
+    // ==========================================
 
     if (!product) {
 
@@ -40,8 +47,29 @@ function ProductPage() {
     }
 
 
+    // ==========================================
+    // POSICIONES
+    // ==========================================
+
     const positions = product.positions || {};
 
+
+    // ==========================================
+    // PRECIO
+    // ==========================================
+
+    const personalizada =
+        name.trim() !== "" ||
+        number.trim() !== "";
+
+    const precioFinal =
+        Number(product.precio) +
+        (personalizada ? 5 : 0);
+
+
+    // ==========================================
+    // AÑADIR AL CARRITO
+    // ==========================================
 
     function handleAddCart() {
 
@@ -53,9 +81,21 @@ function ProductPage() {
 
             talla: size,
 
-            nombrePersonalizado: name,
+            nombrePersonalizado:
+                name.trim(),
 
-            numero: number,
+            numero:
+                number.trim(),
+
+            personalizada,
+
+            precio: precioFinal,
+
+            precioBase:
+                Number(product.precio),
+
+            extraPersonalizacion:
+                personalizada ? 5 : 0,
 
             parche: {
                 tipo: patch
@@ -75,14 +115,16 @@ function ProductPage() {
             <section className="product-detail">
 
 
-                {/* ==============================
+                {/* ==================================
                     GALERÍA
-                ============================== */}
+                ================================== */}
 
                 <div className="product-gallery">
 
                     <div className="shirt-preview">
 
+
+                        {/* CAMISETA */}
 
                         <img
                             src={
@@ -95,72 +137,79 @@ function ProductPage() {
                         />
 
 
-                        {/* ==============================
-                            PARCHE
-                        ============================== */}
+                        {/* ==================================
+                            PARCHE LALIGA
+                        ================================== */}
 
-                        {side === "front" && patch === "laliga" && (
+                        {side === "front" &&
+                            patch === "laliga" && (
 
-                            <img
-                                src={laligaPatch}
-                                alt="LaLiga"
-                                className="shirt-patch"
-                                style={positions.patch}
-                            />
+                                <img
+                                    src={laligaPatch}
+                                    alt="LaLiga"
+                                    className="shirt-patch"
+                                    style={positions.patch}
+                                />
 
-                        )}
-
-
-                        {side === "front" && patch === "champions" && (
-
-                            <img
-                                src={championsPatch}
-                                alt="Champions"
-                                className="shirt-patch"
-                                style={positions.patch}
-                            />
-
-                        )}
+                            )}
 
 
-                        {/* ==============================
+                        {/* ==================================
+                            PARCHE CHAMPIONS
+                        ================================== */}
+
+                        {side === "front" &&
+                            patch === "champions" && (
+
+                                <img
+                                    src={championsPatch}
+                                    alt="Champions"
+                                    className="shirt-patch"
+                                    style={positions.patch}
+                                />
+
+                            )}
+
+
+                        {/* ==================================
                             NOMBRE
-                        ============================== */}
+                        ================================== */}
 
-                        {side === "back" && name && (
+                        {side === "back" &&
+                            name && (
 
-                            <span
-                                className="shirt-name"
-                                style={positions.name}
-                            >
-                                {name.toUpperCase()}
-                            </span>
+                                <span
+                                    className="shirt-name"
+                                    style={positions.name}
+                                >
+                                    {name.toUpperCase()}
+                                </span>
 
-                        )}
+                            )}
 
 
-                        {/* ==============================
+                        {/* ==================================
                             DORSAL
-                        ============================== */}
+                        ================================== */}
 
-                        {side === "back" && number && (
+                        {side === "back" &&
+                            number && (
 
-                            <span
-                                className="shirt-number"
-                                style={positions.number}
-                            >
-                                {number}
-                            </span>
+                                <span
+                                    className="shirt-number"
+                                    style={positions.number}
+                                >
+                                    {number}
+                                </span>
 
-                        )}
-
+                            )}
 
                     </div>
 
 
-                    {/* ==============================
+                    {/* ==================================
                         CAMBIAR VISTA
-                    ============================== */}
+                    ================================== */}
 
                     <div className="gallery-buttons">
 
@@ -170,7 +219,9 @@ function ProductPage() {
                                     ? "active"
                                     : ""
                             }
-                            onClick={() => setSide("front")}
+                            onClick={() =>
+                                setSide("front")
+                            }
                         >
                             Delantera
                         </button>
@@ -182,7 +233,9 @@ function ProductPage() {
                                     ? "active"
                                     : ""
                             }
-                            onClick={() => setSide("back")}
+                            onClick={() =>
+                                setSide("back")
+                            }
                         >
                             Trasera
                         </button>
@@ -192,9 +245,9 @@ function ProductPage() {
                 </div>
 
 
-                {/* ==============================
-                    INFORMACIÓN
-                ============================== */}
+                {/* ==================================
+                    INFORMACIÓN PRODUCTO
+                ================================== */}
 
                 <div className="product-options">
 
@@ -209,12 +262,31 @@ function ProductPage() {
                     </h1>
 
 
+                    {/* ==================================
+                        PRECIO DINÁMICO
+                    ================================== */}
+
                     <div className="price">
-                        {product.precio} €
+
+                        {precioFinal} €
+
                     </div>
 
 
-                    {/* TALLAS */}
+                    {personalizada && (
+
+                        <small className="personalization-price">
+
+                            +5 € por personalización
+
+                        </small>
+
+                    )}
+
+
+                    {/* ==================================
+                        TALLAS
+                    ================================== */}
 
                     <h3>
                         Talla
@@ -223,28 +295,38 @@ function ProductPage() {
 
                     <div className="sizes">
 
-                        {["S", "M", "L", "XL", "2XL", "3XL", "4XL"].map(
-                            item => (
+                        {[
+                            "S",
+                            "M",
+                            "L",
+                            "XL",
+                            "2XL",
+                            "3XL",
+                            "4XL"
+                        ].map(item => (
 
-                                <button
-                                    key={item}
-                                    className={
-                                        size === item
-                                            ? "active"
-                                            : ""
-                                    }
-                                    onClick={() => setSize(item)}
-                                >
-                                    {item}
-                                </button>
+                            <button
+                                key={item}
+                                className={
+                                    size === item
+                                        ? "active"
+                                        : ""
+                                }
+                                onClick={() =>
+                                    setSize(item)
+                                }
+                            >
+                                {item}
+                            </button>
 
-                            )
-                        )}
+                        ))}
 
                     </div>
 
 
-                    {/* PERSONALIZACIÓN */}
+                    {/* ==================================
+                        PERSONALIZACIÓN
+                    ================================== */}
 
                     <h3>
                         Personalización
@@ -256,7 +338,9 @@ function ProductPage() {
                         placeholder="Nombre"
                         value={name}
                         maxLength={15}
-                        onChange={e => setName(e.target.value)}
+                        onChange={e =>
+                            setName(e.target.value)
+                        }
                     />
 
 
@@ -266,11 +350,15 @@ function ProductPage() {
                         value={number}
                         min="0"
                         max="99"
-                        onChange={e => setNumber(e.target.value)}
+                        onChange={e =>
+                            setNumber(e.target.value)
+                        }
                     />
 
 
-                    {/* PARCHE */}
+                    {/* ==================================
+                        PARCHE
+                    ================================== */}
 
                     <h3>
                         Parche
@@ -279,7 +367,9 @@ function ProductPage() {
 
                     <select
                         value={patch}
-                        onChange={e => setPatch(e.target.value)}
+                        onChange={e =>
+                            setPatch(e.target.value)
+                        }
                     >
 
                         <option value="">
@@ -287,7 +377,9 @@ function ProductPage() {
                         </option>
 
 
-                        {product.parches?.includes("laliga") && (
+                        {product.parches?.includes(
+                            "laliga"
+                        ) && (
 
                             <option value="laliga">
                                 🏆 LaLiga GRATIS
@@ -296,7 +388,9 @@ function ProductPage() {
                         )}
 
 
-                        {product.parches?.includes("champions") && (
+                        {product.parches?.includes(
+                            "champions"
+                        ) && (
 
                             <option value="champions">
                                 ⭐ Champions GRATIS
@@ -307,7 +401,9 @@ function ProductPage() {
                     </select>
 
 
-                    {/* CARRITO */}
+                    {/* ==================================
+                        AÑADIR AL CARRITO
+                    ================================== */}
 
                     <button
                         className="add-cart"

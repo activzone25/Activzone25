@@ -12,332 +12,395 @@ import "./Cart.css";
 
 function Cart({ open, setOpen }) {
 
-
     const {
         cart,
         removeFromCart,
         updateQuantity,
         clearCart
-
     } = useCart();
 
 
+    // ==========================================
+    // TOTAL DE CAMISETAS
+    // ==========================================
 
     const totalProductos = cart.reduce(
-
         (total, item) =>
-            total + (item.cantidad || 1),
-
+            total + Number(item.cantidad || 1),
         0
-
     );
 
 
+    // ==========================================
+    // SUBTOTAL
+    // ==========================================
 
     const subtotal = cart.reduce(
-
         (total, item) =>
             total +
-            item.precio *
-            (item.cantidad || 1),
-
+            Number(item.precio || 0) *
+            Number(item.cantidad || 1),
         0
-
     );
 
 
+    // ==========================================
+    // DESCUENTO
+    //
+    // 10% POR CADA PAREJA DE CAMISETAS
+    //
+    // 2 camisetas  -> 10%
+    // 4 camisetas  -> 20%
+    // 6 camisetas  -> 30%
+    //
+    // Se calcula sobre el precio REAL
+    // de las camisetas.
+    // ==========================================
 
-    const descuento =
-
-        totalProductos >= 2
-
-            ? subtotal * 0.10
-
-            : 0;
+    let descuento = 0;
+    let camisetasRestantes = 0;
 
 
-
-    const total = subtotal - descuento;
-
+    const preciosCamisetas = [];
 
 
+    cart.forEach(item => {
 
-    function enviarWhatsApp(){
+        const cantidad =
+            Number(item.cantidad || 1);
+
+        const precio =
+            Number(item.precio || 0);
+
+
+        for (let i = 0; i < cantidad; i++) {
+
+            preciosCamisetas.push(precio);
+
+        }
+
+    });
+
+
+    // Ordenamos de mayor a menor para
+    // formar las parejas correctamente.
+
+    preciosCamisetas.sort(
+        (a, b) => b - a
+    );
+
+
+    const parejas =
+        Math.floor(preciosCamisetas.length / 2);
+
+
+    for (let i = 0; i < parejas * 2; i += 2) {
+
+        const precioPareja =
+            preciosCamisetas[i] +
+            preciosCamisetas[i + 1];
+
+        descuento +=
+            precioPareja * 0.10;
+
+    }
+
+
+    camisetasRestantes =
+        totalProductos - (parejas * 2);
+
+
+    // ==========================================
+    // TOTAL
+    // ==========================================
+
+    const total =
+        subtotal - descuento;
+
+
+    // ==========================================
+    // NOMBRE DEL PARCHE
+    // ==========================================
+
+    function getPatchName(item) {
+
+        const patch =
+            item.parche?.tipo;
+
+
+        if (patch === "laliga") {
+
+            return "LaLiga GRATIS";
+
+        }
+
+
+        if (patch === "champions") {
+
+            return "Champions GRATIS";
+
+        }
+
+
+        return "Sin parche";
+
+    }
+
+
+    // ==========================================
+    // WHATSAPP
+    // ==========================================
+
+    function enviarWhatsApp() {
+
+        if (!cart.length) return;
 
 
         let mensaje =
-
-`🛒 *PEDIDO ACTIVZONE25*
+`🛒 PEDIDO ACTIVZONE25
 
 `;
 
 
-
         cart.forEach(item => {
+
+            const cantidad =
+                Number(item.cantidad || 1);
+
+            const precio =
+                Number(item.precio || 0);
+
+            const precioTotal =
+                precio * cantidad;
 
 
             mensaje +=
-
 `👕 ${item.nombre}
 
 📏 Talla: ${item.talla || "-"}
 
-🏆 Parche: ${
-item.parche?.nombre || "Sin parche"
-}
+🏆 Parche: ${getPatchName(item)}
 
 ✍️ Nombre: ${
-item.nombrePersonalizado || "-"
+    item.nombrePersonalizado || "-"
 }
 
 🔢 Número: ${
-item.numero || "-"
+    item.numero || "-"
 }
 
-Cantidad: ${
-item.cantidad || 1
-}
+${item.personalizada
+    ? "✨ Personalización: +5 €\n"
+    : ""
+}Cantidad: ${cantidad}
+
+Precio unitario: ${precio.toFixed(2)} €
+
+Total producto: ${precioTotal.toFixed(2)} €
 
 ----------------------
 
 `;
 
-
         });
 
 
+        mensaje +=
+`💰 Subtotal: ${subtotal.toFixed(2)} €
+
+`;
+
+
+        if (descuento > 0) {
+
+            mensaje +=
+`🎉 Descuento 10% por cada pareja: -${descuento.toFixed(2)} €
+
+`;
+
+        }
+
 
         mensaje +=
-
 `💰 TOTAL: ${total.toFixed(2)} €`;
 
 
-
         window.open(
-
             `https://wa.me/34647602998?text=${encodeURIComponent(mensaje)}`,
-
             "_blank"
-
         );
 
     }
 
 
-
-
-
     return (
-
 
         <>
 
-            {
-                open && (
+            {/* ==================================
+                OVERLAY
+            ================================== */}
 
-                    <div
+            {open && (
 
-                        className="cart-overlay active"
+                <div
+                    className="cart-overlay active"
+                    onClick={() => setOpen(false)}
+                />
 
-                        onClick={() => setOpen(false)}
-
-                    />
-
-                )
-            }
-
+            )}
 
 
-
+            {/* ==================================
+                CARRITO
+            ================================== */}
 
             <aside
-
                 className={`cart ${
                     open ? "active" : ""
                 }`}
-
             >
 
 
-
+                {/* ==================================
+                    HEADER
+                ================================== */}
 
                 <div className="cart-header">
-
 
                     <h2>
                         🛒 Tu carrito
                     </h2>
 
 
-
                     <button
-
                         onClick={() => setOpen(false)}
-
+                        aria-label="Cerrar carrito"
                     >
 
                         <FiX />
 
                     </button>
 
-
                 </div>
 
 
-
-
+                {/* ==================================
+                    PRODUCTOS
+                ================================== */}
 
                 <div className="cart-items">
 
+                    {cart.length === 0 ? (
 
+                        <p className="empty-cart">
+                            El carrito está vacío
+                        </p>
 
-                    {
-                        cart.length === 0 ? (
-
-
-                            <p className="empty-cart">
-
-                                El carrito está vacío
-
-                            </p>
-
-
-                        )
-
-
-                        :
-
+                    ) : (
 
                         cart.map(item => (
 
-
-
                             <div
-
                                 className="cart-item"
-
                                 key={
-                                    item.cartId || item.id
+                                    item.cartId ||
+                                    item.id
                                 }
-
                             >
 
 
+                                {/* IMAGEN */}
 
                                 <img
-
                                     src={
+                                        item.imagen ||
                                         item.front
                                     }
-
-                                    alt={
-                                        item.nombre
-                                    }
-
+                                    alt={item.nombre}
                                 />
 
 
-
-
+                                {/* INFORMACIÓN */}
 
                                 <div className="cart-info">
 
-
                                     <h3>
-
                                         {item.nombre}
-
                                     </h3>
 
 
-
                                     <p>
-
-                                        {item.precio} €
-
+                                        {Number(
+                                            item.precio || 0
+                                        ).toFixed(2)} €
                                     </p>
 
 
-
-
                                     <small>
-
-                                        📏 Talla: {item.talla}
-
+                                        📏 Talla:{" "}
+                                        {item.talla || "-"}
                                     </small>
 
 
-
-
                                     <small>
-
-                                        🏆 Parche:
-
-                                        {" "}
-
-                                        {
-                                            item.parche?.nombre
-                                            ||
-                                            "Sin parche"
-                                        }
-
+                                        🏆 Parche:{" "}
+                                        {getPatchName(item)}
                                     </small>
 
 
+                                    {(item.nombrePersonalizado ||
+                                        item.numero) && (
+
+                                        <small>
+
+                                            ✍️{" "}
+                                            {item.nombrePersonalizado ||
+                                                "-"}
+
+                                            {" "}
+
+                                            #
+                                            {item.numero || "-"}
+
+                                        </small>
+
+                                    )}
 
 
-                                    {
-                                        item.nombrePersonalizado && (
+                                    {/* PERSONALIZACIÓN */}
 
-                                            <small>
+                                    {item.personalizada && (
 
-                                                ✍️
+                                        <small className="personalization-cart">
 
-                                                {" "}
+                                            ✨ Personalización:
+                                            {" "}
+                                            +5 €
 
-                                                {item.nombrePersonalizado}
+                                        </small>
 
-                                                {" "}
-
-                                                #
-
-                                                {item.numero}
-
-                                            </small>
-
-                                        )
-                                    }
+                                    )}
 
 
-
-
-
-
+                                    {/* CANTIDAD */}
 
                                     <div className="quantity">
 
 
-
                                         <button
-
                                             onClick={() =>
-
                                                 updateQuantity(
-
                                                     item.cartId,
-
                                                     Math.max(
-
                                                         1,
-
-                                                        (item.cantidad || 1) - 1
-
+                                                        Number(
+                                                            item.cantidad || 1
+                                                        ) - 1
                                                     )
-
                                                 )
-
                                             }
-
+                                            aria-label="Reducir cantidad"
                                         >
 
                                             <FiMinus />
@@ -345,34 +408,21 @@ item.cantidad || 1
                                         </button>
 
 
-
-
                                         <span>
-
-                                            {
-                                                item.cantidad || 1
-                                            }
-
+                                            {item.cantidad || 1}
                                         </span>
 
 
-
-
-
                                         <button
-
                                             onClick={() =>
-
                                                 updateQuantity(
-
                                                     item.cartId,
-
-                                                    (item.cantidad || 1) + 1
-
+                                                    Number(
+                                                        item.cantidad || 1
+                                                    ) + 1
                                                 )
-
                                             }
-
+                                            aria-label="Aumentar cantidad"
                                         >
 
                                             <FiPlus />
@@ -380,23 +430,18 @@ item.cantidad || 1
                                         </button>
 
 
-
                                     </div>
 
 
-
-
+                                    {/* ELIMINAR */}
 
                                     <button
-
                                         className="remove-btn"
-
                                         onClick={() =>
                                             removeFromCart(
                                                 item.cartId
                                             )
                                         }
-
                                     >
 
                                         <FiTrash2 />
@@ -405,79 +450,67 @@ item.cantidad || 1
 
                                     </button>
 
-
-
-
                                 </div>
-
-
 
                             </div>
 
-
                         ))
 
-                    }
-
-
+                    )}
 
                 </div>
 
 
-
-
-
-
+                {/* ==================================
+                    FOOTER
+                ================================== */}
 
                 <div className="cart-footer">
 
+
+                    <p>
+
+                        Camisetas:
+                        {" "}
+
+                        <strong>
+                            {totalProductos}
+                        </strong>
+
+                    </p>
 
 
                     <p>
 
                         Subtotal:
-
                         {" "}
 
                         <strong>
-
                             {subtotal.toFixed(2)} €
-
                         </strong>
-
 
                     </p>
 
 
+                    {descuento > 0 && (
 
+                        <p className="discount">
 
+                            🎉 Descuento por parejas:
+                            {" "}
 
-                    {
-                        descuento > 0 && (
+                            <strong>
+                                -{descuento.toFixed(2)} €
+                            </strong>
 
+                        </p>
 
-                            <p className="discount">
-
-                                🎉 Descuento 10%:
-
-                                {" - "}
-
-                                {descuento.toFixed(2)} €
-
-                            </p>
-
-
-                        )
-                    }
-
-
-
+                    )}
 
 
                     <h3>
 
                         Total:
-
                         {" "}
 
                         {total.toFixed(2)} €
@@ -485,54 +518,37 @@ item.cantidad || 1
                     </h3>
 
 
-
-
+                    {/* WHATSAPP */}
 
                     <button
-
                         className="checkout"
-
                         onClick={enviarWhatsApp}
-
+                        disabled={!cart.length}
                     >
 
-                        Pedir por WhatsApp
+                        📲 Pedir por WhatsApp
 
                     </button>
 
 
+                    {/* VACIAR */}
 
+                    {cart.length > 0 && (
 
+                        <button
+                            className="clear-cart"
+                            onClick={clearCart}
+                        >
 
-                    {
-                        cart.length > 0 && (
+                            Vaciar carrito
 
+                        </button>
 
-                            <button
-
-                                className="clear-cart"
-
-                                onClick={clearCart}
-
-                            >
-
-                                Vaciar carrito
-
-                            </button>
-
-
-                        )
-                    }
-
-
-
+                    )}
 
                 </div>
 
-
-
             </aside>
-
 
         </>
 

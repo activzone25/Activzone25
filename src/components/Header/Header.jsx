@@ -14,210 +14,111 @@ import "./Header.css";
 
 
 function Header({
-
     search = "",
     setSearch = () => {},
     setCartOpen = () => {},
     setMenuOpen = () => {}
-
 }) {
 
-
     const { cart } = useCart();
-
     const { favorites } = useFavorites();
 
 
-
     const totalProductos = cart.reduce(
-
-        (total,item) =>
+        (total, item) =>
             total + (item.cantidad || 1),
-
         0
-
     );
 
 
-
-
-
     return (
-
         <header className="header">
-
 
             <div className="header-container">
 
-
-
                 <button
-
                     className="menu-mobile"
-
                     onClick={() => setMenuOpen(true)}
-
+                    aria-label="Abrir menú"
                 >
-
                     <FiMenu />
-
                 </button>
 
 
-
-
-
-
                 <Link
-
                     to="/"
-
                     className="logo"
-
                 >
-
                     ACTIVZONE25
-
                 </Link>
-
-
-
-
-
-
 
 
                 <div className="search-box">
 
-
-                    <FiSearch className="search-icon"/>
-
-
+                    <FiSearch className="search-icon" />
 
                     <input
-
                         type="text"
-
                         placeholder="Buscar camiseta..."
-
                         value={search}
-
-                        onChange={(e)=>
+                        onChange={(e) =>
                             setSearch(e.target.value)
                         }
-
                     />
 
-
                 </div>
-
-
-
-
-
-
 
 
                 <div className="header-actions">
 
-
-
-
-
                     <Link
-
                         to="/favoritos"
-
                         className="icon-btn"
-
+                        aria-label="Favoritos"
                     >
 
-                        <FiHeart/>
+                        <FiHeart />
 
-
-                        {
-                            favorites.length > 0 && (
-
-                                <span className="count">
-
-                                    {favorites.length}
-
-                                </span>
-
-                            )
-                        }
-
+                        {favorites.length > 0 && (
+                            <span className="count">
+                                {favorites.length}
+                            </span>
+                        )}
 
                     </Link>
 
 
-
-
-
-
-
-
                     <button
-
                         className="icon-btn"
-
                         onClick={() => setCartOpen(true)}
-
+                        aria-label="Abrir carrito"
                     >
 
+                        <FiShoppingCart />
 
-                        <FiShoppingCart/>
-
-
-                        {
-                            totalProductos > 0 && (
-
-                                <span className="count">
-
-                                    {totalProductos}
-
-                                </span>
-
-                            )
-                        }
-
+                        {totalProductos > 0 && (
+                            <span className="count">
+                                {totalProductos}
+                            </span>
+                        )}
 
                     </button>
-
-
-
-
-
-
 
 
                     <button
-
                         className="icon-btn menu-btn"
-
                         onClick={() => setMenuOpen(true)}
-
+                        aria-label="Abrir menú"
                     >
-
-                        <FiMenu/>
-
+                        <FiMenu />
                     </button>
-
-
-
 
                 </div>
 
-
-
             </div>
 
-
-
         </header>
-
     );
-
 }
 
 
