@@ -13,7 +13,6 @@ import "./ProductPage.css";
 function ProductPage() {
 
     const { slug } = useParams();
-
     const { addToCart } = useCart();
 
 
@@ -22,14 +21,11 @@ function ProductPage() {
     // ==========================================
 
     const [side, setSide] = useState("front");
-
     const [size, setSize] = useState("M");
-
     const [name, setName] = useState("");
-
     const [number, setNumber] = useState("");
-
     const [patch, setPatch] = useState("");
+    const [added, setAdded] = useState(false);
 
 
     // ==========================================
@@ -48,47 +44,30 @@ function ProductPage() {
     if (!product) {
 
         return (
-
             <main className="not-found">
-
-                <h2>
-                    Producto no encontrado
-                </h2>
-
+                <div className="not-found-box">
+                    <span>404</span>
+                    <h2>Producto no encontrado</h2>
+                    <p>La camiseta que buscas no está disponible.</p>
+                </div>
             </main>
-
         );
 
     }
 
 
     // ==========================================
-    // POSICIONES
+    // DATOS
     // ==========================================
 
-    const positions =
-        product.positions || {};
+    const positions = product.positions || {};
 
-
-    // ==========================================
-    // DATOS LIMPIOS
-    // ==========================================
-
-    const nombreLimpio =
-        name.trim();
-
-
-    const numeroLimpio =
-        number.trim();
-
-
-    // ==========================================
-    // PERSONALIZACIÓN
-    // ==========================================
+    const nombreLimpio = name.trim();
+    const numeroLimpio = number.trim();
 
     const personalizada =
-        nombreLimpio.length > 0 ||
-        numeroLimpio.length > 0;
+        nombreLimpio !== "" ||
+        numeroLimpio !== "";
 
 
     // ==========================================
@@ -98,24 +77,18 @@ function ProductPage() {
     const precioBase =
         Number(product.precio || 25);
 
-
     const extraPersonalizacion =
-        personalizada
-            ? 5
-            : 0;
-
+        personalizada ? 5 : 0;
 
     const precioFinal =
-        precioBase +
-        extraPersonalizacion;
+        precioBase + extraPersonalizacion;
 
 
     // ==========================================
     // TALLAS
     // ==========================================
 
-    const tallasAdulto = [
-
+    const tallas = [
         "S",
         "M",
         "L",
@@ -123,47 +96,28 @@ function ProductPage() {
         "2XL",
         "3XL",
         "4XL"
-
     ];
 
 
     // ==========================================
-    // CAMBIAR NÚMERO
+    // NÚMERO
     // ==========================================
 
     function handleNumberChange(e) {
 
         let value =
-            e.target.value;
-
-
-        // Solo números
-
-        value =
-            value.replace(/\D/g, "");
-
-
-        // Máximo 2 cifras
+            e.target.value.replace(/\D/g, "");
 
         if (value.length > 2) {
-
-            value =
-                value.slice(0, 2);
-
+            value = value.slice(0, 2);
         }
-
-
-        // Máximo 99
 
         if (
             value !== "" &&
             Number(value) > 99
         ) {
-
             value = "99";
-
         }
-
 
         setNumber(value);
 
@@ -202,13 +156,19 @@ function ProductPage() {
             extraPersonalizacion,
 
             parche: {
-
-                tipo:
-                    patch || "sin-parche"
-
+                tipo: patch || "sin-parche"
             }
 
         });
+
+
+        // Confirmación visual
+
+        setAdded(true);
+
+        setTimeout(() => {
+            setAdded(false);
+        }, 2200);
 
     }
 
@@ -230,7 +190,28 @@ function ProductPage() {
 
                 <div className="product-gallery">
 
+
+                    {/* CABECERA PREVIEW */}
+
+                    <div className="preview-top">
+
+                        <span className="preview-label">
+                            VISTA PREVIA
+                        </span>
+
+                        <span className="preview-season">
+                            26/27
+                        </span>
+
+                    </div>
+
+
+                    {/* CAMISETA */}
+
                     <div className="shirt-preview">
+
+                        <div className="shirt-glow" />
+
 
                         <img
                             src={
@@ -243,89 +224,69 @@ function ProductPage() {
                         />
 
 
-                        {/* ==================================
-                            PARCHE LALIGA
-                        ================================== */}
+                        {/* PARCHE LALIGA */}
 
                         {side === "front" &&
                             patch === "laliga" && (
 
-                                <img
-                                    src={laligaPatch}
-                                    alt="Parche LaLiga"
-                                    className="shirt-patch"
-                                    style={
-                                        positions.patch
-                                    }
-                                />
+                            <img
+                                src={laligaPatch}
+                                alt="Parche LaLiga"
+                                className="shirt-patch"
+                                style={positions.patch}
+                            />
 
-                            )}
+                        )}
 
 
-                        {/* ==================================
-                            PARCHE CHAMPIONS
-                        ================================== */}
+                        {/* PARCHE CHAMPIONS */}
 
                         {side === "front" &&
                             patch === "champions" && (
 
-                                <img
-                                    src={championsPatch}
-                                    alt="Parche Champions"
-                                    className="shirt-patch"
-                                    style={
-                                        positions.patch
-                                    }
-                                />
+                            <img
+                                src={championsPatch}
+                                alt="Parche Champions"
+                                className="shirt-patch"
+                                style={positions.patch}
+                            />
 
-                            )}
+                        )}
 
 
-                        {/* ==================================
-                            NOMBRE
-                        ================================== */}
+                        {/* NOMBRE */}
 
                         {side === "back" &&
                             nombreLimpio && (
 
-                                <span
-                                    className="shirt-name"
-                                    style={
-                                        positions.name
-                                    }
-                                >
-                                    {
-                                        nombreLimpio.toUpperCase()
-                                    }
-                                </span>
+                            <span
+                                className="shirt-name"
+                                style={positions.name}
+                            >
+                                {nombreLimpio.toUpperCase()}
+                            </span>
 
-                            )}
+                        )}
 
 
-                        {/* ==================================
-                            DORSAL
-                        ================================== */}
+                        {/* DORSAL */}
 
                         {side === "back" &&
                             numeroLimpio && (
 
-                                <span
-                                    className="shirt-number"
-                                    style={
-                                        positions.number
-                                    }
-                                >
-                                    {numeroLimpio}
-                                </span>
+                            <span
+                                className="shirt-number"
+                                style={positions.number}
+                            >
+                                {numeroLimpio}
+                            </span>
 
-                            )}
+                        )}
 
                     </div>
 
 
-                    {/* ==================================
-                        CAMBIAR VISTA
-                    ================================== */}
+                    {/* CAMBIAR VISTA */}
 
                     <div className="gallery-buttons">
 
@@ -360,6 +321,21 @@ function ProductPage() {
 
                     </div>
 
+
+                    {/* INFO PREVIEW */}
+
+                    <div className="preview-info">
+
+                        <span>
+                            👕 {product.temporada || "2026/27"}
+                        </span>
+
+                        <span>
+                            ✓ Producto disponible
+                        </span>
+
+                    </div>
+
                 </div>
 
 
@@ -370,81 +346,102 @@ function ProductPage() {
                 <div className="product-options">
 
 
-                    <span className="league">
+                    {/* LIGA */}
+
+                    <span className="product-league">
                         {product.liga}
                     </span>
 
+
+                    {/* NOMBRE */}
 
                     <h1>
                         {product.nombre}
                     </h1>
 
 
-                    {/* ==================================
-                        PRECIO
-                    ================================== */}
+                    <p className="product-subtitle">
+                        Camiseta oficial temporada{" "}
+                        {product.temporada || "2026/27"}
+                    </p>
 
-                    <div className="price">
+
+                    {/* PRECIO */}
+
+                    <div className="product-price">
 
                         {precioFinal.toFixed(2)} €
 
                     </div>
 
 
-                    {personalizada && (
+                    {/* NOTA PRECIO */}
 
-                        <small className="personalization-price">
+                    <div
+                        className={
+                            personalizada
+                                ? "price-note personalized"
+                                : "price-note"
+                        }
+                    >
 
-                            Precio camiseta:{" "}
-                            {precioBase.toFixed(2)} €
-                            {" + "}
-                            5 € personalización
+                        {personalizada
+                            ? "✍️ Personalización añadida · +5 €"
+                            : "Personalización opcional · +5 €"
+                        }
 
-                        </small>
-
-                    )}
-
-
-                    {!personalizada && (
-
-                        <small className="personalization-price">
-
-                            Personalización opcional +5 €
-
-                        </small>
-
-                    )}
+                    </div>
 
 
                     {/* ==================================
                         TALLA
                     ================================== */}
 
-                    <h3>
-                        Talla
-                    </h3>
+                    <div className="option-section">
+
+                        <div className="option-title">
+
+                            <div>
+
+                                <h3>
+                                    Talla
+                                </h3>
+
+                                <span className="option-description">
+                                    Selecciona tu talla
+                                </span>
+
+                            </div>
+
+                            <strong>
+                                {size}
+                            </strong>
+
+                        </div>
 
 
-                    <div className="sizes">
+                        <div className="sizes">
 
-                        {tallasAdulto.map(item => (
+                            {tallas.map(item => (
 
-                            <button
-                                type="button"
-                                key={item}
-                                className={
-                                    size === item
-                                        ? "active"
-                                        : ""
-                                }
-                                onClick={() =>
-                                    setSize(item)
-                                }
-                            >
-                                {item}
-                            </button>
+                                <button
+                                    type="button"
+                                    key={item}
+                                    className={
+                                        size === item
+                                            ? "active"
+                                            : ""
+                                    }
+                                    onClick={() =>
+                                        setSize(item)
+                                    }
+                                >
+                                    {item}
+                                </button>
 
-                        ))}
+                            ))}
+
+                        </div>
 
                     </div>
 
@@ -453,88 +450,210 @@ function ProductPage() {
                         PERSONALIZACIÓN
                     ================================== */}
 
-                    <h3>
-                        Personalización
-                    </h3>
+                    <div className="option-section">
+
+                        <div className="option-title">
+
+                            <div>
+
+                                <h3>
+                                    Personalización
+                                </h3>
+
+                                <span className="option-description">
+                                    Nombre y dorsal
+                                </span>
+
+                            </div>
+
+                            <strong>
+                                +5 €
+                            </strong>
+
+                        </div>
 
 
-                    <input
-                        type="text"
-                        placeholder="Nombre en camiseta"
-                        value={name}
-                        maxLength={15}
-                        onChange={e =>
-                            setName(
-                                e.target.value
-                            )
-                        }
-                    />
+                        <div className="custom-fields">
+
+                            <div className="input-field">
+
+                                <label>
+                                    Nombre
+                                </label>
+
+                                <input
+                                    type="text"
+                                    placeholder="Ej. TERRON"
+                                    value={name}
+                                    maxLength={15}
+                                    onChange={e =>
+                                        setName(
+                                            e.target.value
+                                        )
+                                    }
+                                />
+
+                            </div>
 
 
-                    <input
-                        type="text"
-                        inputMode="numeric"
-                        placeholder="Dorsal (0-99)"
-                        value={number}
-                        maxLength={2}
-                        onChange={
-                            handleNumberChange
-                        }
-                    />
+                            <div className="input-field number-field">
+
+                                <label>
+                                    Dorsal
+                                </label>
+
+                                <input
+                                    type="text"
+                                    inputMode="numeric"
+                                    placeholder="10"
+                                    value={number}
+                                    maxLength={2}
+                                    onChange={
+                                        handleNumberChange
+                                    }
+                                />
+
+                            </div>
+
+                        </div>
 
 
-                    <small className="option-help">
+                        <small className="option-help">
+                            Máximo 15 caracteres · dorsal 0-99
+                        </small>
 
-                        ✍️ Personalización +5 €
-
-                    </small>
+                    </div>
 
 
                     {/* ==================================
-                        PARCHE
+                        PARCHES
                     ================================== */}
 
-                    <h3>
-                        Parche
-                    </h3>
+                    <div className="option-section">
+
+                        <div className="option-title">
+
+                            <div>
+
+                                <h3>
+                                    Parche
+                                </h3>
+
+                                <span className="option-description">
+                                    Elige tu parche
+                                </span>
+
+                            </div>
+
+                            <strong className="free-label">
+                                GRATIS
+                            </strong>
+
+                        </div>
 
 
-                    <select
-                        value={patch}
-                        onChange={e =>
-                            setPatch(
-                                e.target.value
-                            )
-                        }
-                    >
-
-                        <option value="">
-                            Sin parche
-                        </option>
+                        <div className="patch-options">
 
 
-                        {product.parches?.includes(
-                            "laliga"
-                        ) && (
+                            {/* SIN PARCHE */}
 
-                            <option value="laliga">
-                                🏆 LaLiga GRATIS
-                            </option>
+                            <button
+                                type="button"
+                                className={
+                                    patch === ""
+                                        ? "patch-option active"
+                                        : "patch-option"
+                                }
+                                onClick={() =>
+                                    setPatch("")
+                                }
+                            >
 
-                        )}
+                                <span className="patch-empty">
+                                    −
+                                </span>
+
+                                <strong>
+                                    Sin parche
+                                </strong>
+
+                            </button>
 
 
-                        {product.parches?.includes(
-                            "champions"
-                        ) && (
+                            {/* LALIGA */}
 
-                            <option value="champions">
-                                ⭐ Champions GRATIS
-                            </option>
+                            {product.parches?.includes(
+                                "laliga"
+                            ) && (
 
-                        )}
+                                <button
+                                    type="button"
+                                    className={
+                                        patch === "laliga"
+                                            ? "patch-option active"
+                                            : "patch-option"
+                                    }
+                                    onClick={() =>
+                                        setPatch("laliga")
+                                    }
+                                >
 
-                    </select>
+                                    <img
+                                        src={laligaPatch}
+                                        alt="LaLiga"
+                                    />
+
+                                    <strong>
+                                        LaLiga
+                                    </strong>
+
+                                    <small>
+                                        GRATIS
+                                    </small>
+
+                                </button>
+
+                            )}
+
+
+                            {/* CHAMPIONS */}
+
+                            {product.parches?.includes(
+                                "champions"
+                            ) && (
+
+                                <button
+                                    type="button"
+                                    className={
+                                        patch === "champions"
+                                            ? "patch-option active"
+                                            : "patch-option"
+                                    }
+                                    onClick={() =>
+                                        setPatch("champions")
+                                    }
+                                >
+
+                                    <img
+                                        src={championsPatch}
+                                        alt="Champions"
+                                    />
+
+                                    <strong>
+                                        Champions
+                                    </strong>
+
+                                    <small>
+                                        GRATIS
+                                    </small>
+
+                                </button>
+
+                            )}
+
+                        </div>
+
+                    </div>
 
 
                     {/* ==================================
@@ -543,18 +662,22 @@ function ProductPage() {
 
                     <div className="product-summary">
 
-                        <span>
-                            Camiseta
-                        </span>
+                        <div>
 
-                        <strong>
-                            {precioBase.toFixed(2)} €
-                        </strong>
+                            <span>
+                                Camiseta
+                            </span>
+
+                            <strong>
+                                {precioBase.toFixed(2)} €
+                            </strong>
+
+                        </div>
 
 
                         {personalizada && (
 
-                            <>
+                            <div>
 
                                 <span>
                                     Personalización
@@ -564,18 +687,39 @@ function ProductPage() {
                                     +5.00 €
                                 </strong>
 
-                            </>
+                            </div>
 
                         )}
 
 
-                        <span>
-                            Total
-                        </span>
+                        {patch && (
 
-                        <strong>
-                            {precioFinal.toFixed(2)} €
-                        </strong>
+                            <div>
+
+                                <span>
+                                    Parche
+                                </span>
+
+                                <strong className="free">
+                                    GRATIS
+                                </strong>
+
+                            </div>
+
+                        )}
+
+
+                        <div className="summary-total">
+
+                            <span>
+                                Total
+                            </span>
+
+                            <strong>
+                                {precioFinal.toFixed(2)} €
+                            </strong>
+
+                        </div>
 
                     </div>
 
@@ -586,14 +730,58 @@ function ProductPage() {
 
                     <button
                         type="button"
-                        className="add-cart"
+                        className={
+                            added
+                                ? "add-cart added"
+                                : "add-cart"
+                        }
                         onClick={handleAddCart}
                     >
 
-                        🛒 Añadir al carrito ·{" "}
-                        {precioFinal.toFixed(2)} €
+                        <span className="cart-button-text">
+
+                            {added
+                                ? "✓ Añadido al carrito"
+                                : "🛒 Añadir al carrito"
+                            }
+
+                        </span>
+
+                        <span>
+                            {precioFinal.toFixed(2)} €
+                        </span>
 
                     </button>
+
+
+                    {/* ==================================
+                        INFORMACIÓN
+                    ================================== */}
+
+                    <div className="purchase-info">
+
+                        <div>
+                            <span>✓</span>
+                            <p>
+                                Parches incluidos gratis
+                            </p>
+                        </div>
+
+                        <div>
+                            <span>✍</span>
+                            <p>
+                                Personalización opcional
+                            </p>
+                        </div>
+
+                        <div>
+                            <span>💬</span>
+                            <p>
+                                Pedido fácil por WhatsApp
+                            </p>
+                        </div>
+
+                    </div>
 
                 </div>
 

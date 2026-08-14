@@ -24,13 +24,33 @@ function ProductCard({ product }) {
     } = useCart();
 
 
-    // ==========================================
-    // FAVORITO
-    // ==========================================
+    /* ==========================================
+       DATOS
+    ========================================== */
 
     const favorite =
         isFavorite(product.id);
 
+    const precio =
+        Number(product.precio || 25);
+
+    const rating =
+        Number(product.rating || 5);
+
+    const opiniones =
+        Number(product.opiniones || 0);
+
+    const tieneParches =
+        Array.isArray(product.parches) &&
+        product.parches.length > 0;
+
+    const personalizable =
+        product.personalizable !== false;
+
+
+    /* ==========================================
+       FAVORITO
+    ========================================== */
 
     function handleFavorite(e) {
 
@@ -42,10 +62,9 @@ function ProductCard({ product }) {
     }
 
 
-    // ==========================================
-    // AÑADIR AL CARRITO
-    // COMPRA RÁPIDA
-    // ==========================================
+    /* ==========================================
+       COMPRA RÁPIDA
+    ========================================== */
 
     function handleAddCart(e) {
 
@@ -56,29 +75,21 @@ function ProductCard({ product }) {
 
             ...product,
 
-            imagen:
-                product.front,
+            imagen: product.front,
 
-            talla:
-                "M",
+            talla: "M",
 
-            nombrePersonalizado:
-                "",
+            nombrePersonalizado: "",
 
-            numero:
-                "",
+            numero: "",
 
-            personalizada:
-                false,
+            personalizada: false,
 
-            precio:
-                Number(product.precio || 25),
+            precio,
 
-            precioBase:
-                Number(product.precio || 25),
+            precioBase: precio,
 
-            extraPersonalizacion:
-                0,
+            extraPersonalizacion: 0,
 
             parche: {
                 tipo: ""
@@ -94,6 +105,7 @@ function ProductCard({ product }) {
         <Link
             to={`/producto/${product.slug}`}
             className="product-card"
+            aria-label={`Ver ${product.nombre}`}
         >
 
             {/* ==================================
@@ -101,9 +113,6 @@ function ProductCard({ product }) {
             ================================== */}
 
             <div className="product-image">
-
-
-                {/* NUEVO */}
 
                 {product.nuevo && (
 
@@ -114,24 +123,29 @@ function ProductCard({ product }) {
                 )}
 
 
-                {/* FAVORITO */}
-
                 <button
+                    type="button"
                     className={`favorite-btn ${
                         favorite ? "active" : ""
                     }`}
                     onClick={handleFavorite}
-                    aria-label="Favorito"
+                    aria-label={
+                        favorite
+                            ? `Quitar ${product.nombre} de favoritos`
+                            : `Añadir ${product.nombre} a favoritos`
+                    }
+                    aria-pressed={favorite}
                 >
+
                     <FiHeart />
+
                 </button>
 
-
-                {/* CAMISETA */}
 
                 <img
                     src={product.front}
                     alt={product.nombre}
+                    loading="lazy"
                 />
 
             </div>
@@ -143,25 +157,18 @@ function ProductCard({ product }) {
 
             <div className="product-info">
 
-
-                {/* LIGA */}
-
                 <span className="league">
-                    {product.liga}
+                    {product.liga || "Fútbol"}
                 </span>
 
-
-                {/* NOMBRE */}
 
                 <h3>
                     {product.nombre}
                 </h3>
 
 
-                {/* TEMPORADA */}
-
                 <p>
-                    Temporada {product.temporada}
+                    Temporada {product.temporada || "2026/27"}
                 </p>
 
 
@@ -171,7 +178,7 @@ function ProductCard({ product }) {
 
                 <div className="product-tags">
 
-                    {product.parches?.length > 0 && (
+                    {tieneParches && (
 
                         <span>
                             🏆 Parches GRATIS
@@ -180,7 +187,7 @@ function ProductCard({ product }) {
                     )}
 
 
-                    {product.personalizable !== false && (
+                    {personalizable && (
 
                         <span>
                             ✍️ Personalizable
@@ -201,16 +208,16 @@ function ProductCard({ product }) {
                         product.precioAnterior && (
 
                         <span className="old-price">
-                            {product.precioAnterior} €
+                            {Number(
+                                product.precioAnterior
+                            ).toFixed(2)} €
                         </span>
 
                     )}
 
 
                     <span className="new-price">
-                        {Number(
-                            product.precio || 25
-                        )} €
+                        {precio.toFixed(2)} €
                     </span>
 
                 </div>
@@ -222,10 +229,12 @@ function ProductCard({ product }) {
 
                 <div className="rating">
 
-                    ⭐ {product.rating || 5.0}
+                    <span>
+                        ⭐ {rating.toFixed(1)}
+                    </span>
 
                     <span>
-                        ({product.opiniones || 0})
+                        ({opiniones})
                     </span>
 
                 </div>
@@ -236,13 +245,16 @@ function ProductCard({ product }) {
                 ================================== */}
 
                 <button
+                    type="button"
                     className="quick-cart"
                     onClick={handleAddCart}
                 >
 
                     <FiShoppingCart />
 
-                    Añadir al carrito
+                    <span>
+                        Añadir al carrito
+                    </span>
 
                 </button>
 
@@ -253,7 +265,9 @@ function ProductCard({ product }) {
 
                 <div className="view-product">
 
-                    Ver producto
+                    <span>
+                        Ver producto
+                    </span>
 
                     <FiArrowRight />
 

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import {
     FiHome,
     FiHeart,
@@ -13,9 +12,7 @@ import "./SideMenu.css";
 function SideMenu({ open, onClose }) {
 
     return (
-
         <>
-
             <div
                 className={`menu-overlay ${open ? "show" : ""}`}
                 onClick={onClose}
@@ -27,7 +24,11 @@ function SideMenu({ open, onClose }) {
 
                     <h2>ACTIVZONE25</h2>
 
-                    <button onClick={onClose}>
+                    <button
+                        type="button"
+                        onClick={onClose}
+                        aria-label="Cerrar menú"
+                    >
                         <FiX />
                     </button>
 
@@ -37,40 +38,39 @@ function SideMenu({ open, onClose }) {
 
                     <Link to="/" onClick={onClose}>
                         <FiHome />
-                        Inicio
+                        <span>Inicio</span>
                     </Link>
 
                     <Link to="/adulto" onClick={onClose}>
-                        👕 Adulto
+                        <span>👕</span>
+                        <span>Adulto</span>
                     </Link>
 
                     <Link to="/nino" onClick={onClose}>
-                        🧒 Niño
+                        <span>🧒</span>
+                        <span>Niño</span>
                     </Link>
 
                     <Link to="/favoritos" onClick={onClose}>
                         <FiHeart />
-                        Favoritos
+                        <span>Favoritos</span>
                     </Link>
 
-                    <a href="#">
+                    <a href="#seguimiento" onClick={onClose}>
                         <FiShoppingCart />
-                        Seguimiento pedido
+                        <span>Seguimiento pedido</span>
                     </a>
 
-                    <a href="#">
+                    <a href="#contacto" onClick={onClose}>
                         <FiUser />
-                        Contacto
+                        <span>Contacto</span>
                     </a>
 
                 </nav>
 
             </aside>
-
         </>
-
     );
-
 }
 
 export default SideMenu;

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import {
     FiSearch,
     FiShoppingCart,
@@ -12,7 +11,6 @@ import { useFavorites } from "../../context/FavoritesContext";
 
 import "./Header.css";
 
-
 function Header({
     search = "",
     setSearch = () => {},
@@ -20,24 +18,16 @@ function Header({
     setMenuOpen = () => {}
 }) {
 
-    const {
-        totalProductos
-    } = useCart();
-
-    const {
-        favorites
-    } = useFavorites();
-
+    const { totalProductos } = useCart();
+    const { favorites } = useFavorites();
 
     return (
-
         <header className="header">
 
             <div className="header-container">
 
-                {/* MENÚ MÓVIL */}
-
                 <button
+                    type="button"
                     className="menu-mobile"
                     onClick={() => setMenuOpen(true)}
                     aria-label="Abrir menú"
@@ -45,93 +35,63 @@ function Header({
                     <FiMenu />
                 </button>
 
-
-                {/* LOGO */}
-
                 <Link
                     to="/"
                     className="logo"
+                    aria-label="Activzone25 - Inicio"
                 >
                     ACTIVZONE25
                 </Link>
 
-
-                {/* BUSCADOR */}
-
                 <div className="search-box">
 
-                    <FiSearch
-                        className="search-icon"
-                    />
+                    <FiSearch className="search-icon" />
 
                     <input
                         type="text"
                         placeholder="Buscar camiseta..."
                         value={search}
-                        onChange={e =>
-                            setSearch(e.target.value)
-                        }
+                        onChange={(e) => setSearch(e.target.value)}
+                        aria-label="Buscar camiseta"
                     />
 
                 </div>
 
-
-                {/* ACCIONES */}
-
                 <div className="header-actions">
-
-
-                    {/* FAVORITOS */}
 
                     <Link
                         to="/favoritos"
                         className="icon-btn"
                         aria-label="Favoritos"
                     >
-
                         <FiHeart />
 
                         {favorites.length > 0 && (
-
                             <span className="count">
                                 {favorites.length}
                             </span>
-
                         )}
-
                     </Link>
 
-
-                    {/* CARRITO */}
-
                     <button
+                        type="button"
                         className="icon-btn"
-                        onClick={() =>
-                            setCartOpen(true)
-                        }
+                        onClick={() => setCartOpen(true)}
                         aria-label="Abrir carrito"
                     >
-
                         <FiShoppingCart />
 
                         {totalProductos > 0 && (
-
                             <span className="count">
                                 {totalProductos}
                             </span>
-
                         )}
-
                     </button>
 
-
-                    {/* MENÚ */}
-
                     <button
+                        type="button"
                         className="icon-btn menu-btn"
-                        onClick={() =>
-                            setMenuOpen(true)
-                        }
+                        onClick={() => setMenuOpen(true)}
                         aria-label="Abrir menú"
                     >
                         <FiMenu />
@@ -142,10 +102,7 @@ function Header({
             </div>
 
         </header>
-
     );
-
 }
-
 
 export default Header;

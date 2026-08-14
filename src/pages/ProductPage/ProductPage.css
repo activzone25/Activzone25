@@ -1,57 +1,140 @@
-/* ==========================================
-   ACTIVZONE25 - PRODUCT PAGE
-========================================== */
+/* =====================================================
+   ACTIVZONE25 - PRODUCT PAGE PREMIUM
+===================================================== */
 
 .product-page {
     min-height: 100vh;
-    padding: 80px 25px;
-    background: #0b0b0b;
-    color: white;
+    padding: 70px 25px 100px;
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(0, 210, 106, .055),
+            transparent 30%
+        ),
+        #0b0b0b;
+    color: #fff;
 }
 
 
-/* ==========================================
+/* =====================================================
    CONTENEDOR
-========================================== */
+===================================================== */
 
 .product-detail {
-    max-width: 1300px;
-    margin: auto;
+    width: 100%;
+    max-width: 1350px;
+    margin: 0 auto;
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+        minmax(0, 1.05fr)
+        minmax(420px, .95fr);
 
     gap: 70px;
+
+    align-items: start;
 }
 
 
-/* ==========================================
+/* =====================================================
    GALERÍA
-========================================== */
+===================================================== */
 
 .product-gallery {
-    background: #151515;
-    border-radius: 30px;
-    padding: 40px;
+    position: sticky;
+    top: 30px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 30px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #191919,
+            #101010
+        );
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.38);
+
+    overflow: hidden;
 }
 
 
-/* ==========================================
-   PREVISUALIZACIÓN CAMISETA
-========================================== */
+/* =====================================================
+   CABECERA PREVIEW
+===================================================== */
+
+.preview-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 5px;
+}
+
+
+.preview-label {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 7px 13px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(0,210,106,.1);
+
+    border:
+        1px solid rgba(0,210,106,.25);
+
+    color: #00d26a;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
+}
+
+
+.preview-season {
+    padding: 6px 10px;
+
+    border-radius: 8px;
+
+    background: #222;
+
+    color: #777;
+
+    font-size: 11px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   PREVISUALIZACIÓN
+===================================================== */
 
 .shirt-preview {
     position: relative;
 
     width: 100%;
-    max-width: 500px;
-    height: 520px;
+    max-width: 540px;
+
+    height: 570px;
+
+    margin: 0 auto;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -59,28 +142,51 @@
 }
 
 
-/* IMAGEN PRINCIPAL */
+.shirt-glow {
+    position: absolute;
+
+    width: 65%;
+    height: 65%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,210,106,.1),
+            transparent 70%
+        );
+
+    filter: blur(25px);
+
+    pointer-events: none;
+}
+
 
 .shirt-image {
+    position: relative;
+
+    z-index: 2;
+
     width: 100%;
     height: 100%;
 
     object-fit: contain;
 
-    transition: transform 0.4s ease;
+    transition:
+        transform .45s ease,
+        filter .45s ease;
 }
 
 
-/* ZOOM */
-
-.shirt-preview:hover .shirt-image {
-    transform: scale(1.04);
+.product-gallery:hover .shirt-image {
+    transform: scale(1.035);
 }
 
 
-/* ==========================================
+/* =====================================================
    PARCHE
-========================================== */
+===================================================== */
 
 .shirt-patch {
     position: absolute;
@@ -92,49 +198,58 @@
     object-fit: contain;
 
     pointer-events: none;
+
+    filter:
+        drop-shadow(
+            0 3px 5px rgba(0,0,0,.45)
+        );
 }
 
 
-/* ==========================================
+/* =====================================================
    NOMBRE
-========================================== */
+===================================================== */
 
 .shirt-name {
     position: absolute;
 
     z-index: 6;
 
-    color: white;
+    color: #fff;
 
     font-size: 30px;
+
     font-weight: 900;
 
     letter-spacing: 2px;
+
+    line-height: 1;
 
     white-space: nowrap;
 
     text-align: center;
 
     text-shadow:
-        2px 2px 3px rgba(0, 0, 0, 0.8),
-        -1px -1px 2px rgba(0, 0, 0, 0.4);
+        2px 2px 3px rgba(0,0,0,.9),
+        -1px -1px 2px rgba(0,0,0,.5);
 
     pointer-events: none;
 }
 
 
-/* ==========================================
+/* =====================================================
    DORSAL
-========================================== */
+===================================================== */
 
 .shirt-number {
     position: absolute;
 
     z-index: 6;
 
-    color: white;
+    color: #fff;
 
     font-size: 78px;
+
     line-height: 1;
 
     font-weight: 900;
@@ -142,46 +257,61 @@
     text-align: center;
 
     text-shadow:
-        3px 3px 5px rgba(0, 0, 0, 0.8),
-        -1px -1px 2px rgba(0, 0, 0, 0.4);
+        3px 3px 5px rgba(0,0,0,.9),
+        -1px -1px 2px rgba(0,0,0,.5);
 
     pointer-events: none;
 }
 
 
-/* ==========================================
-   BOTONES GALERÍA
-========================================== */
+/* =====================================================
+   BOTONES VISTA
+===================================================== */
 
 .gallery-buttons {
-    display: flex;
-    gap: 15px;
+    width: fit-content;
 
-    margin-top: 30px;
+    margin: 10px auto 0;
+
+    padding: 5px;
+
+    display: flex;
+
+    gap: 5px;
+
+    border-radius: 999px;
+
+    background: #0d0d0d;
+
+    border: 1px solid rgba(255,255,255,.08);
 }
 
 
 .gallery-buttons button {
-    padding: 12px 25px;
+    min-width: 125px;
 
-    border-radius: 30px;
+    padding: 11px 20px;
 
-    border: 1px solid #333;
+    border: none;
 
-    background: #222;
+    border-radius: 999px;
 
-    color: white;
+    background: transparent;
+
+    color: #888;
+
+    font-size: 13px;
+
+    font-weight: 800;
 
     cursor: pointer;
 
-    font-weight: 700;
-
-    transition: 0.25s ease;
+    transition: .25s ease;
 }
 
 
 .gallery-buttons button:hover {
-    transform: translateY(-2px);
+    color: #fff;
 }
 
 
@@ -190,89 +320,250 @@
 
     color: #000;
 
-    border-color: #00d26a;
+    box-shadow:
+        0 7px 20px rgba(0,210,106,.25);
 }
 
 
-/* ==========================================
-   INFORMACIÓN
-========================================== */
+/* =====================================================
+   INFO PREVIEW
+===================================================== */
+
+.preview-info {
+    margin-top: 20px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid rgba(255,255,255,.07);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    color: #777;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.preview-info span:last-child {
+    color: #00d26a;
+}
+
+
+/* =====================================================
+   OPCIONES
+===================================================== */
 
 .product-options {
+    padding: 5px 0;
+
     display: flex;
+
     flex-direction: column;
-    justify-content: center;
 }
 
 
-.product-options .league {
+.product-league {
     color: #00d26a;
 
+    font-size: 13px;
+
     font-weight: 900;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.5px;
 }
 
 
 .product-options h1 {
+    margin: 10px 0 5px;
+
+    color: #fff;
+
     font-size: 48px;
 
-    margin: 15px 0;
+    line-height: 1.05;
 
     font-weight: 900;
+
+    letter-spacing: -.5px;
 }
 
 
-.price {
-    font-size: 38px;
+.product-subtitle {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   PRECIO
+===================================================== */
+
+.product-price {
+    margin-top: 18px;
 
     color: #00d26a;
 
+    font-size: 40px;
+
+    line-height: 1;
+
     font-weight: 900;
-
-    margin-bottom: 30px;
 }
 
 
-.product-options h3 {
-    margin: 20px 0 12px;
+.price-note {
+    width: fit-content;
 
-    font-size: 18px;
+    margin-top: 9px;
+
+    padding: 7px 11px;
+
+    border-radius: 9px;
+
+    background: #171717;
+
+    color: #888;
+
+    font-size: 11px;
+
+    font-weight: 700;
 }
 
 
-/* ==========================================
-   TALLAS
-========================================== */
+.price-note.personalized {
+    background:
+        rgba(0,210,106,.09);
 
-.sizes {
+    color: #00d26a;
+
+    border:
+        1px solid rgba(0,210,106,.2);
+}
+
+
+/* =====================================================
+   SECCIONES
+===================================================== */
+
+.option-section {
+    margin-top: 28px;
+
+    padding-top: 24px;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+}
+
+
+.option-title {
     display: flex;
 
-    gap: 10px;
+    align-items: center;
 
-    flex-wrap: wrap;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 14px;
+}
+
+
+.option-title h3 {
+    margin: 0;
+
+    font-size: 16px;
+
+    font-weight: 900;
+}
+
+
+.option-title > strong {
+    color: #00d26a;
+
+    font-size: 13px;
+
+    font-weight: 900;
+}
+
+
+.option-description {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #666;
+
+    font-size: 11px;
+}
+
+
+.free-label {
+    padding: 5px 9px;
+
+    border-radius: 7px;
+
+    background:
+        rgba(0,210,106,.1);
+
+    color: #00d26a !important;
+}
+
+
+/* =====================================================
+   TALLAS
+===================================================== */
+
+.sizes {
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    gap: 8px;
 }
 
 
 .sizes button {
-    width: 55px;
-    height: 45px;
+    height: 50px;
 
-    border-radius: 12px;
+    border-radius: 11px;
 
-    background: #181818;
+    border:
+        1px solid rgba(255,255,255,.11);
 
-    border: 1px solid #333;
+    background: #151515;
 
-    color: white;
+    color: #fff;
 
-    font-weight: 800;
+    font-size: 13px;
+
+    font-weight: 900;
 
     cursor: pointer;
 
-    transition: 0.2s ease;
+    transition:
+        transform .2s,
+        border-color .2s,
+        background .2s,
+        box-shadow .2s;
 }
 
 
 .sizes button:hover {
+    transform: translateY(-2px);
+
     border-color: #00d26a;
 }
 
@@ -280,107 +571,489 @@
 .sizes button.active {
     background: #00d26a;
 
-    color: #000;
-
     border-color: #00d26a;
-}
-
-
-/* ==========================================
-   INPUTS
-========================================== */
-
-.product-options input,
-.product-options select {
-    width: 100%;
-
-    padding: 15px;
-
-    margin-bottom: 12px;
-
-    border-radius: 14px;
-
-    border: 1px solid #333;
-
-    background: #161616;
-
-    color: white;
-
-    font-size: 16px;
-
-    outline: none;
-}
-
-
-.product-options input:focus,
-.product-options select:focus {
-    border-color: #00d26a;
-}
-
-
-.product-options select {
-    cursor: pointer;
-}
-
-
-/* ==========================================
-   BOTÓN CARRITO
-========================================== */
-
-.add-cart {
-    margin-top: 30px;
-
-    padding: 18px;
-
-    border: none;
-
-    border-radius: 18px;
-
-    background: #00d26a;
 
     color: #000;
-
-    font-size: 18px;
-
-    font-weight: 900;
-
-    cursor: pointer;
-
-    transition: 0.3s ease;
-}
-
-
-.add-cart:hover {
-    transform: translateY(-4px);
 
     box-shadow:
-        0 15px 35px rgba(0, 210, 106, 0.35);
+        0 8px 20px rgba(0,210,106,.22);
 }
 
 
-/* ==========================================
-   ERROR
-========================================== */
+/* =====================================================
+   PERSONALIZACIÓN
+===================================================== */
 
-.not-found {
-    min-height: 60vh;
+.custom-fields {
+    display: grid;
+
+    grid-template-columns:
+        1fr 120px;
+
+    gap: 10px;
+}
+
+
+.input-field {
+    position: relative;
+}
+
+
+.input-field label {
+    position: absolute;
+
+    top: -7px;
+    left: 12px;
+
+    z-index: 2;
+
+    padding: 0 5px;
+
+    background: #0b0b0b;
+
+    color: #777;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+.product-options input {
+    width: 100%;
+
+    height: 52px;
+
+    padding: 0 15px;
+
+    border-radius: 12px;
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    background: #151515;
+
+    color: #fff;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    outline: none;
+
+    transition: .2s;
+}
+
+
+.product-options input::placeholder {
+    color: #555;
+}
+
+
+.product-options input:focus {
+    border-color: #00d26a;
+
+    box-shadow:
+        0 0 0 3px rgba(0,210,106,.08);
+}
+
+
+.option-help {
+    display: block;
+
+    margin-top: 9px;
+
+    color: #666;
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   PARCHES
+===================================================== */
+
+.patch-options {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+}
+
+
+.patch-option {
+    min-height: 110px;
+
+    padding: 12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    border-radius: 15px;
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    background: #151515;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s,
+        border-color .2s,
+        background .2s,
+        box-shadow .2s;
+}
+
+
+.patch-option:hover {
+    transform: translateY(-2px);
+
+    border-color: #00d26a;
+}
+
+
+.patch-option.active {
+    background:
+        rgba(0,210,106,.07);
+
+    border-color: #00d26a;
+
+    box-shadow:
+        0 8px 22px rgba(0,210,106,.1);
+}
+
+
+.patch-option img {
+    width: 42px;
+
+    height: 42px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 3px 5px rgba(0,0,0,.4)
+        );
+}
+
+
+.patch-empty {
+    width: 42px;
+    height: 42px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    color: white;
+    border-radius: 50%;
 
-    font-size: 30px;
+    background: #222;
+
+    color: #666;
+
+    font-size: 24px;
+
+    font-weight: 300;
 }
 
 
-/* ==========================================
-   TABLET
-========================================== */
+.patch-option strong {
+    font-size: 12px;
+}
 
-@media (max-width: 900px) {
+
+.patch-option small {
+    color: #00d26a;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: .5px;
+}
+
+
+/* =====================================================
+   RESUMEN
+===================================================== */
+
+.product-summary {
+    margin-top: 28px;
+
+    padding: 18px;
+
+    border-radius: 16px;
+
+    background: #151515;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+}
+
+
+.product-summary > div {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 7px 0;
+
+    color: #888;
+
+    font-size: 13px;
+}
+
+
+.product-summary strong {
+    color: #fff;
+}
+
+
+.product-summary strong.free {
+    color: #00d26a;
+}
+
+
+.product-summary .summary-total {
+    margin-top: 8px;
+
+    padding-top: 15px;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+
+    color: #fff;
+
+    font-size: 15px;
+}
+
+
+.product-summary .summary-total strong {
+    color: #00d26a;
+
+    font-size: 23px;
+}
+
+
+/* =====================================================
+   BOTÓN CARRITO
+===================================================== */
+
+.add-cart {
+    width: 100%;
+
+    min-height: 60px;
+
+    margin-top: 15px;
+
+    padding: 15px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background: #00d26a;
+
+    color: #000;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        background .25s;
+}
+
+
+.add-cart > span:last-child {
+    font-size: 17px;
+}
+
+
+.add-cart:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 16px 38px rgba(0,210,106,.3);
+}
+
+
+.add-cart:active {
+    transform: translateY(0);
+}
+
+
+.add-cart.added {
+    background: #fff;
+
+    box-shadow:
+        0 12px 35px rgba(255,255,255,.12);
+
+    animation:
+        cartAdded .35s ease;
+}
+
+
+@keyframes cartAdded {
+
+    0% {
+        transform: scale(.97);
+    }
+
+    60% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* =====================================================
+   INFORMACIÓN DE COMPRA
+===================================================== */
+
+.purchase-info {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+
+.purchase-info div {
+    min-height: 58px;
+
+    padding: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    border-radius: 12px;
+
+    background: #111;
+
+    border:
+        1px solid rgba(255,255,255,.06);
+}
+
+
+.purchase-info span {
+    color: #00d26a;
+
+    font-size: 15px;
+}
+
+
+.purchase-info p {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 9px;
+
+    line-height: 1.3;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   PRODUCTO NO ENCONTRADO
+===================================================== */
+
+.not-found {
+    min-height: 70vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #0b0b0b;
+
+    color: #fff;
+}
+
+
+.not-found-box {
+    padding: 40px;
+
+    text-align: center;
+}
+
+
+.not-found-box span {
+    display: block;
+
+    color: #00d26a;
+
+    font-size: 70px;
+
+    font-weight: 900;
+}
+
+
+.not-found-box h2 {
+    margin: 10px 0;
+
+    font-size: 28px;
+}
+
+
+.not-found-box p {
+    margin: 0;
+
+    color: #777;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .product-page {
+        padding-top: 45px;
+    }
+
 
     .product-detail {
         grid-template-columns: 1fr;
@@ -388,55 +1061,157 @@
         gap: 40px;
     }
 
-    .product-options h1 {
-        font-size: 36px;
+
+    .product-gallery {
+        position: relative;
+
+        top: auto;
+    }
+
+
+    .product-options {
+        width: 100%;
+
+        max-width: 720px;
+
+        margin: 0 auto;
     }
 
 }
 
 
-/* ==========================================
+/* =====================================================
    MÓVIL
-========================================== */
+===================================================== */
 
 @media (max-width: 600px) {
 
     .product-page {
-        padding: 40px 15px;
+        padding: 30px 15px 70px;
     }
 
 
     .product-gallery {
-        padding: 20px;
+        padding: 18px;
 
-        border-radius: 20px;
+        border-radius: 22px;
     }
 
 
     .shirt-preview {
-        height: 350px;
+        height: 360px;
     }
 
 
     .product-options h1 {
-        font-size: 30px;
+        font-size: 31px;
     }
 
 
-    .shirt-name {
-        font-size: 21px;
-
-        letter-spacing: 1.5px;
+    .product-price {
+        font-size: 32px;
     }
 
 
-    .shirt-number {
-        font-size: 58px;
+    .preview-info {
+        flex-direction: column;
+
+        gap: 6px;
+    }
+
+
+    .gallery-buttons {
+        width: 100%;
     }
 
 
     .gallery-buttons button {
-        padding: 10px 20px;
+        flex: 1;
+
+        min-width: 0;
+    }
+
+
+    .sizes {
+        grid-template-columns:
+            repeat(4, 1fr);
+    }
+
+
+    .custom-fields {
+        grid-template-columns: 1fr;
+    }
+
+
+    .patch-options {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .patch-option:first-child {
+        grid-column: 1 / -1;
+    }
+
+
+    .purchase-info {
+        grid-template-columns: 1fr;
+    }
+
+
+    .purchase-info div {
+        min-height: 48px;
+    }
+
+
+    .shirt-name {
+        max-width: 85%;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+        font-size: 20px;
+
+        letter-spacing: 1px;
+    }
+
+
+    .shirt-number {
+        font-size: 55px;
+    }
+
+}
+
+
+/* =====================================================
+   MÓVIL PEQUEÑO
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .patch-options {
+        grid-template-columns: 1fr;
+    }
+
+
+    .patch-option:first-child {
+        grid-column: auto;
+    }
+
+
+    .product-options h1 {
+        font-size: 27px;
+    }
+
+
+    .sizes {
+        gap: 6px;
+    }
+
+
+    .sizes button {
+        height: 45px;
     }
 
 }

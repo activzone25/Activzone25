@@ -6,8 +6,7 @@ import ProductCard from "../ProductCard/ProductCard";
 
 function ProductGrid({
     search = "",
-    category = "Todas",
-    maxPrice = 40
+    category = "Todas"
 }) {
 
     const text =
@@ -36,11 +35,6 @@ function ProductGrid({
                 product.categoria === category;
 
 
-            const matchPrice =
-                Number(product.precio || 0) <=
-                Number(maxPrice);
-
-
             const disponible =
                 product.disponible !== false;
 
@@ -48,7 +42,6 @@ function ProductGrid({
             return (
                 matchSearch &&
                 matchCategory &&
-                matchPrice &&
                 disponible
             );
 
@@ -63,10 +56,6 @@ function ProductGrid({
     return (
 
         <section className="product-grid-section">
-
-            {/* ==================================
-                CABECERA
-            ================================== */}
 
             <div className="section-header">
 
@@ -97,10 +86,6 @@ function ProductGrid({
 
             </div>
 
-
-            {/* ==================================
-                PRODUCTOS
-            ================================== */}
 
             {filteredProducts.length > 0 ? (
 

@@ -2,7 +2,9 @@ import {
     FiX,
     FiPlus,
     FiMinus,
-    FiTrash2
+    FiTrash2,
+    FiShoppingBag,
+    FiMessageCircle
 } from "react-icons/fi";
 
 import { useCart } from "../../context/CartContext";
@@ -24,9 +26,9 @@ function CartDrawer({ open, onClose }) {
     } = useCart();
 
 
-    // ==========================================
-    // NOMBRE DEL PARCHE
-    // ==========================================
+    /* ==========================================
+       PARCHE
+    ========================================== */
 
     function getPatchName(item) {
 
@@ -44,9 +46,9 @@ function CartDrawer({ open, onClose }) {
     }
 
 
-    // ==========================================
-    // COMPRAR POR WHATSAPP
-    // ==========================================
+    /* ==========================================
+       WHATSAPP
+    ========================================== */
 
     function comprarWhatsApp() {
 
@@ -54,9 +56,7 @@ function CartDrawer({ open, onClose }) {
             return;
         }
 
-        let mensaje = `🛒 *PEDIDO ACTIVZONE25*
-
-`;
+        let mensaje = `🛒 *PEDIDO ACTIVZONE25*\n\n`;
 
         cart.forEach(item => {
 
@@ -70,43 +70,37 @@ function CartDrawer({ open, onClose }) {
                 precio * cantidad;
 
 
-            mensaje += `👕 *${item.nombre}*
+            mensaje +=
+                `👕 *${item.nombre}*\n`;
 
-`;
+            mensaje +=
+                `📏 Talla: ${item.talla || "-"}\n`;
 
-            mensaje += `📏 Talla: ${item.talla || "-"}
-
-`;
-
-            mensaje += `🏆 Parche: ${getPatchName(item)}
-
-`;
+            mensaje +=
+                `🏆 Parche: ${getPatchName(item)}\n`;
 
 
-            // PERSONALIZACIÓN
+            /* PERSONALIZACIÓN */
 
             if (
                 item.nombrePersonalizado ||
                 item.numero
             ) {
 
-                mensaje += `✍️ Personalización:
-
-`;
+                mensaje +=
+                    `✍️ Personalización:\n`;
 
                 if (item.nombrePersonalizado) {
 
                     mensaje +=
-                        `   Nombre: ${item.nombrePersonalizado}
-`;
+                        `   Nombre: ${item.nombrePersonalizado}\n`;
 
                 }
 
                 if (item.numero) {
 
                     mensaje +=
-                        `   Dorsal: ${item.numero}
-`;
+                        `   Dorsal: ${item.numero}\n`;
 
                 }
 
@@ -114,48 +108,33 @@ function CartDrawer({ open, onClose }) {
 
 
             mensaje +=
-                `🔢 Cantidad: ${cantidad}
-
-`;
+                `🔢 Cantidad: ${cantidad}\n`;
 
             mensaje +=
-                `💰 Precio: ${totalProducto.toFixed(2)} €
-
-`;
+                `💰 Precio: ${totalProducto.toFixed(2)} €\n`;
 
             mensaje +=
-                `----------------------
-
-`;
+                `----------------------\n\n`;
 
         });
 
 
-        // ==========================================
-        // RESUMEN
-        // ==========================================
+        /* RESUMEN */
 
         mensaje +=
-            `💰 Subtotal: ${subtotal.toFixed(2)} €
-
-`;
+            `💰 Subtotal: ${subtotal.toFixed(2)} €\n\n`;
 
 
         if (descuento > 0) {
 
             mensaje +=
-                `🎁 Descuento: -${descuento.toFixed(2)} €
-
-`;
+                `🎁 Descuento 10%: -${descuento.toFixed(2)} €\n\n`;
 
         }
 
 
         mensaje +=
-            `💰 *TOTAL: ${total.toFixed(2)} €*
-
-`;
-
+            `💰 *TOTAL: ${total.toFixed(2)} €*\n\n`;
 
         mensaje +=
             `Gracias por comprar en ACTIVZONE25 ⚽`;
@@ -179,17 +158,15 @@ function CartDrawer({ open, onClose }) {
     }
 
 
-    // ==========================================
-    // RENDER
-    // ==========================================
+    /* ==========================================
+       RENDER
+    ========================================== */
 
     return (
 
         <>
 
-            {/* ==========================================
-                OVERLAY
-            ========================================== */}
+            {/* OVERLAY */}
 
             <div
                 className={`cart-overlay ${
@@ -199,52 +176,87 @@ function CartDrawer({ open, onClose }) {
             />
 
 
-            {/* ==========================================
-                CARRITO
-            ========================================== */}
+            {/* DRAWER */}
 
             <aside
                 className={`cart-drawer ${
                     open ? "open" : ""
                 }`}
+                aria-hidden={!open}
             >
 
 
-                {/* ======================================
+                {/* ==================================
                     HEADER
-                ====================================== */}
+                ================================== */}
 
-                <div className="cart-header">
+                <header className="cart-header">
 
-                    <h2>
-                        🛒 Mi carrito
-                    </h2>
+                    <div className="cart-title">
+
+                        <div className="cart-title-icon">
+                            <FiShoppingBag />
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Mi carrito
+                            </h2>
+
+                            <span>
+                                {cart.length === 0
+                                    ? "Sin productos"
+                                    : `${cart.length} producto${
+                                        cart.length === 1
+                                            ? ""
+                                            : "s"
+                                    }`
+                                }
+                            </span>
+
+                        </div>
+
+                    </div>
+
 
                     <button
+                        className="cart-close"
                         onClick={onClose}
                         aria-label="Cerrar carrito"
                     >
                         <FiX />
                     </button>
 
-                </div>
+                </header>
 
 
-                {/* ======================================
+                {/* ==================================
                     CARRITO VACÍO
-                ====================================== */}
+                ================================== */}
 
                 {cart.length === 0 ? (
 
                     <div className="cart-empty">
+
+                        <div className="empty-icon">
+                            <FiShoppingBag />
+                        </div>
 
                         <h3>
                             Tu carrito está vacío
                         </h3>
 
                         <p>
-                            Añade alguna camiseta para comenzar.
+                            Añade alguna camiseta para comenzar tu pedido.
                         </p>
+
+                        <button
+                            className="empty-shop-btn"
+                            onClick={onClose}
+                        >
+                            Ver camisetas
+                        </button>
 
                     </div>
 
@@ -258,134 +270,182 @@ function CartDrawer({ open, onClose }) {
 
                         <div className="cart-items">
 
-                            {cart.map(item => (
+                            {cart.map(item => {
 
-                                <div
-                                    key={item.cartId}
-                                    className="cart-item"
-                                >
+                                const cantidad =
+                                    Number(
+                                        item.cantidad || 1
+                                    );
 
-                                    {/* IMAGEN */}
-
-                                    <img
-                                        src={
-                                            item.imagen ||
-                                            item.front
-                                        }
-                                        alt={item.nombre}
-                                    />
+                                const precio =
+                                    Number(
+                                        item.precio || 0
+                                    );
 
 
-                                    {/* INFORMACIÓN */}
+                                return (
 
-                                    <div className="cart-info">
-
-                                        <h4>
-                                            {item.nombre}
-                                        </h4>
-
-
-                                        <p>
-                                            Talla {item.talla || "-"}
-                                        </p>
+                                    <article
+                                        key={item.cartId}
+                                        className="cart-item"
+                                    >
 
 
-                                        {/* PRECIO */}
+                                        {/* IMAGEN */}
 
-                                        <strong>
-                                            {Number(
-                                                item.precio || 0
-                                            ).toFixed(2)} €
-                                        </strong>
+                                        <div className="cart-product-image">
 
-
-                                        {/* PERSONALIZACIÓN */}
-
-                                        {(item.nombrePersonalizado ||
-                                            item.numero) && (
-
-                                            <small>
-
-                                                ✍️{" "}
-
-                                                {item.nombrePersonalizado ||
-                                                    "Sin nombre"}
-
-                                                {item.numero &&
-                                                    ` #${item.numero}`}
-
-                                                {" (+5 €)"}
-
-                                            </small>
-
-                                        )}
-
-
-                                        {/* PARCHE */}
-
-                                        <small>
-
-                                            🏆{" "}
-
-                                            {getPatchName(item)}
-
-                                        </small>
-
-
-                                        {/* CANTIDAD */}
-
-                                        <div className="qty">
-
-                                            <button
-                                                onClick={() =>
-                                                    decreaseQuantity(
-                                                        item.cartId
-                                                    )
+                                            <img
+                                                src={
+                                                    item.imagen ||
+                                                    item.front
                                                 }
-                                                aria-label="Reducir cantidad"
-                                            >
-                                                <FiMinus />
-                                            </button>
-
-
-                                            <span>
-                                                {item.cantidad || 1}
-                                            </span>
-
-
-                                            <button
-                                                onClick={() =>
-                                                    increaseQuantity(
-                                                        item.cartId
-                                                    )
-                                                }
-                                                aria-label="Aumentar cantidad"
-                                            >
-                                                <FiPlus />
-                                            </button>
+                                                alt={item.nombre}
+                                            />
 
                                         </div>
 
-                                    </div>
+
+                                        {/* INFORMACIÓN */}
+
+                                        <div className="cart-info">
 
 
-                                    {/* ELIMINAR */}
+                                            <div className="cart-product-top">
 
-                                    <button
-                                        className="remove-item"
-                                        onClick={() =>
-                                            removeFromCart(
-                                                item.cartId
-                                            )
-                                        }
-                                        aria-label="Eliminar producto"
-                                    >
-                                        <FiTrash2 />
-                                    </button>
+                                                <div>
 
-                                </div>
+                                                    <span className="cart-league">
+                                                        {item.liga || "Fútbol"}
+                                                    </span>
 
-                            ))}
+                                                    <h4>
+                                                        {item.nombre}
+                                                    </h4>
+
+                                                </div>
+
+
+                                                <button
+                                                    className="remove-item"
+                                                    onClick={() =>
+                                                        removeFromCart(
+                                                            item.cartId
+                                                        )
+                                                    }
+                                                    aria-label="Eliminar producto"
+                                                >
+                                                    <FiTrash2 />
+                                                </button>
+
+                                            </div>
+
+
+                                            {/* DETALLES */}
+
+                                            <div className="cart-details">
+
+                                                <span>
+                                                    Talla {item.talla || "-"}
+                                                </span>
+
+                                                <span>
+                                                    {getPatchName(item)}
+                                                </span>
+
+                                            </div>
+
+
+                                            {/* PERSONALIZACIÓN */}
+
+                                            {(item.nombrePersonalizado ||
+                                                item.numero) && (
+
+                                                <div className="cart-personalization">
+
+                                                    <span>
+                                                        ✍️
+                                                    </span>
+
+                                                    <div>
+
+                                                        {item.nombrePersonalizado && (
+
+                                                            <strong>
+                                                                {item.nombrePersonalizado}
+                                                            </strong>
+
+                                                        )}
+
+                                                        {item.numero && (
+
+                                                            <strong>
+                                                                #{item.numero}
+                                                            </strong>
+
+                                                        )}
+
+                                                    </div>
+
+                                                    <small>
+                                                        +5 €
+                                                    </small>
+
+                                                </div>
+
+                                            )}
+
+
+                                            {/* PRECIO + CANTIDAD */}
+
+                                            <div className="cart-product-bottom">
+
+                                                <strong className="cart-price">
+                                                    {precio.toFixed(2)} €
+                                                </strong>
+
+
+                                                <div className="qty">
+
+                                                    <button
+                                                        onClick={() =>
+                                                            decreaseQuantity(
+                                                                item.cartId
+                                                            )
+                                                        }
+                                                        aria-label="Reducir cantidad"
+                                                    >
+                                                        <FiMinus />
+                                                    </button>
+
+
+                                                    <span>
+                                                        {cantidad}
+                                                    </span>
+
+
+                                                    <button
+                                                        onClick={() =>
+                                                            increaseQuantity(
+                                                                item.cartId
+                                                            )
+                                                        }
+                                                        aria-label="Aumentar cantidad"
+                                                    >
+                                                        <FiPlus />
+                                                    </button>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </article>
+
+                                );
+
+                            })}
 
                         </div>
 
@@ -394,12 +454,39 @@ function CartDrawer({ open, onClose }) {
                             FOOTER
                         ================================== */}
 
-                        <div className="cart-footer">
+                        <footer className="cart-footer">
+
+
+                            {/* DESCUENTO */}
+
+                            {descuento > 0 && (
+
+                                <div className="discount">
+
+                                    <div>
+
+                                        <span>
+                                            🎁 Oferta activada
+                                        </span>
+
+                                        <small>
+                                            10% de descuento
+                                        </small>
+
+                                    </div>
+
+                                    <strong>
+                                        -{descuento.toFixed(2)} €
+                                    </strong>
+
+                                </div>
+
+                            )}
 
 
                             {/* SUBTOTAL */}
 
-                            <div className="subtotal">
+                            <div className="summary-row">
 
                                 <span>
                                     Subtotal
@@ -412,28 +499,9 @@ function CartDrawer({ open, onClose }) {
                             </div>
 
 
-                            {/* DESCUENTO */}
-
-                            {descuento > 0 && (
-
-                                <div className="discount">
-
-                                    <span>
-                                        🎁 Descuento 10%
-                                    </span>
-
-                                    <strong>
-                                        -{descuento.toFixed(2)} €
-                                    </strong>
-
-                                </div>
-
-                            )}
-
-
                             {/* TOTAL */}
 
-                            <div className="cart-total">
+                            <div className="summary-total">
 
                                 <span>
                                     Total
@@ -452,7 +520,17 @@ function CartDrawer({ open, onClose }) {
                                 className="buy-btn"
                                 onClick={comprarWhatsApp}
                             >
-                                📲 Comprar por WhatsApp
+
+                                <FiMessageCircle />
+
+                                <span>
+                                    Comprar por WhatsApp
+                                </span>
+
+                                <strong>
+                                    {total.toFixed(2)} €
+                                </strong>
+
                             </button>
 
 
@@ -465,7 +543,7 @@ function CartDrawer({ open, onClose }) {
                                 Vaciar carrito
                             </button>
 
-                        </div>
+                        </footer>
 
                     </>
 

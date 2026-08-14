@@ -1,200 +1,448 @@
 /* ==========================================
-   ACTIVZONE25 - FAVORITES
+   ACTIVZONE25 - FAVORITES PREMIUM
 ========================================== */
 
+.favorites-page {
 
-.favorites-page{
+    min-height: 100vh;
 
-    min-height:100vh;
+    padding: 80px 25px 100px;
 
-    padding:80px 25px;
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(0, 210, 106, .08),
+            transparent 35%
+        ),
+        #0b0b0b;
 
-    background:#0b0b0b;
-
-    color:white;
-
-}
-
-
-
-
-.favorites-header{
-
-    text-align:center;
-
-    margin-bottom:50px;
+    color: #fff;
 
 }
 
 
+/* ==========================================
+   CABECERA
+========================================== */
 
-.favorites-header h1{
+.favorites-header {
 
-    margin:15px 0;
+    max-width: 1400px;
 
-    font-size:48px;
+    margin: 0 auto 50px;
 
-    font-weight:900;
-
-}
-
-
-
-.favorites-header p{
-
-    color:#aaa;
+    text-align: center;
 
 }
 
 
+.section-badge {
 
+    display: inline-flex;
 
-.clear-favorites{
+    align-items: center;
 
-    margin-top:20px;
+    justify-content: center;
 
-    padding:13px 25px;
+    padding: 8px 15px;
 
+    border-radius: 999px;
 
-    border-radius:14px;
+    background: rgba(0, 210, 106, .1);
 
+    border: 1px solid rgba(0, 210, 106, .25);
 
-    background:#171717;
+    color: #00d26a;
 
+    font-size: 11px;
 
-    border:1px solid #333;
+    font-weight: 900;
 
-
-    color:white;
-
-
-    font-weight:800;
-
-
-    cursor:pointer;
-
-
-    transition:.3s;
+    letter-spacing: 1.5px;
 
 }
 
 
+.favorites-header h1 {
 
-.clear-favorites:hover{
+    margin: 15px 0 8px;
 
-    border-color:#ff5555;
+    font-size: 48px;
 
-    color:#ff5555;
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: -1px;
 
 }
 
 
+.favorites-header p {
+
+    margin: 0;
+
+    color: #888;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
 
 
-.favorites-grid{
+/* ==========================================
+   VACIAR FAVORITOS
+========================================== */
 
-    max-width:1400px;
+.clear-favorites {
 
-    margin:auto;
+    margin-top: 22px;
+
+    padding: 12px 22px;
+
+    border-radius: 12px;
+
+    background: #151515;
+
+    border: 1px solid rgba(255, 255, 255, .1);
+
+    color: #aaa;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        color .25s ease,
+        border-color .25s ease,
+        background .25s ease,
+        transform .25s ease;
+
+}
 
 
-    display:grid;
+.clear-favorites:hover {
 
+    background: rgba(255, 45, 85, .08);
+
+    border-color: rgba(255, 45, 85, .5);
+
+    color: #ff4055;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* ==========================================
+   GRID
+========================================== */
+
+.favorites-grid {
+
+    width: 100%;
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    display: grid;
 
     grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(260px, 1fr)
+        );
 
-    repeat(auto-fill,minmax(260px,1fr));
-
-
-    gap:25px;
-
-}
-
-
-
-
-
-.favorites-empty{
-
-    min-height:40vh;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-
-    text-align:center;
+    gap: 25px;
 
 }
 
 
+/* ==========================================
+   FAVORITOS VACÍOS
+========================================== */
 
-.favorites-empty h2{
+.favorites-empty {
 
-    font-size:32px;
+    min-height: 45vh;
 
-}
+    max-width: 600px;
 
+    margin: 0 auto;
 
+    padding: 50px 30px;
 
-.favorites-empty p{
+    display: flex;
 
-    color:#aaa;
+    flex-direction: column;
 
-}
+    justify-content: center;
 
+    align-items: center;
 
+    text-align: center;
 
+    border-radius: 28px;
 
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #101010
+        );
 
-.back-shop{
+    border: 1px solid rgba(255, 255, 255, .07);
 
-    margin-top:25px;
-
-
-    padding:15px 35px;
-
-
-    background:#00d26a;
-
-
-    color:#000;
-
-
-    border-radius:15px;
-
-
-    text-decoration:none;
-
-
-    font-weight:900;
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, .3);
 
 }
 
 
+/* ==========================================
+   ICONO VACÍO
+========================================== */
+
+.favorites-empty-icon {
+
+    width: 82px;
+
+    height: 82px;
+
+    margin-bottom: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(0, 210, 106, .08);
+
+    border:
+        1px solid rgba(0, 210, 106, .2);
+
+    font-size: 34px;
+
+    box-shadow:
+        0 0 35px rgba(0, 210, 106, .08);
+
+}
 
 
+/* ==========================================
+   TEXTO VACÍO
+========================================== */
 
-@media(max-width:600px){
+.favorites-empty h2 {
+
+    margin: 0 0 10px;
+
+    font-size: 30px;
+
+    font-weight: 900;
+
+}
 
 
-    .favorites-page{
+.favorites-empty p {
 
-        padding:50px 15px;
+    max-width: 420px;
+
+    margin: 0;
+
+    color: #888;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* ==========================================
+   VOLVER A LA TIENDA
+========================================== */
+
+.back-shop {
+
+    margin-top: 25px;
+
+    padding: 14px 30px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #00d26a;
+
+    color: #000;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+
+.back-shop:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 14px 30px rgba(0, 210, 106, .25);
+
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 900px) {
+
+    .favorites-page {
+
+        padding: 65px 20px 80px;
 
     }
 
 
+    .favorites-grid {
 
-    .favorites-header h1{
+        grid-template-columns:
+            repeat(
+                auto-fill,
+                minmax(230px, 1fr)
+            );
 
-        font-size:32px;
+        gap: 20px;
 
     }
 
+}
+
+
+/* ==========================================
+   MÓVIL
+========================================== */
+
+@media (max-width: 600px) {
+
+    .favorites-page {
+
+        padding: 45px 15px 70px;
+
+    }
+
+
+    .favorites-header {
+
+        margin-bottom: 35px;
+
+    }
+
+
+    .favorites-header h1 {
+
+        font-size: 34px;
+
+        letter-spacing: -.5px;
+
+    }
+
+
+    .favorites-header p {
+
+        font-size: 13px;
+
+    }
+
+
+    .favorites-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 14px;
+
+    }
+
+
+    .favorites-empty {
+
+        min-height: 42vh;
+
+        padding: 35px 20px;
+
+        border-radius: 22px;
+
+    }
+
+
+    .favorites-empty-icon {
+
+        width: 70px;
+
+        height: 70px;
+
+        font-size: 28px;
+
+    }
+
+
+    .favorites-empty h2 {
+
+        font-size: 24px;
+
+    }
+
+
+    .favorites-empty p {
+
+        font-size: 13px;
+
+    }
+
+
+    .back-shop {
+
+        width: 100%;
+
+        max-width: 240px;
+
+    }
+
+}
+
+
+/* ==========================================
+   MÓVIL PEQUEÑO
+========================================== */
+
+@media (max-width: 380px) {
+
+    .favorites-grid {
+
+        grid-template-columns: 1fr;
+
+    }
 
 }

@@ -1,455 +1,666 @@
-/* ==========================================
+/* =====================================================
    ACTIVZONE25 - PRODUCT CARD PREMIUM
-========================================== */
+===================================================== */
 
-.product-card{
+.product-card {
+    position: relative;
 
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
 
-    background:#111;
+    height: 100%;
+    min-width: 0;
 
-    border-radius:24px;
+    overflow: hidden;
 
-    overflow:hidden;
+    background:
+        linear-gradient(
+            145deg,
+            #171717 0%,
+            #0f0f0f 100%
+        );
 
-    text-decoration:none;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 24px;
 
-    color:white;
-
-    border:1px solid rgba(255,255,255,.08);
-
-    transition:.35s ease;
-
-    position:relative;
-
-}
-
-
-/* HOVER */
-
-.product-card:hover{
-
-    transform:translateY(-10px);
-
-    border-color:#00d26a;
+    color: #fff;
+    text-decoration: none;
 
     box-shadow:
-    0 25px 60px rgba(0,210,106,.18);
+        0 12px 35px rgba(0, 0, 0, .18);
 
+    transition:
+        transform .35s cubic-bezier(.2, .8, .2, 1),
+        border-color .35s ease,
+        box-shadow .35s ease;
 }
 
 
+/* =====================================================
+   HOVER CARD
+===================================================== */
 
-/* ==========================================
+.product-card:hover {
+    transform: translateY(-8px);
+
+    border-color:
+        rgba(0, 210, 106, .65);
+
+    box-shadow:
+        0 25px 65px rgba(0, 0, 0, .45),
+        0 10px 35px rgba(0, 210, 106, .10);
+}
+
+
+/* =====================================================
    IMAGEN
-========================================== */
+===================================================== */
 
+.product-image {
+    position: relative;
 
-.product-image{
+    width: 100%;
 
-    position:relative;
+    aspect-ratio: 1 / 1;
 
-    background:#161616;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    aspect-ratio:1/1;
+    overflow: hidden;
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    overflow:hidden;
-
+    background:
+        radial-gradient(
+            circle at center,
+            #222 0%,
+            #171717 45%,
+            #101010 100%
+        );
 }
 
 
+/* brillo superior */
 
-.product-image img{
+.product-image::before {
+    content: "";
 
-    width:85%;
+    position: absolute;
+    inset: 0;
 
-    height:85%;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.06),
+            transparent 35%
+        );
 
-    object-fit:contain;
-
-    transition:.4s ease;
-
+    pointer-events: none;
 }
 
 
+/* línea inferior */
 
-.product-card:hover .product-image img{
+.product-image::after {
+    content: "";
 
-    transform:scale(1.08);
+    position: absolute;
 
+    left: 12%;
+    right: 12%;
+    bottom: 0;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.12),
+            transparent
+        );
+
+    pointer-events: none;
 }
 
 
+/* =====================================================
+   CAMISETA
+===================================================== */
 
-/* ==========================================
-   BADGE
-========================================== */
+.product-image img {
+    position: relative;
+    z-index: 1;
 
+    width: 87%;
+    height: 87%;
 
-.badge{
+    object-fit: contain;
 
-    position:absolute;
+    filter:
+        drop-shadow(
+            0 18px 22px rgba(0,0,0,.35)
+        );
 
-    top:15px;
-
-    left:15px;
-
-    z-index:2;
-
-    background:#00d26a;
-
-    color:#000;
-
-    padding:7px 14px;
-
-    border-radius:20px;
-
-    font-size:12px;
-
-    font-weight:900;
-
+    transition:
+        transform .5s cubic-bezier(.2,.8,.2,1),
+        filter .5s ease;
 }
 
 
+.product-card:hover .product-image img {
+    transform:
+        scale(1.07)
+        translateY(-3px);
 
-/* ==========================================
+    filter:
+        drop-shadow(
+            0 25px 30px rgba(0,0,0,.48)
+        );
+}
+
+
+/* =====================================================
+   BADGES
+===================================================== */
+
+.badge {
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+
+    z-index: 5;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    background: #00d26a;
+
+    color: #000;
+
+    font-size: 10px;
+    font-weight: 950;
+
+    letter-spacing: .8px;
+    text-transform: uppercase;
+
+    box-shadow:
+        0 7px 20px rgba(0,210,106,.20);
+}
+
+
+/* =====================================================
    FAVORITO
-========================================== */
+===================================================== */
 
+.favorite-btn {
+    position: absolute;
 
-.favorite-btn{
+    top: 14px;
+    right: 14px;
 
-    position:absolute;
+    z-index: 6;
 
-    top:15px;
+    width: 42px;
+    height: 42px;
 
-    right:15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    width:40px;
+    padding: 0;
 
-    height:40px;
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 50%;
 
-    border-radius:50%;
+    background:
+        rgba(8,8,8,.72);
 
-    border:none;
+    color: #fff;
 
-    background:rgba(0,0,0,.55);
+    backdrop-filter: blur(10px);
 
-    color:white;
+    cursor: pointer;
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    cursor:pointer;
-
-    z-index:3;
-
-    transition:.3s;
-
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        color .25s ease;
 }
 
 
-
-.favorite-btn:hover{
-
-    background:#00d26a;
-
-    color:#000;
-
+.favorite-btn svg {
+    font-size: 18px;
 }
 
 
+.favorite-btn:hover {
+    transform: scale(1.08);
 
-.favorite-btn.active{
+    background: #00d26a;
 
-    background:#00d26a;
+    border-color: #00d26a;
 
-    color:#000;
-
+    color: #000;
 }
 
 
+.favorite-btn.active {
+    background: #00d26a;
 
-/* ==========================================
+    border-color: #00d26a;
+
+    color: #000;
+}
+
+
+/* =====================================================
    INFORMACIÓN
-========================================== */
+===================================================== */
 
+.product-info {
+    position: relative;
 
-.product-info{
+    display: flex;
+    flex-direction: column;
 
-    padding:22px;
+    flex: 1;
 
+    padding: 20px;
 }
 
 
+/* =====================================================
+   LIGA
+===================================================== */
 
-.league{
+.league {
+    color: #00d26a;
 
-    color:#00d26a;
+    font-size: 10px;
+    font-weight: 950;
 
-    font-size:13px;
+    letter-spacing: 1.4px;
 
-    font-weight:800;
-
+    text-transform: uppercase;
 }
 
 
+/* =====================================================
+   NOMBRE
+===================================================== */
 
-.product-info h3{
+.product-info h3 {
+    margin: 8px 0 5px;
 
-    margin:10px 0;
+    color: #fff;
 
-    font-size:22px;
+    font-size: 21px;
+    font-weight: 900;
 
-    font-weight:900;
-
+    line-height: 1.15;
 }
 
 
+/* =====================================================
+   TEMPORADA
+===================================================== */
 
-.product-info p{
+.product-info p {
+    margin: 0 0 13px;
 
-    color:#999;
+    color: #777;
 
-    margin-bottom:15px;
-
+    font-size: 12px;
+    font-weight: 600;
 }
 
 
-
-/* ==========================================
+/* =====================================================
    ETIQUETAS
-========================================== */
+===================================================== */
 
+.product-tags {
+    display: flex;
+    flex-wrap: wrap;
 
-.product-tags{
+    gap: 6px;
 
-    display:flex;
-
-    gap:8px;
-
-    flex-wrap:wrap;
-
-    margin-bottom:15px;
-
+    margin-bottom: 10px;
 }
 
 
+.product-tags span {
+    padding: 5px 8px;
 
-.product-tags span{
+    border:
+        1px solid rgba(255,255,255,.07);
 
-    background:#1d1d1d;
+    border-radius: 8px;
 
-    padding:6px 10px;
+    background: #191919;
 
-    border-radius:10px;
+    color: #aaa;
 
-    font-size:12px;
-
+    font-size: 10px;
+    font-weight: 800;
 }
 
 
-
-/* ==========================================
+/* =====================================================
    PRECIO
-========================================== */
+===================================================== */
 
+.price-box {
+    display: flex;
+    align-items: baseline;
 
-.price-box{
+    gap: 9px;
 
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    margin:15px 0;
-
+    margin:
+        5px 0 14px;
 }
 
 
+.old-price {
+    color: #666;
 
-.old-price{
+    font-size: 13px;
 
-    color:#777;
-
-    text-decoration:line-through;
-
-    font-size:15px;
-
+    text-decoration: line-through;
 }
 
 
+.new-price {
+    color: #00d26a;
 
-.new-price{
+    font-size: 27px;
+    font-weight: 950;
 
-    color:#00d26a;
-
-    font-size:28px;
-
-    font-weight:900;
-
+    letter-spacing: -.5px;
 }
 
 
-
-/* ==========================================
+/* =====================================================
    VALORACIÓN
-========================================== */
+===================================================== */
 
+.rating {
+    display: flex;
+    align-items: center;
 
-.rating{
+    gap: 7px;
 
-    display:flex;
-
-    gap:8px;
-
-    align-items:center;
-
-    margin-bottom:12px;
-
+    margin-bottom: 15px;
 }
 
 
+.rating span {
+    color: #777;
 
-.rating span{
-
-    color:#999;
-
-    font-size:14px;
-
+    font-size: 12px;
 }
 
 
+.rating span:first-child {
+    color: #fff;
 
-/* ==========================================
-   STOCK Y ENVÍO
-========================================== */
-
-
-.extra-info{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    color:#aaa;
-
-    font-size:13px;
-
-    margin-bottom:18px;
-
+    font-weight: 800;
 }
 
 
-
-/* ==========================================
+/* =====================================================
    BOTÓN CARRITO
-========================================== */
+===================================================== */
 
+.quick-cart {
+    width: 100%;
 
-.quick-cart{
+    min-height: 48px;
 
-    width:100%;
+    margin-top: auto;
 
-    padding:14px;
+    padding: 12px 15px;
 
-    border:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    border-radius:14px;
+    gap: 8px;
 
-    background:#00d26a;
+    border: none;
+    border-radius: 12px;
 
-    color:#000;
+    background: #00d26a;
 
-    font-weight:900;
+    color: #000;
 
-    display:flex;
+    font-size: 13px;
+    font-weight: 950;
 
-    align-items:center;
+    cursor: pointer;
 
-    justify-content:center;
-
-    gap:8px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
 }
 
 
-
-.quick-cart:hover{
-
-    transform:scale(1.03);
-
+.quick-cart svg {
+    font-size: 17px;
 }
 
 
+.quick-cart:hover {
+    transform: translateY(-2px);
 
-/* ==========================================
+    background: #19df7b;
+
+    box-shadow:
+        0 12px 28px rgba(0,210,106,.25);
+}
+
+
+.quick-cart:active {
+    transform: scale(.98);
+}
+
+
+/* =====================================================
    VER PRODUCTO
-========================================== */
+===================================================== */
+
+.view-product {
+    margin-top: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    color: #888;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    transition:
+        color .25s ease;
+}
 
 
-.view-product{
+.view-product svg {
+    transition:
+        transform .25s ease;
+}
 
-    margin-top:15px;
 
-    display:flex;
+.product-card:hover .view-product {
+    color: #00d26a;
+}
 
-    justify-content:center;
 
-    align-items:center;
+.product-card:hover .view-product svg {
+    transform:
+        translateX(4px);
+}
 
-    gap:8px;
 
-    color:white;
+/* =====================================================
+   TABLET
+===================================================== */
 
-    font-weight:700;
+@media (max-width: 800px) {
 
-    font-size:14px;
+    .product-info {
+        padding: 17px;
+    }
+
+    .product-info h3 {
+        font-size: 19px;
+    }
+
+    .new-price {
+        font-size: 24px;
+    }
 
 }
 
 
-
-/* ==========================================
+/* =====================================================
    MÓVIL
-========================================== */
+===================================================== */
 
+@media (max-width: 600px) {
 
-@media(max-width:600px){
-
-    .product-info{
-
-        padding:16px;
-
+    .product-card {
+        border-radius: 18px;
     }
 
 
-    .product-info h3{
-
-        font-size:18px;
-
+    .product-image img {
+        width: 88%;
+        height: 88%;
     }
 
 
-    .new-price{
+    .product-info {
+        padding: 14px;
+    }
 
-        font-size:24px;
 
+    .badge {
+        top: 10px;
+        left: 10px;
+
+        padding: 6px 9px;
+
+        font-size: 9px;
+    }
+
+
+    .favorite-btn {
+        top: 9px;
+        right: 9px;
+
+        width: 36px;
+        height: 36px;
+    }
+
+
+    .favorite-btn svg {
+        font-size: 16px;
+    }
+
+
+    .league {
+        font-size: 9px;
+    }
+
+
+    .product-info h3 {
+        margin-top: 6px;
+
+        font-size: 17px;
+    }
+
+
+    .product-info p {
+        font-size: 11px;
+    }
+
+
+    .product-tags {
+        gap: 5px;
+    }
+
+
+    .product-tags span {
+        padding: 4px 7px;
+
+        font-size: 9px;
+    }
+
+
+    .new-price {
+        font-size: 22px;
+    }
+
+
+    .old-price {
+        font-size: 11px;
+    }
+
+
+    .rating {
+        margin-bottom: 12px;
+    }
+
+
+    .quick-cart {
+        min-height: 44px;
+
+        padding: 10px;
+
+        font-size: 12px;
+    }
+
+
+    .view-product {
+        margin-top: 10px;
+
+        font-size: 11px;
+    }
+
+}
+
+
+/* =====================================================
+   MÓVIL MUY PEQUEÑO
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .product-info {
+        padding: 12px;
+    }
+
+
+    .product-info h3 {
+        font-size: 16px;
+    }
+
+
+    .new-price {
+        font-size: 20px;
+    }
+
+
+    .quick-cart {
+        font-size: 11px;
     }
 
 }

@@ -51,6 +51,7 @@ function Categories({
 
                     <button
                         key={item.id}
+                        type="button"
                         className={
                             category === item.id
                                 ? "active"
@@ -65,7 +66,7 @@ function Categories({
                             {item.icon}
                         </span>
 
-                        <span>
+                        <span className="category-name">
                             {item.name}
                         </span>
 

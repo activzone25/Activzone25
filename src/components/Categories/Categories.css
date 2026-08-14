@@ -1,12 +1,12 @@
 /* =====================================================
-   ACTIVZONE25 - CATEGORIES
+   ACTIVZONE25 - CATEGORIES PREMIUM
 ===================================================== */
 
 .categories {
     width: 100%;
     max-width: 1400px;
 
-    margin: 32px auto 25px;
+    margin: 35px auto 28px;
 
     padding: 0 30px;
 
@@ -21,12 +21,28 @@
 .categories-container {
     display: flex;
 
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
-    gap: 12px;
+    gap: 10px;
 
-    flex-wrap: wrap;
+    padding: 8px;
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,.015)
+        );
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.18);
+
+    backdrop-filter: blur(12px);
 }
 
 
@@ -35,6 +51,8 @@
 ===================================================== */
 
 .categories button {
+    position: relative;
+
     display: inline-flex;
 
     align-items: center;
@@ -44,27 +62,31 @@
 
     min-height: 48px;
 
-    padding: 11px 20px;
+    padding: 10px 19px;
 
-    border: 1px solid #292929;
-    border-radius: 999px;
+    border: 1px solid transparent;
 
-    background: #111;
+    border-radius: 12px;
 
-    color: #aaa;
+    background: transparent;
 
-    font-size: 14px;
-    font-weight: 800;
+    color: #888;
+
+    font-size: 13px;
+
+    font-weight: 900;
+
+    letter-spacing: .2px;
 
     white-space: nowrap;
 
     cursor: pointer;
 
     transition:
-        transform .25s ease,
         color .25s ease,
         background .25s ease,
         border-color .25s ease,
+        transform .25s ease,
         box-shadow .25s ease;
 }
 
@@ -76,14 +98,12 @@
 .categories button:hover {
     color: #fff;
 
-    background: #181818;
+    background: rgba(255,255,255,.055);
 
-    border-color: #00d26a;
+    border-color:
+        rgba(255,255,255,.08);
 
     transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 22px rgba(0, 210, 106, .15);
 }
 
 
@@ -92,14 +112,63 @@
 ===================================================== */
 
 .categories button.active {
-    background: #00d26a;
-
     color: #000;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00e676,
+            #00d26a
+        );
 
     border-color: #00d26a;
 
     box-shadow:
-        0 8px 25px rgba(0, 210, 106, .28);
+        0 8px 24px rgba(0,210,106,.25),
+        inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+
+.categories button.active:hover {
+    color: #000;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00e676,
+            #00d26a
+        );
+
+    transform:
+        translateY(-2px)
+        scale(1.02);
+}
+
+
+/* =====================================================
+   INDICADOR ACTIVO
+===================================================== */
+
+.categories button.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: -5px;
+
+    width: 18px;
+    height: 3px;
+
+    border-radius: 999px;
+
+    background: #00d26a;
+
+    transform: translateX(-50%);
+
+    box-shadow:
+        0 0 12px rgba(0,210,106,.65);
 }
 
 
@@ -113,96 +182,195 @@
     align-items: center;
     justify-content: center;
 
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
+
+    flex-shrink: 0;
 
     font-size: 18px;
 
     line-height: 1;
+
+    transition:
+        transform .25s ease,
+        filter .25s ease;
 }
 
 
 /* =====================================================
-   ACTIVE ICON
+   ICONO HOVER
+===================================================== */
+
+.categories button:hover .category-icon {
+    transform: scale(1.12);
+}
+
+
+/* =====================================================
+   ICONO ACTIVO
 ===================================================== */
 
 .categories button.active .category-icon {
-    filter: saturate(1.15);
+    transform: scale(1.08);
+
+    filter:
+        saturate(1.15)
+        contrast(1.05);
 }
 
 
 /* =====================================================
-   RESPONSIVE TABLET
+   NOMBRE
 ===================================================== */
 
-@media (max-width: 768px) {
+.category-name {
+    line-height: 1;
+
+    transition:
+        color .25s ease;
+}
+
+
+/* =====================================================
+   EFECTO CLICK
+===================================================== */
+
+.categories button:active {
+    transform: scale(.96);
+}
+
+
+/* =====================================================
+   FOCUS
+===================================================== */
+
+.categories button:focus-visible {
+    outline: 2px solid #00d26a;
+
+    outline-offset: 3px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
 
     .categories {
-        margin: 25px auto 20px;
+        margin: 28px auto 22px;
 
         padding: 0 20px;
     }
 
+
     .categories-container {
         justify-content: flex-start;
-
-        gap: 10px;
 
         overflow-x: auto;
 
         flex-wrap: nowrap;
 
-        padding: 3px 2px 8px;
+        padding: 7px;
 
         scrollbar-width: none;
 
         -webkit-overflow-scrolling: touch;
     }
 
+
     .categories-container::-webkit-scrollbar {
         display: none;
     }
 
+
     .categories button {
         flex-shrink: 0;
 
-        min-height: 44px;
+        min-height: 46px;
 
         padding: 10px 17px;
 
         font-size: 13px;
     }
+
 }
 
 
 /* =====================================================
-   RESPONSIVE MOVIL
+   MÓVIL
 ===================================================== */
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
 
     .categories {
-        margin: 20px auto 15px;
+        margin: 22px auto 18px;
 
         padding: 0 15px;
     }
 
+
     .categories-container {
-        gap: 8px;
+        gap: 7px;
+
+        padding: 6px;
+
+        border-radius: 15px;
     }
 
+
     .categories button {
-        min-height: 42px;
+        min-height: 43px;
 
         padding: 9px 15px;
 
-        font-size: 13px;
+        gap: 7px;
+
+        border-radius: 10px;
+
+        font-size: 12px;
     }
+
 
     .category-icon {
-        width: 20px;
-        height: 20px;
+        width: 21px;
+        height: 21px;
 
-        font-size: 17px;
+        font-size: 16px;
     }
+
+
+    .categories button.active::after {
+        bottom: -4px;
+
+        width: 15px;
+
+        height: 2px;
+    }
+
+}
+
+
+/* =====================================================
+   MÓVIL PEQUEÑO
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .categories {
+        padding: 0 12px;
+    }
+
+
+    .categories-container {
+        gap: 5px;
+    }
+
+
+    .categories button {
+        padding: 9px 13px;
+
+        font-size: 11px;
+    }
+
 }
