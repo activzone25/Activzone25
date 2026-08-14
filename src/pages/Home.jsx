@@ -7,10 +7,15 @@ import ProductGrid from "../components/ProductGrid/ProductGrid";
 
 import "./Home.css";
 
+
 function Home({ search = "" }) {
 
-    const [category, setCategory] = useState("Todas");
-    const [maxPrice, setMaxPrice] = useState(40);
+    const [category, setCategory] =
+        useState("Todas");
+
+    const [maxPrice, setMaxPrice] =
+        useState(40);
+
 
     return (
 
@@ -18,15 +23,18 @@ function Home({ search = "" }) {
 
             <Hero />
 
+
             <Categories
                 category={category}
                 setCategory={setCategory}
             />
 
+
             <PriceFilter
                 maxPrice={maxPrice}
                 setMaxPrice={setMaxPrice}
             />
+
 
             <section id="productos">
 
@@ -43,5 +51,6 @@ function Home({ search = "" }) {
     );
 
 }
+
 
 export default Home;

@@ -20,21 +20,22 @@ function Header({
     setMenuOpen = () => {}
 }) {
 
-    const { cart } = useCart();
-    const { favorites } = useFavorites();
+    const {
+        totalProductos
+    } = useCart();
 
-
-    const totalProductos = cart.reduce(
-        (total, item) =>
-            total + (item.cantidad || 1),
-        0
-    );
+    const {
+        favorites
+    } = useFavorites();
 
 
     return (
+
         <header className="header">
 
             <div className="header-container">
+
+                {/* MENÚ MÓVIL */}
 
                 <button
                     className="menu-mobile"
@@ -45,6 +46,8 @@ function Header({
                 </button>
 
 
+                {/* LOGO */}
+
                 <Link
                     to="/"
                     className="logo"
@@ -53,15 +56,19 @@ function Header({
                 </Link>
 
 
+                {/* BUSCADOR */}
+
                 <div className="search-box">
 
-                    <FiSearch className="search-icon" />
+                    <FiSearch
+                        className="search-icon"
+                    />
 
                     <input
                         type="text"
                         placeholder="Buscar camiseta..."
                         value={search}
-                        onChange={(e) =>
+                        onChange={e =>
                             setSearch(e.target.value)
                         }
                     />
@@ -69,7 +76,12 @@ function Header({
                 </div>
 
 
+                {/* ACCIONES */}
+
                 <div className="header-actions">
+
+
+                    {/* FAVORITOS */}
 
                     <Link
                         to="/favoritos"
@@ -80,34 +92,46 @@ function Header({
                         <FiHeart />
 
                         {favorites.length > 0 && (
+
                             <span className="count">
                                 {favorites.length}
                             </span>
+
                         )}
 
                     </Link>
 
 
+                    {/* CARRITO */}
+
                     <button
                         className="icon-btn"
-                        onClick={() => setCartOpen(true)}
+                        onClick={() =>
+                            setCartOpen(true)
+                        }
                         aria-label="Abrir carrito"
                     >
 
                         <FiShoppingCart />
 
                         {totalProductos > 0 && (
+
                             <span className="count">
                                 {totalProductos}
                             </span>
+
                         )}
 
                     </button>
 
 
+                    {/* MENÚ */}
+
                     <button
                         className="icon-btn menu-btn"
-                        onClick={() => setMenuOpen(true)}
+                        onClick={() =>
+                            setMenuOpen(true)
+                        }
                         aria-label="Abrir menú"
                     >
                         <FiMenu />
@@ -118,7 +142,9 @@ function Header({
             </div>
 
         </header>
+
     );
+
 }
 
 

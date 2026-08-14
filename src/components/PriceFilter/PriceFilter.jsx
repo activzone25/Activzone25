@@ -3,10 +3,19 @@ import "./PriceFilter.css";
 function PriceFilter({ maxPrice, setMaxPrice }) {
 
     return (
-
         <section className="price-filter">
 
-            <h3>Precio máximo</h3>
+            <div className="price-filter-header">
+
+                <h3>
+                    Precio máximo
+                </h3>
+
+                <strong>
+                    {maxPrice} €
+                </strong>
+
+            </div>
 
             <input
                 type="range"
@@ -14,15 +23,21 @@ function PriceFilter({ maxPrice, setMaxPrice }) {
                 max="40"
                 step="1"
                 value={maxPrice}
-                onChange={(e) => setMaxPrice(Number(e.target.value))}
+                onChange={(e) =>
+                    setMaxPrice(Number(e.target.value))
+                }
             />
 
-            <span>{maxPrice} €</span>
+            <div className="price-range">
+
+                <span>20 €</span>
+
+                <span>40 €</span>
+
+            </div>
 
         </section>
-
     );
-
 }
 
 export default PriceFilter;

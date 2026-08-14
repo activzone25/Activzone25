@@ -15,6 +15,8 @@ function CartDrawer({ open, onClose }) {
     const {
         cart,
         subtotal,
+        descuento,
+        total,
         increaseQuantity,
         decreaseQuantity,
         removeFromCart,
@@ -23,106 +25,118 @@ function CartDrawer({ open, onClose }) {
 
 
     // ==========================================
-    // TOTAL DE CAMISETAS
+    // NOMBRE DEL PARCHE
     // ==========================================
 
-    const totalProductos = cart.reduce(
-        (total, item) =>
-            total + (item.cantidad || 1),
-        0
-    );
+    function getPatchName(item) {
 
+        const patch = item.parche?.tipo;
 
-    // ==========================================
-    // DESCUENTO
-    // 10% POR CADA PAREJA DE 2 CAMISETAS
-    // ==========================================
+        if (patch === "laliga") {
+            return "LaLiga GRATIS";
+        }
 
-    const parejas = Math.floor(
-        totalProductos / 2
-    );
+        if (patch === "champions") {
+            return "Champions GRATIS";
+        }
 
-    const descuento =
-        parejas * (25 * 2 * 0.10);
+        return "Sin parche";
+    }
 
 
     // ==========================================
-    // TOTAL
-    // ==========================================
-
-    const total =
-        subtotal - descuento;
-
-
-    // ==========================================
-    // WHATSAPP
+    // COMPRAR POR WHATSAPP
     // ==========================================
 
     function comprarWhatsApp() {
 
-        if (!cart.length) return;
+        if (!cart.length) {
+            return;
+        }
 
-
-        let mensaje =
-`🛒 *PEDIDO ACTIVZONE25*
+        let mensaje = `🛒 *PEDIDO ACTIVZONE25*
 
 `;
-
 
         cart.forEach(item => {
 
+            const cantidad =
+                Number(item.cantidad || 1);
+
+            const precio =
+                Number(item.precio || 0);
+
+            const totalProducto =
+                precio * cantidad;
+
+
+            mensaje += `👕 *${item.nombre}*
+
+`;
+
+            mensaje += `📏 Talla: ${item.talla || "-"}
+
+`;
+
+            mensaje += `🏆 Parche: ${getPatchName(item)}
+
+`;
+
+
+            // PERSONALIZACIÓN
+
+            if (
+                item.nombrePersonalizado ||
+                item.numero
+            ) {
+
+                mensaje += `✍️ Personalización:
+
+`;
+
+                if (item.nombrePersonalizado) {
+
+                    mensaje +=
+                        `   Nombre: ${item.nombrePersonalizado}
+`;
+
+                }
+
+                if (item.numero) {
+
+                    mensaje +=
+                        `   Dorsal: ${item.numero}
+`;
+
+                }
+
+            }
+
+
             mensaje +=
-`👕 ${item.nombre}
-📏 Talla: ${item.talla || "-"}
-🔢 Cantidad: ${item.cantidad || 1}
-💰 Precio: ${(
-    Number(item.precio || 0) *
-    (item.cantidad || 1)
-).toFixed(2)} €
+                `🔢 Cantidad: ${cantidad}
 
 `;
-
-
-            if (item.nombrePersonalizado) {
-
-                mensaje +=
-`✍️ Nombre: ${item.nombrePersonalizado}
-
-`;
-
-            }
-
-
-            if (item.numero) {
-
-                mensaje +=
-`🔢 Dorsal: ${item.numero}
-
-`;
-
-            }
-
-
-            if (item.parche?.tipo) {
-
-                mensaje +=
-`🏆 Parche: ${item.parche.tipo}
-
-`;
-
-            }
-
 
             mensaje +=
-`----------------------
+                `💰 Precio: ${totalProducto.toFixed(2)} €
+
+`;
+
+            mensaje +=
+                `----------------------
 
 `;
 
         });
 
 
+        // ==========================================
+        // RESUMEN
+        // ==========================================
+
         mensaje +=
-`💰 Subtotal: ${subtotal.toFixed(2)} €
+            `💰 Subtotal: ${subtotal.toFixed(2)} €
 
 `;
 
@@ -130,7 +144,7 @@ function CartDrawer({ open, onClose }) {
         if (descuento > 0) {
 
             mensaje +=
-`🎁 Descuento 10% por cada 2 camisetas: -${descuento.toFixed(2)} €
+                `🎁 Descuento: -${descuento.toFixed(2)} €
 
 `;
 
@@ -138,22 +152,44 @@ function CartDrawer({ open, onClose }) {
 
 
         mensaje +=
-`💰 TOTAL: ${total.toFixed(2)} €`;
+            `💰 *TOTAL: ${total.toFixed(2)} €*
+
+`;
+
+
+        mensaje +=
+            `Gracias por comprar en ACTIVZONE25 ⚽`;
+
+
+        const telefono =
+            "34647602998";
+
+
+        const url =
+            `https://wa.me/${telefono}?text=${encodeURIComponent(
+                mensaje
+            )}`;
 
 
         window.open(
-            `https://wa.me/34647602998?text=${encodeURIComponent(mensaje)}`,
+            url,
             "_blank"
         );
 
     }
 
 
+    // ==========================================
+    // RENDER
+    // ==========================================
+
     return (
 
         <>
 
-            {/* OVERLAY */}
+            {/* ==========================================
+                OVERLAY
+            ========================================== */}
 
             <div
                 className={`cart-overlay ${
@@ -163,7 +199,9 @@ function CartDrawer({ open, onClose }) {
             />
 
 
-            {/* CARRITO */}
+            {/* ==========================================
+                CARRITO
+            ========================================== */}
 
             <aside
                 className={`cart-drawer ${
@@ -172,14 +210,15 @@ function CartDrawer({ open, onClose }) {
             >
 
 
-                {/* HEADER */}
+                {/* ======================================
+                    HEADER
+                ====================================== */}
 
                 <div className="cart-header">
 
                     <h2>
                         🛒 Mi carrito
                     </h2>
-
 
                     <button
                         onClick={onClose}
@@ -191,7 +230,9 @@ function CartDrawer({ open, onClose }) {
                 </div>
 
 
-                {/* CONTENIDO */}
+                {/* ======================================
+                    CARRITO VACÍO
+                ====================================== */}
 
                 {cart.length === 0 ? (
 
@@ -202,7 +243,7 @@ function CartDrawer({ open, onClose }) {
                         </h3>
 
                         <p>
-                            Añade alguna camiseta.
+                            Añade alguna camiseta para comenzar.
                         </p>
 
                     </div>
@@ -211,8 +252,9 @@ function CartDrawer({ open, onClose }) {
 
                     <>
 
-
-                        {/* PRODUCTOS */}
+                        {/* ==================================
+                            PRODUCTOS
+                        ================================== */}
 
                         <div className="cart-items">
 
@@ -223,12 +265,18 @@ function CartDrawer({ open, onClose }) {
                                     className="cart-item"
                                 >
 
+                                    {/* IMAGEN */}
 
                                     <img
-                                        src={item.imagen}
+                                        src={
+                                            item.imagen ||
+                                            item.front
+                                        }
                                         alt={item.nombre}
                                     />
 
+
+                                    {/* INFORMACIÓN */}
 
                                     <div className="cart-info">
 
@@ -238,9 +286,11 @@ function CartDrawer({ open, onClose }) {
 
 
                                         <p>
-                                            Talla {item.talla}
+                                            Talla {item.talla || "-"}
                                         </p>
 
+
+                                        {/* PRECIO */}
 
                                         <strong>
                                             {Number(
@@ -249,17 +299,40 @@ function CartDrawer({ open, onClose }) {
                                         </strong>
 
 
-                                        {item.nombrePersonalizado && (
+                                        {/* PERSONALIZACIÓN */}
+
+                                        {(item.nombrePersonalizado ||
+                                            item.numero) && (
 
                                             <small>
+
                                                 ✍️{" "}
-                                                {item.nombrePersonalizado}
+
+                                                {item.nombrePersonalizado ||
+                                                    "Sin nombre"}
+
                                                 {item.numero &&
                                                     ` #${item.numero}`}
+
+                                                {" (+5 €)"}
+
                                             </small>
 
                                         )}
 
+
+                                        {/* PARCHE */}
+
+                                        <small>
+
+                                            🏆{" "}
+
+                                            {getPatchName(item)}
+
+                                        </small>
+
+
+                                        {/* CANTIDAD */}
 
                                         <div className="qty">
 
@@ -296,6 +369,8 @@ function CartDrawer({ open, onClose }) {
                                     </div>
 
 
+                                    {/* ELIMINAR */}
+
                                     <button
                                         className="remove-item"
                                         onClick={() =>
@@ -315,10 +390,14 @@ function CartDrawer({ open, onClose }) {
                         </div>
 
 
-                        {/* FOOTER */}
+                        {/* ==================================
+                            FOOTER
+                        ================================== */}
 
                         <div className="cart-footer">
 
+
+                            {/* SUBTOTAL */}
 
                             <div className="subtotal">
 
@@ -333,11 +412,15 @@ function CartDrawer({ open, onClose }) {
                             </div>
 
 
+                            {/* DESCUENTO */}
+
                             {descuento > 0 && (
 
                                 <div className="discount">
 
-                                    🎁 Descuento 10% por cada 2 camisetas
+                                    <span>
+                                        🎁 Descuento 10%
+                                    </span>
 
                                     <strong>
                                         -{descuento.toFixed(2)} €
@@ -347,6 +430,8 @@ function CartDrawer({ open, onClose }) {
 
                             )}
 
+
+                            {/* TOTAL */}
 
                             <div className="cart-total">
 
@@ -361,6 +446,8 @@ function CartDrawer({ open, onClose }) {
                             </div>
 
 
+                            {/* WHATSAPP */}
+
                             <button
                                 className="buy-btn"
                                 onClick={comprarWhatsApp}
@@ -368,6 +455,8 @@ function CartDrawer({ open, onClose }) {
                                 📲 Comprar por WhatsApp
                             </button>
 
+
+                            {/* VACIAR */}
 
                             <button
                                 className="clear-btn"

@@ -91,8 +91,6 @@ const baseProduct = {
 
     opiniones: 100,
 
-    envio: "24/48 h",
-
     personalizable: true,
 
     positions: defaultPositions

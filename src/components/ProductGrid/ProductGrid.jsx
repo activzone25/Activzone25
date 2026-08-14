@@ -3,19 +3,16 @@ import "./ProductGrid.css";
 import products from "../../data/products";
 import ProductCard from "../ProductCard/ProductCard";
 
+
 function ProductGrid({
-
     search = "",
-
     category = "Todas",
-
     maxPrice = 40
-
 }) {
 
-    const text = search
-        .toLowerCase()
-        .trim();
+    const text =
+        search.toLowerCase().trim();
+
 
     const filteredProducts = products
 
@@ -27,51 +24,49 @@ function ProductGrid({
             const equipo =
                 product.equipo?.toLowerCase() || "";
 
+
             const matchSearch =
-
                 nombre.includes(text) ||
-
                 equipo.includes(text);
 
+
             const matchCategory =
-
                 category === "Todas" ||
-
                 product.liga === category ||
-
                 product.categoria === category;
 
+
             const matchPrice =
-                product.precio <= maxPrice;
+                Number(product.precio || 0) <=
+                Number(maxPrice);
+
 
             const disponible =
                 product.disponible !== false;
 
+
             return (
-
                 matchSearch &&
-
                 matchCategory &&
-
                 matchPrice &&
-
                 disponible
-
             );
 
         })
 
         .sort((a, b) =>
-
             Number(b.nuevo) -
-
             Number(a.nuevo)
-
         );
+
 
     return (
 
         <section className="product-grid-section">
+
+            {/* ==================================
+                CABECERA
+            ================================== */}
 
             <div className="section-header">
 
@@ -79,24 +74,35 @@ function ProductGrid({
                     ⭐ COLECCIÓN 2026/27
                 </span>
 
+
                 <h2>
                     🔥 Novedades
                 </h2>
+
 
                 <p>
                     Descubre las últimas equipaciones disponibles.
                 </p>
 
+
                 <small>
+
                     {filteredProducts.length}{" "}
+
                     {filteredProducts.length === 1
                         ? "producto disponible"
                         : "productos disponibles"}
+
                 </small>
 
             </div>
 
-            {filteredProducts.length ? (
+
+            {/* ==================================
+                PRODUCTOS
+            ================================== */}
+
+            {filteredProducts.length > 0 ? (
 
                 <div className="product-grid">
 
@@ -119,6 +125,7 @@ function ProductGrid({
                         😕 No encontramos productos
                     </h3>
 
+
                     <p>
                         Prueba con otra búsqueda o categoría.
                     </p>
@@ -132,5 +139,6 @@ function ProductGrid({
     );
 
 }
+
 
 export default ProductGrid;

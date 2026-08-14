@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import {
     FiHeart,
     FiArrowRight,
@@ -9,6 +10,7 @@ import { useFavorites } from "../../context/FavoritesContext";
 import { useCart } from "../../context/CartContext";
 
 import "./ProductCard.css";
+
 
 function ProductCard({ product }) {
 
@@ -21,7 +23,14 @@ function ProductCard({ product }) {
         addToCart
     } = useCart();
 
-    const favorite = isFavorite(product.id);
+
+    // ==========================================
+    // FAVORITO
+    // ==========================================
+
+    const favorite =
+        isFavorite(product.id);
+
 
     function handleFavorite(e) {
 
@@ -32,6 +41,12 @@ function ProductCard({ product }) {
 
     }
 
+
+    // ==========================================
+    // AÑADIR AL CARRITO
+    // COMPRA RÁPIDA
+    // ==========================================
+
     function handleAddCart(e) {
 
         e.preventDefault();
@@ -41,15 +56,38 @@ function ProductCard({ product }) {
 
             ...product,
 
-            imagen: product.front,
+            imagen:
+                product.front,
 
-            talla: "M",
+            talla:
+                "M",
 
-            cantidad: 1
+            nombrePersonalizado:
+                "",
+
+            numero:
+                "",
+
+            personalizada:
+                false,
+
+            precio:
+                Number(product.precio || 25),
+
+            precioBase:
+                Number(product.precio || 25),
+
+            extraPersonalizacion:
+                0,
+
+            parche: {
+                tipo: ""
+            }
 
         });
 
     }
+
 
     return (
 
@@ -58,7 +96,14 @@ function ProductCard({ product }) {
             className="product-card"
         >
 
+            {/* ==================================
+                IMAGEN
+            ================================== */}
+
             <div className="product-image">
+
+
+                {/* NUEVO */}
 
                 {product.nuevo && (
 
@@ -68,13 +113,21 @@ function ProductCard({ product }) {
 
                 )}
 
+
+                {/* FAVORITO */}
+
                 <button
-                    className={`favorite-btn ${favorite ? "active" : ""}`}
+                    className={`favorite-btn ${
+                        favorite ? "active" : ""
+                    }`}
                     onClick={handleFavorite}
                     aria-label="Favorito"
                 >
                     <FiHeart />
                 </button>
+
+
+                {/* CAMISETA */}
 
                 <img
                     src={product.front}
@@ -83,35 +136,69 @@ function ProductCard({ product }) {
 
             </div>
 
+
+            {/* ==================================
+                INFORMACIÓN
+            ================================== */}
+
             <div className="product-info">
+
+
+                {/* LIGA */}
 
                 <span className="league">
                     {product.liga}
                 </span>
 
+
+                {/* NOMBRE */}
+
                 <h3>
                     {product.nombre}
                 </h3>
+
+
+                {/* TEMPORADA */}
 
                 <p>
                     Temporada {product.temporada}
                 </p>
 
+
+                {/* ==================================
+                    ETIQUETAS
+                ================================== */}
+
                 <div className="product-tags">
 
                     {product.parches?.length > 0 && (
-                        <span>🏆 Parches GRATIS</span>
+
+                        <span>
+                            🏆 Parches GRATIS
+                        </span>
+
                     )}
 
+
                     {product.personalizable !== false && (
-                        <span>✍️ Personalizable</span>
+
+                        <span>
+                            ✍️ Personalizable
+                        </span>
+
                     )}
 
                 </div>
 
+
+                {/* ==================================
+                    PRECIO
+                ================================== */}
+
                 <div className="price-box">
 
-                    {product.oferta && product.precioAnterior && (
+                    {product.oferta &&
+                        product.precioAnterior && (
 
                         <span className="old-price">
                             {product.precioAnterior} €
@@ -119,13 +206,21 @@ function ProductCard({ product }) {
 
                     )}
 
+
                     <span className="new-price">
-                        {product.precio} €
+                        {Number(
+                            product.precio || 25
+                        )} €
                     </span>
 
                 </div>
 
-                                <div className="rating">
+
+                {/* ==================================
+                    VALORACIÓN
+                ================================== */}
+
+                <div className="rating">
 
                     ⭐ {product.rating || 5.0}
 
@@ -135,17 +230,10 @@ function ProductCard({ product }) {
 
                 </div>
 
-                <div className="extra-info">
 
-                    <span>
-                        📦 Stock: {product.stock || 20}
-                    </span>
-
-                    <span>
-                        🚚 {product.envio || "24/48 h"}
-                    </span>
-
-                </div>
+                {/* ==================================
+                    AÑADIR AL CARRITO
+                ================================== */}
 
                 <button
                     className="quick-cart"
@@ -157,6 +245,11 @@ function ProductCard({ product }) {
                     Añadir al carrito
 
                 </button>
+
+
+                {/* ==================================
+                    VER PRODUCTO
+                ================================== */}
 
                 <div className="view-product">
 
@@ -173,5 +266,6 @@ function ProductCard({ product }) {
     );
 
 }
+
 
 export default ProductCard;

@@ -5,20 +5,27 @@ import {
     useState
 } from "react";
 
+
 const CartContext = createContext();
+
 
 const CART_STORAGE_KEY = "activzone_cart";
 
 
 export function CartProvider({ children }) {
 
+    // ==========================================
+    // CARRITO
+    // ==========================================
+
     const [cart, setCart] = useState(() => {
 
         try {
 
-            const saved = localStorage.getItem(
-                CART_STORAGE_KEY
-            );
+            const saved =
+                localStorage.getItem(
+                    CART_STORAGE_KEY
+                );
 
             return saved
                 ? JSON.parse(saved)
@@ -55,9 +62,6 @@ export function CartProvider({ children }) {
 
         setCart(prevCart => {
 
-            const parche =
-                product.parche?.tipo || "sin-parche";
-
             const talla =
                 product.talla || "sin-talla";
 
@@ -66,6 +70,10 @@ export function CartProvider({ children }) {
 
             const numero =
                 product.numero || "";
+
+            const parche =
+                product.parche?.tipo ||
+                "sin-parche";
 
 
             const cartId = [
@@ -77,27 +85,40 @@ export function CartProvider({ children }) {
             ].join("-");
 
 
-            const existingProduct = prevCart.find(
-                item => item.cartId === cartId
-            );
+            const existente =
+                prevCart.find(
+                    item =>
+                        item.cartId === cartId
+                );
 
 
-            if (existingProduct) {
+            // Si ya existe → aumentar cantidad
+
+            if (existente) {
 
                 return prevCart.map(item =>
+
                     item.cartId === cartId
+
                         ? {
                             ...item,
                             cantidad:
-                                Number(item.cantidad || 1) + 1
+                                Number(
+                                    item.cantidad || 1
+                                ) + 1
                         }
+
                         : item
+
                 );
 
             }
 
 
+            // Producto nuevo
+
             return [
+
                 ...prevCart,
 
                 {
@@ -114,15 +135,18 @@ export function CartProvider({ children }) {
 
 
     // ==========================================
-    // ELIMINAR PRODUCTO
+    // ELIMINAR
     // ==========================================
 
     function removeFromCart(cartId) {
 
         setCart(prevCart =>
+
             prevCart.filter(
-                item => item.cartId !== cartId
+                item =>
+                    item.cartId !== cartId
             )
+
         );
 
     }
@@ -135,15 +159,23 @@ export function CartProvider({ children }) {
     function increaseQuantity(cartId) {
 
         setCart(prevCart =>
+
             prevCart.map(item =>
+
                 item.cartId === cartId
+
                     ? {
                         ...item,
                         cantidad:
-                            Number(item.cantidad || 1) + 1
+                            Number(
+                                item.cantidad || 1
+                            ) + 1
                     }
+
                     : item
+
             )
+
         );
 
     }
@@ -156,17 +188,32 @@ export function CartProvider({ children }) {
     function decreaseQuantity(cartId) {
 
         setCart(prevCart =>
+
             prevCart
+
                 .map(item =>
+
                     item.cartId === cartId
+
                         ? {
                             ...item,
                             cantidad:
-                                Number(item.cantidad || 1) - 1
+                                Number(
+                                    item.cantidad || 1
+                                ) - 1
                         }
+
                         : item
+
                 )
-                .filter(item => item.cantidad > 0)
+
+                .filter(
+                    item =>
+                        Number(
+                            item.cantidad
+                        ) > 0
+                )
+
         );
 
     }
@@ -176,23 +223,34 @@ export function CartProvider({ children }) {
     // ACTUALIZAR CANTIDAD
     // ==========================================
 
-    function updateQuantity(cartId, cantidad) {
+    function updateQuantity(
+        cartId,
+        cantidad
+    ) {
 
-        const nuevaCantidad = Math.max(
-            1,
-            Number(cantidad)
-        );
+        const nuevaCantidad =
+            Math.max(
+                1,
+                Number(cantidad) || 1
+            );
 
 
         setCart(prevCart =>
+
             prevCart.map(item =>
+
                 item.cartId === cartId
+
                     ? {
                         ...item,
-                        cantidad: nuevaCantidad
+                        cantidad:
+                            nuevaCantidad
                     }
+
                     : item
+
             )
+
         );
 
     }
@@ -210,50 +268,158 @@ export function CartProvider({ children }) {
 
 
     // ==========================================
+    // TOTAL DE CAMISETAS
+    // ==========================================
+
+    const totalProductos =
+        cart.reduce(
+
+            (total, item) =>
+
+                total +
+                Number(
+                    item.cantidad || 0
+                ),
+
+            0
+
+        );
+
+
+    // ==========================================
     // SUBTOTAL
     // ==========================================
 
-    const subtotal = cart.reduce(
-        (total, item) =>
-            total +
-            Number(item.precio || 0) *
-            Number(item.cantidad || 0),
-        0
-    );
+    const subtotal =
+        cart.reduce(
+
+            (total, item) =>
+
+                total +
+
+                Number(
+                    item.precio || 0
+                ) *
+
+                Number(
+                    item.cantidad || 0
+                ),
+
+            0
+
+        );
 
 
     // ==========================================
-    // TOTAL PRODUCTOS
+    // DESCUENTO
+    //
+    // 10% POR CADA PAREJA
+    //
+    // 1 → 0%
+    // 2 → 10%
+    // 3 → 10%
+    // 4 → 20%
+    // 5 → 20%
+    // 6 → 30%
     // ==========================================
 
-    const totalProductos = cart.reduce(
-        (total, item) =>
-            total +
-            Number(item.cantidad || 0),
-        0
-    );
+    const precios = [];
+
+
+    cart.forEach(item => {
+
+        const cantidad =
+            Number(
+                item.cantidad || 0
+            );
+
+        const precio =
+            Number(
+                item.precio || 0
+            );
+
+
+        for (
+            let i = 0;
+            i < cantidad;
+            i++
+        ) {
+
+            precios.push(precio);
+
+        }
+
+    });
+
+
+    const parejas =
+        Math.floor(
+            precios.length / 2
+        );
+
+
+    const descuento =
+        precios
+
+            .slice(
+                0,
+                parejas * 2
+            )
+
+            .reduce(
+
+                (total, precio) =>
+
+                    total +
+                    precio * 0.10,
+
+                0
+
+            );
 
 
     // ==========================================
-    // CONTEXT
+    // TOTAL FINAL
+    // ==========================================
+
+    const total =
+        Math.max(
+            0,
+            subtotal - descuento
+        );
+
+
+    // ==========================================
+    // PROVIDER
     // ==========================================
 
     return (
 
         <CartContext.Provider
             value={{
+
                 cart,
+
                 subtotal,
+
+                descuento,
+
+                total,
+
                 totalProductos,
 
                 addToCart,
+
                 removeFromCart,
 
                 increaseQuantity,
+
                 decreaseQuantity,
+
                 updateQuantity,
 
                 clearCart
+
             }}
         >
 
@@ -272,6 +438,8 @@ export function CartProvider({ children }) {
 
 export function useCart() {
 
-    return useContext(CartContext);
+    return useContext(
+        CartContext
+    );
 
 }

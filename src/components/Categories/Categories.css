@@ -2,168 +2,207 @@
    ACTIVZONE25 - CATEGORIES
 ===================================================== */
 
-.categories{
+.categories {
+    width: 100%;
+    max-width: 1400px;
 
-    max-width:1400px;
+    margin: 32px auto 25px;
 
-    margin:45px auto;
+    padding: 0 30px;
 
-    padding:0 30px;
-
+    box-sizing: border-box;
 }
 
-.categories-container{
 
-    display:flex;
+/* =====================================================
+   CONTENEDOR
+===================================================== */
 
-    justify-content:center;
+.categories-container {
+    display: flex;
 
-    align-items:center;
+    justify-content: center;
+    align-items: center;
 
-    flex-wrap:wrap;
+    gap: 12px;
 
-    gap:16px;
-
+    flex-wrap: wrap;
 }
+
 
 /* =====================================================
    BOTONES
 ===================================================== */
 
-.categories button{
+.categories button {
+    display: inline-flex;
 
-    display:flex;
+    align-items: center;
+    justify-content: center;
 
-    align-items:center;
+    gap: 9px;
 
-    gap:10px;
+    min-height: 48px;
 
-    padding:14px 24px;
+    padding: 11px 20px;
 
-    background:rgba(255,255,255,.05);
+    border: 1px solid #292929;
+    border-radius: 999px;
 
-    backdrop-filter:blur(12px);
+    background: #111;
 
-    border:1px solid rgba(255,255,255,.08);
+    color: #aaa;
 
-    border-radius:999px;
+    font-size: 14px;
+    font-weight: 800;
 
-    color:#fff;
+    white-space: nowrap;
 
-    font-size:15px;
-
-    font-weight:700;
-
-    cursor:pointer;
+    cursor: pointer;
 
     transition:
-        transform .25s,
-        background .25s,
-        border-color .25s,
-        box-shadow .25s;
-
+        transform .25s ease,
+        color .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
 }
 
-.categories button:hover{
 
-    transform:translateY(-4px);
+/* =====================================================
+   HOVER
+===================================================== */
 
-    border-color:#00d26a;
+.categories button:hover {
+    color: #fff;
 
-    box-shadow:0 10px 25px rgba(0,210,106,.18);
+    background: #181818;
 
+    border-color: #00d26a;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 22px rgba(0, 210, 106, .15);
 }
+
 
 /* =====================================================
    ACTIVO
 ===================================================== */
 
-.categories button.active{
+.categories button.active {
+    background: #00d26a;
 
-    background:#00d26a;
+    color: #000;
 
-    color:#000;
+    border-color: #00d26a;
 
-    border-color:#00d26a;
-
-    box-shadow:0 12px 30px rgba(0,210,106,.35);
-
+    box-shadow:
+        0 8px 25px rgba(0, 210, 106, .28);
 }
+
 
 /* =====================================================
    ICONO
 ===================================================== */
 
-.category-icon{
+.category-icon {
+    display: flex;
 
-    font-size:20px;
+    align-items: center;
+    justify-content: center;
 
-    line-height:1;
+    width: 22px;
+    height: 22px;
 
+    font-size: 18px;
+
+    line-height: 1;
 }
+
 
 /* =====================================================
-   RESPONSIVE
+   ACTIVE ICON
 ===================================================== */
 
-@media(max-width:768px){
-
-    .categories{
-
-        padding:0 20px;
-
-    }
-
-    .categories-container{
-
-        gap:12px;
-
-    }
-
-    .categories button{
-
-        padding:12px 18px;
-
-        font-size:14px;
-
-    }
-
+.categories button.active .category-icon {
+    filter: saturate(1.15);
 }
 
-@media(max-width:480px){
 
-    .categories{
+/* =====================================================
+   RESPONSIVE TABLET
+===================================================== */
 
-        margin:35px auto;
+@media (max-width: 768px) {
 
-        padding:0 15px;
+    .categories {
+        margin: 25px auto 20px;
 
+        padding: 0 20px;
     }
 
-    .categories-container{
+    .categories-container {
+        justify-content: flex-start;
 
-        justify-content:flex-start;
+        gap: 10px;
 
-        overflow-x:auto;
+        overflow-x: auto;
 
-        flex-wrap:nowrap;
+        flex-wrap: nowrap;
 
-        padding-bottom:8px;
+        padding: 3px 2px 8px;
 
-        scrollbar-width:none;
+        scrollbar-width: none;
 
+        -webkit-overflow-scrolling: touch;
     }
 
-    .categories-container::-webkit-scrollbar{
-
-        display:none;
-
+    .categories-container::-webkit-scrollbar {
+        display: none;
     }
 
-    .categories button{
+    .categories button {
+        flex-shrink: 0;
 
-        flex-shrink:0;
+        min-height: 44px;
 
+        padding: 10px 17px;
+
+        font-size: 13px;
+    }
+}
+
+
+/* =====================================================
+   RESPONSIVE MOVIL
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .categories {
+        margin: 20px auto 15px;
+
+        padding: 0 15px;
     }
 
+    .categories-container {
+        gap: 8px;
+    }
+
+    .categories button {
+        min-height: 42px;
+
+        padding: 9px 15px;
+
+        font-size: 13px;
+    }
+
+    .category-icon {
+        width: 20px;
+        height: 20px;
+
+        font-size: 17px;
+    }
 }

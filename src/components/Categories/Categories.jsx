@@ -1,63 +1,85 @@
 import "./Categories.css";
 
+
 const categories = [
-  {
-    id: "Todas",
-    icon: "🌍",
-    name: "Todas"
-  },
-  {
-    id: "LaLiga",
-    icon: "🇪🇸",
-    name: "LaLiga"
-  },
-  {
-    id: "Premier League",
-    icon: "🏴",
-    name: "Premier"
-  },
-  {
-    id: "Bundesliga",
-    icon: "🇩🇪",
-    name: "Bundesliga"
-  },
-  {
-    id: "Ligue 1",
-    icon: "🇫🇷",
-    name: "Ligue 1"
-  }
+
+    {
+        id: "Todas",
+        icon: "🌍",
+        name: "Todas"
+    },
+
+    {
+        id: "LaLiga",
+        icon: "🇪🇸",
+        name: "LaLiga"
+    },
+
+    {
+        id: "Premier League",
+        icon: "🏴",
+        name: "Premier"
+    },
+
+    {
+        id: "Bundesliga",
+        icon: "🇩🇪",
+        name: "Bundesliga"
+    },
+
+    {
+        id: "Ligue 1",
+        icon: "🇫🇷",
+        name: "Ligue 1"
+    }
+
 ];
 
-function Categories({ category, setCategory }) {
-  return (
-    <section className="categories">
 
-      <div className="categories-container">
+function Categories({
+    category,
+    setCategory
+}) {
 
-        {categories.map((item) => (
+    return (
 
-          <button
-            key={item.id}
-            className={category === item.id ? "active" : ""}
-            onClick={() => setCategory(item.id)}
-          >
+        <section className="categories">
 
-            <span className="category-icon">
-              {item.icon}
-            </span>
+            <div className="categories-container">
 
-            <span>
-              {item.name}
-            </span>
+                {categories.map(item => (
 
-          </button>
+                    <button
+                        key={item.id}
+                        className={
+                            category === item.id
+                                ? "active"
+                                : ""
+                        }
+                        onClick={() =>
+                            setCategory(item.id)
+                        }
+                    >
 
-        ))}
+                        <span className="category-icon">
+                            {item.icon}
+                        </span>
 
-      </div>
+                        <span>
+                            {item.name}
+                        </span>
 
-    </section>
-  );
+                    </button>
+
+                ))}
+
+            </div>
+
+        </section>
+
+    );
+
 }
+
 
 export default Categories;

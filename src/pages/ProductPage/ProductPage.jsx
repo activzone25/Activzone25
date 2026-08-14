@@ -16,20 +16,29 @@ function ProductPage() {
 
     const { addToCart } = useCart();
 
-    const product = products.find(
-        item => item.slug === slug
-    );
-
 
     // ==========================================
     // ESTADOS
     // ==========================================
 
     const [side, setSide] = useState("front");
+
     const [size, setSize] = useState("M");
+
     const [name, setName] = useState("");
+
     const [number, setNumber] = useState("");
+
     const [patch, setPatch] = useState("");
+
+
+    // ==========================================
+    // PRODUCTO
+    // ==========================================
+
+    const product = products.find(
+        item => item.slug === slug
+    );
 
 
     // ==========================================
@@ -39,9 +48,15 @@ function ProductPage() {
     if (!product) {
 
         return (
-            <div className="not-found">
-                Producto no encontrado
-            </div>
+
+            <main className="not-found">
+
+                <h2>
+                    Producto no encontrado
+                </h2>
+
+            </main>
+
         );
 
     }
@@ -51,20 +66,108 @@ function ProductPage() {
     // POSICIONES
     // ==========================================
 
-    const positions = product.positions || {};
+    const positions =
+        product.positions || {};
+
+
+    // ==========================================
+    // DATOS LIMPIOS
+    // ==========================================
+
+    const nombreLimpio =
+        name.trim();
+
+
+    const numeroLimpio =
+        number.trim();
+
+
+    // ==========================================
+    // PERSONALIZACIÓN
+    // ==========================================
+
+    const personalizada =
+        nombreLimpio.length > 0 ||
+        numeroLimpio.length > 0;
 
 
     // ==========================================
     // PRECIO
     // ==========================================
 
-    const personalizada =
-        name.trim() !== "" ||
-        number.trim() !== "";
+    const precioBase =
+        Number(product.precio || 25);
+
+
+    const extraPersonalizacion =
+        personalizada
+            ? 5
+            : 0;
+
 
     const precioFinal =
-        Number(product.precio) +
-        (personalizada ? 5 : 0);
+        precioBase +
+        extraPersonalizacion;
+
+
+    // ==========================================
+    // TALLAS
+    // ==========================================
+
+    const tallasAdulto = [
+
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL",
+        "4XL"
+
+    ];
+
+
+    // ==========================================
+    // CAMBIAR NÚMERO
+    // ==========================================
+
+    function handleNumberChange(e) {
+
+        let value =
+            e.target.value;
+
+
+        // Solo números
+
+        value =
+            value.replace(/\D/g, "");
+
+
+        // Máximo 2 cifras
+
+        if (value.length > 2) {
+
+            value =
+                value.slice(0, 2);
+
+        }
+
+
+        // Máximo 99
+
+        if (
+            value !== "" &&
+            Number(value) > 99
+        ) {
+
+            value = "99";
+
+        }
+
+
+        setNumber(value);
+
+    }
 
 
     // ==========================================
@@ -77,36 +180,42 @@ function ProductPage() {
 
             ...product,
 
-            imagen: product.front,
+            imagen:
+                product.front,
 
-            talla: size,
+            talla:
+                size,
 
             nombrePersonalizado:
-                name.trim(),
+                nombreLimpio,
 
             numero:
-                number.trim(),
+                numeroLimpio,
 
             personalizada,
 
-            precio: precioFinal,
+            precio:
+                precioFinal,
 
-            precioBase:
-                Number(product.precio),
+            precioBase,
 
-            extraPersonalizacion:
-                personalizada ? 5 : 0,
+            extraPersonalizacion,
 
             parche: {
-                tipo: patch
-            },
 
-            cantidad: 1
+                tipo:
+                    patch || "sin-parche"
+
+            }
 
         });
 
     }
 
+
+    // ==========================================
+    // RENDER
+    // ==========================================
 
     return (
 
@@ -122,9 +231,6 @@ function ProductPage() {
                 <div className="product-gallery">
 
                     <div className="shirt-preview">
-
-
-                        {/* CAMISETA */}
 
                         <img
                             src={
@@ -146,9 +252,11 @@ function ProductPage() {
 
                                 <img
                                     src={laligaPatch}
-                                    alt="LaLiga"
+                                    alt="Parche LaLiga"
                                     className="shirt-patch"
-                                    style={positions.patch}
+                                    style={
+                                        positions.patch
+                                    }
                                 />
 
                             )}
@@ -163,9 +271,11 @@ function ProductPage() {
 
                                 <img
                                     src={championsPatch}
-                                    alt="Champions"
+                                    alt="Parche Champions"
                                     className="shirt-patch"
-                                    style={positions.patch}
+                                    style={
+                                        positions.patch
+                                    }
                                 />
 
                             )}
@@ -176,13 +286,17 @@ function ProductPage() {
                         ================================== */}
 
                         {side === "back" &&
-                            name && (
+                            nombreLimpio && (
 
                                 <span
                                     className="shirt-name"
-                                    style={positions.name}
+                                    style={
+                                        positions.name
+                                    }
                                 >
-                                    {name.toUpperCase()}
+                                    {
+                                        nombreLimpio.toUpperCase()
+                                    }
                                 </span>
 
                             )}
@@ -193,13 +307,15 @@ function ProductPage() {
                         ================================== */}
 
                         {side === "back" &&
-                            number && (
+                            numeroLimpio && (
 
                                 <span
                                     className="shirt-number"
-                                    style={positions.number}
+                                    style={
+                                        positions.number
+                                    }
                                 >
-                                    {number}
+                                    {numeroLimpio}
                                 </span>
 
                             )}
@@ -214,6 +330,7 @@ function ProductPage() {
                     <div className="gallery-buttons">
 
                         <button
+                            type="button"
                             className={
                                 side === "front"
                                     ? "active"
@@ -228,6 +345,7 @@ function ProductPage() {
 
 
                         <button
+                            type="button"
                             className={
                                 side === "back"
                                     ? "active"
@@ -246,7 +364,7 @@ function ProductPage() {
 
 
                 {/* ==================================
-                    INFORMACIÓN PRODUCTO
+                    INFORMACIÓN
                 ================================== */}
 
                 <div className="product-options">
@@ -263,12 +381,12 @@ function ProductPage() {
 
 
                     {/* ==================================
-                        PRECIO DINÁMICO
+                        PRECIO
                     ================================== */}
 
                     <div className="price">
 
-                        {precioFinal} €
+                        {precioFinal.toFixed(2)} €
 
                     </div>
 
@@ -277,7 +395,21 @@ function ProductPage() {
 
                         <small className="personalization-price">
 
-                            +5 € por personalización
+                            Precio camiseta:{" "}
+                            {precioBase.toFixed(2)} €
+                            {" + "}
+                            5 € personalización
+
+                        </small>
+
+                    )}
+
+
+                    {!personalizada && (
+
+                        <small className="personalization-price">
+
+                            Personalización opcional +5 €
 
                         </small>
 
@@ -285,7 +417,7 @@ function ProductPage() {
 
 
                     {/* ==================================
-                        TALLAS
+                        TALLA
                     ================================== */}
 
                     <h3>
@@ -295,17 +427,10 @@ function ProductPage() {
 
                     <div className="sizes">
 
-                        {[
-                            "S",
-                            "M",
-                            "L",
-                            "XL",
-                            "2XL",
-                            "3XL",
-                            "4XL"
-                        ].map(item => (
+                        {tallasAdulto.map(item => (
 
                             <button
+                                type="button"
                                 key={item}
                                 className={
                                     size === item
@@ -335,25 +460,34 @@ function ProductPage() {
 
                     <input
                         type="text"
-                        placeholder="Nombre"
+                        placeholder="Nombre en camiseta"
                         value={name}
                         maxLength={15}
                         onChange={e =>
-                            setName(e.target.value)
+                            setName(
+                                e.target.value
+                            )
                         }
                     />
 
 
                     <input
-                        type="number"
-                        placeholder="Número"
+                        type="text"
+                        inputMode="numeric"
+                        placeholder="Dorsal (0-99)"
                         value={number}
-                        min="0"
-                        max="99"
-                        onChange={e =>
-                            setNumber(e.target.value)
+                        maxLength={2}
+                        onChange={
+                            handleNumberChange
                         }
                     />
+
+
+                    <small className="option-help">
+
+                        ✍️ Personalización +5 €
+
+                    </small>
 
 
                     {/* ==================================
@@ -368,7 +502,9 @@ function ProductPage() {
                     <select
                         value={patch}
                         onChange={e =>
-                            setPatch(e.target.value)
+                            setPatch(
+                                e.target.value
+                            )
                         }
                     >
 
@@ -402,16 +538,62 @@ function ProductPage() {
 
 
                     {/* ==================================
+                        RESUMEN
+                    ================================== */}
+
+                    <div className="product-summary">
+
+                        <span>
+                            Camiseta
+                        </span>
+
+                        <strong>
+                            {precioBase.toFixed(2)} €
+                        </strong>
+
+
+                        {personalizada && (
+
+                            <>
+
+                                <span>
+                                    Personalización
+                                </span>
+
+                                <strong>
+                                    +5.00 €
+                                </strong>
+
+                            </>
+
+                        )}
+
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong>
+                            {precioFinal.toFixed(2)} €
+                        </strong>
+
+                    </div>
+
+
+                    {/* ==================================
                         AÑADIR AL CARRITO
                     ================================== */}
 
                     <button
+                        type="button"
                         className="add-cart"
                         onClick={handleAddCart}
                     >
-                        🛒 Añadir al carrito
-                    </button>
 
+                        🛒 Añadir al carrito ·{" "}
+                        {precioFinal.toFixed(2)} €
+
+                    </button>
 
                 </div>
 
