@@ -6,180 +6,96 @@ import {
 } from "react";
 
 
-const FavoritesContext = createContext();
+const FavoritesContext = createContext(undefined);
+
+const FAVORITES_STORAGE_KEY = "activzone_favorites";
 
 
-
-export function FavoritesProvider({ children }) {
-
-
-    const [favorites, setFavorites] = useState(() => {
-
-
-        try {
-
-
-            const saved = localStorage.getItem(
-                "activzone_favorites"
-            );
-
-
-            return saved
-                ? JSON.parse(saved)
-                : [];
-
-
-        } catch {
-
-            return [];
-
-        }
-
-
-    });
-
-
-
-
-
-    useEffect(() => {
-
-
-        localStorage.setItem(
-
-            "activzone_favorites",
-
-            JSON.stringify(favorites)
-
+function getSavedFavorites() {
+    try {
+        const savedFavorites = localStorage.getItem(
+            FAVORITES_STORAGE_KEY
         );
 
+        const parsedFavorites = savedFavorites
+            ? JSON.parse(savedFavorites)
+            : [];
 
-    }, [favorites]);
-
-
-
-
-
-
-
-
-    function toggleFavorite(product){
-
-
-        setFavorites(current => {
-
-
-            const exists = current.some(
-
-                item => item.id === product.id
-
-            );
-
-
-
-            if(exists){
-
-
-                return current.filter(
-
-                    item => item.id !== product.id
-
-                );
-
-
-            }
-
-
-
-            return [
-
-                ...current,
-
-                product
-
-            ];
-
-
-        });
-
-
+        return Array.isArray(parsedFavorites)
+            ? parsedFavorites
+            : [];
+    } catch {
+        return [];
     }
-
-
-
-
-
-
-
-
-    function isFavorite(id){
-
-
-        return favorites.some(
-
-            item => item.id === id
-
-        );
-
-
-    }
-
-
-
-
-
-
-
-
-    function clearFavorites(){
-
-
-        setFavorites([]);
-
-
-    }
-
-
-
-
-
-
-
-
-    return (
-
-        <FavoritesContext.Provider
-
-            value={{
-
-                favorites,
-
-                toggleFavorite,
-
-                isFavorite,
-
-                clearFavorites
-
-            }}
-
-        >
-
-            {children}
-
-        </FavoritesContext.Provider>
-
-    );
-
 }
 
 
+export function FavoritesProvider({ children }) {
+    const [favorites, setFavorites] = useState(
+        getSavedFavorites
+    );
 
 
+    useEffect(() => {
+        localStorage.setItem(
+            FAVORITES_STORAGE_KEY,
+            JSON.stringify(favorites)
+        );
+    }, [favorites]);
 
-export function useFavorites(){
+
+    function toggleFavorite(product) {
+        setFavorites((currentFavorites) => {
+            const alreadyExists = currentFavorites.some(
+                (item) => item.id === product.id
+            );
+
+            if (alreadyExists) {
+                return currentFavorites.filter(
+                    (item) => item.id !== product.id
+                );
+            }
+
+            return [...currentFavorites, product];
+        });
+    }
 
 
-    return useContext(FavoritesContext);
+    function isFavorite(productId) {
+        return favorites.some(
+            (item) => item.id === productId
+        );
+    }
 
 
+    function clearFavorites() {
+        setFavorites([]);
+    }
+
+
+    return (
+        <FavoritesContext.Provider
+            value={{
+                favorites,
+                toggleFavorite,
+                isFavorite,
+                clearFavorites
+            }}
+        >
+            {children}
+        </FavoritesContext.Provider>
+    );
+}
+
+
+export function useFavorites() {
+    const context = useContext(FavoritesContext);
+
+    if (!context) {
+        throw new Error(
+            "useFavorites debe utilizarse dentro de FavoritesProvider."
+        );
+    }
+
+    return context;
 }

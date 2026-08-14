@@ -2,444 +2,228 @@ import {
     createContext,
     useContext,
     useEffect,
+    useMemo,
     useState
 } from "react";
 
 
-const CartContext = createContext();
-
+const CartContext = createContext(undefined);
 
 const CART_STORAGE_KEY = "activzone_cart";
 
 
+function getSavedCart() {
+    try {
+        const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+        const parsedCart = savedCart ? JSON.parse(savedCart) : [];
+
+        return Array.isArray(parsedCart) ? parsedCart : [];
+    } catch {
+        return [];
+    }
+}
+
+
+function getCartId(product) {
+    const size = product.talla || "sin-talla";
+    const name = (product.nombrePersonalizado || "")
+        .trim()
+        .toUpperCase();
+    const number = String(product.numero || "").trim();
+    const patch = product.parche?.tipo || "sin-parche";
+
+    return JSON.stringify([
+        product.id,
+        size,
+        name,
+        number,
+        patch
+    ]);
+}
+
+
 export function CartProvider({ children }) {
+    const [cart, setCart] = useState(getSavedCart);
 
-    // ==========================================
-    // CARRITO
-    // ==========================================
-
-    const [cart, setCart] = useState(() => {
-
-        try {
-
-            const saved =
-                localStorage.getItem(
-                    CART_STORAGE_KEY
-                );
-
-            return saved
-                ? JSON.parse(saved)
-                : [];
-
-        } catch {
-
-            return [];
-
-        }
-
-    });
-
-
-    // ==========================================
-    // GUARDAR CARRITO
-    // ==========================================
 
     useEffect(() => {
-
         localStorage.setItem(
             CART_STORAGE_KEY,
             JSON.stringify(cart)
         );
-
     }, [cart]);
 
 
-    // ==========================================
-    // AÑADIR AL CARRITO
-    // ==========================================
-
     function addToCart(product) {
+        const cartId = getCartId(product);
 
-        setCart(prevCart => {
+        const cartItem = {
+            ...product,
+            cartId,
+            talla: product.talla || "sin-talla",
+            nombrePersonalizado: (
+                product.nombrePersonalizado || ""
+            ).trim(),
+            numero: String(product.numero || "").trim(),
+            cantidad: 1
+        };
 
-            const talla =
-                product.talla || "sin-talla";
+        setCart((currentCart) => {
+            const itemExists = currentCart.some(
+                (item) => item.cartId === cartId
+            );
 
-            const nombre =
-                product.nombrePersonalizado || "";
-
-            const numero =
-                product.numero || "";
-
-            const parche =
-                product.parche?.tipo ||
-                "sin-parche";
-
-
-            const cartId = [
-                product.id,
-                talla,
-                nombre,
-                numero,
-                parche
-            ].join("-");
-
-
-            const existente =
-                prevCart.find(
-                    item =>
-                        item.cartId === cartId
-                );
-
-
-            // Si ya existe → aumentar cantidad
-
-            if (existente) {
-
-                return prevCart.map(item =>
-
-                    item.cartId === cartId
-
-                        ? {
-                            ...item,
-                            cantidad:
-                                Number(
-                                    item.cantidad || 1
-                                ) + 1
-                        }
-
-                        : item
-
-                );
-
+            if (!itemExists) {
+                return [...currentCart, cartItem];
             }
 
-
-            // Producto nuevo
-
-            return [
-
-                ...prevCart,
-
-                {
-                    ...product,
-                    cartId,
-                    cantidad: 1
-                }
-
-            ];
-
+            return currentCart.map((item) =>
+                item.cartId === cartId
+                    ? {
+                        ...item,
+                        cantidad: Number(item.cantidad || 1) + 1
+                    }
+                    : item
+            );
         });
-
     }
 
-
-    // ==========================================
-    // ELIMINAR
-    // ==========================================
 
     function removeFromCart(cartId) {
-
-        setCart(prevCart =>
-
-            prevCart.filter(
-                item =>
-                    item.cartId !== cartId
+        setCart((currentCart) =>
+            currentCart.filter(
+                (item) => item.cartId !== cartId
             )
-
         );
-
     }
 
-
-    // ==========================================
-    // AUMENTAR CANTIDAD
-    // ==========================================
 
     function increaseQuantity(cartId) {
-
-        setCart(prevCart =>
-
-            prevCart.map(item =>
-
+        setCart((currentCart) =>
+            currentCart.map((item) =>
                 item.cartId === cartId
-
                     ? {
                         ...item,
-                        cantidad:
-                            Number(
-                                item.cantidad || 1
-                            ) + 1
+                        cantidad: Number(item.cantidad || 1) + 1
                     }
-
                     : item
-
             )
-
         );
-
     }
 
-
-    // ==========================================
-    // DISMINUIR CANTIDAD
-    // ==========================================
 
     function decreaseQuantity(cartId) {
-
-        setCart(prevCart =>
-
-            prevCart
-
-                .map(item =>
-
+        setCart((currentCart) =>
+            currentCart
+                .map((item) =>
                     item.cartId === cartId
-
                         ? {
                             ...item,
-                            cantidad:
-                                Number(
-                                    item.cantidad || 1
-                                ) - 1
+                            cantidad: Number(item.cantidad || 1) - 1
                         }
-
                         : item
-
                 )
-
-                .filter(
-                    item =>
-                        Number(
-                            item.cantidad
-                        ) > 0
-                )
-
+                .filter((item) => item.cantidad > 0)
         );
-
     }
 
 
-    // ==========================================
-    // ACTUALIZAR CANTIDAD
-    // ==========================================
+    function updateQuantity(cartId, quantity) {
+        const safeQuantity = Math.max(
+            1,
+            Number(quantity) || 1
+        );
 
-    function updateQuantity(
-        cartId,
-        cantidad
-    ) {
-
-        const nuevaCantidad =
-            Math.max(
-                1,
-                Number(cantidad) || 1
-            );
-
-
-        setCart(prevCart =>
-
-            prevCart.map(item =>
-
+        setCart((currentCart) =>
+            currentCart.map((item) =>
                 item.cartId === cartId
-
                     ? {
                         ...item,
-                        cantidad:
-                            nuevaCantidad
+                        cantidad: safeQuantity
                     }
-
                     : item
-
             )
-
         );
-
     }
 
-
-    // ==========================================
-    // VACIAR CARRITO
-    // ==========================================
 
     function clearCart() {
-
         setCart([]);
-
     }
 
 
-    // ==========================================
-    // TOTAL DE CAMISETAS
-    // ==========================================
-
-    const totalProductos =
-        cart.reduce(
-
+    const cartSummary = useMemo(() => {
+        const totalProductos = cart.reduce(
             (total, item) =>
-
-                total +
-                Number(
-                    item.cantidad || 0
-                ),
-
+                total + Number(item.cantidad || 0),
             0
-
         );
 
-
-    // ==========================================
-    // SUBTOTAL
-    // ==========================================
-
-    const subtotal =
-        cart.reduce(
-
+        const subtotal = cart.reduce(
             (total, item) =>
-
                 total +
-
-                Number(
-                    item.precio || 0
-                ) *
-
-                Number(
-                    item.cantidad || 0
-                ),
-
+                Number(item.precio || 0) *
+                Number(item.cantidad || 0),
             0
-
         );
 
+        // Cada pareja recibe un 10% de descuento.
+        // 2 productos: descuento sobre 2.
+        // 3 productos: descuento sobre 2.
+        // 4 productos: descuento sobre 4.
+        const productsWithDiscount =
+            Math.floor(totalProductos / 2) * 2;
 
-    // ==========================================
-    // DESCUENTO
-    //
-    // 10% POR CADA PAREJA
-    //
-    // 1 → 0%
-    // 2 → 10%
-    // 3 → 10%
-    // 4 → 20%
-    // 5 → 20%
-    // 6 → 30%
-    // ==========================================
-
-    const precios = [];
-
-
-    cart.forEach(item => {
-
-        const cantidad =
-            Number(
-                item.cantidad || 0
-            );
-
-        const precio =
-            Number(
-                item.precio || 0
-            );
-
-
-        for (
-            let i = 0;
-            i < cantidad;
-            i++
-        ) {
-
-            precios.push(precio);
-
-        }
-
-    });
-
-
-    const parejas =
-        Math.floor(
-            precios.length / 2
-        );
-
-
-    const descuento =
-        precios
-
-            .slice(
-                0,
-                parejas * 2
+        const unitPrices = cart.flatMap((item) =>
+            Array.from(
+                { length: Number(item.cantidad || 0) },
+                () => Number(item.precio || 0)
             )
-
-            .reduce(
-
-                (total, precio) =>
-
-                    total +
-                    precio * 0.10,
-
-                0
-
-            );
-
-
-    // ==========================================
-    // TOTAL FINAL
-    // ==========================================
-
-    const total =
-        Math.max(
-            0,
-            subtotal - descuento
         );
 
+        const descuento = unitPrices
+            .slice(0, productsWithDiscount)
+            .reduce(
+                (total, price) => total + price * 0.1,
+                0
+            );
 
-    // ==========================================
-    // PROVIDER
-    // ==========================================
+        return {
+            totalProductos,
+            subtotal,
+            descuento,
+            total: Math.max(0, subtotal - descuento)
+        };
+    }, [cart]);
+
 
     return (
-
         <CartContext.Provider
             value={{
-
                 cart,
-
-                subtotal,
-
-                descuento,
-
-                total,
-
-                totalProductos,
-
+                ...cartSummary,
                 addToCart,
-
                 removeFromCart,
-
                 increaseQuantity,
-
                 decreaseQuantity,
-
                 updateQuantity,
-
                 clearCart
-
             }}
         >
-
             {children}
-
         </CartContext.Provider>
-
     );
-
 }
 
 
-// ==========================================
-// HOOK
-// ==========================================
-
 export function useCart() {
+    const context = useContext(CartContext);
 
-    return useContext(
-        CartContext
-    );
+    if (!context) {
+        throw new Error(
+            "useCart debe utilizarse dentro de CartProvider."
+        );
+    }
 
+    return context;
 }

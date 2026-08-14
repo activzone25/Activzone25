@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+
 import {
-    FiHome,
     FiHeart,
+    FiHome,
     FiShoppingCart,
     FiUser,
     FiX
@@ -9,19 +10,22 @@ import {
 
 import "./SideMenu.css";
 
-function SideMenu({ open, onClose }) {
 
+function SideMenu({ open, onClose }) {
     return (
         <>
             <div
                 className={`menu-overlay ${open ? "show" : ""}`}
                 onClick={onClose}
+                aria-hidden="true"
             />
 
-            <aside className={`side-menu ${open ? "open" : ""}`}>
-
-                <div className="menu-header">
-
+            <aside
+                className={`side-menu ${open ? "open" : ""}`}
+                aria-hidden={!open}
+                aria-label="Menú de navegación"
+            >
+                <header className="menu-header">
                     <h2>ACTIVZONE25</h2>
 
                     <button
@@ -31,46 +35,43 @@ function SideMenu({ open, onClose }) {
                     >
                         <FiX />
                     </button>
+                </header>
 
-                </div>
-
-                <nav>
-
+                <nav aria-label="Navegación principal">
                     <Link to="/" onClick={onClose}>
-                        <FiHome />
+                        <FiHome aria-hidden="true" />
                         <span>Inicio</span>
                     </Link>
 
                     <Link to="/adulto" onClick={onClose}>
-                        <span>👕</span>
+                        <span aria-hidden="true">👕</span>
                         <span>Adulto</span>
                     </Link>
 
                     <Link to="/nino" onClick={onClose}>
-                        <span>🧒</span>
+                        <span aria-hidden="true">🧒</span>
                         <span>Niño</span>
                     </Link>
 
                     <Link to="/favoritos" onClick={onClose}>
-                        <FiHeart />
+                        <FiHeart aria-hidden="true" />
                         <span>Favoritos</span>
                     </Link>
 
                     <a href="#seguimiento" onClick={onClose}>
-                        <FiShoppingCart />
+                        <FiShoppingCart aria-hidden="true" />
                         <span>Seguimiento pedido</span>
                     </a>
 
                     <a href="#contacto" onClick={onClose}>
-                        <FiUser />
+                        <FiUser aria-hidden="true" />
                         <span>Contacto</span>
                     </a>
-
                 </nav>
-
             </aside>
         </>
     );
 }
+
 
 export default SideMenu;

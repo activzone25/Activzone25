@@ -1,11 +1,5 @@
 /* =====================================================
-   ACTIVZONE25 - CART DRAWER PREMIUM
-   Nike / EA SPORTS FC Style
-===================================================== */
-
-
-/* =====================================================
-   OVERLAY
+   ACTIVZONE25 — CART DRAWER
 ===================================================== */
 
 .cart-overlay {
@@ -36,42 +30,36 @@
 
 .cart-drawer {
     position: fixed;
-
     top: 0;
     right: -460px;
+    z-index: 1000;
 
     width: 440px;
     max-width: 100%;
     height: 100vh;
-
-    z-index: 1000;
+    height: 100dvh;
 
     display: flex;
     flex-direction: column;
 
-    box-sizing: border-box;
+    overflow: hidden;
 
-    background:
-        linear-gradient(
-            180deg,
-            #111 0%,
-            #0b0b0b 100%
-        );
-
+    background: linear-gradient(180deg, #111, #0b0b0b);
     color: #fff;
 
-    border-left:
-        1px solid rgba(255,255,255,.08);
+    border-left: 1px solid rgba(255, 255, 255, .08);
+    box-shadow: -25px 0 70px rgba(0, 0, 0, .6);
 
-    box-shadow:
-        -25px 0 70px rgba(0,0,0,.6);
-
-    transition:
-        right .38s cubic-bezier(.4,0,.2,1);
+    transition: right .38s cubic-bezier(.4, 0, .2, 1);
 }
 
 .cart-drawer.open {
     right: 0;
+}
+
+.cart-drawer button:focus-visible {
+    outline: 2px solid #00d26a;
+    outline-offset: 3px;
 }
 
 
@@ -80,49 +68,36 @@
 ===================================================== */
 
 .cart-header {
-    flex-shrink: 0;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+    flex-shrink: 0;
+
     padding: 22px 24px;
 
-    background:
-        rgba(17,17,17,.96);
-
-    border-bottom:
-        1px solid rgba(255,255,255,.08);
+    background: rgba(17, 17, 17, .96);
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
 }
-
-
-/* =====================================================
-   TITULO
-===================================================== */
 
 .cart-title {
     display: flex;
     align-items: center;
-
     gap: 13px;
 }
 
 .cart-title-icon {
-    width: 44px;
-    height: 44px;
-
     display: flex;
     align-items: center;
     justify-content: center;
 
+    width: 44px;
+    height: 44px;
+
+    border: 1px solid rgba(0, 210, 106, .25);
     border-radius: 13px;
 
-    background:
-        rgba(0,210,106,.1);
-
-    border:
-        1px solid rgba(0,210,106,.25);
-
+    background: rgba(0, 210, 106, .1);
     color: #00d26a;
 
     font-size: 21px;
@@ -131,11 +106,8 @@
 .cart-title h2 {
     margin: 0;
 
-    color: #fff;
-
     font-size: 22px;
     font-weight: 900;
-
     letter-spacing: -.5px;
 }
 
@@ -148,32 +120,25 @@
 
     font-size: 11px;
     font-weight: 700;
-
-    text-transform: uppercase;
     letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-
-/* =====================================================
-   CERRAR
-===================================================== */
-
 .cart-close {
-    width: 42px;
-    height: 42px;
-
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border: 1px solid rgba(255,255,255,.08);
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid rgba(255, 255, 255, .08);
     border-radius: 12px;
 
     background: #181818;
     color: #fff;
 
     font-size: 19px;
-
     cursor: pointer;
 
     transition:
@@ -191,12 +156,11 @@
 
 
 /* =====================================================
-   PRODUCTOS
+   PRODUCTS
 ===================================================== */
 
 .cart-items {
     flex: 1;
-
     min-height: 0;
 
     overflow-y: auto;
@@ -213,83 +177,62 @@
 }
 
 .cart-items::-webkit-scrollbar-thumb {
-    background: #333;
-
     border-radius: 10px;
+
+    background: #333;
 }
 
 .cart-items::-webkit-scrollbar-thumb:hover {
     background: #00d26a;
 }
 
-
-/* =====================================================
-   PRODUCTO
-===================================================== */
-
 .cart-item {
-    position: relative;
-
     display: flex;
-
     gap: 15px;
 
     margin-bottom: 15px;
     padding: 13px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #181818,
-            #121212
-        );
-
-    border:
-        1px solid rgba(255,255,255,.07);
-
+    border: 1px solid rgba(255, 255, 255, .07);
     border-radius: 17px;
 
+    background: linear-gradient(145deg, #181818, #121212);
+
     transition:
-        border-color .25s ease,
         transform .25s ease,
+        border-color .25s ease,
         background .25s ease;
-}
-
-.cart-item:hover {
-    transform: translateY(-2px);
-
-    border-color:
-        rgba(0,210,106,.35);
-
-    background:
-        linear-gradient(
-            145deg,
-            #1b1b1b,
-            #131313
-        );
 }
 
 .cart-item:last-child {
     margin-bottom: 0;
 }
 
+.cart-item:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(0, 210, 106, .35);
+    background: linear-gradient(145deg, #1b1b1b, #131313);
+}
+
 
 /* =====================================================
-   IMAGEN PRODUCTO
+   PRODUCT IMAGE
 ===================================================== */
 
 .cart-product-image {
-    width: 92px;
-    height: 110px;
-
-    flex-shrink: 0;
-
     display: flex;
     align-items: center;
     justify-content: center;
 
+    flex-shrink: 0;
+
+    width: 92px;
+    height: 110px;
+
     overflow: hidden;
 
+    border: 1px solid rgba(255, 255, 255, .06);
     border-radius: 13px;
 
     background:
@@ -299,21 +242,17 @@
             #151515 65%,
             #101010 100%
         );
-
-    border:
-        1px solid rgba(255,255,255,.06);
 }
 
 .cart-product-image img {
     width: 100%;
     height: 100%;
 
-    object-fit: contain;
-
     padding: 5px;
 
-    transition:
-        transform .35s ease;
+    object-fit: contain;
+
+    transition: transform .35s ease;
 }
 
 .cart-item:hover .cart-product-image img {
@@ -322,28 +261,20 @@
 
 
 /* =====================================================
-   INFORMACIÓN
+   PRODUCT INFORMATION
 ===================================================== */
 
 .cart-info {
+    display: flex;
     flex: 1;
+    flex-direction: column;
 
     min-width: 0;
-
-    display: flex;
-    flex-direction: column;
 }
-
-
-/* =====================================================
-   PARTE SUPERIOR
-===================================================== */
 
 .cart-product-top {
     display: flex;
-
     justify-content: space-between;
-
     gap: 8px;
 }
 
@@ -356,51 +287,39 @@
 
     font-size: 9px;
     font-weight: 900;
-
-    text-transform: uppercase;
-
     letter-spacing: 1.2px;
+    text-transform: uppercase;
 }
 
 .cart-info h4 {
     max-width: 190px;
-
     margin: 0;
 
     color: #fff;
 
     font-size: 15px;
     font-weight: 900;
-
     line-height: 1.2;
 }
 
-
-/* =====================================================
-   ELIMINAR
-===================================================== */
-
 .remove-item {
-    width: 30px;
-    height: 30px;
-
-    flex-shrink: 0;
-
     display: flex;
     align-items: center;
     justify-content: center;
 
+    flex-shrink: 0;
+
+    width: 30px;
+    height: 30px;
     padding: 0;
 
-    border: none;
+    border: 0;
     border-radius: 9px;
 
     background: transparent;
-
     color: #666;
 
     font-size: 16px;
-
     cursor: pointer;
 
     transition:
@@ -410,8 +329,7 @@
 }
 
 .remove-item:hover {
-    background: rgba(255,45,85,.12);
-
+    background: rgba(255, 45, 85, .12);
     color: #ff2d55;
 
     transform: scale(1.08);
@@ -419,14 +337,12 @@
 
 
 /* =====================================================
-   DETALLES
+   DETAILS AND PERSONALIZATION
 ===================================================== */
 
 .cart-details {
     display: flex;
-
     flex-wrap: wrap;
-
     gap: 6px;
 
     margin-top: 9px;
@@ -438,7 +354,6 @@
     border-radius: 7px;
 
     background: #202020;
-
     color: #999;
 
     font-size: 10px;
@@ -446,49 +361,35 @@
 }
 
 .cart-details span:last-child {
+    background: rgba(0, 210, 106, .08);
     color: #00d26a;
-
-    background:
-        rgba(0,210,106,.08);
 }
-
-
-/* =====================================================
-   PERSONALIZACIÓN
-===================================================== */
 
 .cart-personalization {
     display: flex;
-
     align-items: center;
-
     gap: 7px;
 
     margin-top: 8px;
     padding: 6px 8px;
 
+    border: 1px solid rgba(255, 255, 255, .05);
     border-radius: 8px;
 
-    background:
-        rgba(255,255,255,.035);
-
-    border:
-        1px solid rgba(255,255,255,.05);
-
+    background: rgba(255, 255, 255, .035);
     color: #aaa;
 
     font-size: 10px;
 }
 
-.cart-personalization > span {
+.cart-personalization > span,
+.cart-personalization small {
     color: #00d26a;
 }
 
 .cart-personalization div {
     display: flex;
-
     flex-wrap: wrap;
-
     gap: 5px;
 }
 
@@ -501,23 +402,19 @@
 .cart-personalization small {
     margin-left: auto;
 
-    color: #00d26a;
-
     font-size: 9px;
     font-weight: 900;
 }
 
 
 /* =====================================================
-   PARTE INFERIOR PRODUCTO
+   PRICE AND QUANTITY
 ===================================================== */
 
 .cart-product-bottom {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
-
     gap: 10px;
 
     margin-top: auto;
@@ -531,47 +428,35 @@
     font-weight: 900;
 }
 
-
-/* =====================================================
-   CANTIDADES
-===================================================== */
-
 .qty {
     display: flex;
-
     align-items: center;
-
     gap: 7px;
 
     padding: 4px;
 
+    border: 1px solid rgba(255, 255, 255, .08);
     border-radius: 10px;
 
     background: #0c0c0c;
-
-    border:
-        1px solid rgba(255,255,255,.08);
 }
 
 .qty button {
-    width: 27px;
-    height: 27px;
-
     display: flex;
     align-items: center;
     justify-content: center;
 
+    width: 27px;
+    height: 27px;
     padding: 0;
 
-    border: none;
+    border: 0;
     border-radius: 7px;
 
     background: #202020;
-
     color: #fff;
 
     font-size: 13px;
-
     cursor: pointer;
 
     transition:
@@ -582,7 +467,6 @@
 
 .qty button:hover {
     background: #00d26a;
-
     color: #000;
 
     transform: scale(1.05);
@@ -591,17 +475,16 @@
 .qty span {
     min-width: 20px;
 
-    text-align: center;
-
     color: #fff;
 
     font-size: 12px;
     font-weight: 900;
+    text-align: center;
 }
 
 
 /* =====================================================
-   FOOTER
+   FOOTER AND SUMMARY
 ===================================================== */
 
 .cart-footer {
@@ -609,66 +492,49 @@
 
     padding: 18px 22px 22px;
 
-    background:
-        linear-gradient(
-            180deg,
-            #111,
-            #0b0b0b
-        );
+    border-top: 1px solid rgba(255, 255, 255, .08);
 
-    border-top:
-        1px solid rgba(255,255,255,.08);
-
-    box-shadow:
-        0 -15px 40px rgba(0,0,0,.3);
+    background: linear-gradient(180deg, #111, #0b0b0b);
+    box-shadow: 0 -15px 40px rgba(0, 0, 0, .3);
 }
-
-
-/* =====================================================
-   DESCUENTO
-===================================================== */
 
 .discount {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
-
     gap: 15px;
 
     margin-bottom: 15px;
-
     padding: 12px 14px;
 
+    border: 1px solid rgba(0, 210, 106, .25);
     border-radius: 12px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(0,210,106,.13),
-            rgba(0,210,106,.04)
+            rgba(0, 210, 106, .13),
+            rgba(0, 210, 106, .04)
         );
 
-    border:
-        1px solid rgba(0,210,106,.25);
-
-    box-shadow:
-        inset 0 0 20px rgba(0,210,106,.03);
+    box-shadow: inset 0 0 20px rgba(0, 210, 106, .03);
 }
 
 .discount div {
     display: flex;
-
     flex-direction: column;
-
     gap: 3px;
 }
 
-.discount span {
+.discount span,
+.discount > strong {
     color: #00d26a;
 
-    font-size: 12px;
     font-weight: 900;
+}
+
+.discount span {
+    font-size: 12px;
 }
 
 .discount small {
@@ -681,23 +547,17 @@
 .discount > strong {
     flex-shrink: 0;
 
-    color: #00d26a;
-
     font-size: 15px;
-    font-weight: 900;
 }
 
-
-/* =====================================================
-   RESUMEN
-===================================================== */
-
-.summary-row {
+.summary-row,
+.summary-total {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
+}
 
+.summary-row {
     padding: 5px 0;
 
     color: #888;
@@ -711,22 +571,11 @@
     font-weight: 800;
 }
 
-
-/* =====================================================
-   TOTAL
-===================================================== */
-
 .summary-total {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
     margin-top: 8px;
     padding-top: 14px;
 
-    border-top:
-        1px solid rgba(255,255,255,.08);
+    border-top: 1px solid rgba(255, 255, 255, .08);
 }
 
 .summary-total span {
@@ -734,9 +583,8 @@
 
     font-size: 19px;
     font-weight: 900;
-
-    text-transform: uppercase;
     letter-spacing: .5px;
+    text-transform: uppercase;
 }
 
 .summary-total strong {
@@ -744,51 +592,36 @@
 
     font-size: 29px;
     font-weight: 900;
-
     letter-spacing: -.5px;
 }
 
 
 /* =====================================================
-   BOTÓN WHATSAPP
+   ACTIONS
 ===================================================== */
 
 .buy-btn {
-    width: 100%;
-
-    min-height: 58px;
-
-    margin-top: 17px;
-
-    padding: 0 16px;
-
     display: flex;
-
     align-items: center;
     justify-content: space-between;
-
     gap: 12px;
 
-    border: none;
+    width: 100%;
+    min-height: 58px;
+    margin-top: 17px;
+    padding: 0 16px;
 
+    border: 0;
     border-radius: 14px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #00e676,
-            #00c853
-        );
-
+    background: linear-gradient(135deg, #00e676, #00c853);
     color: #000;
 
     font-size: 14px;
     font-weight: 900;
-
     cursor: pointer;
 
-    box-shadow:
-        0 12px 30px rgba(0,210,106,.2);
+    box-shadow: 0 12px 30px rgba(0, 210, 106, .2);
 
     transition:
         transform .25s ease,
@@ -815,45 +648,29 @@
 }
 
 .buy-btn:hover {
+    filter: brightness(1.05);
     transform: translateY(-3px);
 
-    filter: brightness(1.05);
-
-    box-shadow:
-        0 18px 40px rgba(0,210,106,.35);
+    box-shadow: 0 18px 40px rgba(0, 210, 106, .35);
 }
 
 .buy-btn:active {
     transform: translateY(0);
-
-    box-shadow:
-        0 8px 20px rgba(0,210,106,.2);
 }
-
-
-/* =====================================================
-   VACIAR CARRITO
-===================================================== */
 
 .clear-btn {
     width: 100%;
-
     margin-top: 10px;
-
     padding: 11px;
 
-    border:
-        1px solid rgba(255,255,255,.08);
-
+    border: 1px solid rgba(255, 255, 255, .08);
     border-radius: 11px;
 
     background: #151515;
-
     color: #777;
 
     font-size: 11px;
     font-weight: 800;
-
     cursor: pointer;
 
     transition:
@@ -863,26 +680,21 @@
 }
 
 .clear-btn:hover {
-    background:
-        rgba(255,45,85,.08);
+    border-color: rgba(255, 45, 85, .35);
 
-    border-color:
-        rgba(255,45,85,.35);
-
+    background: rgba(255, 45, 85, .08);
     color: #ff4055;
 }
 
 
 /* =====================================================
-   CARRITO VACÍO
+   EMPTY CART
 ===================================================== */
 
 .cart-empty {
-    flex: 1;
-
     display: flex;
+    flex: 1;
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
 
@@ -892,23 +704,18 @@
 }
 
 .empty-icon {
-    width: 80px;
-    height: 80px;
-
     display: flex;
     align-items: center;
     justify-content: center;
 
+    width: 80px;
+    height: 80px;
     margin-bottom: 20px;
 
+    border: 1px solid rgba(0, 210, 106, .2);
     border-radius: 24px;
 
-    background:
-        rgba(0,210,106,.08);
-
-    border:
-        1px solid rgba(0,210,106,.2);
-
+    background: rgba(0, 210, 106, .08);
     color: #00d26a;
 
     font-size: 34px;
@@ -925,32 +732,26 @@
 
 .cart-empty p {
     max-width: 280px;
-
     margin: 0;
 
     color: #777;
 
     font-size: 13px;
-
     line-height: 1.5;
 }
 
 .empty-shop-btn {
     margin-top: 22px;
-
     padding: 13px 25px;
 
-    border: none;
-
+    border: 0;
     border-radius: 12px;
 
     background: #00d26a;
-
     color: #000;
 
     font-size: 13px;
     font-weight: 900;
-
     cursor: pointer;
 
     transition:
@@ -961,21 +762,18 @@
 .empty-shop-btn:hover {
     transform: translateY(-2px);
 
-    box-shadow:
-        0 10px 25px rgba(0,210,106,.25);
+    box-shadow: 0 10px 25px rgba(0, 210, 106, .25);
 }
 
 
 /* =====================================================
-   TABLET
+   MOBILE
 ===================================================== */
 
 @media (max-width: 600px) {
-
     .cart-drawer {
-        width: 100%;
-
         right: -100%;
+        width: 100%;
     }
 
     .cart-header {
@@ -987,7 +785,10 @@
     }
 
     .cart-footer {
-        padding: 16px 18px 18px;
+        padding:
+            16px
+            18px
+            calc(18px + env(safe-area-inset-bottom));
     }
 
     .cart-product-image {
@@ -1010,19 +811,11 @@
     .buy-btn {
         min-height: 55px;
     }
-
 }
 
-
-/* =====================================================
-   MÓVIL PEQUEÑO
-===================================================== */
-
 @media (max-width: 380px) {
-
     .cart-item {
         gap: 10px;
-
         padding: 10px;
     }
 
@@ -1031,10 +824,7 @@
         height: 90px;
     }
 
-    .cart-details span {
-        font-size: 9px;
-    }
-
+    .cart-details span,
     .cart-personalization {
         font-size: 9px;
     }
@@ -1053,5 +843,4 @@
 
         font-size: 13px;
     }
-
 }

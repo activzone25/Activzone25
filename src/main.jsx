@@ -9,26 +9,17 @@ import { FavoritesProvider } from "./context/FavoritesContext";
 
 import "./styles/global.css";
 
+
 ReactDOM.createRoot(
     document.getElementById("root")
 ).render(
-
     <React.StrictMode>
-
         <BrowserRouter>
-
             <FavoritesProvider>
-
                 <CartProvider>
-
                     <App />
-
                 </CartProvider>
-
             </FavoritesProvider>
-
         </BrowserRouter>
-
     </React.StrictMode>
-
 );

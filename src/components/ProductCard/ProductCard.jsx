@@ -1,284 +1,171 @@
 import { Link } from "react-router-dom";
 
 import {
+    FiArrowUpRight,
     FiHeart,
-    FiArrowRight,
     FiShoppingCart
 } from "react-icons/fi";
 
-import { useFavorites } from "../../context/FavoritesContext";
 import { useCart } from "../../context/CartContext";
+import { useFavorites } from "../../context/FavoritesContext";
 
 import "./ProductCard.css";
 
 
 function ProductCard({ product }) {
+    const { addToCart } = useCart();
+    const { isFavorite, toggleFavorite } = useFavorites();
 
-    const {
-        toggleFavorite,
-        isFavorite
-    } = useFavorites();
+    const favorite = isFavorite(product.id);
+    const price = Number(product.precio) || 25;
+    const season = product.temporada || "2026/27";
 
-    const {
-        addToCart
-    } = useCart();
-
-
-    /* ==========================================
-       DATOS
-    ========================================== */
-
-    const favorite =
-        isFavorite(product.id);
-
-    const precio =
-        Number(product.precio || 25);
-
-    const rating =
-        Number(product.rating || 5);
-
-    const opiniones =
-        Number(product.opiniones || 0);
-
-    const tieneParches =
-        Array.isArray(product.parches) &&
-        product.parches.length > 0;
-
-    const personalizable =
-        product.personalizable !== false;
+    const image =
+        product.front ||
+        product.imagen ||
+        product.image;
 
 
-    /* ==========================================
-       FAVORITO
-    ========================================== */
-
-    function handleFavorite(e) {
-
-        e.preventDefault();
-        e.stopPropagation();
-
+    function handleFavorite() {
         toggleFavorite(product);
-
     }
 
 
-    /* ==========================================
-       COMPRA RÁPIDA
-    ========================================== */
-
-    function handleAddCart(e) {
-
-        e.preventDefault();
-        e.stopPropagation();
-
+    function handleAddToCart() {
         addToCart({
-
             ...product,
 
-            imagen: product.front,
+            imagen: image,
 
-            talla: "M",
+            talla: product.categoria === "Niño" ? "16" : "M",
 
             nombrePersonalizado: "",
-
             numero: "",
-
             personalizada: false,
 
-            precio,
-
-            precioBase: precio,
-
+            precio: price,
+            precioBase: price,
             extraPersonalizacion: 0,
 
             parche: {
-                tipo: ""
+                tipo: "sin-parche",
+                nombre: ""
             }
-
         });
-
     }
 
 
     return (
+        <article className="product-card">
+            <div className="product-card-image">
+                <Link
+                    to={`/producto/${product.slug}`}
+                    className="product-card-image-link"
+                    aria-label={`Ver ${product.nombre}`}
+                >
+                    <div className="product-card-badges">
+                        {product.nuevo && (
+                            <span className="product-badge new">
+                                ⭐ NUEVO {season}
+                            </span>
+                        )}
 
-        <Link
-            to={`/producto/${product.slug}`}
-            className="product-card"
-            aria-label={`Ver ${product.nombre}`}
-        >
+                        {product.oferta && (
+                            <span className="product-badge offer">
+                                OFERTA
+                            </span>
+                        )}
+                    </div>
 
-            {/* ==================================
-                IMAGEN
-            ================================== */}
+                    {image ? (
+                        <img
+                            src={image}
+                            alt={product.nombre}
+                            loading="lazy"
+                            className="product-image"
+                        />
+                    ) : (
+                        <div className="product-image-placeholder">
+                            Sin imagen
+                        </div>
+                    )}
 
-            <div className="product-image">
-
-                {product.nuevo && (
-
-                    <span className="badge">
-                        ⭐ NUEVO 26/27
-                    </span>
-
-                )}
-
+                    <div className="product-card-overlay">
+                        <span>
+                            Ver producto
+                            <FiArrowUpRight />
+                        </span>
+                    </div>
+                </Link>
 
                 <button
                     type="button"
-                    className={`favorite-btn ${
-                        favorite ? "active" : ""
-                    }`}
+                    className={
+                        favorite
+                            ? "product-favorite active"
+                            : "product-favorite"
+                    }
                     onClick={handleFavorite}
                     aria-label={
                         favorite
-                            ? `Quitar ${product.nombre} de favoritos`
-                            : `Añadir ${product.nombre} a favoritos`
+                            ? "Quitar de favoritos"
+                            : "Añadir a favoritos"
                     }
-                    aria-pressed={favorite}
                 >
-
-                    <FiHeart />
-
+                    <FiHeart aria-hidden="true" />
                 </button>
-
-
-                <img
-                    src={product.front}
-                    alt={product.nombre}
-                    loading="lazy"
-                />
-
             </div>
 
-
-            {/* ==================================
-                INFORMACIÓN
-            ================================== */}
-
-            <div className="product-info">
-
-                <span className="league">
-                    {product.liga || "Fútbol"}
-                </span>
-
-
-                <h3>
-                    {product.nombre}
-                </h3>
-
-
-                <p>
-                    Temporada {product.temporada || "2026/27"}
-                </p>
-
-
-                {/* ==================================
-                    ETIQUETAS
-                ================================== */}
-
-                <div className="product-tags">
-
-                    {tieneParches && (
-
-                        <span>
-                            🏆 Parches GRATIS
+            <div className="product-card-info">
+                <div className="product-card-top">
+                    <div>
+                        <span className="product-card-league">
+                            {product.liga || "Fútbol"}
                         </span>
 
+                        <Link
+                            to={`/producto/${product.slug}`}
+                            className="product-card-name"
+                        >
+                            {product.nombre}
+                        </Link>
+                    </div>
+
+                    <strong className="product-card-price">
+                        {price.toFixed(2)} €
+                    </strong>
+                </div>
+
+                <div className="product-card-meta">
+                    <span>👕 {season}</span>
+
+                    {product.personalizable !== false && (
+                        <span>✍️ +5 €</span>
                     )}
-
-
-                    {personalizable && (
-
-                        <span>
-                            ✍️ Personalizable
-                        </span>
-
-                    )}
-
                 </div>
 
+                <div className="product-card-actions">
+                    <Link
+                        to={`/producto/${product.slug}`}
+                        className="product-view"
+                    >
+                        Ver detalles
+                        <FiArrowUpRight />
+                    </Link>
 
-                {/* ==================================
-                    PRECIO
-                ================================== */}
-
-                <div className="price-box">
-
-                    {product.oferta &&
-                        product.precioAnterior && (
-
-                        <span className="old-price">
-                            {Number(
-                                product.precioAnterior
-                            ).toFixed(2)} €
-                        </span>
-
-                    )}
-
-
-                    <span className="new-price">
-                        {precio.toFixed(2)} €
-                    </span>
-
+                    <button
+                        type="button"
+                        className="product-add"
+                        onClick={handleAddToCart}
+                        aria-label={`Añadir ${product.nombre} al carrito`}
+                    >
+                        <FiShoppingCart aria-hidden="true" />
+                        <span>Añadir</span>
+                    </button>
                 </div>
-
-
-                {/* ==================================
-                    VALORACIÓN
-                ================================== */}
-
-                <div className="rating">
-
-                    <span>
-                        ⭐ {rating.toFixed(1)}
-                    </span>
-
-                    <span>
-                        ({opiniones})
-                    </span>
-
-                </div>
-
-
-                {/* ==================================
-                    AÑADIR AL CARRITO
-                ================================== */}
-
-                <button
-                    type="button"
-                    className="quick-cart"
-                    onClick={handleAddCart}
-                >
-
-                    <FiShoppingCart />
-
-                    <span>
-                        Añadir al carrito
-                    </span>
-
-                </button>
-
-
-                {/* ==================================
-                    VER PRODUCTO
-                ================================== */}
-
-                <div className="view-product">
-
-                    <span>
-                        Ver producto
-                    </span>
-
-                    <FiArrowRight />
-
-                </div>
-
             </div>
-
-        </Link>
-
+        </article>
     );
-
 }
 
 

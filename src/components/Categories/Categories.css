@@ -1,253 +1,169 @@
 /* =====================================================
-   ACTIVZONE25 - CATEGORIES PREMIUM
+   ACTIVZONE25 — CATEGORIES
 ===================================================== */
 
 .categories {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1480px;
 
-    margin: 35px auto 28px;
-
-    padding: 0 30px;
+    margin: 34px auto 30px;
+    padding: 0 36px;
 
     box-sizing: border-box;
 }
 
 
 /* =====================================================
-   CONTENEDOR
+   CONTAINER
 ===================================================== */
 
 .categories-container {
     display: flex;
+    align-items: stretch;
 
-    align-items: center;
-    justify-content: center;
+    width: 100%;
 
-    gap: 10px;
-
-    padding: 8px;
-
-    border: 1px solid rgba(255,255,255,.07);
-
-    border-radius: 18px;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
 
     background:
         linear-gradient(
             180deg,
-            rgba(255,255,255,.035),
-            rgba(255,255,255,.015)
+            rgba(255, 255, 255, .025),
+            rgba(255, 255, 255, .008)
         );
-
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.18);
-
-    backdrop-filter: blur(12px);
 }
 
 
 /* =====================================================
-   BOTONES
+   BUTTON
 ===================================================== */
 
-.categories button {
+.category-button {
     position: relative;
 
-    display: inline-flex;
-
+    display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
 
-    gap: 9px;
+    min-height: 62px;
+    padding: 0 22px;
 
-    min-height: 48px;
+    overflow: hidden;
 
-    padding: 10px 19px;
-
-    border: 1px solid transparent;
-
-    border-radius: 12px;
+    border: 0;
+    border-right: 1px solid rgba(255, 255, 255, .07);
 
     background: transparent;
+    color: #666;
 
-    color: #888;
-
-    font-size: 13px;
-
-    font-weight: 900;
-
-    letter-spacing: .2px;
-
-    white-space: nowrap;
-
+    font-family: inherit;
     cursor: pointer;
 
     transition:
         color .25s ease,
         background .25s ease,
-        border-color .25s ease,
-        transform .25s ease,
-        box-shadow .25s ease;
+        transform .2s ease;
 }
 
-
-/* =====================================================
-   HOVER
-===================================================== */
-
-.categories button:hover {
-    color: #fff;
-
-    background: rgba(255,255,255,.055);
-
-    border-color:
-        rgba(255,255,255,.08);
-
-    transform: translateY(-2px);
+.category-button:last-child {
+    border-right: 0;
 }
 
-
-/* =====================================================
-   ACTIVO
-===================================================== */
-
-.categories button.active {
-    color: #000;
-
-    background:
-        linear-gradient(
-            135deg,
-            #00e676,
-            #00d26a
-        );
-
-    border-color: #00d26a;
-
-    box-shadow:
-        0 8px 24px rgba(0,210,106,.25),
-        inset 0 1px 0 rgba(255,255,255,.25);
-}
-
-
-.categories button.active:hover {
-    color: #000;
-
-    background:
-        linear-gradient(
-            135deg,
-            #00e676,
-            #00d26a
-        );
-
-    transform:
-        translateY(-2px)
-        scale(1.02);
-}
-
-
-/* =====================================================
-   INDICADOR ACTIVO
-===================================================== */
-
-.categories button.active::after {
+.category-button::after {
     content: "";
 
     position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
-    left: 50%;
-
-    bottom: -5px;
-
-    width: 18px;
-    height: 3px;
-
-    border-radius: 999px;
+    height: 2px;
 
     background: #00d26a;
 
-    transform: translateX(-50%);
+    transform: scaleX(0);
+    transform-origin: center;
 
-    box-shadow:
-        0 0 12px rgba(0,210,106,.65);
+    transition: transform .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+.category-button:hover {
+    background: rgba(255, 255, 255, .035);
+    color: #fff;
+}
+
+.category-button:active {
+    transform: scale(.985);
+}
+
+.category-button:focus-visible {
+    outline: 2px solid #00d26a;
+    outline-offset: -2px;
 }
 
 
 /* =====================================================
-   ICONO
-===================================================== */
-
-.category-icon {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    width: 24px;
-    height: 24px;
-
-    flex-shrink: 0;
-
-    font-size: 18px;
-
-    line-height: 1;
-
-    transition:
-        transform .25s ease,
-        filter .25s ease;
-}
-
-
-/* =====================================================
-   ICONO HOVER
-===================================================== */
-
-.categories button:hover .category-icon {
-    transform: scale(1.12);
-}
-
-
-/* =====================================================
-   ICONO ACTIVO
-===================================================== */
-
-.categories button.active .category-icon {
-    transform: scale(1.08);
-
-    filter:
-        saturate(1.15)
-        contrast(1.05);
-}
-
-
-/* =====================================================
-   NOMBRE
+   LABELS
 ===================================================== */
 
 .category-name {
-    line-height: 1;
+    position: relative;
+    z-index: 2;
+
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    white-space: nowrap;
 
     transition:
-        color .25s ease;
+        color .25s ease,
+        transform .25s ease;
+}
+
+.category-name-short {
+    display: none;
+}
+
+.category-button:hover .category-name {
+    transform: translateY(-1px);
 }
 
 
 /* =====================================================
-   EFECTO CLICK
+   ACTIVE STATE
 ===================================================== */
 
-.categories button:active {
-    transform: scale(.96);
+.category-button.active {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 210, 106, .07),
+            rgba(0, 210, 106, .025)
+        );
+
+    color: #fff;
 }
 
+.category-button.active::after {
+    transform: scaleX(1);
+}
 
-/* =====================================================
-   FOCUS
-===================================================== */
+.category-indicator {
+    position: absolute;
+    top: 13px;
+    right: 14px;
 
-.categories button:focus-visible {
-    outline: 2px solid #00d26a;
+    width: 6px;
+    height: 6px;
 
-    outline-offset: 3px;
+    border-radius: 50%;
+
+    background: #00d26a;
+
+    box-shadow: 0 0 12px rgba(0, 210, 106, .7);
 }
 
 
@@ -256,121 +172,91 @@
 ===================================================== */
 
 @media (max-width: 900px) {
-
     .categories {
-        margin: 28px auto 22px;
-
-        padding: 0 20px;
+        margin: 28px auto 25px;
+        padding: 0 22px;
     }
-
 
     .categories-container {
-        justify-content: flex-start;
-
         overflow-x: auto;
 
-        flex-wrap: nowrap;
-
-        padding: 7px;
-
         scrollbar-width: none;
-
         -webkit-overflow-scrolling: touch;
     }
-
 
     .categories-container::-webkit-scrollbar {
         display: none;
     }
 
+    .category-button {
+        flex: 0 0 auto;
 
-    .categories button {
-        flex-shrink: 0;
-
-        min-height: 46px;
-
-        padding: 10px 17px;
-
-        font-size: 13px;
+        min-width: 145px;
+        min-height: 58px;
+        padding: 0 18px;
     }
-
 }
 
 
 /* =====================================================
-   MÓVIL
+   MOBILE
 ===================================================== */
 
 @media (max-width: 600px) {
-
     .categories {
-        margin: 22px auto 18px;
-
-        padding: 0 15px;
+        margin: 22px auto 20px;
+        padding: 0 14px;
     }
 
-
-    .categories-container {
-        gap: 7px;
-
-        padding: 6px;
-
-        border-radius: 15px;
+    .category-button {
+        min-width: 115px;
+        min-height: 53px;
+        padding: 0 14px;
     }
 
-
-    .categories button {
-        min-height: 43px;
-
-        padding: 9px 15px;
-
-        gap: 7px;
-
-        border-radius: 10px;
-
-        font-size: 12px;
+    .category-name {
+        font-size: 9px;
+        letter-spacing: .8px;
     }
 
-
-    .category-icon {
-        width: 21px;
-        height: 21px;
-
-        font-size: 16px;
+    .category-name-full {
+        display: none;
     }
 
-
-    .categories button.active::after {
-        bottom: -4px;
-
-        width: 15px;
-
-        height: 2px;
+    .category-name-short {
+        display: inline;
     }
 
+    .category-indicator {
+        top: 10px;
+        right: 10px;
+
+        width: 5px;
+        height: 5px;
+    }
 }
 
 
-/* =====================================================
-   MÓVIL PEQUEÑO
-===================================================== */
-
 @media (max-width: 380px) {
-
     .categories {
         padding: 0 12px;
     }
 
-
-    .categories-container {
-        gap: 5px;
+    .category-button {
+        min-width: 105px;
+        min-height: 50px;
+        padding: 0 12px;
     }
 
-
-    .categories button {
-        padding: 9px 13px;
-
-        font-size: 11px;
+    .category-name {
+        font-size: 8px;
     }
+}
 
+
+@media (prefers-reduced-motion: reduce) {
+    .category-button,
+    .category-button * {
+        transition: none !important;
+    }
 }

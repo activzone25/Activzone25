@@ -1,39 +1,29 @@
- /* =====================================================
-    ACTIVZONE25 - HOME PREMIUM
- ===================================================== */
+/* =====================================================
+   ACTIVZONE25 — HOME
+===================================================== */
 
-main {
+.home-page {
     position: relative;
 
     width: 100%;
-
     min-height: 100vh;
 
     overflow: hidden;
 
-    background:
-        #0b0b0b;
-
+    background: #0b0b0b;
     color: #fff;
 }
 
-
-/* =====================================================
-   FONDO GENERAL
-===================================================== */
-
-main::before {
+.home-page::before {
     content: "";
 
     position: fixed;
-
     top: 0;
     left: 50%;
+    z-index: 0;
 
     width: 900px;
     height: 900px;
-
-    transform: translateX(-50%);
 
     background:
         radial-gradient(
@@ -44,62 +34,23 @@ main::before {
 
     pointer-events: none;
 
-    z-index: 0;
+    transform: translateX(-50%);
 }
 
-
-/* =====================================================
-   CONTENIDO HOME
-===================================================== */
-
-main > * {
+.home-page > * {
     position: relative;
-
     z-index: 1;
 }
-
-
-/* =====================================================
-   SEPARACIÓN HERO → CATEGORÍAS
-===================================================== */
 
 .hero + .categories {
     margin-top: 34px;
 }
 
-
-/* =====================================================
-   CATEGORÍAS → FILTRO
-===================================================== */
-
-.categories + .price-filter {
-    margin-top: 22px;
-}
-
-
-/* =====================================================
-   FILTRO → PRODUCTOS
-===================================================== */
-
-.price-filter + #productos {
-    margin-top: 5px;
-}
-
-
-/* =====================================================
-   SECCIÓN PRODUCTOS
-===================================================== */
-
 #productos {
-    width: 100%;
-
     position: relative;
+
+    width: 100%;
 }
-
-
-/* =====================================================
-   LÍNEA DECORATIVA
-===================================================== */
 
 #productos::before {
     content: "";
@@ -107,101 +58,52 @@ main > * {
     display: block;
 
     width: min(90%, 1350px);
-
     height: 1px;
-
     margin: 42px auto 0;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.07),
+            rgba(255, 255, 255, .07),
             transparent
         );
 }
 
 
-/* =====================================================
-   SCROLL SUAVE
-===================================================== */
-
-html {
-    scroll-behavior: smooth;
-}
-
-
-/* =====================================================
-   SELECCIÓN DE TEXTO
-===================================================== */
-
-::selection {
-    background: #00d26a;
-
-    color: #000;
-}
-
-
-/* =====================================================
-   TABLET
-===================================================== */
-
 @media (max-width: 900px) {
-
     .hero + .categories {
         margin-top: 28px;
     }
 
     #productos::before {
         width: 88%;
-
         margin-top: 35px;
     }
-
 }
 
 
-/* =====================================================
-   MÓVIL
-===================================================== */
-
 @media (max-width: 650px) {
-
-    main::before {
+    .home-page::before {
         width: 500px;
         height: 500px;
 
         opacity: .7;
     }
 
-
     .hero + .categories {
         margin-top: 20px;
     }
 
-
-    .categories + .price-filter {
-        margin-top: 15px;
-    }
-
-
     #productos::before {
         width: 85%;
-
         margin-top: 28px;
     }
-
 }
 
 
-/* =====================================================
-   MÓVIL PEQUEÑO
-===================================================== */
-
 @media (max-width: 380px) {
-
     #productos::before {
         margin-top: 22px;
     }
-
 }

@@ -1,38 +1,32 @@
 import "./Categories.css";
 
 
-const categories = [
-
+const CATEGORIES = [
     {
         id: "Todas",
-        icon: "🌍",
-        name: "Todas"
+        name: "Todas",
+        shortName: "Todo"
     },
-
     {
         id: "LaLiga",
-        icon: "🇪🇸",
-        name: "LaLiga"
+        name: "LaLiga",
+        shortName: "LaLiga"
     },
-
     {
         id: "Premier League",
-        icon: "🏴",
-        name: "Premier"
+        name: "Premier League",
+        shortName: "Premier"
     },
-
     {
         id: "Bundesliga",
-        icon: "🇩🇪",
-        name: "Bundesliga"
+        name: "Bundesliga",
+        shortName: "Bundesliga"
     },
-
     {
         id: "Ligue 1",
-        icon: "🇫🇷",
-        name: "Ligue 1"
+        name: "Ligue 1",
+        shortName: "Ligue 1"
     }
-
 ];
 
 
@@ -40,46 +34,49 @@ function Categories({
     category,
     setCategory
 }) {
-
     return (
-
-        <section className="categories">
-
+        <section
+            className="categories"
+            aria-label="Filtrar camisetas por liga"
+        >
             <div className="categories-container">
+                {CATEGORIES.map((item) => {
+                    const isActive = category === item.id;
 
-                {categories.map(item => (
+                    return (
+                        <button
+                            type="button"
+                            key={item.id}
+                            className={
+                                isActive
+                                    ? "category-button active"
+                                    : "category-button"
+                            }
+                            onClick={() => setCategory(item.id)}
+                            aria-pressed={isActive}
+                        >
+                            <span className="category-name">
+                                <span className="category-name-full">
+                                    {item.name}
+                                </span>
 
-                    <button
-                        key={item.id}
-                        type="button"
-                        className={
-                            category === item.id
-                                ? "active"
-                                : ""
-                        }
-                        onClick={() =>
-                            setCategory(item.id)
-                        }
-                    >
+                                <span className="category-name-short">
+                                    {item.shortName}
+                                </span>
+                            </span>
 
-                        <span className="category-icon">
-                            {item.icon}
-                        </span>
-
-                        <span className="category-name">
-                            {item.name}
-                        </span>
-
-                    </button>
-
-                ))}
-
+                            {isActive && (
+                                <span
+                                    className="category-indicator"
+                                    aria-hidden="true"
+                                />
+                            )}
+                        </button>
+                    );
+                })}
             </div>
-
         </section>
-
     );
-
 }
 
 

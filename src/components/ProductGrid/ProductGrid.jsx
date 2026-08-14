@@ -1,128 +1,153 @@
-import "./ProductGrid.css";
-
 import products from "../../data/products";
 import ProductCard from "../ProductCard/ProductCard";
+
+import "./ProductGrid.css";
 
 
 function ProductGrid({
     search = "",
     category = "Todas"
 }) {
-
-    const text =
-        search.toLowerCase().trim();
-
+    const searchText = search.toLowerCase().trim();
 
     const filteredProducts = products
+        .filter((product) => {
+            const name = product.nombre?.toLowerCase() || "";
+            const team = product.equipo?.toLowerCase() || "";
+            const league = product.liga?.toLowerCase() || "";
 
-        .filter(product => {
+            const matchesSearch =
+                !searchText ||
+                name.includes(searchText) ||
+                team.includes(searchText) ||
+                league.includes(searchText);
 
-            const nombre =
-                product.nombre?.toLowerCase() || "";
-
-            const equipo =
-                product.equipo?.toLowerCase() || "";
-
-
-            const matchSearch =
-                nombre.includes(text) ||
-                equipo.includes(text);
-
-
-            const matchCategory =
+            const matchesCategory =
                 category === "Todas" ||
                 product.liga === category ||
                 product.categoria === category;
 
-
-            const disponible =
-                product.disponible !== false;
-
-
             return (
-                matchSearch &&
-                matchCategory &&
-                disponible
+                product.disponible !== false &&
+                matchesSearch &&
+                matchesCategory
             );
-
         })
+        .sort((firstProduct, secondProduct) => {
+            if (
+                Number(firstProduct.nuevo) !==
+                Number(secondProduct.nuevo)
+            ) {
+                return (
+                    Number(secondProduct.nuevo) -
+                    Number(firstProduct.nuevo)
+                );
+            }
 
-        .sort((a, b) =>
-            Number(b.nuevo) -
-            Number(a.nuevo)
-        );
+            if (
+                Number(firstProduct.rating || 0) !==
+                Number(secondProduct.rating || 0)
+            ) {
+                return (
+                    Number(secondProduct.rating || 0) -
+                    Number(firstProduct.rating || 0)
+                );
+            }
+
+            return (firstProduct.nombre || "").localeCompare(
+                secondProduct.nombre || ""
+            );
+        });
+
+    const productCount = filteredProducts.length;
+    const counterText =
+        productCount === 1 ? "PRODUCTO" : "PRODUCTOS";
 
 
     return (
+        <section
+            className="product-grid-section"
+            aria-label="Catálogo de productos"
+        >
+            <header className="catalog-header">
+                <div className="catalog-heading">
+                    <span className="catalog-eyebrow">
+                        ACTIVZONE25
 
-        <section className="product-grid-section">
+                        <span
+                            className="eyebrow-separator"
+                            aria-hidden="true"
+                        >
+                            /
+                        </span>
 
-            <div className="section-header">
+                        COLECCIÓN 26/27
+                    </span>
 
-                <span className="section-badge">
-                    ⭐ COLECCIÓN 2026/27
-                </span>
+                    <h2>
+                        Las nuevas
+                        <br />
+                        <span>equipaciones</span>
+                    </h2>
 
+                    <p>
+                        Descubre las nuevas camisetas de fútbol de la
+                        temporada 2026/27.
+                    </p>
+                </div>
 
-                <h2>
-                    🔥 Novedades
-                </h2>
+                <div
+                    className="catalog-counter"
+                    aria-label={`${productCount} ${counterText.toLowerCase()}`}
+                >
+                    <strong>{productCount}</strong>
+                    <span>{counterText}</span>
+                </div>
+            </header>
 
+            <div
+                className="catalog-line"
+                aria-hidden="true"
+            />
 
-                <p>
-                    Descubre las últimas equipaciones disponibles.
-                </p>
-
-
-                <small>
-
-                    {filteredProducts.length}{" "}
-
-                    {filteredProducts.length === 1
-                        ? "producto disponible"
-                        : "productos disponibles"}
-
-                </small>
-
-            </div>
-
-
-            {filteredProducts.length > 0 ? (
-
-                <div className="product-grid">
-
-                    {filteredProducts.map(product => (
-
+            {productCount > 0 ? (
+                <div
+                    className="product-grid"
+                    aria-live="polite"
+                >
+                    {filteredProducts.map((product) => (
                         <ProductCard
                             key={product.id}
                             product={product}
                         />
-
                     ))}
-
                 </div>
-
             ) : (
+                <div
+                    className="empty-products"
+                    role="status"
+                >
+                    <div
+                        className="empty-products-icon"
+                        aria-hidden="true"
+                    >
+                        ×
+                    </div>
 
-                <div className="empty-products">
+                    <span className="empty-eyebrow">
+                        CATÁLOGO
+                    </span>
 
-                    <h3>
-                        😕 No encontramos productos
-                    </h3>
-
+                    <h3>No encontramos productos</h3>
 
                     <p>
-                        Prueba con otra búsqueda o categoría.
+                        Prueba con otra búsqueda o selecciona una
+                        categoría diferente.
                     </p>
-
                 </div>
-
             )}
-
         </section>
-
     );
-
 }
 
 

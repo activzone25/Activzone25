@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+
 import {
-    FiSearch,
-    FiShoppingCart,
+    FiHeart,
     FiMenu,
-    FiHeart
+    FiSearch,
+    FiShoppingCart
 } from "react-icons/fi";
 
 import { useCart } from "../../context/CartContext";
@@ -11,21 +12,23 @@ import { useFavorites } from "../../context/FavoritesContext";
 
 import "./Header.css";
 
+
 function Header({
     search = "",
     setSearch = () => {},
     setCartOpen = () => {},
     setMenuOpen = () => {}
 }) {
-
     const { totalProductos } = useCart();
     const { favorites } = useFavorites();
 
+    const favoriteCount = favorites.length;
+    const cartCount = totalProductos;
+
+
     return (
         <header className="header">
-
             <div className="header-container">
-
                 <button
                     type="button"
                     className="menu-mobile"
@@ -44,31 +47,37 @@ function Header({
                 </Link>
 
                 <div className="search-box">
-
-                    <FiSearch className="search-icon" />
-
-                    <input
-                        type="text"
-                        placeholder="Buscar camiseta..."
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        aria-label="Buscar camiseta"
+                    <FiSearch
+                        className="search-icon"
+                        aria-hidden="true"
                     />
 
+                    <input
+                        type="search"
+                        value={search}
+                        placeholder="Buscar camiseta..."
+                        aria-label="Buscar camiseta"
+                        onChange={(event) =>
+                            setSearch(event.target.value)
+                        }
+                    />
                 </div>
 
                 <div className="header-actions">
-
                     <Link
                         to="/favoritos"
                         className="icon-btn"
-                        aria-label="Favoritos"
+                        aria-label={
+                            favoriteCount > 0
+                                ? `Favoritos, ${favoriteCount} productos`
+                                : "Favoritos"
+                        }
                     >
-                        <FiHeart />
+                        <FiHeart aria-hidden="true" />
 
-                        {favorites.length > 0 && (
+                        {favoriteCount > 0 && (
                             <span className="count">
-                                {favorites.length}
+                                {favoriteCount}
                             </span>
                         )}
                     </Link>
@@ -77,13 +86,17 @@ function Header({
                         type="button"
                         className="icon-btn"
                         onClick={() => setCartOpen(true)}
-                        aria-label="Abrir carrito"
+                        aria-label={
+                            cartCount > 0
+                                ? `Carrito, ${cartCount} productos`
+                                : "Carrito"
+                        }
                     >
-                        <FiShoppingCart />
+                        <FiShoppingCart aria-hidden="true" />
 
-                        {totalProductos > 0 && (
+                        {cartCount > 0 && (
                             <span className="count">
-                                {totalProductos}
+                                {cartCount}
                             </span>
                         )}
                     </button>
@@ -94,15 +107,13 @@ function Header({
                         onClick={() => setMenuOpen(true)}
                         aria-label="Abrir menú"
                     >
-                        <FiMenu />
+                        <FiMenu aria-hidden="true" />
                     </button>
-
                 </div>
-
             </div>
-
         </header>
     );
 }
+
 
 export default Header;

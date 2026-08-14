@@ -1,21 +1,19 @@
 import {
-    Routes,
-    Route
+    Route,
+    Routes
 } from "react-router-dom";
 
 import Home from "../pages/Home";
 import Adult from "../pages/Adult";
 import Kids from "../pages/Kids";
-import ProductPage from "../pages/ProductPage/ProductPage";
 import Favorites from "../pages/Favorites";
 import NotFound from "../pages/NotFound";
+import ProductPage from "../pages/ProductPage/ProductPage";
+
 
 function AppRouter({ search }) {
-
     return (
-
         <Routes>
-
             <Route
                 path="/"
                 element={<Home search={search} />}
@@ -45,11 +43,9 @@ function AppRouter({ search }) {
                 path="*"
                 element={<NotFound />}
             />
-
         </Routes>
-
     );
-
 }
+
 
 export default AppRouter;

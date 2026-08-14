@@ -7,45 +7,32 @@ import "./Favorites.css";
 
 
 function Favorites() {
-
     const {
         favorites,
         clearFavorites
     } = useFavorites();
 
-
-    const totalFavoritos = favorites.length;
+    const favoriteCount = favorites.length;
 
 
     return (
-
         <main className="favorites-page">
-
-            {/* ==========================================
-                CABECERA
-            ========================================== */}
-
-            <section className="favorites-header">
-
+            <header className="favorites-header">
                 <span className="section-badge">
                     ❤️ FAVORITOS
                 </span>
 
-                <h1>
-                    Mis favoritos
-                </h1>
+                <h1>Mis favoritos</h1>
 
                 <p>
-                    {totalFavoritos}{" "}
-                    {totalFavoritos === 1
+                    {favoriteCount}{" "}
+                    {favoriteCount === 1
                         ? "camiseta guardada"
                         : "camisetas guardadas"
                     }
                 </p>
 
-
-                {totalFavoritos > 0 && (
-
+                {favoriteCount > 0 && (
                     <button
                         type="button"
                         className="clear-favorites"
@@ -53,50 +40,35 @@ function Favorites() {
                     >
                         Vaciar favoritos
                     </button>
-
                 )}
+            </header>
 
-            </section>
-
-
-            {/* ==========================================
-                FAVORITOS
-            ========================================== */}
-
-            {totalFavoritos > 0 ? (
-
-                <section className="favorites-grid">
-
-                    {favorites.map(product => (
-
+            {favoriteCount > 0 ? (
+                <section
+                    className="favorites-grid"
+                    aria-label="Productos favoritos"
+                >
+                    {favorites.map((product) => (
                         <ProductCard
                             key={product.id}
                             product={product}
                         />
-
                     ))}
-
                 </section>
-
             ) : (
-
-                /* ======================================
-                   FAVORITOS VACÍOS
-                ====================================== */
-
                 <section className="favorites-empty">
-
-                    <div className="favorites-empty-icon">
+                    <div
+                        className="favorites-empty-icon"
+                        aria-hidden="true"
+                    >
                         ❤️
                     </div>
 
-                    <h2>
-                        No tienes favoritos
-                    </h2>
+                    <h2>No tienes favoritos</h2>
 
                     <p>
-                        Guarda tus camisetas favoritas
-                        para tenerlas siempre a mano.
+                        Guarda tus camisetas favoritas para tenerlas
+                        siempre a mano.
                     </p>
 
                     <Link
@@ -105,15 +77,10 @@ function Favorites() {
                     >
                         Ver catálogo
                     </Link>
-
                 </section>
-
             )}
-
         </main>
-
     );
-
 }
 
 

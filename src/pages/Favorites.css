@@ -1,12 +1,14 @@
-/* ==========================================
-   ACTIVZONE25 - FAVORITES PREMIUM
-========================================== */
+/* =====================================================
+   ACTIVZONE25
+   FAVORITES — PREMIUM
+===================================================== */
 
 .favorites-page {
-
     min-height: 100vh;
 
     padding: 80px 25px 100px;
+
+    box-sizing: border-box;
 
     background:
         radial-gradient(
@@ -17,134 +19,125 @@
         #0b0b0b;
 
     color: #fff;
-
 }
 
 
-/* ==========================================
+/* =====================================================
    CABECERA
-========================================== */
+===================================================== */
 
 .favorites-header {
-
+    width: 100%;
     max-width: 1400px;
 
     margin: 0 auto 50px;
 
     text-align: center;
-
 }
 
 
 .section-badge {
-
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
 
     padding: 8px 15px;
 
     border-radius: 999px;
 
-    background: rgba(0, 210, 106, .1);
+    background:
+        rgba(0, 210, 106, .1);
 
-    border: 1px solid rgba(0, 210, 106, .25);
+    border:
+        1px solid rgba(0, 210, 106, .25);
 
     color: #00d26a;
 
     font-size: 11px;
-
     font-weight: 900;
 
     letter-spacing: 1.5px;
-
 }
 
 
 .favorites-header h1 {
-
     margin: 15px 0 8px;
 
+    color: #fff;
+
     font-size: 48px;
-
-    line-height: 1;
-
     font-weight: 900;
 
+    line-height: 1;
     letter-spacing: -1px;
-
 }
 
 
 .favorites-header p {
-
     margin: 0;
 
     color: #888;
 
     font-size: 14px;
-
     font-weight: 600;
-
 }
 
 
-/* ==========================================
+/* =====================================================
    VACIAR FAVORITOS
-========================================== */
+===================================================== */
 
 .clear-favorites {
-
     margin-top: 22px;
 
     padding: 12px 22px;
+
+    border:
+        1px solid rgba(255, 255, 255, .1);
 
     border-radius: 12px;
 
     background: #151515;
 
-    border: 1px solid rgba(255, 255, 255, .1);
-
     color: #aaa;
 
     font-size: 13px;
-
     font-weight: 800;
 
     cursor: pointer;
 
     transition:
+        transform .25s ease,
         color .25s ease,
         border-color .25s ease,
-        background .25s ease,
-        transform .25s ease;
-
+        background .25s ease;
 }
 
 
 .clear-favorites:hover {
-
-    background: rgba(255, 45, 85, .08);
-
-    border-color: rgba(255, 45, 85, .5);
-
-    color: #ff4055;
-
     transform: translateY(-2px);
 
+    background:
+        rgba(255, 45, 85, .08);
+
+    border-color:
+        rgba(255, 45, 85, .5);
+
+    color: #ff4055;
 }
 
 
-/* ==========================================
-   GRID
-========================================== */
+.clear-favorites:active {
+    transform: translateY(0);
+}
+
+
+/* =====================================================
+   GRID FAVORITOS
+===================================================== */
 
 .favorites-grid {
-
     width: 100%;
-
     max-width: 1400px;
 
     margin: 0 auto;
@@ -152,39 +145,40 @@
     display: grid;
 
     grid-template-columns:
-        repeat(
-            auto-fill,
-            minmax(260px, 1fr)
-        );
+        repeat(4, minmax(0, 1fr));
 
-    gap: 25px;
+    gap: 24px;
 
+    align-items: stretch;
 }
 
 
-/* ==========================================
+/* =====================================================
    FAVORITOS VACÍOS
-========================================== */
+===================================================== */
 
 .favorites-empty {
+    width: 100%;
+    max-width: 600px;
 
     min-height: 45vh;
-
-    max-width: 600px;
 
     margin: 0 auto;
 
     padding: 50px 30px;
 
-    display: flex;
+    box-sizing: border-box;
 
+    display: flex;
     flex-direction: column;
 
+    align-items: center;
     justify-content: center;
 
-    align-items: center;
-
     text-align: center;
+
+    border:
+        1px solid rgba(255, 255, 255, .07);
 
     border-radius: 28px;
 
@@ -195,65 +189,55 @@
             #101010
         );
 
-    border: 1px solid rgba(255, 255, 255, .07);
-
     box-shadow:
         0 25px 70px rgba(0, 0, 0, .3);
-
 }
 
 
-/* ==========================================
+/* =====================================================
    ICONO VACÍO
-========================================== */
+===================================================== */
 
 .favorites-empty-icon {
-
     width: 82px;
-
     height: 82px;
 
     margin-bottom: 22px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
+
+    border:
+        1px solid rgba(0, 210, 106, .2);
 
     border-radius: 50%;
 
     background:
         rgba(0, 210, 106, .08);
 
-    border:
-        1px solid rgba(0, 210, 106, .2);
-
     font-size: 34px;
 
     box-shadow:
         0 0 35px rgba(0, 210, 106, .08);
-
 }
 
 
-/* ==========================================
-   TEXTO VACÍO
-========================================== */
+/* =====================================================
+   TEXTO
+===================================================== */
 
 .favorites-empty h2 {
-
     margin: 0 0 10px;
 
+    color: #fff;
+
     font-size: 30px;
-
     font-weight: 900;
-
 }
 
 
 .favorites-empty p {
-
     max-width: 420px;
 
     margin: 0;
@@ -263,24 +247,20 @@
     font-size: 14px;
 
     line-height: 1.6;
-
 }
 
 
-/* ==========================================
+/* =====================================================
    VOLVER A LA TIENDA
-========================================== */
+===================================================== */
 
 .back-shop {
-
     margin-top: 25px;
 
     padding: 14px 30px;
 
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
 
     border-radius: 13px;
@@ -289,160 +269,171 @@
 
     color: #000;
 
-    text-decoration: none;
-
     font-size: 14px;
-
     font-weight: 900;
+
+    text-decoration: none;
 
     transition:
         transform .25s ease,
-        box-shadow .25s ease;
-
+        box-shadow .25s ease,
+        background .25s ease;
 }
 
 
 .back-shop:hover {
-
     transform: translateY(-3px);
+
+    background: #19df7b;
 
     box-shadow:
         0 14px 30px rgba(0, 210, 106, .25);
+}
+
+
+.back-shop:active {
+    transform: translateY(0);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1150px) {
+
+    .favorites-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 20px;
+    }
 
 }
 
 
-/* ==========================================
-   TABLET
-========================================== */
+/* =====================================================
+   TABLET PEQUEÑA
+===================================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 850px) {
 
     .favorites-page {
-
         padding: 65px 20px 80px;
-
     }
 
 
     .favorites-grid {
-
         grid-template-columns:
-            repeat(
-                auto-fill,
-                minmax(230px, 1fr)
-            );
+            repeat(2, minmax(0, 1fr));
 
-        gap: 20px;
-
+        gap: 17px;
     }
 
 }
 
 
-/* ==========================================
+/* =====================================================
    MÓVIL
-========================================== */
+===================================================== */
 
 @media (max-width: 600px) {
 
     .favorites-page {
-
-        padding: 45px 15px 70px;
-
+        padding: 45px 14px 70px;
     }
 
 
     .favorites-header {
-
         margin-bottom: 35px;
-
     }
 
 
     .favorites-header h1 {
-
         font-size: 34px;
 
         letter-spacing: -.5px;
-
     }
 
 
     .favorites-header p {
-
         font-size: 13px;
-
     }
 
 
     .favorites-grid {
-
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
 
-        gap: 14px;
-
+        gap: 11px;
     }
 
 
     .favorites-empty {
-
         min-height: 42vh;
 
         padding: 35px 20px;
 
         border-radius: 22px;
-
     }
 
 
     .favorites-empty-icon {
-
         width: 70px;
-
         height: 70px;
 
         font-size: 28px;
-
     }
 
 
     .favorites-empty h2 {
-
         font-size: 24px;
-
     }
 
 
     .favorites-empty p {
-
         font-size: 13px;
-
     }
 
 
     .back-shop {
-
         width: 100%;
-
         max-width: 240px;
-
     }
 
 }
 
 
-/* ==========================================
+/* =====================================================
    MÓVIL PEQUEÑO
-========================================== */
+===================================================== */
 
 @media (max-width: 380px) {
 
     .favorites-grid {
-
         grid-template-columns: 1fr;
 
+        gap: 14px;
     }
 
+}
+
+
+/* =====================================================
+   REDUCIR MOVIMIENTO
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .clear-favorites,
+    .back-shop {
+        transition: none;
+    }
+
+}
+
+.clear-favorites:focus-visible,
+.back-shop:focus-visible {
+    outline: 2px solid #00d26a;
+    outline-offset: 3px;
 }

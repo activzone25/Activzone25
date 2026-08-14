@@ -1,22 +1,18 @@
 import { useState } from "react";
 
-import Hero from "../components/Hero/Hero";
 import Categories from "../components/Categories/Categories";
+import Hero from "../components/Hero/Hero";
 import ProductGrid from "../components/ProductGrid/ProductGrid";
 
 import "./Home.css";
 
 
 function Home({ search = "" }) {
-
-    const [category, setCategory] =
-        useState("Todas");
+    const [category, setCategory] = useState("Todas");
 
 
     return (
-
-        <main>
-
+        <main className="home-page">
             <Hero />
 
             <Categories
@@ -25,18 +21,13 @@ function Home({ search = "" }) {
             />
 
             <section id="productos">
-
                 <ProductGrid
                     search={search}
                     category={category}
                 />
-
             </section>
-
         </main>
-
     );
-
 }
 
 
